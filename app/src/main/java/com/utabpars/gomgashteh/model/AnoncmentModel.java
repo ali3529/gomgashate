@@ -1,0 +1,167 @@
+package com.utabpars.gomgashteh.model;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AnoncmentModel {
+    @SerializedName("response")
+    private String response;
+    @SerializedName("data")
+    private List<Detile> data=new ArrayList<>();
+
+    @SerializedName("last_page")
+    private int last_page;
+
+    public int getLast_page() {
+        return last_page;
+    }
+
+    public void setLast_page(int last_page) {
+        this.last_page = last_page;
+    }
+
+    public List<Detile> getData() {
+        return data;
+    }
+
+    public void setData(List<Detile> data) {
+        this.data = data;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public AnoncmentModel(String response) {
+        this.response = response;
+    }
+
+    public class Detile {
+        @SerializedName("id")
+        private String id;
+
+        @SerializedName("title")
+        private String title;
+
+        @SerializedName("province")
+        private String province;
+
+        @SerializedName("city")
+        private String city;
+
+        @SerializedName("category")
+        private String category;
+
+        @SerializedName("collection")
+        private String collection;
+
+        @SerializedName("detail")
+        private String detail;
+
+        @SerializedName("pictures")
+        private String pictures;
+
+        @SerializedName("type")
+        private String type;
+
+        @SerializedName("user")
+        private String user;
+
+        @SerializedName("create")
+        private String create;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getProvince() {
+            return province;
+        }
+
+        public void setProvince(String province) {
+            this.province = province;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public String getCollection() {
+            return collection;
+        }
+
+        public void setCollection(String collection) {
+            this.collection = collection;
+        }
+
+        public String getDetail() {
+            return detail;
+        }
+
+        public void setDetail(String detail) {
+            this.detail = detail;
+        }
+
+        public String getPictures() {
+            return pictures;
+        }
+
+        public void setPictures(String pictures) {
+            this.pictures = pictures;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getUser() {
+            return user;
+        }
+
+        public void setUser(String user) {
+            this.user = user;
+        }
+
+        public String getCreate() {
+            return create;
+        }
+
+        public void setCreate(String create) {
+            this.create = create;
+        }
+    }
+}

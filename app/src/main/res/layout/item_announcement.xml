@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="announcment"
+            type="com.utabpars.gomgashteh.model.AnoncmentModel.Detile" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imageviewaccon"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:scaleType="centerCrop"
+                app:imagebind="@{announcment.pictures}"
+                app:error="@{@drawable/ic_placeholder}"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@{announcment.title}"
+                android:textAlignment="textStart"
+                />
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@{announcment.collection}"
+                android:textAlignment="textStart"
+                />
+            <TextView
+                android:id="@+id/txt3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@{announcment.category}"
+                android:textAlignment="textStart"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="9dp"
+                android:background="#000"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>
