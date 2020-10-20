@@ -62,6 +62,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentAnnouncmentDetail">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="421" />
+                            <option name="y" value="389" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentSplash">
                     <value>
                       <LayoutPositions>

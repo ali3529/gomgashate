@@ -22,7 +22,11 @@
         android:id="@+id/announcement"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncement"
         android:label="fragment_announcement"
-        tools:layout="@layout/fragment_announcement" />
+        tools:layout="@layout/fragment_announcement" >
+        <action
+            android:id="@+id/action_announcement_to_fragmentAnnouncmentDetail2"
+            app:destination="@id/fragmentAnnouncmentDetail" />
+    </fragment>
     <fragment
         android:id="@+id/add"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAddAnnouncement"
@@ -59,4 +63,9 @@
             android:id="@+id/action_perofile_to_announcement"
             app:destination="@id/announcement" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentAnnouncmentDetail"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncmentDetail"
+        android:label="fragment_announcment_detail"
+        tools:layout="@layout/fragment_announcment_detail" />
 </navigation>

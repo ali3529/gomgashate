@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +50,12 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
     @Override
     public void onBindViewHolder(@NonNull AnnoncementViewHolder holder, int position) {
         holder.binding.setAnnouncment(getItem(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentAnnouncmentDetail2);
+            }
+        });
     }
 
     class AnnoncementViewHolder extends RecyclerView.ViewHolder {

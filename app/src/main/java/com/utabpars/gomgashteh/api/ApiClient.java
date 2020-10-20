@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.api;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import okhttp3.Interceptor;

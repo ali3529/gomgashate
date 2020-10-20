@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.paging;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
@@ -12,6 +13,7 @@ public class AnnouncementViewModel extends ViewModel {
     public LiveData<PagedList<AnoncmentModel.Detile>> listLiveData;
     LiveData<PageKeyedDataSource<Integer, AnoncmentModel.Detile>> dataSourceLiveData;
 
+
     public  AnnouncementViewModel(){
         ItemDataSourceFactory itemDataSourceFactory=new ItemDataSourceFactory();
         dataSourceLiveData=itemDataSourceFactory.getAnoncmentMutableLiveData();
@@ -22,4 +24,5 @@ public class AnnouncementViewModel extends ViewModel {
 
         listLiveData=new LivePagedListBuilder(itemDataSourceFactory,config).build();
     }
+
 }

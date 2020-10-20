@@ -5,62 +5,91 @@
         <variable
             name="announcment"
             type="com.utabpars.gomgashteh.model.AnoncmentModel.Detile" />
+
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/white">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/img_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginRight="12dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentLeft="true">
 
             <ImageView
                 android:id="@+id/imageviewaccon"
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="140dp"
+                android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 app:imagebind="@{announcment.pictures}"
-                app:error="@{@drawable/ic_placeholder}"/>
-        </LinearLayout>
-        <LinearLayout
+                app:error="@{@drawable/ic_placeholder}" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/detil_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/img_layout"
+            android:layout_alignParentRight="true"
+            android:padding="8dp">
             <TextView
-                android:id="@+id/txt1"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="@{announcment.title}"
+                android:layout_height="wrap_content"
+                android:text="پراید مدل 96 بدون خظ وخش"
+                tools:text="@{announcment.title}"
                 android:textAlignment="textStart"
+                android:fontFamily="@font/sans"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginBottom="36dp"
+
                 />
             <TextView
-                android:id="@+id/txt2"
+                android:id="@+id/city"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:text="@{announcment.city}"
+                tools:text="شیراز - گویم"
+                android:textColor="@color/lowblack"
+                android:fontFamily="@font/sans"
+                android:layout_above="@id/date"
+                android:textSize="18dp"
+
+                />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@{announcment.collection}"
-                android:textAlignment="textStart"
-                />
-            <TextView
-                android:id="@+id/txt3"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="@{announcment.category}"
-                android:textAlignment="textStart"
+                tools:text="12/3434/545/"
+                android:textColor="@color/lowblack"
+                android:fontFamily="@font/sans"
+                android:textSize="18sp"
+                android:layout_alignParentBottom="true"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="9dp"
-                android:background="#000"/>
-        </LinearLayout>
-    </LinearLayout>
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/darkgray"
+            android:layout_below="@id/img_layout"
+            android:layout_marginHorizontal="10dp"
+            />
+
+
+    </RelativeLayout>
 
 </layout>

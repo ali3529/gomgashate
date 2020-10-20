@@ -15,6 +15,7 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,21 +23,26 @@ import android.view.ViewGroup;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
+import com.utabpars.gomgashteh.model.ProgressModel;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
+import com.utabpars.gomgashteh.paging.ItemDataSource;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
 
 public class FragmentAnnouncement extends Fragment {
     RecyclerView recyclerView;
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
+    AnnouncementViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.VISIBLE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_announcement,container,false);
+        viewModel= new ViewModelProvider(this).get(AnnouncementViewModel.class);
         // Inflate the layout for this fragment
         initViews();
+
         return binding.getRoot();
     }
 
@@ -46,22 +52,24 @@ public class FragmentAnnouncement extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Navigation.findNavController(view).popBackStack(R.id.action_fragmentSplash_to_fragmentAnnouncement,false);
 
-        AnnouncementViewModel viewModel= new ViewModelProvider(this).get(AnnouncementViewModel.class);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         adaptor=new PagingAdaptor();
 
-        viewModel.listLiveData.observe(this, new Observer<PagedList<AnoncmentModel.Detile>>() {
+        ItemDataSource itemDataSource=new ItemDataSource();
+        itemDataSource.getbind(binding,getContext());
+        binding.setLifecycleOwner(this);
+
+        viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
             @Override
-            public void onChanged(PagedList<AnoncmentModel.Detile> data) {
-                adaptor.submitList(data);
+            public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
+                adaptor.submitList(detiles);
+
+
             }
         });
 
         recyclerView.setAdapter(adaptor);
-
-
-
     }
 
     private void initViews() {
@@ -84,5 +92,17 @@ public class FragmentAnnouncement extends Fragment {
 
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
     }
 }
