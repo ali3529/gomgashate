@@ -17,7 +17,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.FragmentAnnouncmentDetail">
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -207,13 +207,14 @@
             android:layout_below="@id/detail"
             android:layout_marginTop="6dp"
             android:layout_alignParentRight="true"
-            android:layout_margin="12dp"/>
+            android:layout_margin="12dp"
+            android:lineSpacingExtra="7dp"/>
 
     </RelativeLayout>
 
 
     </RelativeLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

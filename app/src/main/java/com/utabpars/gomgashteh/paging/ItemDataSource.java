@@ -23,6 +23,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
 
     public static final int PAGE=1;
     public static final int PAGESIZE=5;
+    public int lastPage=0;
    static FragmentAnnouncementBinding binding;
     static Context context;
     @Override
@@ -85,7 +86,10 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, AnoncmentModel.Detile> callback) {
         ApiInterface apiInterface= ApiClient.getApiClient();
-        binding.setProgressbelow(true);
+        if (lastPage!=params.key){
+            binding.setProgressbelow(true);
+        }
+
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         Integer key = true? params.key + 1 : null;
         compositeDisposable.add(apiInterface.getAnnouncement(key)
@@ -96,17 +100,9 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
                         if (anoncmentModel.getResponse()!=null) {
                             if (anoncmentModel.getResponse().equals("1")) {
-
+                                lastPage=anoncmentModel.getLast_page();
                                 callback.onResult(anoncmentModel.getData(), key);
                                 binding.setProgressbelow(false);
-                                Log.d("pagingcheck", "onSuccess: loadAfter");
-
-                                //test not work
-                                Log.d("anim", "onSuccess: " + key);
-                                if (key >= anoncmentModel.getLast_page()) {
-                                    Log.d("anim", "onSuccess: ");
-                                    binding.setProgressbelow(false);
-                                }
                             }
                         }
                     }

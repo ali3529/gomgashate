@@ -14,6 +14,9 @@ public class AnoncmentModel {
     @SerializedName("last_page")
     private int last_page;
 
+    @SerializedName("next_page_url")
+    private String next_page_url;
+
     public int getLast_page() {
         return last_page;
     }
@@ -40,6 +43,14 @@ public class AnoncmentModel {
 
     public AnoncmentModel(String response) {
         this.response = response;
+    }
+
+    public String getNext_page_url() {
+        return next_page_url;
+    }
+
+    public void setNext_page_url(String next_page_url) {
+        this.next_page_url = next_page_url;
     }
 
     public class Detile {
