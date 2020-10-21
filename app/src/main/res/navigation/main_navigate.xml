@@ -17,6 +17,7 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+
     </fragment>
     <fragment
         android:id="@+id/announcement"
@@ -25,7 +26,11 @@
         tools:layout="@layout/fragment_announcement" >
         <action
             android:id="@+id/action_announcement_to_fragmentAnnouncmentDetail2"
-            app:destination="@id/fragmentAnnouncmentDetail" />
+            app:destination="@id/fragmentAnnouncmentDetail"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/add"
