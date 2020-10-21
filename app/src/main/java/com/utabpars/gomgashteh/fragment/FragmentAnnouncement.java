@@ -1,6 +1,12 @@
 package com.utabpars.gomgashteh.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -8,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -25,16 +32,21 @@ import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
+import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.ProgressModel;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 import com.utabpars.gomgashteh.paging.ItemDataSource;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
+import com.utabpars.gomgashteh.utils.Utils;
+import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
 
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     RecyclerView recyclerView;
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
     AnnouncementViewModel viewModel;
+    CheckUpdateViewModel updateViewModel;
+    MutableLiveData<AppVersionModel> appVersionModelMutableLiveData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +56,11 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         viewModel= new ViewModelProvider(this).get(AnnouncementViewModel.class);
         // Inflate the layout for this fragment
         initViews();
+
+        updateViewModel=new ViewModelProvider(this).get(CheckUpdateViewModel.class);
+
+        appVersionModelMutableLiveData=updateViewModel.getAppVersionModelLiveData();
+        getAppVersion();
 
         return binding.getRoot();
     }
@@ -107,4 +124,56 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         bundle.putInt("id",id);
         Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentAnnouncmentDetail2,bundle);
     }
+
+    private void getAppVersion(){
+        appVersionModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<AppVersionModel>() {
+            @Override
+            public void onChanged(AppVersionModel appVersionModel) {
+                if (appVersionModel.getLast_app_version().equals(Utils.versionCode(getActivity()))){
+
+
+                }else {
+                    if (appVersionModel.getIs_force()==1){
+                        AppVersionAlertDialog(getContext(),appVersionModel.getMessage(),true);
+                    }else AppVersionAlertDialog(getContext(),appVersionModel.getMessage(),false);
+                }
+            }
+        });
+    }
+
+    private void AppVersionAlertDialog(Context context,String massage,boolean is_force){
+       AlertDialog.Builder builder= new AlertDialog.Builder(context)
+                .setTitle(massage)
+               .setCancelable(false)
+                .setPositiveButton("آپدیت", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent=new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("http://chidashop.ir"));
+                        startActivity(intent);
+                    }
+                });
+       if (!is_force){
+            builder.setNegativeButton("آلان نه", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialogInterface, int i) {
+                   builder.setCancelable(true);
+               }
+           });
+
+       }else {
+           builder.setCancelable(false);
+           builder.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialogInterface, int i) {
+                   getActivity().finish();
+               }
+           });
+       }
+
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+    }
+
+
 }
