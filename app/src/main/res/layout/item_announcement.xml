@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:padding="8dp"
@@ -62,21 +62,11 @@
                 tools:text="شیراز - گویم"
                 android:textColor="@color/lowblack"
                 android:fontFamily="@font/sans"
-                android:layout_above="@id/date"
+                android:layout_alignParentBottom="true"
                 android:textSize="18dp"
 
                 />
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{announcment.collection}"
-                tools:text="12/3434/545/"
-                android:textColor="@color/lowblack"
-                android:fontFamily="@font/sans"
-                android:textSize="18sp"
-                android:layout_alignParentBottom="true"
-                />
+
 
 
         </RelativeLayout>
@@ -85,7 +75,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
             android:background="@color/darkgray"
-            android:layout_below="@id/img_layout"
+           android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="10dp"
             />
 

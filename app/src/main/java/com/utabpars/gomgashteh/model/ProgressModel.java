@@ -1,17 +1,17 @@
 package com.utabpars.gomgashteh.model;
 
 public class ProgressModel {
-    private boolean test;
+    private boolean progress;
 
-    public boolean getTest() {
-        return test;
+    public boolean getProgress() {
+        return progress;
     }
 
-    public void setTest(boolean test) {
-        this.test = test;
+    public void setProgress(boolean progress) {
+        this.progress = progress;
     }
 
-    public ProgressModel(boolean test) {
-        this.test = test;
+    public ProgressModel(boolean progress) {
+        this.progress = progress;
     }
 }

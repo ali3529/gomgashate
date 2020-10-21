@@ -19,16 +19,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
+import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.ProgressModel;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 import com.utabpars.gomgashteh.paging.ItemDataSource;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
 
-public class FragmentAnnouncement extends Fragment {
+public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     RecyclerView recyclerView;
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
@@ -58,7 +60,8 @@ public class FragmentAnnouncement extends Fragment {
 
         ItemDataSource itemDataSource=new ItemDataSource();
         itemDataSource.getbind(binding,getContext());
-        binding.setLifecycleOwner(this);
+        adaptor.getDEtail(this);
+
 
         viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
             @Override
@@ -70,6 +73,9 @@ public class FragmentAnnouncement extends Fragment {
         });
 
         recyclerView.setAdapter(adaptor);
+
+
+
     }
 
     private void initViews() {
@@ -96,13 +102,9 @@ public class FragmentAnnouncement extends Fragment {
 
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
+    public void onItemClicked(View view, int id) {
+        Bundle bundle=new Bundle();
+        bundle.putInt("id",id);
+        Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentAnnouncmentDetail2,bundle);
     }
 }

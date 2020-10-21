@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="picture"
+            type="String" />
+        <variable
+            name="progress"
+            type="Boolean" />
+    </data>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:imageSlider="@{picture}"
+        app:errorSlider="@{@drawable/ic_placeholder}"/>
+
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="180dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        app:lottie_rawRes="@raw/progress"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        app:lottie_loop="true"-->
+<!--        app:setImageSliderProgress="@{progress}"-->
+<!--        />-->
+
+</RelativeLayout>
+</layout>

@@ -44,13 +44,11 @@ public class AnoncmentModel {
 
     public class Detile {
         @SerializedName("id")
-        private String id;
+        private int id;
 
         @SerializedName("title")
         private String title;
 
-        @SerializedName("province")
-        private String province;
 
         @SerializedName("city")
         private String city;
@@ -58,8 +56,6 @@ public class AnoncmentModel {
         @SerializedName("category")
         private String category;
 
-        @SerializedName("collection")
-        private String collection;
 
         @SerializedName("detail")
         private String detail;
@@ -76,11 +72,11 @@ public class AnoncmentModel {
         @SerializedName("create")
         private String create;
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 
@@ -90,14 +86,6 @@ public class AnoncmentModel {
 
         public void setTitle(String title) {
             this.title = title;
-        }
-
-        public String getProvince() {
-            return province;
-        }
-
-        public void setProvince(String province) {
-            this.province = province;
         }
 
         public String getCity() {
@@ -116,13 +104,6 @@ public class AnoncmentModel {
             this.category = category;
         }
 
-        public String getCollection() {
-            return collection;
-        }
-
-        public void setCollection(String collection) {
-            this.collection = collection;
-        }
 
         public String getDetail() {
             return detail;

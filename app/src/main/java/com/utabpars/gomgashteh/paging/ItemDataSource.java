@@ -29,24 +29,27 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, AnoncmentModel.Detile> callback) {
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        binding.setProgress(new ProgressModel(true));
+        binding.setProgress(true);
         compositeDisposable.add(apiInterface.getAnnouncement(PAGE)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
             @Override
             public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
-                if (anoncmentModel.getResponse().equals("1")){
-                    callback.onResult(anoncmentModel.getData(),null,PAGE);
-                    binding.setProgress(new ProgressModel(false));
-                    Log.d("pagingcheck", "onSuccess: loadInitial");
+                if (anoncmentModel.getResponse()!=null){
+                    if (anoncmentModel.getResponse().equals("1")){
+                        callback.onResult(anoncmentModel.getData(),null,PAGE);
+                        binding.setProgress(false);
+                        Log.d("pagingcheck", "onSuccess: loadInitial");
 
+                    }
                 }
+
             }
 
             @Override
             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
+                Toast.makeText(context, "timeout", Toast.LENGTH_LONG).show();
             }
         }));
 
@@ -63,10 +66,12 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
-                        if (anoncmentModel.getResponse().equals("1")){
+                        if (anoncmentModel.getResponse()!=null) {
+                            if (anoncmentModel.getResponse().equals("1")) {
 
-                            callback.onResult(anoncmentModel.getData(),adjacentKey);
-                            Log.d("pagingcheck", "onSuccess: loadBefore");
+                                callback.onResult(anoncmentModel.getData(), adjacentKey);
+                                Log.d("pagingcheck", "onSuccess: loadBefore");
+                            }
                         }
                     }
 
@@ -80,7 +85,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, AnoncmentModel.Detile> callback) {
         ApiInterface apiInterface= ApiClient.getApiClient();
-        binding.setProgressbelow(new ProgressModel(true));
+        binding.setProgressbelow(true);
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         Integer key = true? params.key + 1 : null;
         compositeDisposable.add(apiInterface.getAnnouncement(key)
@@ -89,17 +94,19 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
-                        if (anoncmentModel.getResponse().equals("1")){
+                        if (anoncmentModel.getResponse()!=null) {
+                            if (anoncmentModel.getResponse().equals("1")) {
 
-                            callback.onResult(anoncmentModel.getData(),key);
-                            binding.setProgressbelow(new ProgressModel(false));
-                            Log.d("pagingcheck", "onSuccess: loadAfter");
+                                callback.onResult(anoncmentModel.getData(), key);
+                                binding.setProgressbelow(false);
+                                Log.d("pagingcheck", "onSuccess: loadAfter");
 
-                            //test not work
-                            Log.d("anim", "onSuccess: "+key);
-                            if (key>=anoncmentModel.getLast_page()){
-                                Log.d("anim", "onSuccess: ");
-                                binding.setProgressbelow(new ProgressModel(false));
+                                //test not work
+                                Log.d("anim", "onSuccess: " + key);
+                                if (key >= anoncmentModel.getLast_page()) {
+                                    Log.d("anim", "onSuccess: ");
+                                    binding.setProgressbelow(false);
+                                }
                             }
                         }
                     }
@@ -110,6 +117,8 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                     }
                 }));
     }
+
+
 
     public  void getbind(FragmentAnnouncementBinding binding, Context context){
      this.binding=binding;

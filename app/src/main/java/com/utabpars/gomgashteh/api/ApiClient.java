@@ -18,6 +18,8 @@ public class ApiClient {
     private static Retrofit getInstance(){
         if (retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+//                    .connectTimeout(30,TimeUnit.SECONDS)
+//                    .readTimeout(30,TimeUnit.SECONDS);
             httpClient.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
@@ -32,9 +34,9 @@ public class ApiClient {
             OkHttpClient client=httpClient.build();
             retrofit=new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                    .client(client)
                     .build();
         }
         return retrofit;

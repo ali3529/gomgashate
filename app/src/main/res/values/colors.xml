@@ -11,4 +11,5 @@
     <color name="blue">#F50057</color>
     <color name="gray">#e0e0e0</color>
     <color name="darkgray">#bdbdbd</color>
+    <color name="blackgray">#474646</color>
 </resources>

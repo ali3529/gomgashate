@@ -6,11 +6,11 @@
 <data>
    <variable
        name="progress"
-       type="com.utabpars.gomgashteh.model.ProgressModel" />
+       type="Boolean" />
 
    <variable
        name="progressbelow"
-       type="com.utabpars.gomgashteh.model.ProgressModel" />
+       type="Boolean" />
 
 
 
@@ -25,6 +25,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:layout_above="@id/below_progress"
+
   />
 
    <com.airbnb.lottie.LottieAnimationView
@@ -35,7 +36,7 @@
        app:lottie_loop="true"
        app:lottie_rawRes="@raw/progress"
        android:visibility="visible"
-       app:setvisib="@{progress.test}"/>
+      app:setvisib="@{progress}"/>
 
    <com.airbnb.lottie.LottieAnimationView
        android:id="@+id/below_progress"
@@ -46,7 +47,7 @@
        app:lottie_loop="true"
        app:lottie_rawRes="@raw/progress"
        android:visibility="gone"
-       app:setvisib="@{progressbelow.test}"
+       app:setvisib="@{progressbelow}"
        android:layout_alignParentBottom="true"
 
        />

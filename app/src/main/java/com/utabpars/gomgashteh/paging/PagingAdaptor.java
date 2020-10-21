@@ -19,12 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.ItemAnnouncementBinding;
+import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 
 public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, PagingAdaptor.AnnoncementViewHolder> {
+    DetileCallBack detileCallBack;
     public PagingAdaptor(){
         super(DIFF_CALLBACK);
     }
+
 
     public static DiffUtil.ItemCallback<AnoncmentModel.Detile> DIFF_CALLBACK=new DiffUtil.ItemCallback<AnoncmentModel.Detile>() {
         @Override
@@ -53,9 +56,10 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentAnnouncmentDetail2);
+                detileCallBack.onItemClicked(view,getItem(position).getId());
             }
         });
+
     }
 
     class AnnoncementViewHolder extends RecyclerView.ViewHolder {
@@ -68,6 +72,10 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
 
 
         }
+    }
+
+    public void getDEtail(DetileCallBack detileCallBack){
+        this.detileCallBack=detileCallBack;
     }
 
 
