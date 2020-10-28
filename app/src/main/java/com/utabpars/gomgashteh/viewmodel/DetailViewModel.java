@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.databinding.FragmentAnnouncmentDetailBinding;
 import com.utabpars.gomgashteh.model.DetailModel;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -18,6 +19,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DetailViewModel extends ViewModel {
     private MutableLiveData<DetailModel.Data> dataMutableLiveData=new MutableLiveData<>();
+    FragmentAnnouncmentDetailBinding binding;
     public void getDetail(int id){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
@@ -37,6 +39,8 @@ public class DetailViewModel extends ViewModel {
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.d("dfsd", "onError: "+e);
+                binding.setLayoutvisibility(true);
+                binding.setProgress(false);
             }
         }));
     }
@@ -44,4 +48,14 @@ public class DetailViewModel extends ViewModel {
     public MutableLiveData<DetailModel.Data> getMutableDetail(){
         return dataMutableLiveData;
     }
+
+   public void getView(FragmentAnnouncmentDetailBinding binding){
+        this.binding=binding;
+   }
+
+public void test(int id){
+      getDetail(id);
+      binding.setLayoutvisibility(false);
+      binding.setProgress(true);
+}
 }

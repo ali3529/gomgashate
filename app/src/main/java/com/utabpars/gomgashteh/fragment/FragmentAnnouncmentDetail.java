@@ -30,6 +30,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
     ImageSliderAdaptor sliderAdaptor;
     SliderView sliderView;
     FragmentAnnouncmentDetailBinding binding;
+    DetailViewModel viewModel;
 
 
     @Override
@@ -47,8 +48,12 @@ public class FragmentAnnouncmentDetail extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.setProgress(true);
         int id=getArguments().getInt("id");
-        DetailViewModel viewModel= new ViewModelProvider(this).get(DetailViewModel.class);
+        viewModel= new ViewModelProvider(this).get(DetailViewModel.class);
         viewModel.getDetail(id);
+        viewModel.getView(binding);
+        binding.setViemodel(viewModel);
+        binding.setDid(id);
+
         dataMutableLiveData=viewModel.getMutableDetail();
 
 
@@ -67,4 +72,5 @@ public class FragmentAnnouncmentDetail extends Fragment {
         sliderAdaptor=new ImageSliderAdaptor(pic);
         sliderView.setSliderAdapter(sliderAdaptor);
     }
+
 }

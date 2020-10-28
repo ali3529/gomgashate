@@ -8,6 +8,17 @@
         <variable
             name="details"
             type="com.utabpars.gomgashteh.model.DetailModel.Data" />
+
+        <variable
+            name="layoutvisibility"
+            type="Boolean" />
+
+        <variable
+            name="viemodel"
+            type="com.utabpars.gomgashteh.viewmodel.DetailViewModel" />
+        <variable
+            name="did"
+            type="Integer" />
     </data>
 
 
@@ -199,7 +210,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lorem"
+            tools:text="@string/lorem"
+            android:text="@{details.detail}"
 
             android:textSize="@dimen/detail_size"
             android:fontFamily="@font/sans"
@@ -232,5 +244,22 @@
             android:visibility="visible"
           />
     </RelativeLayout>
+
+       <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/white"
+       app:setLayoutVisi="@{layoutvisibility}"
+       android:visibility="gone">
+
+   <Button
+       android:id="@+id/refredh"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      android:text="tryagain"
+      android:layout_centerInParent="true"
+       android:onClick="@{() -> viemodel.test(did)}"/>
+
+       </RelativeLayout>
 </RelativeLayout>
 </layout>

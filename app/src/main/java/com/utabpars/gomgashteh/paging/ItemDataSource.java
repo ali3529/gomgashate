@@ -42,6 +42,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                         callback.onResult(anoncmentModel.getData(),null,PAGE);
                         binding.setProgress(false);
                         Log.d("pagingcheck", "onSuccess: loadInitial");
+                        binding.setLayoutvisibility(false);
 
                     }
                 }
@@ -51,6 +52,9 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
             @Override
             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                 Toast.makeText(context, "timeout", Toast.LENGTH_LONG).show();
+                binding.setLayoutvisibility(true);
+                binding.setProgress(false);
+                binding.setRefresh(false);
             }
         }));
 
@@ -78,7 +82,8 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
 
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
+                        binding.setLayoutvisibility(true);
+                        binding.setProgress(false);
                     }
                 }));
     }
@@ -99,7 +104,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
                         if (anoncmentModel.getResponse()!=null) {
-                            if (anoncmentModel.getResponse().equals("1")) {
+                            if (anoncmentModel.getResponse().equals("1") && anoncmentModel.getData()!=null) {
                                 lastPage=anoncmentModel.getLast_page();
                                 callback.onResult(anoncmentModel.getData(), key);
                                 binding.setProgressbelow(false);
@@ -109,7 +114,8 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
 
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
+                        binding.setLayoutvisibility(true);
+                        binding.setProgress(false);
                     }
                 }));
     }
@@ -119,6 +125,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
     public  void getbind(FragmentAnnouncementBinding binding, Context context){
      this.binding=binding;
      this.context=context;
+
     }
 
 
