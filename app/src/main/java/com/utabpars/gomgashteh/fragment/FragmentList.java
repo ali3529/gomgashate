@@ -38,7 +38,7 @@ public class FragmentList extends Fragment {
     RecyclerView recyclerView;
     CategoryAdaptor categoryAdaptor;
     CategoryViewModel categoryViewModel;
-    MutableLiveData<CategoryModel> categoryModelMutableLiveData;
+    static MutableLiveData<CategoryModel> saveInstanceList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,16 +57,29 @@ public class FragmentList extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+        if (saveInstanceList==null){
+            categoryViewModel.categoriesMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
+                @Override
+                public void onChanged(CategoryModel categoryModel) {
+                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData());
+                    Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
+                    Log.d("sdvsdvds", "onchange: "+categoryModel.getListData().get(0).getCategoryName());
+                    recyclerView.setAdapter(categoryAdaptor);
+                    saveInstanceList =categoryViewModel.categoriesMutableLiveData();
+                }
+            });
+        }else {
+            saveInstanceList.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
+                @Override
+                public void onChanged(CategoryModel categoryModel) {
+                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData());
+                    Log.d("sdvsdvds", "instance: "+categoryModel.getResponse());
+                    Log.d("sdvsdvds", "instance: "+categoryModel.getListData().get(0).getCategoryName());
+                    recyclerView.setAdapter(categoryAdaptor);
+                }
+            });
+        }
 
-        categoryViewModel.categoriesMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
-            @Override
-            public void onChanged(CategoryModel categoryModel) {
-                categoryAdaptor=new CategoryAdaptor(categoryModel.getListData());
-                Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
-                Log.d("sdvsdvds", "onchange: "+categoryModel.getListData().get(0).getCategoryName());
-                recyclerView.setAdapter(categoryAdaptor);
-            }
-        });
 
 
 
