@@ -5,25 +5,72 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.adaptor.CategoryAdaptor;
+import com.utabpars.gomgashteh.api.ApiClient;
+import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.databinding.FragmentListBinding;
+import com.utabpars.gomgashteh.model.CategoryModel;
+import com.utabpars.gomgashteh.viewmodel.CategoryViewModel;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FragmentList extends Fragment {
-
+    FragmentListBinding binding;
+    RecyclerView recyclerView;
+    CategoryAdaptor categoryAdaptor;
+    CategoryViewModel categoryViewModel;
+    MutableLiveData<CategoryModel> categoryModelMutableLiveData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_list,container,false);
+        initViews();
+        categoryViewModel=new ViewModelProvider(this).get(CategoryViewModel.class);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+
+
+        categoryViewModel.categoriesMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
+            @Override
+            public void onChanged(CategoryModel categoryModel) {
+                categoryAdaptor=new CategoryAdaptor(categoryModel.getListData());
+                Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
+                Log.d("sdvsdvds", "onchange: "+categoryModel.getListData().get(0).getCategoryName());
+                recyclerView.setAdapter(categoryAdaptor);
+            }
+        });
+
+
+
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -40,5 +87,32 @@ public class FragmentList extends Fragment {
 
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
+    }
+
+    private void initViews() {
+        recyclerView=binding.categoryrecyclerview;
+    }
+
+
+    private void getCategory(){
+        ApiInterface apiInterface= ApiClient.getApiClient();
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        compositeDisposable.add(apiInterface.getcategories()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull CategoryModel categoryModel) {
+                        if (categoryModel.getResponse().equals("1")){
+                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getResponse());
+                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getListData().get(0).getCategoryName());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.d("dsfsd", "onError: "+e.toString());
+                    }
+                }));
     }
 }

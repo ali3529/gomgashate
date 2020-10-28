@@ -2,6 +2,7 @@ package com.utabpars.gomgashteh.api;
 
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
+import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.DetailModel;
 
 import io.reactivex.rxjava3.core.Single;
@@ -26,5 +27,8 @@ public interface ApiInterface {
 
     @POST("splash")
     Single<AppVersionModel> update();
+
+    @POST("categories")
+    Single<CategoryModel> getcategories();
 
 }

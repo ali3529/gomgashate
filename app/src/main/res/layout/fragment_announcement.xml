@@ -46,14 +46,16 @@
        android:layout_height="wrap_content"
        android:layout_alignParentTop="true"
        android:background="@color/gray"
+       app:title=" "
        >
 
          <androidx.appcompat.widget.SearchView
              android:id="@+id/search"
              android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_height="match_parent"
              android:layout_gravity="end"
-             android:background="#83BBD5"
+
+             android:theme="@style/Widget.AppCompat.SearchView.ActionBar"
              />
 
 

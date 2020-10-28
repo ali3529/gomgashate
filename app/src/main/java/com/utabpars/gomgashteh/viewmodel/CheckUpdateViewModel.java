@@ -34,6 +34,7 @@ public class CheckUpdateViewModel extends ViewModel {
             public void onSuccess(@NonNull AppVersionModel appVersionModel) {
                 if (appVersionModel.getStatus()!=null && appVersionModel.getStatus().equals("1")){
                     appVersionModelMutableLiveData.postValue(appVersionModel);
+
                 }
 
 

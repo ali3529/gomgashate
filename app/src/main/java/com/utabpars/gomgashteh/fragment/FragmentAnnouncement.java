@@ -107,13 +107,13 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getContext(), query, Toast.LENGTH_SHORT).show();
+                Log.d("fsdsda", "onQueryTextSubmit: "+query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Toast.makeText(getContext(), newText+" ZVZV", Toast.LENGTH_SHORT).show();
+                Log.d("fsdsda", "onQueryTextSubmit: "+newText);
                 return true;
             }
         });
