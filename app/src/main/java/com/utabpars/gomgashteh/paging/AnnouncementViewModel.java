@@ -1,7 +1,10 @@
 package com.utabpars.gomgashteh.paging;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.SavedStateHandle;
@@ -25,6 +28,7 @@ public class AnnouncementViewModel extends ViewModel {
 
     public  AnnouncementViewModel(){
        getAnnouncement();
+
     }
 
 
@@ -48,8 +52,14 @@ public class AnnouncementViewModel extends ViewModel {
     public void getProg(FragmentAnnouncementBinding binding){
         this.binding=binding;
     }
+
     public void swipeRefresh(){
-        itemDataSourceFactory.getAnoncmentMutableLiveData().getValue().invalidate();
+        try {
+            itemDataSourceFactory.getAnoncmentMutableLiveData().getValue().invalidate();
+        }catch (Exception e){
+            Log.d("crashswipe", "swipeRefresh: "+e.toString());
+        }
+
 
 
     }

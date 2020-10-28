@@ -17,6 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -54,6 +55,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     CheckUpdateViewModel updateViewModel;
     MutableLiveData<AppVersionModel> appVersionModelMutableLiveData;
     Toolbar toolbar;
+    static LiveData<PagedList<AnoncmentModel.Detile>> saveInstanceAnnounc;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,14 +93,27 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         binding.setViemodel(viewModel);
 
-        viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
-            @Override
-            public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
-                adaptor.submitList(detiles);
+        if (saveInstanceAnnounc==null){
+            viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
+                @Override
+                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
+                    adaptor.submitList(detiles);
+                    saveInstanceAnnounc=viewModel.listLiveData;
 
 
-            }
-        });
+                }
+            });
+
+        }else {
+            saveInstanceAnnounc.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
+                @Override
+                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
+                    adaptor.submitList(detiles);
+
+                }
+            });
+        }
+
 
         recyclerView.setAdapter(adaptor);
 

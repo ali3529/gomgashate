@@ -15,7 +15,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1e4e46e-d0a5-40d0-a09e-453e23db03ac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/paging/AnnouncementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/paging/AnnouncementViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_category.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_category.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,38 +212,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1603797361061" />
-    <state width="1323" height="235" key="GridCell.Tab.0.bottom" timestamp="1603878821384">
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1603880974240">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="235" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1603878821384" />
-    <state width="1323" height="235" key="GridCell.Tab.0.center" timestamp="1603878821384">
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1603880974240" />
+    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1603880974239">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="235" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1603878821384" />
-    <state width="1323" height="235" key="GridCell.Tab.0.left" timestamp="1603878821384">
+    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1603880974239" />
+    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1603880974239">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="235" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1603878821384" />
-    <state width="1323" height="235" key="GridCell.Tab.0.right" timestamp="1603878821384">
+    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1603880974239" />
+    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1603880974239">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="235" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1603878821384" />
-    <state width="1323" height="132" key="GridCell.Tab.1.bottom" timestamp="1603877693711">
+    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1603880974239" />
+    <state width="1323" height="132" key="GridCell.Tab.1.bottom" timestamp="1603879623099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="132" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1603877693711" />
-    <state width="1323" height="132" key="GridCell.Tab.1.center" timestamp="1603877693711">
+    <state width="1323" height="132" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1603879623099" />
+    <state width="1323" height="132" key="GridCell.Tab.1.center" timestamp="1603879623099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="132" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1603877693711" />
-    <state width="1323" height="132" key="GridCell.Tab.1.left" timestamp="1603877693711">
+    <state width="1323" height="132" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1603879623099" />
+    <state width="1323" height="132" key="GridCell.Tab.1.left" timestamp="1603879623098">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="132" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1603877693711" />
-    <state width="1323" height="132" key="GridCell.Tab.1.right" timestamp="1603877693711">
+    <state width="1323" height="132" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1603879623098" />
+    <state width="1323" height="132" key="GridCell.Tab.1.right" timestamp="1603879623099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="132" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1603877693711" />
+    <state width="1323" height="132" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1603879623099" />
     <state x="445" y="161" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1603193991476">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
