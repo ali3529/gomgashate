@@ -58,6 +58,13 @@
         <action
             android:id="@+id/action_list_to_announcement"
             app:destination="@id/announcement" />
+        <action
+            android:id="@+id/action_list_to_fragmentCallection"
+            app:destination="@id/fragmentCallection"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/perofile"
@@ -73,4 +80,26 @@
         android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncmentDetail"
         android:label="fragment_announcment_detail"
         tools:layout="@layout/fragment_announcment_detail" />
+    <fragment
+        android:id="@+id/fragmentCallection"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentCallection"
+        android:label="fragment_callection"
+        tools:layout="@layout/fragment_callection" >
+        <action
+            android:id="@+id/action_fragmentCallection_to_fragmentAnnouncCollection"
+            app:destination="@id/fragmentAnnouncCollection"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAnnouncCollection"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncCollection"
+        android:label="fragment_announc_collection"
+        tools:layout="@layout/fragment_announc_collection" >
+        <action
+            android:id="@+id/action_fragmentAnnouncCollection_to_fragmentAnnouncmentDetail"
+            app:destination="@id/fragmentAnnouncmentDetail" />
+    </fragment>
 </navigation>

@@ -51,7 +51,7 @@ public class BindingAdaptorUtil {
     }
 
     @BindingAdapter("setLayoutVisi")
-    public static void setLayoutVisibility(RelativeLayout view,boolean visibility){
+    public static void setLayoutVisibility(View view,boolean visibility){
         if (visibility){
             view.setVisibility(View.VISIBLE);
         }else {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="visivility"
+        type="Boolean" />
+
+    <variable
+        name="viemodel"
+        type="com.utabpars.gomgashteh.paging.filterpaging.FilterAnouncmentViewModel" />
+
+    <variable
+        name="progress"
+        type="Boolean" />
+</data>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.FragmentAnnouncCollection">
+
+
+        <TextView
+            android:id="@+id/titleerror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="در این دسته بندی اگهی ثبت نشده است"
+            android:fontFamily="@font/sans"
+            android:textSize="20dp"
+            app:setLayoutVisi="@{visivility}"
+            android:layout_above="@id/btn"
+            android:layout_centerInParent="true"
+            />
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:setLayoutVisi="@{visivility}"
+            android:layout_centerInParent="true"
+            android:text="تلاش مجدد"
+            android:onClick="@{() -> viemodel.refresh()}"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/preeeeg"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/progress"
+        android:visibility="gone"
+        app:setvisib="@{progress}"
+        android:layout_centerInParent="true"
+
+
+        />
+
+</RelativeLayout>
+</layout>

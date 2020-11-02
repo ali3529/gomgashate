@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit=null;
-    private static String BASE_URL="http://chidashop.ir/api/";
+    private static String BASE_URL="https://gomgashteh.com/api/";
 
     private static Retrofit getInstance(){
         if (retrofit==null){

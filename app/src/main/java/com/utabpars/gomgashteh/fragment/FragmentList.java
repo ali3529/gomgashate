@@ -6,8 +6,11 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,12 +22,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.CategoryAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentListBinding;
+import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.viewmodel.CategoryViewModel;
 
@@ -39,12 +44,14 @@ public class FragmentList extends Fragment {
     CategoryAdaptor categoryAdaptor;
     CategoryViewModel categoryViewModel;
     static MutableLiveData<CategoryModel> saveInstanceList;
+    Toolbar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_list,container,false);
         initViews();
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         categoryViewModel=new ViewModelProvider(this).get(CategoryViewModel.class);
 
         // Inflate the layout for this fragment
@@ -57,11 +64,21 @@ public class FragmentList extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+
         if (saveInstanceList==null){
             categoryViewModel.categoriesMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
                 @Override
                 public void onChanged(CategoryModel categoryModel) {
-                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData());
+                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
+                        @Override
+                        public void getCategoryId(View view, int id,int position) {
+                            Bundle bundle=new Bundle();
+                            bundle.putString("title",categoryModel.getListData().get(position).getCategoryName());
+                            bundle.putString("id",String.valueOf(id));
+                            Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection,bundle);
+
+                        }
+                    });
                     Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
                     Log.d("sdvsdvds", "onchange: "+categoryModel.getListData().get(0).getCategoryName());
                     recyclerView.setAdapter(categoryAdaptor);
@@ -72,7 +89,16 @@ public class FragmentList extends Fragment {
             saveInstanceList.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
                 @Override
                 public void onChanged(CategoryModel categoryModel) {
-                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData());
+                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
+                        @Override
+                        public void getCategoryId(View view, int id,int position) {
+                            Bundle bundle=new Bundle();
+                            bundle.putString("title",categoryModel.getListData().get(position).getCategoryName());
+                            bundle.putString("id",String.valueOf(id));
+                            Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection,bundle);
+                            Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     Log.d("sdvsdvds", "instance: "+categoryModel.getResponse());
                     Log.d("sdvsdvds", "instance: "+categoryModel.getListData().get(0).getCategoryName());
                     recyclerView.setAdapter(categoryAdaptor);
@@ -104,6 +130,7 @@ public class FragmentList extends Fragment {
 
     private void initViews() {
         recyclerView=binding.categoryrecyclerview;
+        toolbar=binding.toolbar;
     }
 
 
@@ -128,4 +155,6 @@ public class FragmentList extends Fragment {
                     }
                 }));
     }
+
+
 }

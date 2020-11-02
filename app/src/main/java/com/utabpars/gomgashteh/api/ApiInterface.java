@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.api;
 
+import com.google.gson.JsonObject;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
@@ -7,6 +8,7 @@ import com.utabpars.gomgashteh.model.DetailModel;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
@@ -30,5 +32,14 @@ public interface ApiInterface {
 
     @POST("categories")
     Single<CategoryModel> getcategories();
+
+
+    @POST("collections")
+    @FormUrlEncoded
+    Single<CategoryModel> getcallection(@Field("category_id") String category_id);
+
+    @POST("collectionFilter")
+    @FormUrlEncoded
+    Single<AnoncmentModel> getFilterAnnouncment(@Field("collection_id") String collection_id);
 
 }
