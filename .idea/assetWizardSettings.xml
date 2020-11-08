@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/search/baseline_search_24.xml" />
+                                      <entry key="url" value="file:/G:/sdk/icons/material/materialicons/keyboard_arrow_left/baseline_keyboard_arrow_left_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_earch" />
+                            <entry key="outputName" value="ic_more" />
                             <entry key="sourceFile" value="C:\Users\alireza\AndroidStudioProjects\gomgashteh" />
                           </map>
                         </option>

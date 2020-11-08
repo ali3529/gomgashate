@@ -36,6 +36,7 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.VISIBLE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_announc_collection,container,false);
         initViews();
         viewModel= new ViewModelProvider(this).get(FilterAnouncmentViewModel.class);

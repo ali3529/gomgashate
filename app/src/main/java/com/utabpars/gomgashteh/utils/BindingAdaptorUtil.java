@@ -12,6 +12,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.smarteist.autoimageslider.SliderView;
 import com.utabpars.gomgashteh.adaptor.ImageSliderAdaptor;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
@@ -77,6 +78,8 @@ public class BindingAdaptorUtil {
         });
 
     }
+
+
 
 
 }

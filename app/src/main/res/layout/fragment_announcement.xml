@@ -24,6 +24,10 @@
        name="layoutvisibility"
        type="Boolean" />
 
+   <variable
+       name="search"
+       type="com.utabpars.gomgashteh.fragment.FragmentAnnouncement" />
+
 
 </data>
    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -43,19 +47,20 @@
    <androidx.appcompat.widget.Toolbar
        android:id="@+id/toolbar"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="?attr/actionBarSize"
        android:layout_alignParentTop="true"
        android:background="@color/gray"
-       app:title=" "
+
        >
 
-         <androidx.appcompat.widget.SearchView
+         <com.arlib.floatingsearchview.FloatingSearchView
              android:id="@+id/search"
-             android:layout_width="wrap_content"
-             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
              android:layout_gravity="end"
-
              android:theme="@style/Widget.AppCompat.SearchView.ActionBar"
+             app:floatingSearch_searchHint="جستجو..."
+             app:floatingSearch_leftActionMode="showSearch"
              />
 
 
@@ -66,6 +71,8 @@
        android:layout_height="match_parent"
        android:layout_above="@id/below_progress"
        android:layout_below="@id/toolbar"
+       app:floatingSearch_leftActionMode="showHamburger"
+       app:floatingSearch_close_search_on_keyboard_dismiss="true"
 
   />
 

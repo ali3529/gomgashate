@@ -42,4 +42,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     Single<AnoncmentModel> getFilterAnnouncment(@Field("collection_id") String collection_id);
 
+    @POST("keySearch")
+    @FormUrlEncoded
+    Single<AnoncmentModel> Search(@Field("key") String key);
+
 }

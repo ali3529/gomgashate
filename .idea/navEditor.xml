@@ -80,6 +80,15 @@
                             <option name="y" value="-1268" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentAnnouncCollection_to_fragmentAnnouncmentDetail">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -102,6 +111,27 @@
                           <Point>
                             <option name="x" value="866" />
                             <option name="y" value="-1464" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentCallection_to_fragmentAnnouncCollection">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentSearch">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="66" />
+                            <option name="y" value="418" />
                           </Point>
                         </option>
                       </LayoutPositions>

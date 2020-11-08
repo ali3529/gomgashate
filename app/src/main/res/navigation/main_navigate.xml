@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/list">
+    app:startDestination="@id/announcement">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -31,6 +31,13 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_announcement_to_fragmentSearch"
+            app:destination="@id/fragmentSearch"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/add"
@@ -102,4 +109,9 @@
             android:id="@+id/action_fragmentAnnouncCollection_to_fragmentAnnouncmentDetail"
             app:destination="@id/fragmentAnnouncmentDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentSearch"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentSearch"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>
