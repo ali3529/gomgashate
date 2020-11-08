@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,7 +11,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -25,45 +22,25 @@ import androidx.navigation.Navigation;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-import android.os.Parcel;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
-import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
-import com.utabpars.gomgashteh.api.ApiClient;
-import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
-import com.utabpars.gomgashteh.model.ProgressModel;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 import com.utabpars.gomgashteh.paging.ItemDataSource;
-import com.utabpars.gomgashteh.paging.ItemDataSourceFactory;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
 import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
+
     RecyclerView recyclerView;
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
@@ -73,7 +50,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     Toolbar toolbar;
     public LiveData<PagedList<AnoncmentModel.Detile>> listLiveDataُSearch;
     static LiveData<PagedList<AnoncmentModel.Detile>> saveInstanceAnnounc;
-    FloatingSearchView searchView;
+    MaterialSearchBar searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -136,45 +113,20 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         recyclerView.setAdapter(adaptor);
 
 
-
-
-        searchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSearchTextChanged(String oldQuery, String newQuery) {
-                searcgKey(oldQuery);
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentSearch);
             }
         });
-
-
     }
 
-
-    private void searcgKey(String query) {
-        ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.Search(query)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
-                        if (anoncmentModel.getResponse().equals("1")){
-                            Toast.makeText(getContext(), ""+anoncmentModel.getData().size(), Toast.LENGTH_SHORT).show();
-
-                        }else Toast.makeText(getContext(), "نا موفق", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                    }
-                }));
-    }
 
     private void initViews() {
         recyclerView = binding.recycler;
         toolbar=binding.toolbar;
          searchView=binding.search;
+
     }
 
 

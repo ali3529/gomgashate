@@ -29,6 +29,7 @@
        type="com.utabpars.gomgashteh.fragment.FragmentAnnouncement" />
 
 
+
 </data>
    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
        android:id="@+id/srefresh"
@@ -53,18 +54,18 @@
 
        >
 
-         <com.arlib.floatingsearchview.FloatingSearchView
+         <com.mancj.materialsearchbar.MaterialSearchBar
              android:id="@+id/search"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_gravity="end"
-             android:theme="@style/Widget.AppCompat.SearchView.ActionBar"
-             app:floatingSearch_searchHint="جستجو..."
-             app:floatingSearch_leftActionMode="showSearch"
+             app:mt_hint="sadf"
              />
 
 
    </androidx.appcompat.widget.Toolbar>
+
+
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recycler"
        android:layout_width="match_parent"

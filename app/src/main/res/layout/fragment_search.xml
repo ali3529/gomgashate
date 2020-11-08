@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+    <variable
+        name="searchvisibility"
+        type="Boolean" />
+</data>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,17 +22,23 @@
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/searchtwo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
         android:focusable="true"
-        android:theme="@style/SearchbarCustomYhem"
+        app:floatingSearch_searchHint="جستجو..."
+        app:floatingSearch_leftActionMode="showSearch"
         />
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/searchtwo"/>
+        android:layout_below="@id/searchtwo"
+        app:setImageSliderProgress="@{searchvisibility}">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchrecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 
 </RelativeLayout>
 </layout>
