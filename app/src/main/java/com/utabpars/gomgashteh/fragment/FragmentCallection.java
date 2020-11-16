@@ -1,5 +1,7 @@
 package com.utabpars.gomgashteh.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,10 @@ public class FragmentCallection extends Fragment {
     Toolbar toolbar;
     RecyclerView recyclerView;
     CategoryAdaptor collectionAdaptor;
+    String test="0";
+    String title;
+    String list_id;
+    SharedPreferences sharedPreferences;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,13 +57,20 @@ public class FragmentCallection extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String title=getArguments().getString("title");
-        String id=getArguments().getString("id");
+         title=getArguments().getString("title");
+         list_id=getArguments().getString("id");
+
+        try {
+            test=getArguments().getString("test");
+        }catch (Exception e){
+
+        }
+
         binding.setTitle(title);
 
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getcallection(id)
+        compositeDisposable.add(apiInterface.getcallection(list_id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
@@ -67,10 +80,26 @@ public class FragmentCallection extends Fragment {
                     collectionAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
                         public void getCategoryId(View view, int id,int position) {
-                            Bundle bundle=new Bundle();
-                            bundle.putString("id",String.valueOf(id));
-                            Navigation.findNavController(view).navigate(R.id.action_fragmentCallection_to_fragmentAnnouncCollection,bundle);
-                            Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
+                            if (test.equals("1")){
+                                Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx {cpllent}");
+                                Bundle bundle=new Bundle();
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putString("title_list",title);
+                                editor.putString("id_categ",String.valueOf(id));
+                                editor.putString("id_list",String.valueOf(list_id));
+                                editor.putString("title_categ",categoryModel.getListData().get(position).getCategoryName());
+                                editor.apply();
+
+//                                bundle.putString("title_list",title);
+//                                bundle.putString("id_categ",String.valueOf(id));
+//                                bundle.putString("id_list",String.valueOf(list_id));
+                                Navigation.findNavController(view).navigate(R.id.action_fragmentCallection_to_add,bundle);
+                            }else {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("id", String.valueOf(id));
+                                Navigation.findNavController(view).navigate(R.id.action_fragmentCallection_to_fragmentAnnouncCollection, bundle);
+                                Toast.makeText(getContext(), "" + id, Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                     recyclerView.setAdapter(collectionAdaptor);
@@ -91,5 +120,6 @@ public class FragmentCallection extends Fragment {
         recyclerView=binding.recyvlerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+        sharedPreferences=getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
     }
 }

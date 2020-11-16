@@ -5,6 +5,7 @@ import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.DetailModel;
+import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
@@ -45,5 +46,16 @@ public interface ApiInterface {
     @POST("keySearch")
     @FormUrlEncoded
     Single<AnoncmentModel> Search(@Field("key") String key);
+
+    @POST("provinces")
+    Single<CategoryModel> Provinces();
+
+    @POST("cities")
+    @FormUrlEncoded
+    Single<CategoryModel> cities(@Field("province") String province_id);
+
+
+    @POST("insertAnnounce")
+    Single<SaveAnnouncementModel> insertAnnouncment(@Body JsonObject jsonObject);
 
 }

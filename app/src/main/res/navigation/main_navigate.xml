@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/fragmentSearch">
+    app:startDestination="@id/fragmentSplash">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -47,6 +47,20 @@
         <action
             android:id="@+id/action_add_to_announcement"
             app:destination="@id/announcement" />
+        <action
+            android:id="@+id/action_add_to_list"
+            app:destination="@id/list"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_add_to_fragmentCity"
+            app:destination="@id/fragmentCity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/chat"
@@ -99,6 +113,13 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_fragmentCallection_to_add"
+            app:destination="@id/add"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncCollection"
@@ -107,7 +128,11 @@
         tools:layout="@layout/fragment_announc_collection" >
         <action
             android:id="@+id/action_fragmentAnnouncCollection_to_fragmentAnnouncmentDetail"
-            app:destination="@id/fragmentAnnouncmentDetail" />
+            app:destination="@id/fragmentAnnouncmentDetail"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSearch"
@@ -120,6 +145,31 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCity"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentProvince"
+        android:label="fragment_city"
+        tools:layout="@layout/fragment_province" >
+        <action
+            android:id="@+id/action_fragmentCity_to_fragmentCity2"
+            app:destination="@id/fragmentCity2"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCity2"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentCity"
+        android:label="FragmentCity" >
+        <action
+            android:id="@+id/action_fragmentCity2_to_add"
+            app:destination="@id/add"
+            app:enterAnim="@anim/fragment_open_exit"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_exit"
             app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
 </navigation>

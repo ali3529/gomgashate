@@ -58,4 +58,7 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
             this.binding=binding;
         }
     }
+    public void setcity(List<CategoryModel.ListData> categoryList){
+        this.categoryCallBack=categoryCallBack;
+    }
 }

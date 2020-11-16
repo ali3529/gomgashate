@@ -45,6 +45,7 @@ public class FragmentList extends Fragment {
     CategoryViewModel categoryViewModel;
     static MutableLiveData<CategoryModel> saveInstanceList;
     Toolbar toolbar;
+    String test="0";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,20 +64,38 @@ public class FragmentList extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+        try {
+            test=getArguments().getString("test");
+        }catch (Exception e){
+
+        }
 
 
-        if (saveInstanceList==null){
+
+        if (true){
             categoryViewModel.categoriesMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
                 @Override
                 public void onChanged(CategoryModel categoryModel) {
                     categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
                         public void getCategoryId(View view, int id,int position) {
-                            Bundle bundle=new Bundle();
-                            bundle.putString("title",categoryModel.getListData().get(position).getCategoryName());
-                            bundle.putString("id",String.valueOf(id));
-                            Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection,bundle);
+                            if (test.equals("1")){
+                                Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]");
 
+                                Bundle bundle = new Bundle();
+                                bundle.putString("title", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("id", String.valueOf(id));
+                                bundle.putString("test", test);
+                                Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection, bundle);
+                            }else {
+
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("title", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("id", String.valueOf(id));
+                                bundle.putString("test", "0");
+                                Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection, bundle);
+                            }
                         }
                     });
                     Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
@@ -85,26 +104,27 @@ public class FragmentList extends Fragment {
                     saveInstanceList =categoryViewModel.categoriesMutableLiveData();
                 }
             });
-        }else {
-            saveInstanceList.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
-                @Override
-                public void onChanged(CategoryModel categoryModel) {
-                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
-                        @Override
-                        public void getCategoryId(View view, int id,int position) {
-                            Bundle bundle=new Bundle();
-                            bundle.putString("title",categoryModel.getListData().get(position).getCategoryName());
-                            bundle.putString("id",String.valueOf(id));
-                            Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection,bundle);
-                            Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    Log.d("sdvsdvds", "instance: "+categoryModel.getResponse());
-                    Log.d("sdvsdvds", "instance: "+categoryModel.getListData().get(0).getCategoryName());
-                    recyclerView.setAdapter(categoryAdaptor);
-                }
-            });
-        }
+       }
+//        else {
+//            saveInstanceList.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
+//                @Override
+//                public void onChanged(CategoryModel categoryModel) {
+//                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
+//                        @Override
+//                        public void getCategoryId(View view, int id,int position) {
+//                            Bundle bundle=new Bundle();
+//                            bundle.putString("title",categoryModel.getListData().get(position).getCategoryName());
+//                            bundle.putString("id",String.valueOf(id));
+//                            Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection,bundle);
+//                            Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                    Log.d("sdvsdvds", "instance: "+categoryModel.getResponse());
+//                    Log.d("sdvsdvds", "instance: "+categoryModel.getListData().get(0).getCategoryName());
+//                    recyclerView.setAdapter(categoryAdaptor);
+//                }
+//            });
+//        }
 
 
 

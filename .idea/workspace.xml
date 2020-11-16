@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TAG" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="dgdfg" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -15,6 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1e4e46e-d0a5-40d0-a09e-453e23db03ac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentProvince.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/model/SaveAnnouncementModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/viewmodel/ProvinceViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_city2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_province.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -25,13 +31,19 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_announcement.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_announcement.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/adaptor/CategoryAdaptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/adaptor/CategoryAdaptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/api/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/api/ApiInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAddAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAddAnnouncement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_announcement.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_announcement.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigate.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigate.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +70,8 @@
         <option value="valueResourceFile" />
         <option value="resourceFile" />
         <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -77,7 +89,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android-custom-viewC:/Users/alireza/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0-rc01/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-rc01-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
     <property name="android.sdk.path" value="G:/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Amoozkadeh/app/src/main/res/layout/activity_login.xml" />
     <property name="multi-representation-previewC:/Users/alireza/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0-rc01/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-rc01-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
@@ -85,18 +97,18 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\raw" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.utabpars.gomgashteh" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\font" />
     </key>
     <key name="android.template.808836593">
       <recent name="com.utabpars.gomgashteh.fragment" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\raw" />
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\font" />
     </key>
   </component>
   <component name="RunManager">
@@ -199,10 +211,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="200" y="110" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1603874031090" />
-    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1604823428974">
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1605496339027">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1604823428974" />
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605496339027" />
     <state x="230" y="289" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1602663904281">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -231,46 +243,50 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="291" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604821451126" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1604340518164">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1605497181651">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1604340518164" />
-    <state width="1323" height="242" key="GridCell.Tab.0.bottom" timestamp="1604826588047">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605497181651" />
+    <state width="1323" height="238" key="GridCell.Tab.0.bottom" timestamp="1605497075128">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604826588047" />
-    <state width="1323" height="242" key="GridCell.Tab.0.center" timestamp="1604826588046">
+    <state width="1323" height="238" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605497075128" />
+    <state width="1323" height="238" key="GridCell.Tab.0.center" timestamp="1605497075127">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604826588046" />
-    <state width="1323" height="242" key="GridCell.Tab.0.left" timestamp="1604826588046">
+    <state width="1323" height="238" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605497075127" />
+    <state width="1323" height="238" key="GridCell.Tab.0.left" timestamp="1605497075127">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604826588046" />
-    <state width="1323" height="242" key="GridCell.Tab.0.right" timestamp="1604826588047">
+    <state width="1323" height="238" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605497075127" />
+    <state width="1323" height="238" key="GridCell.Tab.0.right" timestamp="1605497075128">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604826588047" />
-    <state width="1323" height="242" key="GridCell.Tab.1.bottom" timestamp="1604826588057">
+    <state width="1323" height="238" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605497075128" />
+    <state width="1323" height="242" key="GridCell.Tab.1.bottom" timestamp="1605471033698">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604826588057" />
-    <state width="1323" height="242" key="GridCell.Tab.1.center" timestamp="1604826588047">
+    <state width="1323" height="242" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605471033698" />
+    <state width="1323" height="242" key="GridCell.Tab.1.center" timestamp="1605471033697">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1604826588047" />
-    <state width="1323" height="242" key="GridCell.Tab.1.left" timestamp="1604826588047">
+    <state width="1323" height="242" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1605471033697" />
+    <state width="1323" height="242" key="GridCell.Tab.1.left" timestamp="1605471033697">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1604826588047" />
-    <state width="1323" height="242" key="GridCell.Tab.1.right" timestamp="1604826588057">
+    <state width="1323" height="242" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1605471033697" />
+    <state width="1323" height="242" key="GridCell.Tab.1.right" timestamp="1605471033698">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="242" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1604826588057" />
+    <state width="1323" height="242" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1605471033698" />
     <state x="261" y="12" key="SettingsEditor" timestamp="1604302171195">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="261" y="12" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1604302171195" />
+    <state x="330" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605490810753">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="330" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1605490810753" />
     <state x="492" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604821473533">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -295,5 +311,36 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603185133351" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentCallection.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

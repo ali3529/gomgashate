@@ -24,6 +24,16 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_add_to_fragmentCity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_add_to_list">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -41,6 +51,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_announcement_to_fragmentAnnouncmentDetail2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_announcement_to_fragmentSearch">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -115,12 +130,41 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_fragmentCallection_to_add">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_fragmentCallection_to_fragmentAnnouncCollection">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentCity">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1556" />
+                            <option name="y" value="-325" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentCity2">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1900" />
+                            <option name="y" value="-332" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -133,6 +177,15 @@
                             <option name="x" value="66" />
                             <option name="y" value="418" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentSearch_to_fragmentAnnouncmentDetail">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

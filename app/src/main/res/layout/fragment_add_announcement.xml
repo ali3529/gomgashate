@@ -1,18 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="category"
+            type="String" />
+
+        <variable
+            name="city"
+            type="String" />
+
+        <variable
+            name="Frag"
+            type="com.utabpars.gomgashteh.fragment.FragmentAddAnnouncement" />
+    </data>
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.FragmentAddAnnouncement"
+        android:background="@color/white">
 
 
-<RelativeLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.FragmentAddAnnouncement">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add"
-        android:layout_centerInParent="true"/>
 
-</RelativeLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ثبت اگهی"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:layout_below="@id/tolbar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   >
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/blackgray"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/setcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="دسته بندی"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{category}"
+                        android:hint="انتخاب کنید"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="20dp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/hr_callection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/setcategory">
+                    <View
+
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/blackgray"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/setcity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_below="@id/setcategory"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="محدوده آگهی"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{city}"
+                        android:hint="انتخاب کنید"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="20dp"/>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/laout_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/setcity"
+                    android:layout_marginTop="60dp"
+                    >
+                    <TextView
+                        android:id="@+id/title_gued"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="عنوان آگهی"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:textSize="25dp"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="18dp"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="18dp"
+                        android:layout_below="@id/title_gued"
+                        android:layout_marginTop="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textDirection="rtl"
+                            android:textSize="22dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/laout_title"
+                    android:layout_marginTop="60dp"
+
+                    >
+                    <TextView
+                        android:id="@+id/detail_gued"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="توضیحات آگهی"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:textSize="25dp"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="18dp"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="18dp"
+                        android:layout_below="@id/detail_gued"
+                        android:layout_marginTop="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:gravity="right|top"
+                            android:lines="8"
+                            android:minLines="3"
+                            android:textDirection="rtl"
+                            android:textSize="22dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_detail"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="12dp">
+                    <RadioGroup
+                        android:id="@+id/radiogroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/find"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sans"
+                            android:onClick="@{(View) -> Frag.onClickRadio(View)}"
+                            android:textSize="18dp"
+                            android:text="پیدا شده"
+                            android:layout_margin="6dp"/>
+                        <RadioButton
+                            android:id="@+id/lost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sans"
+                            android:layout_margin="6dp"
+                            android:onClick="@{(View) -> Frag.onClickRadio(View)}"
+
+                            android:textSize="18dp"
+                            android:text="گم شده" />
+                    </RadioGroup>
+                </RelativeLayout>
+                <Button
+                    android:id="@+id/saveAnnounce"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="@color/white"
+                    android:layout_marginHorizontal="40dp"
+                    android:keyboardNavigationCluster="false"
+                    android:text="ثبت آگهی"
+                    android:textSize="18dp"/>
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
 </layout>
