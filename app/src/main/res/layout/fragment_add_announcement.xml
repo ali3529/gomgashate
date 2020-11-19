@@ -212,6 +212,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/type_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layout_detail"
@@ -239,7 +240,6 @@
                             android:fontFamily="@font/sans"
                             android:layout_margin="6dp"
                             android:onClick="@{(View) -> Frag.onClickRadio(View)}"
-
                             android:textSize="18dp"
                             android:text="گم شده" />
                     </RadioGroup>
@@ -248,15 +248,14 @@
                     android:id="@+id/saveAnnounce"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerInParent="true"
+
                     android:layout_marginBottom="16dp"
                     android:textColor="@color/white"
                     android:layout_marginHorizontal="40dp"
-                    android:keyboardNavigationCluster="false"
                     android:text="ثبت آگهی"
-                    android:textSize="18dp"/>
-
+                    android:textSize="18dp"
+                    android:layout_below="@id/type_layout"
+                    />
             </RelativeLayout>
 
         </ScrollView>

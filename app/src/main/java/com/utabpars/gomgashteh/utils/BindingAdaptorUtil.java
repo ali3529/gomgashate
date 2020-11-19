@@ -1,5 +1,12 @@
 package com.utabpars.gomgashteh.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
@@ -12,15 +19,18 @@ import androidx.databinding.BindingAdapter;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.smarteist.autoimageslider.SliderView;
+import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.ImageSliderAdaptor;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 
 public class BindingAdaptorUtil {
 
     @BindingAdapter({"imagebind","error"})
-    public static void getImage(ImageView imageView, String s, Drawable error){
+    public static void getImage(RoundedImageView imageView, String s, Drawable error){
+
         Utils.showimage(imageView,s,error);
     }
 

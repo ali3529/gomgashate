@@ -98,7 +98,7 @@ public class FragmentAddAnnouncement extends Fragment {
                 if (edTitle.getText().toString().length()!=0){
                     if (edDescription.getText().toString().length()!=0){
                         if (type!=null){
-                            getdd(fetchdata());
+                            sendAnnouncment(fetchdata());
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -163,7 +163,7 @@ public void onClickRadio(View view){
         radioGroup=binding.radiogroup;
     }
 
-private void getdd(JsonObject jsonObject){
+private void sendAnnouncment(JsonObject jsonObject){
     ApiInterface apiInterface= ApiClient.getApiClient();
     CompositeDisposable compositeDisposable=new CompositeDisposable();
     compositeDisposable.add(apiInterface.insertAnnouncment(jsonObject)
@@ -174,7 +174,9 @@ private void getdd(JsonObject jsonObject){
         public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull SaveAnnouncementModel saveAnnouncementModel) {
             if (saveAnnouncementModel.getResponse().equals("1")){
                 Toast.makeText(getContext(), saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
-            }else Toast.makeText(getContext(), saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
+            }else if (saveAnnouncementModel.getResponse().equals("0")) {
+                Toast.makeText(getContext(), saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override

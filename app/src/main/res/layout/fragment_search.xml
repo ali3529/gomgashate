@@ -4,6 +4,18 @@
     <variable
         name="searchvisibility"
         type="Boolean" />
+
+    <variable
+        name="progres"
+        type="Boolean" />
+
+    <variable
+        name="result"
+        type="String" />
+
+    <variable
+        name="layouterror"
+        type="Boolean" />
 </data>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,26 +30,117 @@
 <!--        android:layout_alignParentTop="true"-->
 <!--        android:background="@color/gray"-->
         >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/search_layout"
+    android:background="@color/searchlight">
 
-    <com.arlib.floatingsearchview.FloatingSearchView
+
+<!--    <EditText-->
+<!--        android:id="@+id/searchtwo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/black"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:focusable="true"-->
+<!--        app:floatingSearch_searchHint="جستجو..."-->
+<!--        app:floatingSearch_leftActionMode="showSearch"-->
+<!--        android:iconifiedByDefault="false"-->
+<!--        android:focusedByDefault="true"-->
+
+<!--        />-->
+    <EditText
         android:id="@+id/searchtwo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/searchlight"
         android:layout_alignParentTop="true"
-        android:focusable="true"
-        app:floatingSearch_searchHint="جستجو..."
-        app:floatingSearch_leftActionMode="showSearch"
+        android:textDirection="rtl"
+        android:textColor="@color/black"
+        android:fontFamily="@font/sans"
+        android:layout_toLeftOf="@id/back_arrow"
+        android:layout_marginRight="6dp"
+
+        android:layout_toRightOf="@id/clean_text"
+        android:layout_marginLeft="6dp"
+        android:textSize="18dp"
+        android:lines="1"
+        android:maxLines="1"
+        android:inputType="textFilter"
+
+
+
+
+        />
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_forward_24"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="12dp"
         />
 
+    <ImageView
+        android:id="@+id/clean_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel_24"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="12dp"/>
+</RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/searchtwo"
+        android:layout_below="@id/search_layout"
         app:setImageSliderProgress="@{searchvisibility}">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/below_progress"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/progress"
+        android:visibility="visible"
+        app:setvisib="@{progres}"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:setLayoutVisi="@{layouterror}"
+        android:background="@color/white"
+        android:layout_below="@id/search_layout">
+        <ImageView
+            android:id="@+id/block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_block_24"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{result}"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/block"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/sans"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

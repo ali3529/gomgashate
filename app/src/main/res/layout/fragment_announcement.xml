@@ -50,30 +50,35 @@
        android:layout_width="match_parent"
        android:layout_height="?attr/actionBarSize"
        android:layout_alignParentTop="true"
-       android:background="@color/gray"
-
-       >
+       android:background="@color/gray">
 
          <com.mancj.materialsearchbar.MaterialSearchBar
              android:id="@+id/search"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_gravity="end"
-             app:mt_hint="sadf"
              />
 
 
    </androidx.appcompat.widget.Toolbar>
 
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/topListRecyclerview"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:layout_below="@id/toolbar"
+       android:background="@color/gray"
+       android:layoutDirection="rtl"/>
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recycler"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:layout_above="@id/below_progress"
-       android:layout_below="@id/toolbar"
+       android:layout_below="@id/topListRecyclerview"
        app:floatingSearch_leftActionMode="showHamburger"
        app:floatingSearch_close_search_on_keyboard_dismiss="true"
+
 
   />
 

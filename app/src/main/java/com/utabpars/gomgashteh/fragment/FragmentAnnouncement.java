@@ -22,6 +22,7 @@ import androidx.navigation.Navigation;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import android.view.ViewGroup;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.adaptor.TopFilterAdaptor;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
@@ -39,9 +41,12 @@ import com.utabpars.gomgashteh.paging.PagingAdaptor;
 import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,topFilterRecyclerview;
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
     AnnouncementViewModel viewModel;
@@ -51,6 +56,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     public LiveData<PagedList<AnoncmentModel.Detile>> listLiveDataُSearch;
     static LiveData<PagedList<AnoncmentModel.Detile>> saveInstanceAnnounc;
     MaterialSearchBar searchView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,6 +125,10 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                 Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentSearch);
             }
         });
+
+
+        TopFilterAdaptor topFilterAdaptor=new TopFilterAdaptor(setTopfilterData());
+        topFilterRecyclerview.setAdapter(topFilterAdaptor);
     }
 
 
@@ -126,6 +136,12 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         recyclerView = binding.recycler;
         toolbar=binding.toolbar;
          searchView=binding.search;
+        searchView.setHint("جستوجو...");
+        searchView.setPlaceHolder("جستجو در همه آگهی ها");
+        searchView.setPlaceHolderColor(R.color.gray);
+        topFilterRecyclerview=binding.topListRecyclerview;
+        topFilterRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,LinearLayoutManager.HORIZONTAL));
+        topFilterRecyclerview.setHasFixedSize(true);
 
     }
 
@@ -205,6 +221,20 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public List<String> setTopfilterData(){
+        List<String> list=new ArrayList<>();
+        list.add("پیدا شده");
+        list.add("گم شده");
+        list.add("کالا");
+        list.add("شخص");
+        list.add("مالی");
+        list.add("اشیاء");
+        list.add("لوازم الکترونیکی");
+        list.add("حیوانات");
+
+        return list;
     }
 
 }

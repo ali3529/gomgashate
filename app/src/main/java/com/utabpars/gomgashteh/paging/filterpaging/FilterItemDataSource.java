@@ -36,12 +36,13 @@ public class FilterItemDataSource extends PageKeyedDataSource<Integer, Anoncment
                                 callback.onResult(anoncmentModel.getData(),null,1);
                                 binding.setVisivility(false);
                                 binding.setProgress(false);
-                            }else {
-                                Log.d("paginfjnasfd", "onSuccess: "+"not found anouncment");
-                                binding.setVisivility(true);
-                                binding.setProgress(false);
+                                Log.d("paginfjnasfd", "onSuccess: "+"found anouncment");
                             }
 
+                        }else  {
+                            Log.d("paginfjnasfd", "onSuccess: "+"not found anouncment");
+                            binding.setVisivility(true);
+                            binding.setProgress(false);
                         }
 
                     }

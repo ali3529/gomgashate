@@ -12,4 +12,5 @@
     <color name="gray">#e0e0e0</color>
     <color name="darkgray">#bdbdbd</color>
     <color name="blackgray">#A19F9F</color>
+    <color name="searchlight">#EAE8E8</color>
 </resources>

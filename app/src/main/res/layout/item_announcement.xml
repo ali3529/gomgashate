@@ -10,11 +10,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="150dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="@color/white">
+        android:padding="16dp"
+        android:background="@color/white"
+        >
 
         <RelativeLayout
             android:id="@+id/img_layout"
@@ -25,13 +26,25 @@
             android:layout_marginBottom="10dp"
             android:layout_alignParentLeft="true">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageviewaccon"
-                android:layout_width="140dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
                 android:scaleType="centerCrop"
                 app:imagebind="@{announcment.pictures}"
-                app:error="@{@drawable/ic_placeholder}" />
+                app:error="@{@drawable/ic_placeholder}"
+                android:elevation="8dp"
+
+                app:riv_corner_radius="3dip"
+                app:riv_border_width="1dip"
+                app:riv_border_color="@color/gray"
+                app:riv_mutate_background="true"
+                app:riv_tile_mode="mirror"
+                app:riv_oval="false"
+
+
+
+                />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/detil_layout"
@@ -50,7 +63,7 @@
                 android:textAlignment="textStart"
                 android:fontFamily="@font/sans"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_18"
                 android:layout_marginBottom="36dp"
 
                 />
@@ -58,25 +71,65 @@
                 android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{announcment.city}"
+                android:text="@{announcment.type}"
                 tools:text="شیراز - گویم"
-                android:textColor="@color/lowblack"
+                android:textColor="#A933424C"
                 android:fontFamily="@font/sans"
-                android:layout_alignParentBottom="true"
-                android:textSize="18dp"
+               android:layout_above="@id/date"
+                android:textSize="@dimen/text_size"
+
+
 
                 />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{announcment.create}"
+                tools:text="لحظاتی پیش"
+                android:textColor="@color/lowblack"
+                android:fontFamily="@font/sans"
+                android:textSize="@dimen/text_size"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
 
+
+                />
+<!--            <TextView-->
+<!--                android:id="@+id/line"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:text=" - "-->
+
+<!--                android:layout_toLeftOf="@id/date"-->
+<!--                android:textSize="@dimen/text_size"-->
+<!--               />-->
+<!--            <TextView-->
+<!--                android:id="@+id/type"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@{announcment.type}"-->
+<!--                tools:text="پیدا شده"-->
+<!--                android:textColor="@color/lowblack"-->
+<!--                android:fontFamily="@font/sans"-->
+<!--                android:textSize="@dimen/text_size"-->
+<!--               android:layout_alignParentBottom="true"-->
+<!--                android:layout_toLeftOf="@id/line"-->
+
+
+<!--                />-->
 
 
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.8dp"
             android:layout_marginTop="20dp"
-            android:background="@color/darkgray"
+            android:background="#56100F0F"
            android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="1dp"
             />
 
 

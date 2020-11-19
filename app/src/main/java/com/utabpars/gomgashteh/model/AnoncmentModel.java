@@ -10,12 +10,21 @@ public class AnoncmentModel {
     private String response;
     @SerializedName("data")
     private List<Detile> data=new ArrayList<>();
-
+    @SerializedName("massage")
+    private String massage;
     @SerializedName("last_page")
     private int last_page;
 
     @SerializedName("next_page_url")
     private String next_page_url;
+
+    public String getMassage() {
+        return massage;
+    }
+
+    public void setMassage(String massage) {
+        this.massage = massage;
+    }
 
     public int getLast_page() {
         return last_page;
