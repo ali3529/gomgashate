@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -56,6 +57,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     public LiveData<PagedList<AnoncmentModel.Detile>> listLiveDataُSearch;
     static LiveData<PagedList<AnoncmentModel.Detile>> saveInstanceAnnounc;
     MaterialSearchBar searchView;
+    SharedPreferences shPref;
 
 
     @Override
@@ -66,6 +68,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         viewModel = new ViewModelProvider(this).get(AnnouncementViewModel.class);
         // Inflate the layout for this fragment
         initViews();
+        shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         updateViewModel = new ViewModelProvider(this).get(CheckUpdateViewModel.class);
@@ -129,6 +132,17 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         TopFilterAdaptor topFilterAdaptor=new TopFilterAdaptor(setTopfilterData());
         topFilterRecyclerview.setAdapter(topFilterAdaptor);
+
+
+        binding.setCity(shPref.getString("city_name_announcment","انتخاب"));
+        binding.layoutLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putString("navigate","choose");
+                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentCity,bundle);
+            }
+        });
     }
 
 
@@ -136,9 +150,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         recyclerView = binding.recycler;
         toolbar=binding.toolbar;
          searchView=binding.search;
-        searchView.setHint("جستوجو...");
         searchView.setPlaceHolder("جستجو در همه آگهی ها");
-        searchView.setPlaceHolderColor(R.color.gray);
+
         topFilterRecyclerview=binding.topListRecyclerview;
         topFilterRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,LinearLayoutManager.HORIZONTAL));
         topFilterRecyclerview.setHasFixedSize(true);

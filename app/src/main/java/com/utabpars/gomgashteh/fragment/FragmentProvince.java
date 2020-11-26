@@ -35,6 +35,7 @@ public class FragmentProvince extends Fragment {
     ProvinceViewModel provinceViewModel;
     RecyclerView recyclerView;
     CategoryAdaptor categoryAdaptor;
+    String navigate;
 
 
 
@@ -53,7 +54,7 @@ public class FragmentProvince extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        navigate=getArguments().getString("navigate");
         provinceViewModel.categoryModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
             @Override
             public void onChanged(CategoryModel categoryModel) {
@@ -63,6 +64,7 @@ public class FragmentProvince extends Fragment {
                        Bundle bundle=new Bundle();
                        bundle.putString("province",String.valueOf(id));
                        bundle.putString("province_name",categoryModel.getListData().get(position).getCategoryName());
+                       bundle.putString("navigate",navigate);
                        Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2,bundle);
                     }
                 });

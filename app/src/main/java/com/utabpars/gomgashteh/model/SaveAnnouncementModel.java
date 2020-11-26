@@ -2,11 +2,13 @@ package com.utabpars.gomgashteh.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class SaveAnnouncementModel {
     @SerializedName("response")
     private String response;
     @SerializedName("message")
-    private String masg;
+    private List<String> masg;
     @SerializedName("announce_id")
     private String announce_id;
 
@@ -18,11 +20,11 @@ public class SaveAnnouncementModel {
         this.response = response;
     }
 
-    public String getMasg() {
+    public List<String> getMasg() {
         return masg;
     }
 
-    public void setMasg(String masg) {
+    public void setMasg(List<String> masg) {
         this.masg = masg;
     }
 

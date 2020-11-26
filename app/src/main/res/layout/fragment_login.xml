@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.FragmentLogin">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/toolbar_background"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tooltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ورود به حساب کاربری"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/sans"
+
+            android:layout_margin="8dp"
+            android:textColor="@color/text_color_black"
+            android:layout_toLeftOf="@id/arrow"
+            android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            android:layout_alignParentRight="true"
+            android:layout_margin="6dp"
+            android:layout_centerInParent="true"
+            />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="شماره موبایل خود را وارد کنید "
+        android:textSize="22dp"
+        android:fontFamily="@font/sans"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_black"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:layout_below="@id/toolbar"/>
+
+
+    <TextView
+        android:id="@+id/ttt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="برای استفاده از امکانات گمگشته، لطفا شماره موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد."
+        android:textSize="17dp"
+        android:fontFamily="@font/sans"
+
+        android:textColor="@color/text_color_low_black"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:layout_below="@id/title"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ttt"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+       >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="rtl"
+            android:focusable="true"
+            android:fontFamily="@font/sans"
+            android:textColor="@color/text_color_black"
+            android:inputType="number"
+            android:cursorVisible="true"
+            android:letterSpacing="0.1"
+            android:maxLength="11"
+
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/toolbar_background">
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:text="بعدی"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_18"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="6dp"
+            android:textAlignment="center"/>
+    </RelativeLayout>
+</RelativeLayout>

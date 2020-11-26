@@ -82,20 +82,14 @@ public class FragmentSearch extends Fragment  {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),
                         InputMethodManager.RESULT_UNCHANGED_SHOWN);
-                return true;
+                return false;
             }
         });
 
 
 
 
-        
-//        searchBar.setOnHomeActionClickListener(new FloatingSearchView.OnHomeActionClickListener() {
-//            @Override
-//            public void onHomeClicked() {
-//                Toast.makeText(getContext(), "exit", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

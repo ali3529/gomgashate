@@ -27,7 +27,9 @@
    <variable
        name="search"
        type="com.utabpars.gomgashteh.fragment.FragmentAnnouncement" />
-
+<variable
+    name="city"
+    type="String" />
 
 
 </data>
@@ -50,16 +52,61 @@
        android:layout_width="match_parent"
        android:layout_height="?attr/actionBarSize"
        android:layout_alignParentTop="true"
-       android:background="@color/gray">
+       android:background="@color/toolbar_background">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
          <com.mancj.materialsearchbar.MaterialSearchBar
              android:id="@+id/search"
-             android:layout_width="match_parent"
+             android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="end"
+             app:mt_placeholderColor="@color/darkgray"
+             android:layout_toRightOf="@id/layout_location"
              />
 
+      <RelativeLayout
+          android:id="@+id/layout_location"
+          android:layout_width="wrap_content"
+          android:layout_height="?attr/actionBarSize"
+          android:layout_alignParentLeft="true"
+          android:layout_gravity="center"
+          android:background="@color/white"
+          >
 
+         <ImageView
+             android:id="@+id/img_location"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/ic_location_24"
+             android:layout_centerInParent="true"
+             android:layout_alignParentLeft="true"
+
+             />
+         <TextView
+             android:id="@+id/text_location"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             tools:text="شیراز"
+             android:text="@{city}"
+             android:layout_toRightOf="@id/img_location"
+             android:layout_centerInParent="true"
+             android:fontFamily="@font/sans"
+             android:textColor="@color/text_color_black"
+             android:textSize="@dimen/text_size_16"
+             />
+         <View
+             android:layout_width="0.8dp"
+             android:layout_height="match_parent"
+             android:layout_toRightOf="@id/text_location"
+             android:background="@color/hr_color"
+             android:layout_marginLeft="6dp"
+             android:layout_marginVertical="8dp"
+             />
+      </RelativeLayout>
+</RelativeLayout>
    </androidx.appcompat.widget.Toolbar>
 
    <androidx.recyclerview.widget.RecyclerView
@@ -67,7 +114,7 @@
        android:layout_width="match_parent"
        android:layout_height="50dp"
        android:layout_below="@id/toolbar"
-       android:background="@color/gray"
+       android:background="@color/toolbar_background"
        android:layoutDirection="rtl"/>
 
    <androidx.recyclerview.widget.RecyclerView

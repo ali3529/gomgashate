@@ -6,14 +6,23 @@ import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
+import com.utabpars.gomgashteh.model.AddImageModel;
+
+import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -56,6 +65,15 @@ public interface ApiInterface {
 
 
     @POST("insertAnnounce")
-    Single<SaveAnnouncementModel> insertAnnouncment(@Body JsonObject jsonObject);
+    @Multipart
+    Single<SaveAnnouncementModel> insertAnnouncment(@PartMap Map<String,RequestBody> requestBody,@Part List<MultipartBody.Part> file);
 
+
+
+
+
+
+    @POST("test")
+    @Multipart
+    Call<AddImageModel> test(@PartMap Map<String,RequestBody> requestBody);
 }

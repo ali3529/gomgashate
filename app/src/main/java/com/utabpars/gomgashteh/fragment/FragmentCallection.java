@@ -57,6 +57,7 @@ public class FragmentCallection extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.setProgress(true);
          title=getArguments().getString("title");
          list_id=getArguments().getString("id");
 
@@ -77,6 +78,7 @@ public class FragmentCallection extends Fragment {
             @Override
             public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull CategoryModel categoryModel) {
                 if (categoryModel.getResponse().equals("1")){
+                    binding.setProgress(false);
                     collectionAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
                         public void getCategoryId(View view, int id,int position) {

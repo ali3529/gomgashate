@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen tools:override="true" name="bottom_nav_menu">16dp</dimen>
-    <dimen tools:override="true" name="detail_size">20dp</dimen>
-    <dimen name="text_size">16dp</dimen>
-    <dimen name="text_size_18">16dp</dimen>
+    <dimen tools:override="true" name="detail_size">18dp</dimen>
+    <dimen name="text_size_16">16dp</dimen>
+    <dimen name="text_size_18">18dp</dimen>
+    <dimen name="detail_padding">8dp</dimen>
 </resources>

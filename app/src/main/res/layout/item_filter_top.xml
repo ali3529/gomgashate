@@ -28,7 +28,7 @@
             tools:text="دسته بندی"
             android:text="@{title}"
             android:textSize="19dp"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/text_color_black"
             android:textAlignment="center"
             android:fontFamily="@font/sans"
 

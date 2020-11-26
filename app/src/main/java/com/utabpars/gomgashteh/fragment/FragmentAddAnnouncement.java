@@ -1,7 +1,10 @@
 package com.utabpars.gomgashteh.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -10,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.util.Log;
@@ -23,31 +28,51 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+
 import com.utabpars.gomgashteh.databinding.FragmentAddAnnouncementBinding;
+import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
+import com.utabpars.gomgashteh.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-public class FragmentAddAnnouncement extends Fragment {
+import static com.utabpars.gomgashteh.utils.Utils.ReadExternalRequestCode;
+
+public class FragmentAddAnnouncement extends Fragment  {
     FragmentAddAnnouncementBinding binding;
     EditText edTitle, edDescription;
     Button save_announcement;
     SharedPreferences shPref;
     RadioGroup radioGroup;
     String type;
+    RecyclerView addImageRecyclerview;
+    Intent intent;
+    AddImageAnnouncmentAdaptor addImageAnnouncmentAdaptor;
+    List<Uri> uriList =new ArrayList<>();
+    List<MultipartBody.Part> partLists=new ArrayList<>();
+    Test test;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_add_announcement,container,false);
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
         initViews();
         binding.setFrag(this);
@@ -59,6 +84,7 @@ public class FragmentAddAnnouncement extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         RelativeLayout button=binding.setcategory;
         RelativeLayout city=binding.setcity;
         button.setOnClickListener(new View.OnClickListener() {
@@ -73,17 +99,19 @@ public class FragmentAddAnnouncement extends Fragment {
         city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmentCity);
+                Bundle bundle=new Bundle();
+                bundle.putString("navigate","add");
+                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmentCity,bundle);
             }
         });
 
         //set category
-            String title=shPref.getString("title_list","انتخاب کنید");
-            String title_collection=shPref.getString("title_categ","");
-            String id=shPref.getString("id_categ",null);
-            String id_list=shPref.getString("id_list",null);
+        String title=shPref.getString("title_list","انتخاب کنید");
+        String title_collection=shPref.getString("title_categ","");
+        String id=shPref.getString("id_categ",null);
+        String id_list=shPref.getString("id_list",null);
 
-            binding.setCategory(title+", "+title_collection);
+        binding.setCategory(title+", "+title_collection);
 
 
 
@@ -99,15 +127,8 @@ public class FragmentAddAnnouncement extends Fragment {
                     if (edDescription.getText().toString().length()!=0){
                         if (type!=null){
                             sendAnnouncment(fetchdata());
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Navigation.findNavController(view).navigate(R.id.action_add_to_announcement);
-                                    SharedPreferences.Editor editor=shPref.edit();
-                                    editor.clear();
-                                    editor.apply();
-                                }
-                            },2000);
+                            Log.d("insetanosdijds", "onClick: goood");
+
 
 
                         }else Toast.makeText(getContext(), "لطفا نوع آگهی را مشخص کنید", Toast.LENGTH_SHORT).show();
@@ -118,26 +139,58 @@ public class FragmentAddAnnouncement extends Fragment {
         });
 
 
+        binding.layoutAddImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (Utils.checkPermission(getContext())) {
+                    tttest();
+
+
+                }
+            }
+        });
 
 
     }
-public void onClickRadio(View view){
-    boolean checked = ((RadioButton) view).isChecked();
 
-    // Check which radio button was clicked
-    switch(view.getId()) {
-        case R.id.find:
-            if (checked)
-             type="1";
-            Log.d("jhvhjvj", "onClickRadio: "+type);
-                break;
-        case R.id.lost:
-            if (checked)
-                type="2";
+
+    public void tttest(){
+        test=new Test();
+        test.show(getActivity().getSupportFragmentManager(),"ModalBottomShee");
+
+        test.passData(new PassDataCallBack() {
+            @Override
+            public void passUri(Uri uri, MultipartBody.Part partList) {
+                Toast.makeText(getContext(), "dsgsdgsdgsdg", Toast.LENGTH_SHORT).show();
+                Log.d("fdyheszhb", "passUri: asfasfsaf"+uriList);
+                test.dismiss();
+                partLists.add(partList);
+                uriList.add(uri);
+                addImageAnnouncmentAdaptor=new AddImageAnnouncmentAdaptor(uriList);
+                addImageRecyclerview.setAdapter(addImageAnnouncmentAdaptor);
+
+            }
+        });
+    }
+
+    public void onClickRadio(View view){
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.find:
+                if (checked)
+                    type="1";
                 Log.d("jhvhjvj", "onClickRadio: "+type);
                 break;
+            case R.id.lost:
+                if (checked)
+                    type="2";
+                Log.d("jhvhjvj", "onClickRadio: "+type);
+                break;
+        }
     }
-}
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -161,45 +214,92 @@ public void onClickRadio(View view){
         edDescription =binding.description;
         save_announcement=binding.saveAnnounce;
         radioGroup=binding.radiogroup;
+        addImageRecyclerview=binding.imgRecyclerview;
+        addImageRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true));
+        addImageRecyclerview.setHasFixedSize(true);
+
+
     }
 
-private void sendAnnouncment(JsonObject jsonObject){
-    ApiInterface apiInterface= ApiClient.getApiClient();
-    CompositeDisposable compositeDisposable=new CompositeDisposable();
-    compositeDisposable.add(apiInterface.insertAnnouncment(jsonObject)
-    .subscribeOn(Schedulers.io())
-    .observeOn(AndroidSchedulers.mainThread())
-    .subscribeWith(new DisposableSingleObserver<SaveAnnouncementModel>() {
-        @Override
-        public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull SaveAnnouncementModel saveAnnouncementModel) {
-            if (saveAnnouncementModel.getResponse().equals("1")){
-                Toast.makeText(getContext(), saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
-            }else if (saveAnnouncementModel.getResponse().equals("0")) {
-                Toast.makeText(getContext(), saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
+    private void sendAnnouncment(HashMap<String,RequestBody> requestbody){
+        ApiInterface apiInterface= ApiClient.getApiClient();
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        compositeDisposable.add(apiInterface.insertAnnouncment(requestbody,partLists)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<SaveAnnouncementModel>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull SaveAnnouncementModel saveAnnouncementModel) {
+                        if (saveAnnouncementModel.getResponse().equals("1")){
+                            Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
+                            Log.d("insetanosdijds", "onSuccess: "+saveAnnouncementModel.getMasg());
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_announcement);
+                                    SharedPreferences.Editor editor=shPref.edit();
+                                    editor.clear();
+                                    editor.apply();
+                                }
+                            },2000);
+                        }else if (saveAnnouncementModel.getResponse().equals("0")) {
+                            Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d("insetanosdijds", "onSuccess: "+e.toString());
+                    }
+                }));
+    }
+
+    public HashMap<String,RequestBody> fetchdata(){
+
+        HashMap<String,RequestBody> addAnnouncement=new HashMap<>();
+
+        RequestBody title=RequestBody.create(MediaType.parse("title"),edTitle.getText().toString());
+        RequestBody utype=RequestBody.create(MediaType.parse("type"),type);
+        RequestBody category_id=RequestBody.create(MediaType.parse("category_id"),shPref.getString("id_list",null));
+        RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("id_categ",null));
+        RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",null));
+        RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",null));
+        RequestBody detail=RequestBody.create(MediaType.parse("detail"),edDescription.getText().toString());
+        RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),"1");
+
+        addAnnouncement.put("title",title);
+        addAnnouncement.put("type",utype);
+        addAnnouncement.put("category_id",category_id);
+        addAnnouncement.put("collection_id",collection_id);
+        addAnnouncement.put("province_id",province_id);
+        addAnnouncement.put("city_id",city_id);
+        addAnnouncement.put("detail",detail);
+        addAnnouncement.put("announcer_id",announcer_id);
+
+
+        return addAnnouncement;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == ReadExternalRequestCode) { // با کلید مربوط به خواندن مموری نتیجه را می خوانیم
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // اگر از درخواست دسترسی جواب مثبت برگشت دستورات شرط اجرا می شود.
+                startActivityForResult(intent, 100);
+                Toast.makeText(getContext(), "permision granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "دسترسی داده نشد!", Toast.LENGTH_LONG).show(); // در صورتی که جواب منفی گرفتیم پیام دسترسی داده نشد را نمایش می دهیم.
             }
         }
+    }
 
-        @Override
-        public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
 
-        }
-    }));
-}
 
-public JsonObject fetchdata(){
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("title",edTitle.getText().toString());
-        jsonObject.addProperty("type",type);
-        jsonObject.addProperty("category_id",shPref.getString("id_categ",null));
-        jsonObject.addProperty("collection_id",shPref.getString("id_list",null));
-        jsonObject.addProperty("province_id",shPref.getString("province_id",null));
-        jsonObject.addProperty("city_id",shPref.getString("city_id",null));
-        jsonObject.addProperty("detail",edDescription.getText().toString());
-        jsonObject.addProperty("announcer_id","1");
 
-    Log.e("dgdfg", "fetchdata: "+jsonObject );
 
-        return jsonObject;
-}
+
+
 }
 

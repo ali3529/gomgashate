@@ -38,12 +38,20 @@
             app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_announcement_to_fragmentCity"
+            app:destination="@id/fragmentCity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/add"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAddAnnouncement"
         android:label="fragment_add_announcement"
-        tools:layout="@layout/fragment_add_announcement" >
+        tools:layout="@layout/fragment_add_announcement"
+        app:startDestination="@id/action_add_to_announcement">
         <action
             android:id="@+id/action_add_to_announcement"
             app:destination="@id/announcement" />
@@ -95,6 +103,9 @@
         <action
             android:id="@+id/action_perofile_to_announcement"
             app:destination="@id/announcement" />
+        <action
+            android:id="@+id/action_perofile_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -171,5 +182,18 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_exit"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_fragmentCity2_to_announcement"
+            app:destination="@id/announcement" />
     </fragment>
+    <fragment
+        android:id="@+id/test"
+        android:name="com.utabpars.gomgashteh.fragment.Test"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

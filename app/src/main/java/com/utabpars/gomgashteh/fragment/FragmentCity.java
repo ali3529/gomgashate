@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.CategoryAdaptor;
@@ -34,7 +35,7 @@ public class FragmentCity extends Fragment {
     FragmentCity2Binding binding;
     RecyclerView recyclerView;
     CategoryAdaptor categoryAdaptor;
-    String province_id,province_name;
+    String province_id,province_name,navigation;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -49,6 +50,7 @@ public class FragmentCity extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navigation=getArguments().getString("navigate");
          province_id =getArguments().getString("province");
          province_name =getArguments().getString("province_name");
         Log.d("afd", "onSuccess: "+ province_id);
@@ -79,8 +81,15 @@ public class FragmentCity extends Fragment {
                              editor.putString("city_id",String.valueOf(id));
                              editor.putString("city_name",categoryModel.getListData().get(position).getCategoryName());
                              editor.apply();
+                             if (navigation.equals("add")){
+                                 Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_add);
+                             }else if (navigation.equals("choose")){
+                               Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_announcement);
+                                 editor.putString("city_name_announcment",categoryModel.getListData().get(position).getCategoryName());
+                                 editor.apply();
+                             }
 
-                             Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_add);
+
                          }
                      });
                      recyclerView.setAdapter(categoryAdaptor);
