@@ -5,6 +5,7 @@ import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.DetailModel;
+import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
 import com.utabpars.gomgashteh.model.AddImageModel;
 
@@ -73,7 +74,12 @@ public interface ApiInterface {
 
 
 
-    @POST("test")
-    @Multipart
-    Call<AddImageModel> test(@PartMap Map<String,RequestBody> requestBody);
+    @POST("userAuthentication")
+    @FormUrlEncoded
+    Single<RmModel> userAuthentication(@Field("phone_num") String phone_num);
+
+    @POST("validateCode")
+    @FormUrlEncoded
+    Single<RmModel> validateOtp(@Field("phone_num") String phone_num,
+                                @Field("code") String code);
 }

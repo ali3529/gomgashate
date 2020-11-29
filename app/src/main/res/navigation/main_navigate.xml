@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/announcement">
+    app:startDestination="@id/fragmentLogin">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -188,12 +188,37 @@
     </fragment>
     <fragment
         android:id="@+id/test"
-        android:name="com.utabpars.gomgashteh.fragment.Test"
+        android:name="com.utabpars.gomgashteh.fragment.BottomSheetChooseImage"
         android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_bottomsheet_addimage" />
     <fragment
         android:id="@+id/fragmentLogin"
         android:name="com.utabpars.gomgashteh.fragment.FragmentLogin"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentOtp"
+            app:destination="@id/fragmentOtp"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOtp"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentOtp"
+        android:label="FragmentOtp" >
+        <action
+            android:id="@+id/action_fragmentOtp_to_perofile"
+            app:destination="@id/perofile" />
+        <action
+            android:id="@+id/action_fragmentOtp_to_fragmentRegister"
+            app:destination="@id/fragmentRegister" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegister"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentRegister"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>

@@ -75,8 +75,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="776" />
-                            <option name="y" value="-1315" />
+                            <option name="x" value="-490" />
+                            <option name="y" value="-1343" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -204,6 +204,48 @@
                           <Point>
                             <option name="x" value="3354" />
                             <option name="y" value="909" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentLogin_to_fragmentOtp">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentOtp">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="3894" />
+                            <option name="y" value="473" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentOtp_to_perofile">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentRegister">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="4472" />
+                            <option name="y" value="510" />
                           </Point>
                         </option>
                       </LayoutPositions>

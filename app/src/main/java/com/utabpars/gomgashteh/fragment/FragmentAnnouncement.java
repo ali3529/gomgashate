@@ -134,7 +134,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         topFilterRecyclerview.setAdapter(topFilterAdaptor);
 
 
-        binding.setCity(shPref.getString("city_name_announcment","انتخاب"));
+        SharedPreferences preferences=getActivity().getSharedPreferences("cityName",Context.MODE_PRIVATE);
+        binding.setCity(preferences.getString("city_name_announcment","انتخاب"));
         binding.layoutLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

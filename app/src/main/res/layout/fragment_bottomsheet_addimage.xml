@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="test"
+            type="com.utabpars.gomgashteh.fragment.BottomSheetChooseImage" />
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.BottomSheetChooseImage">
+        <RelativeLayout
+            android:id="@+id/sheeet"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            app:behavior_peekHeight="00dp"
+            app:behavior_hideable="true"
+            android:background="@drawable/bootomsheet_shape"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/title_botton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="انتخاب عکس آگهی"
+                android:textSize="@dimen/text_size_18"
+                android:fontFamily="@font/sans"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_color_low_black"
+                android:layout_marginVertical="8dp"
+                />
+            <View
+                android:id="@+id/hr_botton"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/hr_color"
+                android:layout_below="@id/title_botton"
+                android:layout_marginBottom="8dp"
+                />
+            <TextView
+                android:id="@+id/camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="از دوربین"
+                android:textSize="@dimen/text_size_18"
+                android:fontFamily="@font/sans"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_color_black"
+                android:layout_below="@id/hr_botton"
+                android:layout_marginBottom="8dp"
+                android:drawableRight="@drawable/ic_camera_24"
+                android:drawablePadding="9dp"
+
+                />
+
+            <TextView
+                android:id="@+id/gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="از گالری"
+                android:textSize="@dimen/text_size_18"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/camera"
+                android:fontFamily="@font/sans"
+                android:textColor="@color/text_color_black"
+                android:drawableRight="@drawable/ic_photo_24"
+                android:drawablePadding="9dp"
+                />
+        </RelativeLayout>
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

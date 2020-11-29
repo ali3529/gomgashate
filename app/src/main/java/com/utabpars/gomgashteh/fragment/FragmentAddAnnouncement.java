@@ -64,7 +64,7 @@ public class FragmentAddAnnouncement extends Fragment  {
     AddImageAnnouncmentAdaptor addImageAnnouncmentAdaptor;
     List<Uri> uriList =new ArrayList<>();
     List<MultipartBody.Part> partLists=new ArrayList<>();
-    Test test;
+    BottomSheetChooseImage bottomSheetChooseImage;
 
 
     @Override
@@ -143,8 +143,8 @@ public class FragmentAddAnnouncement extends Fragment  {
             @Override
             public void onClick(View view) {
 
-                if (Utils.checkPermission(getContext())) {
-                    tttest();
+                if (Utils.checkPermissionStorage(getContext())) {
+                    setImageAnnounsmenet();
 
 
                 }
@@ -155,16 +155,17 @@ public class FragmentAddAnnouncement extends Fragment  {
     }
 
 
-    public void tttest(){
-        test=new Test();
-        test.show(getActivity().getSupportFragmentManager(),"ModalBottomShee");
+    public void setImageAnnounsmenet(){
+       // ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.CAMERA}, ReadExternalRequestCode);
+        bottomSheetChooseImage =new BottomSheetChooseImage();
+        bottomSheetChooseImage.show(getActivity().getSupportFragmentManager(),"ModalBottomShee");
 
-        test.passData(new PassDataCallBack() {
+        bottomSheetChooseImage.passData(new PassDataCallBack() {
             @Override
             public void passUri(Uri uri, MultipartBody.Part partList) {
                 Toast.makeText(getContext(), "dsgsdgsdgsdg", Toast.LENGTH_SHORT).show();
                 Log.d("fdyheszhb", "passUri: asfasfsaf"+uriList);
-                test.dismiss();
+                bottomSheetChooseImage.dismiss();
                 partLists.add(partList);
                 uriList.add(uri);
                 addImageAnnouncmentAdaptor=new AddImageAnnouncmentAdaptor(uriList);

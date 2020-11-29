@@ -46,11 +46,26 @@ public class Utils {
     }
 
 
-    public static boolean checkPermission(Context context) {
+    public static boolean checkPermissionStorage(Context context) {
         int currentAPIVersion = Build.VERSION.SDK_INT;
         if (currentAPIVersion >= Build.VERSION_CODES.M) { // ابتدا کنترل می کند تا اندروید بالاتر M باشد
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { // اگر دسترسی خواندن مموری را نداشته باشد دستورات داخل شرط اجرا می شود.
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ReadExternalRequestCode);
+
+                return false;// دسترسی تایید نشده باشد جواب منفی داده می شود.
+            } else {
+                return true;// دسترسی تایید شده جواب مثبت می شود.
+            }
+        } else {
+            return true;// دسترسی تایید شده جواب مثبت می شود.
+        }
+    }
+
+    public static boolean checkPermissionCamera(Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= Build.VERSION_CODES.M) { // ابتدا کنترل می کند تا اندروید بالاتر M باشد
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { // اگر دسترسی خواندن مموری را نداشته باشد دستورات داخل شرط اجرا می شود.
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CAMERA}, ReadExternalRequestCode);
 
                 return false;// دسترسی تایید نشده باشد جواب منفی داده می شود.
             } else {

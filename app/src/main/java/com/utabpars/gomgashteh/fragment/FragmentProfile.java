@@ -30,7 +30,7 @@ public class FragmentProfile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Navigation.findNavController(view).navigate(R.id.action_perofile_to_fragmentLogin);
+//        Navigation.findNavController(view).navigate(R.id.action_perofile_to_fragmentLogin);
 
 
     }
