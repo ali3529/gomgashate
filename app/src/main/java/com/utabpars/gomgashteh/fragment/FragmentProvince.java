@@ -61,11 +61,27 @@ public class FragmentProvince extends Fragment {
                 categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                     @Override
                     public void getCategoryId(View view, int id, int position) {
-                       Bundle bundle=new Bundle();
-                       bundle.putString("province",String.valueOf(id));
-                       bundle.putString("province_name",categoryModel.getListData().get(position).getCategoryName());
-                       bundle.putString("navigate",navigate);
-                       Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2,bundle);
+                        if (navigate.equals("city_add")) {
+
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("province", String.valueOf(id));
+                            bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                            bundle.putString("navigate", navigate);
+                            Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
+                        }else if (navigate.equals("otherCity")){
+                            Bundle bundle = new Bundle();
+                            bundle.putString("province", String.valueOf(id));
+                            bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                            Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
+                        }
+                        else if (navigate.equals("choose")){
+                            Bundle bundle = new Bundle();
+                            bundle.putString("province", String.valueOf(id));
+                            bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                            bundle.putString("navigate", "choose");
+                            Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
+                        }
                     }
                 });
                 recyclerView.setAdapter(categoryAdaptor);

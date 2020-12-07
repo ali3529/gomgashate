@@ -14,19 +14,53 @@
         <variable
             name="Frag"
             type="com.utabpars.gomgashteh.fragment.FragmentAddAnnouncement" />
+
+        <variable
+            name="isLogin"
+            type="Boolean" />
+
+        <variable
+            name="isLogined"
+            type="Boolean" />
     </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/islogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:setLayoutVisi="@{isLogin}">
 
+
+        <TextView
+            android:id="@+id/rirle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="برای ثبت آگهی لطفا وارد حساب کاربری خود شوید."
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_18"/>
+        <Button
+            android:id="@+id/add_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/rirle"
+            android:text="ورود"
+            android:onClick="@{() -> Frag.getRegister()}"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
-
+        android:id="@+id/mainl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.FragmentAddAnnouncement"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:visibility="gone"
+        app:setLayoutVisi="@{isLogined}">
 
 
 
@@ -50,10 +84,12 @@
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
+            android:id="@+id/scrool"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            android:layout_below="@id/tolbar">
+            android:layout_below="@id/tolbar"
+            android:layout_above="@id/booton_tto">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -143,12 +179,46 @@
                         android:layout_marginTop="6dp"
                         />
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/set_othercity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_below="@id/setcity"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="شهر های دیگر"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="@dimen/text_size_18"
+                        android:textColor="@color/text_color_black" />
 
+                    <TextView
+                        android:id="@+id/othercity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:hint="انتخاب کنید"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="@dimen/text_size_18"
+                        android:textColor="@color/text_color_low_black"/>
+                    <View
+
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/hr_color"
+                        android:layout_below="@id/othercity"
+                        android:layout_marginTop="6dp"
+                        />
+                </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/layout_img_recyclerview"
-                    android:layout_below="@id/setcity"
+                    android:layout_below="@id/set_othercity"
                     android:padding="8dp">
                     <TextView
                         android:id="@+id/title_add_image"
@@ -312,21 +382,34 @@
                             android:textColor="@color/text_color_black"/>
                     </RadioGroup>
                 </RelativeLayout>
-                <Button
-                    android:id="@+id/saveAnnounce"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
 
-                    android:layout_marginBottom="16dp"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="40dp"
-                    android:text="ثبت آگهی"
-                    android:textSize="18dp"
-                    android:layout_below="@id/type_layout"
-                    />
             </RelativeLayout>
 
         </ScrollView>
+
+
+        <RelativeLayout
+            android:id="@+id/booton_tto"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/toolbar_background"
+
+            >
+            <Button
+                android:id="@+id/saveAnnounce"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:text="ثبت آگهی"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_18"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_margin="6dp"
+                android:textAlignment="center"
+
+           />
+        </RelativeLayout>
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

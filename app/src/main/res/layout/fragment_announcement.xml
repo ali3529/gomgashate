@@ -3,36 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<data>
-   <variable
-       name="progress"
-       type="Boolean" />
+   <data>
+      <variable
+          name="progress"
+          type="Boolean" />
 
-   <variable
-       name="progressbelow"
-       type="Boolean" />
+      <variable
+          name="progressbelow"
+          type="Boolean" />
 
-   <variable
-       name="refresh"
-       type="Boolean" />
+      <variable
+          name="refresh"
+          type="Boolean" />
 
-   <variable
-       name="viemodel"
-       type="com.utabpars.gomgashteh.paging.AnnouncementViewModel" />
+      <variable
+          name="viemodel"
+          type="com.utabpars.gomgashteh.paging.AnnouncementViewModel" />
 
-   <variable
-       name="layoutvisibility"
-       type="Boolean" />
+      <variable
+          name="layoutvisibility"
+          type="Boolean" />
 
-   <variable
-       name="search"
-       type="com.utabpars.gomgashteh.fragment.FragmentAnnouncement" />
-<variable
-    name="city"
-    type="String" />
+      <variable
+          name="search"
+          type="com.utabpars.gomgashteh.fragment.FragmentAnnouncement" />
+      <variable
+          name="city"
+          type="String" />
 
 
-</data>
+   </data>
    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
        android:id="@+id/srefresh"
        android:layout_width="match_parent"
@@ -42,146 +42,149 @@
 
 
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.FragmentAnnouncement">
-
-   <androidx.appcompat.widget.Toolbar
-       android:id="@+id/toolbar"
-       android:layout_width="match_parent"
-       android:layout_height="?attr/actionBarSize"
-       android:layout_alignParentTop="true"
-       android:background="@color/toolbar_background">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-         <com.mancj.materialsearchbar.MaterialSearchBar
-             android:id="@+id/search"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="end"
-             app:mt_placeholderColor="@color/darkgray"
-             android:layout_toRightOf="@id/layout_location"
-             />
-
       <RelativeLayout
-          android:id="@+id/layout_location"
-          android:layout_width="wrap_content"
-          android:layout_height="?attr/actionBarSize"
-          android:layout_alignParentLeft="true"
-          android:layout_gravity="center"
-          android:background="@color/white"
-          >
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          tools:context=".fragment.FragmentAnnouncement">
 
-         <ImageView
-             android:id="@+id/img_location"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:src="@drawable/ic_location_24"
-             android:layout_centerInParent="true"
-             android:layout_alignParentLeft="true"
+         <androidx.appcompat.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:layout_alignParentTop="true"
+             android:background="@color/toolbar_background"
+             android:layout_marginTop="6dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-             />
-         <TextView
-             android:id="@+id/text_location"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             tools:text="شیراز"
-             android:text="@{city}"
-             android:layout_toRightOf="@id/img_location"
-             android:layout_centerInParent="true"
-             android:fontFamily="@font/sans"
-             android:textColor="@color/text_color_black"
-             android:textSize="@dimen/text_size_16"
-             />
-         <View
-             android:layout_width="0.8dp"
+
+               <com.mancj.materialsearchbar.MaterialSearchBar
+                   android:id="@+id/search"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_gravity="end"
+                   app:mt_placeholderColor="@color/darkgray"
+                   android:layout_toRightOf="@id/layout_location"
+                   android:layoutDirection="ltr"
+                   />
+
+               <RelativeLayout
+                   android:id="@+id/layout_location"
+                   android:layout_width="90dp"
+                   android:layout_height="50dp"
+                   android:layout_alignParentLeft="true"
+                   android:layout_gravity="center"
+                   android:background="@color/white"
+                   android:padding="6dp"
+                   >
+
+                  <ImageView
+                      android:id="@+id/img_location"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:src="@drawable/ic_location_24"
+                      android:layout_centerInParent="true"
+                      android:layout_alignParentLeft="true"
+
+                      />
+                  <TextView
+                      android:id="@+id/text_location"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      tools:text="شیراز"
+                      android:text="@{city}"
+                      android:layout_toRightOf="@id/img_location"
+                      android:layout_centerInParent="true"
+                      android:fontFamily="@font/sans"
+                      android:textColor="@color/text_color_black"
+                      android:textSize="@dimen/text_size_16"
+                      />
+                  <View
+                      android:layout_width="0.8dp"
+                      android:layout_height="match_parent"
+                      android:layout_toRightOf="@id/text_location"
+                      android:background="@color/hr_color"
+                      android:layout_marginLeft="6dp"
+                      android:layout_marginVertical="8dp"
+                      />
+               </RelativeLayout>
+            </RelativeLayout>
+         </androidx.appcompat.widget.Toolbar>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/topListRecyclerview"
+             android:layout_width="match_parent"
+             android:layout_height="50dp"
+             android:layout_below="@id/toolbar"
+             android:background="@color/toolbar_background"
+             android:layoutDirection="rtl"/>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/recycler"
+             android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_toRightOf="@id/text_location"
-             android:background="@color/hr_color"
-             android:layout_marginLeft="6dp"
-             android:layout_marginVertical="8dp"
+             android:layout_above="@id/below_progress"
+             android:layout_below="@id/topListRecyclerview"
+             app:floatingSearch_leftActionMode="showHamburger"
+             app:floatingSearch_close_search_on_keyboard_dismiss="true"
+
+
              />
+
+         <com.airbnb.lottie.LottieAnimationView
+             android:layout_width="150dp"
+             android:layout_height="125dp"
+             android:layout_centerInParent="true"
+             app:lottie_autoPlay="true"
+             app:lottie_loop="true"
+             app:lottie_rawRes="@raw/progress"
+             android:visibility="visible"
+             app:setvisib="@{progress}"/>
+
+         <com.airbnb.lottie.LottieAnimationView
+             android:id="@+id/below_progress"
+             android:layout_width="300dp"
+             android:layout_height="70dp"
+             android:layout_centerInParent="true"
+             app:lottie_autoPlay="true"
+             app:lottie_loop="true"
+             app:lottie_rawRes="@raw/progress"
+             android:visibility="gone"
+             app:setvisib="@{progressbelow}"
+             android:layout_alignParentBottom="true"
+
+             />
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             app:setLayoutVisi="@{layoutvisibility}"
+             android:visibility="gone">
+
+            <Button
+                android:id="@+id/refredh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tryagain"
+                android:layout_centerInParent="true"
+                android:onClick="@{() -> viemodel.refresh()}"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/preeeeg"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_below="@id/refredh"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/progress"
+                android:visibility="gone"
+                app:setvisib="@{refresh}"
+                android:layout_centerInParent="true"
+
+
+                />
+         </RelativeLayout>
       </RelativeLayout>
-</RelativeLayout>
-   </androidx.appcompat.widget.Toolbar>
-
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/topListRecyclerview"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:layout_below="@id/toolbar"
-       android:background="@color/toolbar_background"
-       android:layoutDirection="rtl"/>
-
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recycler"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_above="@id/below_progress"
-       android:layout_below="@id/topListRecyclerview"
-       app:floatingSearch_leftActionMode="showHamburger"
-       app:floatingSearch_close_search_on_keyboard_dismiss="true"
-
-
-  />
-
-   <com.airbnb.lottie.LottieAnimationView
-       android:layout_width="150dp"
-       android:layout_height="125dp"
-       android:layout_centerInParent="true"
-       app:lottie_autoPlay="true"
-       app:lottie_loop="true"
-       app:lottie_rawRes="@raw/progress"
-       android:visibility="visible"
-      app:setvisib="@{progress}"/>
-
-   <com.airbnb.lottie.LottieAnimationView
-       android:id="@+id/below_progress"
-       android:layout_width="300dp"
-       android:layout_height="70dp"
-       android:layout_centerInParent="true"
-       app:lottie_autoPlay="true"
-       app:lottie_loop="true"
-       app:lottie_rawRes="@raw/progress"
-       android:visibility="gone"
-       app:setvisib="@{progressbelow}"
-       android:layout_alignParentBottom="true"
-
-       />
-
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       app:setLayoutVisi="@{layoutvisibility}"
-       android:visibility="gone">
-
-   <Button
-       android:id="@+id/refredh"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-      android:text="tryagain"
-      android:layout_centerInParent="true"
-       android:onClick="@{() -> viemodel.refresh()}"/>
-
-      <com.airbnb.lottie.LottieAnimationView
-          android:id="@+id/preeeeg"
-          android:layout_width="300dp"
-          android:layout_height="70dp"
-         android:layout_below="@id/refredh"
-          app:lottie_autoPlay="true"
-          app:lottie_loop="true"
-          app:lottie_rawRes="@raw/progress"
-          android:visibility="gone"
-          app:setvisib="@{refresh}"
-          android:layout_centerInParent="true"
-
-
-          />
-   </RelativeLayout>
-</RelativeLayout>
    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

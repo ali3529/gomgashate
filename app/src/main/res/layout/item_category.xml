@@ -23,6 +23,7 @@
     android:layout_marginRight="@dimen/text_size_16"
     android:layout_marginBottom="6dp"/>
     <ImageView
+        android:id="@+id/fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -34,6 +35,13 @@
         android:layout_below="@id/name"
         android:background="@color/hr_color"
         />
+
+    <ImageView
+        android:id="@+id/selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_24"
+        android:layout_toRightOf="@id/fff"/>
 
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -18,8 +19,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class UserAuthenticationViewModel extends ViewModel {
     public MutableLiveData<RmModel> phoneNumberResponseLiveData=new MutableLiveData<>();
-    public MutableLiveData<RmModel> otpResponseLiveData=new MutableLiveData<>();
+    public MutableLiveData<RegisterModel> otpResponseLiveData=new MutableLiveData<>();
+    public MutableLiveData<RegisterModel> registerUserLiveData=new MutableLiveData<>();
     public MutableLiveData<Long> timerOtp=new MutableLiveData<>();
+
+    public MutableLiveData<String> error=new MutableLiveData<>();
 
     public MutableLiveData<String> timerOtpFinish=new MutableLiveData<>();
 
@@ -40,6 +44,7 @@ public class UserAuthenticationViewModel extends ViewModel {
 
             @Override
             public void onError(@NonNull Throwable e) {
+                error.postValue(e.toString());
                 Log.d("sdfsdf", "onError: "+e.toString());
             }
         }));
@@ -51,9 +56,9 @@ public class UserAuthenticationViewModel extends ViewModel {
         compositeDisposable.add(apiInterface.validateOtp(phoneNum,otpCode)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<RmModel>() {
+        .subscribeWith(new DisposableSingleObserver<RegisterModel>() {
             @Override
-            public void onSuccess(@NonNull RmModel rmModel) {
+            public void onSuccess(@NonNull RegisterModel rmModel) {
 
                     otpResponseLiveData.postValue(rmModel);
 
@@ -62,7 +67,7 @@ public class UserAuthenticationViewModel extends ViewModel {
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                error.postValue(e.toString());
             }
         }));
     }
@@ -80,5 +85,26 @@ public class UserAuthenticationViewModel extends ViewModel {
                 timerOtpFinish.postValue("ارسال مجدد");
             }
         }.start();
+    }
+
+    public void registerUser(String phone,String code,String name,String lastName){
+        ApiInterface apiInterface= ApiClient.getApiClient();
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        compositeDisposable.add(apiInterface.registerUser(phone,code,name,lastName)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeWith(new DisposableSingleObserver<RegisterModel>() {
+            @Override
+            public void onSuccess(@NonNull RegisterModel rmModel) {
+                registerUserLiveData.postValue(rmModel);
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                error.postValue(e.toString());
+
+            }
+        }));
     }
 }

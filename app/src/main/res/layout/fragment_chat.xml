@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentChat">
-
-
     <TextView
+        android:id="@+id/chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="chat"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_18"
+        android:visibility="gone"/>
+<RelativeLayout
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+
+    <TextView
+        android:id="@+id/rirle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="برای مشاهده چت ها وارد حساب کاربری خود شوید."
+        android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_18"/>
+    <Button
+        android:id="@+id/chat_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/rirle"
+        android:text="ورود"/>
 
 </RelativeLayout>
+
+
+</RelativeLayout>
+
+</layout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/fragmentLogin">
+    app:startDestination="@id/perofile">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -69,6 +69,9 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_add_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
     </fragment>
     <fragment
         android:id="@+id/chat"
@@ -78,6 +81,9 @@
         <action
             android:id="@+id/action_chat_to_announcement"
             app:destination="@id/announcement" />
+        <action
+            android:id="@+id/action_chat_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
     </fragment>
     <fragment
         android:id="@+id/list"
@@ -105,7 +111,9 @@
             app:destination="@id/announcement" />
         <action
             android:id="@+id/action_perofile_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            app:enterAnim="@anim/fade_out"
+            app:exitAnim="@anim/fade_out_left" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -170,6 +178,9 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_fragmentCity_to_fragmentOtherCity"
+            app:destination="@id/fragmentOtherCity" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCity2"
@@ -203,7 +214,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
-            app:popUpToInclusive="false" />
+
+
+            />
     </fragment>
     <fragment
         android:id="@+id/fragmentOtp"
@@ -213,12 +226,16 @@
             android:id="@+id/action_fragmentOtp_to_perofile"
             app:destination="@id/perofile" />
         <action
-            android:id="@+id/action_fragmentOtp_to_fragmentRegister"
-            app:destination="@id/fragmentRegister" />
+            android:id="@+id/action_fragmentOtp_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentRegister"
-        android:name="com.utabpars.gomgashteh.fragment.FragmentRegister"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        android:id="@+id/fragmentOtherCity"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentOtherCity"
+        android:label="fragment_other_city"
+        tools:layout="@layout/fragment_other_city" >
+        <action
+            android:id="@+id/action_fragmentOtherCity_to_add"
+            app:destination="@id/add" />
+    </fragment>
 </navigation>

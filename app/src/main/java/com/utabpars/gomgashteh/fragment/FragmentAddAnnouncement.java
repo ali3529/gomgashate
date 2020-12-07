@@ -28,6 +28,11 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
@@ -38,7 +43,10 @@ import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
 import com.utabpars.gomgashteh.utils.Utils;
 
+import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,6 +57,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okio.ByteString;
 
 import static com.utabpars.gomgashteh.utils.Utils.ReadExternalRequestCode;
 
@@ -56,7 +65,7 @@ public class FragmentAddAnnouncement extends Fragment  {
     FragmentAddAnnouncementBinding binding;
     EditText edTitle, edDescription;
     Button save_announcement;
-    SharedPreferences shPref;
+    SharedPreferences shPref,user_status;
     RadioGroup radioGroup;
     String type;
     RecyclerView addImageRecyclerview;
@@ -67,6 +76,7 @@ public class FragmentAddAnnouncement extends Fragment  {
     BottomSheetChooseImage bottomSheetChooseImage;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +84,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_add_announcement,container,false);
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
+        user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
         initViews();
         binding.setFrag(this);
         return binding.getRoot();
@@ -84,7 +95,14 @@ public class FragmentAddAnnouncement extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        boolean isLogin=user_status.getBoolean("user_login",false);
+        if (isLogin){
+            binding.setIsLogin(false);
+            binding.setIsLogined(true);
+        }else {
+            binding.setIsLogin(true);
+            binding.setIsLogined(false);
+        }
         RelativeLayout button=binding.setcategory;
         RelativeLayout city=binding.setcity;
         button.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +118,16 @@ public class FragmentAddAnnouncement extends Fragment  {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
-                bundle.putString("navigate","add");
+                bundle.putString("navigate","city_add");
+                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmentCity,bundle);
+            }
+        });
+
+        binding.setOthercity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putString("navigate","otherCity");
                 Navigation.findNavController(view).navigate(R.id.action_add_to_fragmentCity,bundle);
             }
         });
@@ -115,8 +142,16 @@ public class FragmentAddAnnouncement extends Fragment  {
 
 
 
-        //set city
+        //set other city
+        if (getSHaredList()==null){
+            binding.othercity.setText("انتخاب کنید");
+        }else {
+            binding.othercity.setText(getSHaredList().size()+"شهر");
+        }
 
+
+
+        //set city
         binding.setCity(shPref.getString("city_name","انتخاب کنید")+", "+shPref.getString("province_name",""));
 
 
@@ -135,6 +170,10 @@ public class FragmentAddAnnouncement extends Fragment  {
                     }else    Toast.makeText(getContext(), "لطفا توضیحات آگهی را وارد کنید", Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(getContext(), "لطفا عنوان آگهی را وارد کنید", Toast.LENGTH_SHORT).show();
+
+
+
+
             }
         });
 
@@ -223,6 +262,8 @@ public class FragmentAddAnnouncement extends Fragment  {
     }
 
     private void sendAnnouncment(HashMap<String,RequestBody> requestbody){
+
+
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.insertAnnouncment(requestbody,partLists)
@@ -241,9 +282,14 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     SharedPreferences.Editor editor=shPref.edit();
                                     editor.clear();
                                     editor.apply();
+
+                                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor1=sharedPreferences.edit();
+                                    editor1.clear();
+                                    editor1.apply();
                                 }
                             },2000);
-                        }else if (saveAnnouncementModel.getResponse().equals("0")) {
+                        }else {
                             Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
 
                         }
@@ -263,12 +309,17 @@ public class FragmentAddAnnouncement extends Fragment  {
 
         RequestBody title=RequestBody.create(MediaType.parse("title"),edTitle.getText().toString());
         RequestBody utype=RequestBody.create(MediaType.parse("type"),type);
-        RequestBody category_id=RequestBody.create(MediaType.parse("category_id"),shPref.getString("id_list",null));
-        RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("id_categ",null));
-        RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",null));
-        RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",null));
+        RequestBody category_id=RequestBody.create(MediaType.parse("category_id"),shPref.getString("id_list",""));
+        RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("id_categ",""));
+        RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",""));
+        RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",""));
         RequestBody detail=RequestBody.create(MediaType.parse("detail"),edDescription.getText().toString());
+        RequestBody other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
+
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),"1");
+
+
+
 
         addAnnouncement.put("title",title);
         addAnnouncement.put("type",utype);
@@ -276,13 +327,14 @@ public class FragmentAddAnnouncement extends Fragment  {
         addAnnouncement.put("collection_id",collection_id);
         addAnnouncement.put("province_id",province_id);
         addAnnouncement.put("city_id",city_id);
+        addAnnouncement.put("other_city",other_city);
         addAnnouncement.put("detail",detail);
         addAnnouncement.put("announcer_id",announcer_id);
 
 
+
         return addAnnouncement;
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -298,9 +350,26 @@ public class FragmentAddAnnouncement extends Fragment  {
 
 
 
+    public  List<String> getSHaredList() {
+        Gson gson = new Gson();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+
+        String s = sharedPreferences.getString("otherCityList", null);
+        Type type = new TypeToken<List<String>>() {
+
+        }.getType();
+        List<String> j = gson.fromJson(s, type);
 
 
 
+            return j;
+
+
+    }
+
+    public void getRegister(){
+        Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentLogin);
+    }
 
 }
 

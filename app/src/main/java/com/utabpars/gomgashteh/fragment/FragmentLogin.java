@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
@@ -27,7 +30,10 @@ public class FragmentLogin extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         // Inflate the layout for this fragment
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_login,container,false);
         viewModel=new ViewModelProvider(this).get(UserAuthenticationViewModel.class);
         return binding.getRoot();
@@ -37,19 +43,44 @@ public class FragmentLogin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.setSendotp(this);
+        binding.inputPhonenumber.setFocusable(true);
+//        InputMethodManager inputMethodManager =
+//                (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//            inputMethodManager.toggleSoftInputFromWindow(
+//                    binding.inputPhonenumber.getApplicationWindowToken(),
+//                    InputMethodManager.SHOW_FORCED, 0);
+
 
 
         viewModel.phoneNumberResponseLiveData.observe(getViewLifecycleOwner(), new Observer<RmModel>() {
             @Override
             public void onChanged(RmModel rmModel) {
-
+                if (rmModel.getResponse().equals("1")){
                     Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
                     binding.setProgress(false);
                     Bundle bundle=new Bundle();
                     bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
+                    bundle.putBoolean("is_validate",true);
                     Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+                }else if (rmModel.getResponse().equals("0")){
+                    Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+                    binding.setProgress(false);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
+                    bundle.putBoolean("is_validate",false);
+                    Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+                }
 
 
+
+            }
+        });
+
+        viewModel.error.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.setProgress(false);
+                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             }
         });
 

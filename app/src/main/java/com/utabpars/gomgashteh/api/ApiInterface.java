@@ -1,10 +1,12 @@
 package com.utabpars.gomgashteh.api;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.DetailModel;
+import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
 import com.utabpars.gomgashteh.model.AddImageModel;
@@ -67,7 +69,8 @@ public interface ApiInterface {
 
     @POST("insertAnnounce")
     @Multipart
-    Single<SaveAnnouncementModel> insertAnnouncment(@PartMap Map<String,RequestBody> requestBody,@Part List<MultipartBody.Part> file);
+    Single<SaveAnnouncementModel> insertAnnouncment(@PartMap Map<String,RequestBody> requestBody,
+                                                    @Part List<MultipartBody.Part> file);
 
 
 
@@ -80,6 +83,16 @@ public interface ApiInterface {
 
     @POST("validateCode")
     @FormUrlEncoded
-    Single<RmModel> validateOtp(@Field("phone_num") String phone_num,
-                                @Field("code") String code);
+    Single<RegisterModel> validateOtp(@Field("phone_num") String phone_num,
+                                      @Field("code") String code);
+
+
+    @POST("userRegistration")
+    @FormUrlEncoded
+    Single<RegisterModel> registerUser(@Field("phone_num") String phone_num,
+                                @Field("code") String code,
+                               @Field("first_name")  String name,
+                                @Field("last_name")   String lastName);
+
+
 }

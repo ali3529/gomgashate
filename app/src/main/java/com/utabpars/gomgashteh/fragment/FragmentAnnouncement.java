@@ -122,7 +122,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         recyclerView.setAdapter(adaptor);
 
 
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentSearch);

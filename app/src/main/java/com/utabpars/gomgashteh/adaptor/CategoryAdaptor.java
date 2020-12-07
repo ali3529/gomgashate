@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.ItemCategoryBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
+import com.utabpars.gomgashteh.interfaces.ItemSelectedCallback;
 import com.utabpars.gomgashteh.model.CategoryModel;
 
 import java.util.List;
@@ -18,6 +19,14 @@ import java.util.List;
 public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.CategoryViewHolder > {
     private List<CategoryModel.ListData> categoryList;
     private CategoryCallBack categoryCallBack;
+    public ItemSelectedCallback itemSelectedCallback;
+
+    public CategoryAdaptor(List<CategoryModel.ListData> categoryList, CategoryCallBack categoryCallBack, ItemSelectedCallback itemSelectedCallback) {
+        this.categoryList = categoryList;
+        this.categoryCallBack = categoryCallBack;
+        this.itemSelectedCallback = itemSelectedCallback;
+    }
+
     public CategoryAdaptor(List<CategoryModel.ListData> categoryList, CategoryCallBack categoryCallBack) {
         this.categoryList = categoryList;
         this.categoryCallBack=categoryCallBack;
@@ -37,11 +46,15 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        holder.binding.setCategory(categoryList.get(position));
+       holder.getSelectetItem(categoryList.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 categoryCallBack.getCategoryId(view,categoryList.get(position).getId(),position);
+                if (itemSelectedCallback!=null){
+                    itemSelectedCallback.getSelectedItem(view,categoryList.get(position),position);
+                }
+
             }
         });
     }
@@ -57,8 +70,16 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
             super(binding.getRoot());
             this.binding=binding;
         }
+        private void getSelectetItem(CategoryModel.ListData listData){
+            if (listData.isSelected()){
+                binding.setCategory(listData);
+                binding.selected.setVisibility(View.VISIBLE);
+            }else {
+                binding.setCategory(listData);
+                binding.selected.setVisibility(View.GONE);
+            }
+
+        }
     }
-    public void setcity(List<CategoryModel.ListData> categoryList){
-        this.categoryCallBack=categoryCallBack;
-    }
+
 }

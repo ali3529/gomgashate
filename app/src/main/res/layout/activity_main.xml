@@ -25,6 +25,7 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/botton_nav_menu"
         app:labelVisibilityMode="labeled"
+        android:layoutDirection="ltr"
 
         />
 

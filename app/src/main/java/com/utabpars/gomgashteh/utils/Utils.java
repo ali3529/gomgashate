@@ -4,23 +4,30 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class Utils {
 
@@ -97,6 +104,19 @@ public class Utils {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+
+    public static List<String> getSHaredList(Activity activity){
+        Gson gson=new Gson();
+        SharedPreferences sharedPreferences=activity.getSharedPreferences("other_city",Context.MODE_PRIVATE);
+        String s=sharedPreferences.getString("otherCityList","w");
+        Type type=new TypeToken<List<String>>(){
+
+        }.getType();
+        List<String>  j=gson.fromJson(s,type);
+
+        Log.d("sfesfsef", "getCategoryId: "+j.get(0));
+        return j;
+    }
 }
 
 

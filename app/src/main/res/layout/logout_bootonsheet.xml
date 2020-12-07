@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.BottomSheetLogout">
+<RelativeLayout
+    android:id="@+id/sheetlatout"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_peekHeight="220dp"
+    app:behavior_hideable="true"
+    android:padding="10dp"
+
+    >
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="آیا مایل به خروج از حساب کاربری خود هستید؟"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_18"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_black"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+
+        />
+<View
+    android:id="@+id/hr"
+    android:layout_width="match_parent"
+    android:layout_height="0.8dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_below="@id/title"
+    android:background="@color/hr_color"
+    android:layout_marginTop="26dp"/>
+    <LinearLayout
+
+
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/hr"
+        android:weightSum="2"
+        android:layout_alignParentBottom="false"
+       >
+
+        <TextView
+            android:id="@+id/yes"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="بله"
+            android:textSize="@dimen/text_size_18"
+            android:background="@drawable/botton_sheet_yes_no_shape"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="خیر"
+            android:textSize="@dimen/text_size_18"
+            android:background="@drawable/botton_sheet_yes_no_shape"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

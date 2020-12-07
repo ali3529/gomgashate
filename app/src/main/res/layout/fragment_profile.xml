@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentProfile">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_background"
+        android:layout_alignParentTop="true"
+       >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="پروفایل"
+            android:textSize="@dimen/text_size_18"
+            android:fontFamily="@font/sans"
+            android:textStyle="bold"
+            android:textColor="@color/text_color_black"
+            android:layout_gravity="right"
+            android:layout_margin="8dp"/>
+    </androidx.appcompat.widget.Toolbar>
+<RelativeLayout
+    android:id="@+id/profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/toolbar"
+    android:padding="8dp">
+
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="profile"
-        android:layout_centerInParent="true"/>
+        android:text="شما با شماره 09337067554 وارد شدهاید"
+        android:textSize="15dp"
+        android:fontFamily="@font/sans"
 
+        android:textColor="@color/text_color_black"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+
+
+        />
+    <RelativeLayout
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:background="@drawable/logout_shape"
+        >
+        <TextView
+            android:id="@+id/text_log"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="خروج از حساب"
+            android:layout_margin="8dp"
+            android:textColor="@color/lowblack"
+        android:textStyle="bold"
+            android:textSize="@dimen/text_size_16"
+            android:gravity="center"
+
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/logout"
+        android:background="@color/hr_color"
+        android:layout_marginHorizontal="12dp"
+        />
 </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profile">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.utabpars.gomgashteh.view.TestFragment"/>
+    </FrameLayout>
+</RelativeLayout>
+</layout>
