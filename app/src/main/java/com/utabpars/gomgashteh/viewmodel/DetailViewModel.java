@@ -19,10 +19,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DetailViewModel extends ViewModel {
     private MutableLiveData<DetailModel.Data> dataMutableLiveData=new MutableLiveData<>();
+    CompositeDisposable compositeDisposable;
     FragmentAnnouncmentDetailBinding binding;
     public void getDetail(int id){
         ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
+         compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.getDetail(id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -58,4 +59,6 @@ public void test(int id){
       binding.setLayoutvisibility(false);
       binding.setProgress(true);
 }
+
+
 }

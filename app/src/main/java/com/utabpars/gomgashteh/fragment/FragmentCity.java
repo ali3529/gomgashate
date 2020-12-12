@@ -87,7 +87,8 @@ public class FragmentCity extends Fragment {
                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_announcement);
                                SharedPreferences preferences=getActivity().getSharedPreferences("cityName",Context.MODE_PRIVATE);
                                SharedPreferences.Editor editor1=preferences.edit();
-                                 editor1.putString("city_name_announcment",categoryModel.getListData().get(position).getCategoryName());
+                                 editor1.putString("city_name_announcment",province_name);
+                                 editor1.putString("province_id",province_id);
                                  editor1.apply();
                              }
 
@@ -101,7 +102,7 @@ public class FragmentCity extends Fragment {
 
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        Log.d("afd", "onSuccess: "+e.toString());
+                        Log.d("tfhgfb", "onSuccess: "+e.toString()+"6");
                     }
                 }));
     }

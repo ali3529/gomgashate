@@ -31,45 +31,45 @@ public class UserAuthenticationViewModel extends ViewModel {
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.userAuthentication(phoneNum)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<RmModel>() {
-            @Override
-            public void onSuccess(@NonNull RmModel rmModel) {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<RmModel>() {
+                    @Override
+                    public void onSuccess(@NonNull RmModel rmModel) {
 
-                    phoneNumberResponseLiveData.postValue(rmModel);
+                        phoneNumberResponseLiveData.postValue(rmModel);
 
 
-            }
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                error.postValue(e.toString());
-                Log.d("sdfsdf", "onError: "+e.toString());
-            }
-        }));
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        error.postValue(e.toString());
+                        Log.d("sdfsdf", "onError: "+e.toString());
+                    }
+                }));
     }
 
     public void validateOtp(String phoneNum,String otpCode){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.validateOtp(phoneNum,otpCode)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<RegisterModel>() {
-            @Override
-            public void onSuccess(@NonNull RegisterModel rmModel) {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<RegisterModel>() {
+                    @Override
+                    public void onSuccess(@NonNull RegisterModel rmModel) {
 
-                    otpResponseLiveData.postValue(rmModel);
+                        otpResponseLiveData.postValue(rmModel);
 
 
-            }
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                error.postValue(e.toString());
-            }
-        }));
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        error.postValue(e.toString());
+                    }
+                }));
     }
 
 
@@ -91,20 +91,20 @@ public class UserAuthenticationViewModel extends ViewModel {
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.registerUser(phone,code,name,lastName)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<RegisterModel>() {
-            @Override
-            public void onSuccess(@NonNull RegisterModel rmModel) {
-                registerUserLiveData.postValue(rmModel);
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<RegisterModel>() {
+                    @Override
+                    public void onSuccess(@NonNull RegisterModel rmModel) {
+                        registerUserLiveData.postValue(rmModel);
 
-            }
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                error.postValue(e.toString());
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        error.postValue(e.toString());
 
-            }
-        }));
+                    }
+                }));
     }
 }

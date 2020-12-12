@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/perofile">
+    app:startDestination="@id/announcement">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -23,7 +23,8 @@
         android:id="@+id/announcement"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncement"
         android:label="fragment_announcement"
-        tools:layout="@layout/fragment_announcement" >
+        tools:layout="@layout/fragment_announcement"
+        app:startDestination="@id/action_announcement_to_fragmentCity">
         <action
             android:id="@+id/action_announcement_to_fragmentAnnouncmentDetail2"
             app:destination="@id/fragmentAnnouncmentDetail"

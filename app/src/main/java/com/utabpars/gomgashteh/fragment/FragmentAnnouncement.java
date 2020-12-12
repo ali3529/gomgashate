@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +40,13 @@ import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 import com.utabpars.gomgashteh.paging.ItemDataSource;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
+import com.utabpars.gomgashteh.paging.provinceFilter.ProvinceFilterDataSource;
+import com.utabpars.gomgashteh.paging.topfilterpaging.TopFilterDataSource;
+import com.utabpars.gomgashteh.paging.topfilterpaging.TopFilterViewModelPaging;
 import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.utabpars.gomgashteh.paging.provinceFilter.FilterAnouncmentByProvinceViewModel;
+import com.utabpars.gomgashteh.viewmodel.TopFilterViewModel;
 
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
@@ -58,6 +61,13 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     static LiveData<PagedList<AnoncmentModel.Detile>> saveInstanceAnnounc;
     MaterialSearchBar searchView;
     SharedPreferences shPref;
+    TopFilterViewModel topfilterViewModel;
+    TopFilterDataSource topFilterDataSource;
+    TopFilterViewModelPaging topFilterViewModelPaging;
+    TopFilterAdaptor topFilterAdaptor;
+    FilterAnouncmentByProvinceViewModel provinceViewModel;
+    ProvinceFilterDataSource provinceFilterDataSource;
+
 
 
     @Override
@@ -97,7 +107,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         binding.setViemodel(viewModel);
 
-        if (saveInstanceAnnounc==null){
+      //  if (saveInstanceAnnounc==null){
             viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
                 @Override
                 public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
@@ -108,15 +118,15 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                 }
             });
 
-        }else {
-            saveInstanceAnnounc.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
-                @Override
-                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
-                    adaptor.submitList(detiles);
-
-                }
-            });
-        }
+       // }else {
+//            saveInstanceAnnounc.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
+//                @Override
+//                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
+//                    adaptor.submitList(detiles);
+//
+//                }
+//            });
+//        }
 
 
         recyclerView.setAdapter(adaptor);
@@ -130,8 +140,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         });
 
 
-        TopFilterAdaptor topFilterAdaptor=new TopFilterAdaptor(setTopfilterData());
-        topFilterRecyclerview.setAdapter(topFilterAdaptor);
+
+
 
 
         SharedPreferences preferences=getActivity().getSharedPreferences("cityName",Context.MODE_PRIVATE);
@@ -144,6 +154,45 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                 Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentCity,bundle);
             }
         });
+
+        // province filter anouncmement
+       String province_id= preferences.getString("province_id",null);
+       if (province_id!=null) {
+           provinceFilterDataSource = new ProvinceFilterDataSource(province_id);
+           provinceViewModel.getProvinceFilter();
+
+           provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
+               adaptor.submitList(province);
+           });
+       }
+
+
+
+
+        topfilterViewModel.rmModelMutableLiveData.observe(getViewLifecycleOwner(),topFilter->{
+             topFilterAdaptor=new TopFilterAdaptor(getContext(),topFilter.getTopFilterData(), t->{
+                 topFilterDataSource=new TopFilterDataSource(t);
+                 topFilterViewModelPaging.topFilterd();
+
+                Log.d("sdfsdfdf", "onViewCreated: interface onclick");
+
+                 topFilterViewModelPaging.listLiveData.observe(getViewLifecycleOwner(), detail->{
+                         adaptor.submitList(detail);
+//            //recyclerView.setAdapter(adaptor);
+                     Log.d("sdfsdfdf", "onViewCreated: viewmodel");
+                 });
+            });
+            topFilterRecyclerview.setAdapter(topFilterAdaptor);
+        });
+
+//        topFilterRecyclerview.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//
+//                return true;
+//            }
+//        });
+
     }
 
 
@@ -156,6 +205,10 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         topFilterRecyclerview=binding.topListRecyclerview;
         topFilterRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,LinearLayoutManager.HORIZONTAL));
         topFilterRecyclerview.setHasFixedSize(true);
+        topfilterViewModel=new ViewModelProvider(this).get(TopFilterViewModel.class);
+        topFilterViewModelPaging=new ViewModelProvider(this).get(TopFilterViewModelPaging.class);
+        provinceViewModel=new ViewModelProvider(this).get(FilterAnouncmentByProvinceViewModel.class);
+
 
     }
 
@@ -237,18 +290,5 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         alertDialog.show();
     }
 
-    public List<String> setTopfilterData(){
-        List<String> list=new ArrayList<>();
-        list.add("پیدا شده");
-        list.add("گم شده");
-        list.add("کالا");
-        list.add("شخص");
-        list.add("مالی");
-        list.add("اشیاء");
-        list.add("لوازم الکترونیکی");
-        list.add("حیوانات");
-
-        return list;
-    }
 
 }

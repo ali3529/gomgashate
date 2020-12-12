@@ -18,14 +18,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CategoryViewModel extends ViewModel {
      MutableLiveData<CategoryModel> categoryModelMutableLiveData=new MutableLiveData<>();
-
+    CompositeDisposable compositeDisposable;
     public CategoryViewModel() {
         getCategory();
     }
 
     public void getCategory(){
         ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
+         compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.getcategories()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -49,5 +49,11 @@ public class CategoryViewModel extends ViewModel {
 
     public MutableLiveData<CategoryModel> categoriesMutableLiveData(){
         return categoryModelMutableLiveData;
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.dispose();
     }
 }

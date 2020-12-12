@@ -314,9 +314,16 @@ public class FragmentAddAnnouncement extends Fragment  {
         RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",""));
         RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",""));
         RequestBody detail=RequestBody.create(MediaType.parse("detail"),edDescription.getText().toString());
-        RequestBody other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
 
-        RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),"1");
+        RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
+        RequestBody other_city;
+        if (getSHaredList()==null){
+            other_city=RequestBody.create(MediaType.parse("other_city"),"");
+        }else {
+
+            other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
+        }
+
 
 
 

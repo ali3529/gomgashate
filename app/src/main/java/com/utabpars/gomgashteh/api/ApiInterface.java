@@ -94,5 +94,16 @@ public interface ApiInterface {
                                @Field("first_name")  String name,
                                 @Field("last_name")   String lastName);
 
+    @POST("categoriesInHeader")
+    Single<RmModel> getTopFilter();
+
+    @POST("categoriesFilterInHeader")
+    @FormUrlEncoded
+    Single<AnoncmentModel> getTopFilterAnnouncement(@Query("page") int page,
+                                                    @Field("id") String id);
+
+    @POST("provinceFilter")
+    @FormUrlEncoded
+    Single<AnoncmentModel> filterByProvince(@Field("province_id") String province_id);
 
 }

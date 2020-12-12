@@ -74,19 +74,26 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/logout"
-        android:background="@color/hr_color"
+        android:background="#25100F0F"
         android:layout_marginHorizontal="12dp"
         />
 </RelativeLayout>
 
-    <FrameLayout
+
+
+    <fragment
+        android:id="@+id/tfragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/profile">
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.utabpars.gomgashteh.view.TestFragment"/>
-    </FrameLayout>
+        android:layout_below="@id/profile"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/test_navigation"
+
+       />
+
+
+
+
+
 </RelativeLayout>
 </layout>
