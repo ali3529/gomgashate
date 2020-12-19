@@ -9,6 +9,8 @@ import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
@@ -40,6 +42,7 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                         if (anoncmentModel.getResponse().equals("1")){
                             callback.onResult(anoncmentModel.getData(),null,PAGE);
                             Log.d("vxcvdxvs", "onSuccess: gooooood");
+
                         }
 
                     }
@@ -47,6 +50,7 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                         Log.d("vxcvdxvs", "onSuccess: error"+e.toString());
+
                     }
                 }));
     }

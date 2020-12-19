@@ -9,7 +9,8 @@
         android:id="@+id/fragmentSplash"
         android:name="com.utabpars.gomgashteh.fragment.FragmentSplash"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash"
+        app:startDestination="@id/action_fragmentSplash_to_fragmentAnnouncement">
         <action
             android:id="@+id/action_fragmentSplash_to_fragmentAnnouncement"
             app:destination="@id/announcement"
@@ -46,13 +47,20 @@
             app:exitAnim="@anim/fragment_close_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_announcement_to_fragmentChoosecity"
+            app:destination="@id/fragmentChoosecity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/add"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAddAnnouncement"
         android:label="fragment_add_announcement"
         tools:layout="@layout/fragment_add_announcement"
-        app:startDestination="@id/action_add_to_announcement">
+        app:startDestination="@id/action_add_to_fragmentCity">
         <action
             android:id="@+id/action_add_to_announcement"
             app:destination="@id/announcement" />
@@ -182,6 +190,9 @@
         <action
             android:id="@+id/action_fragmentCity_to_fragmentOtherCity"
             app:destination="@id/fragmentOtherCity" />
+        <action
+            android:id="@+id/action_fragmentCity_to_fragmentMainCity"
+            app:destination="@id/fragmentMainCity" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCity2"
@@ -239,4 +250,13 @@
             android:id="@+id/action_fragmentOtherCity_to_add"
             app:destination="@id/add" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentMainCity"
+        android:name="com.utabpars.gomgashteh.adaptor.maincity.FragmentMainCity"
+        android:label="FragmentMainCity" />
+    <fragment
+        android:id="@+id/fragmentChoosecity"
+        android:name="com.utabpars.gomgashteh.adaptor.maincity.FragmentChoosecity"
+        android:label="fragment_choosecity"
+        tools:layout="@layout/fragment_choosecity" />
 </navigation>

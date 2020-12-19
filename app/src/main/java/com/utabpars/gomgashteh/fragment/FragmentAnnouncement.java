@@ -29,7 +29,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.TopFilterAdaptor;
@@ -37,6 +42,7 @@ import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
+import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 import com.utabpars.gomgashteh.paging.ItemDataSource;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
@@ -47,6 +53,9 @@ import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
 import com.utabpars.gomgashteh.paging.provinceFilter.FilterAnouncmentByProvinceViewModel;
 import com.utabpars.gomgashteh.viewmodel.TopFilterViewModel;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
@@ -67,6 +76,9 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     TopFilterAdaptor topFilterAdaptor;
     FilterAnouncmentByProvinceViewModel provinceViewModel;
     ProvinceFilterDataSource provinceFilterDataSource;
+    static MutableLiveData<RmModel> rmModelMutableLiveDatattt;
+
+    SharedPreferences sharedPreferences;
 
 
 
@@ -75,7 +87,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                              Bundle savedInstanceState) {
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.VISIBLE);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_announcement, container, false);
-        viewModel = new ViewModelProvider(this).get(AnnouncementViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(AnnouncementViewModel.class);
         // Inflate the layout for this fragment
         initViews();
         shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
@@ -107,27 +119,16 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         binding.setViemodel(viewModel);
 
-      //  if (saveInstanceAnnounc==null){
-            viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
-                @Override
-                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
-                    adaptor.submitList(detiles);
-                    saveInstanceAnnounc=viewModel.listLiveData;
+
+        viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
+            @Override
+            public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
+                adaptor.submitList(detiles);
+                saveInstanceAnnounc = viewModel.listLiveData;
 
 
-                }
-            });
-
-       // }else {
-//            saveInstanceAnnounc.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
-//                @Override
-//                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
-//                    adaptor.submitList(detiles);
-//
-//                }
-//            });
-//        }
-
+            }
+        });
 
         recyclerView.setAdapter(adaptor);
 
@@ -139,74 +140,82 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
             }
         });
 
+        sharedPreferences=getActivity().getSharedPreferences("main_city",Context.MODE_PRIVATE);
+        try {
+            if (getMainCity()==null){
+                binding.setCity( "انتخاب");
+            }else {
+                binding.setCity(getMainCity().size()+"شهر");
+            }
+        }catch (Exception e){
+            Toast.makeText(getContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+            binding.setCity( "انتخاب");
+        }
 
 
-
-
-
-        SharedPreferences preferences=getActivity().getSharedPreferences("cityName",Context.MODE_PRIVATE);
-        binding.setCity(preferences.getString("city_name_announcment","انتخاب"));
         binding.layoutLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putString("navigate","choose");
-                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentCity,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("navigate", "choose");
+                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentChoosecity, bundle);
             }
         });
 
+        //todo
         // province filter anouncmement
-       String province_id= preferences.getString("province_id",null);
-       if (province_id!=null) {
-           provinceFilterDataSource = new ProvinceFilterDataSource(province_id);
-           provinceViewModel.getProvinceFilter();
-
-           provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
-               adaptor.submitList(province);
-           });
-       }
+        try {
+            if (getMainCity()!=null) {
 
 
 
+                Log.d("Sgsgsgse", "onViewCreated: "+getMainCity().toString());
 
-        topfilterViewModel.rmModelMutableLiveData.observe(getViewLifecycleOwner(),topFilter->{
-             topFilterAdaptor=new TopFilterAdaptor(getContext(),topFilter.getTopFilterData(), t->{
-                 topFilterDataSource=new TopFilterDataSource(t);
-                 topFilterViewModelPaging.topFilterd();
+                provinceFilterDataSource = new ProvinceFilterDataSource(getMainCity().toString());
+                provinceViewModel.getProvinceFilter();
+
+
+
+                provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
+                    adaptor.submitList(province);
+                });
+            }
+        }catch (Exception e){
+            Toast.makeText(getContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+        topfilterViewModel.rmModelMutableLiveData.observe(getActivity(), topFilter -> {
+            topFilterAdaptor = new TopFilterAdaptor(getContext(), topFilter.getTopFilterData(), t -> {
+                topFilterDataSource = new TopFilterDataSource(t);
+                topFilterViewModelPaging.topFilterd();
 
                 Log.d("sdfsdfdf", "onViewCreated: interface onclick");
 
-                 topFilterViewModelPaging.listLiveData.observe(getViewLifecycleOwner(), detail->{
-                         adaptor.submitList(detail);
+                topFilterViewModelPaging.listLiveData.observe(getViewLifecycleOwner(), detail -> {
+                    adaptor.submitList(detail);
 //            //recyclerView.setAdapter(adaptor);
-                     Log.d("sdfsdfdf", "onViewCreated: viewmodel");
-                 });
+                    Log.d("sdfsdfdf", "onViewCreated: viewmodel");
+                });
             });
             topFilterRecyclerview.setAdapter(topFilterAdaptor);
         });
-
-//        topFilterRecyclerview.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                return true;
-//            }
-//        });
-
     }
 
 
     private void initViews() {
         recyclerView = binding.recycler;
         toolbar=binding.toolbar;
-         searchView=binding.search;
+        searchView=binding.search;
         searchView.setPlaceHolder("جستجو در همه آگهی ها");
 
         topFilterRecyclerview=binding.topListRecyclerview;
         topFilterRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,LinearLayoutManager.HORIZONTAL));
         topFilterRecyclerview.setHasFixedSize(true);
-        topfilterViewModel=new ViewModelProvider(this).get(TopFilterViewModel.class);
-        topFilterViewModelPaging=new ViewModelProvider(this).get(TopFilterViewModelPaging.class);
+        topfilterViewModel=new ViewModelProvider(getActivity()).get(TopFilterViewModel.class);
+        topFilterViewModelPaging=new ViewModelProvider(getActivity()).get(TopFilterViewModelPaging.class);
         provinceViewModel=new ViewModelProvider(this).get(FilterAnouncmentByProvinceViewModel.class);
 
 
@@ -239,6 +248,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         bundle.putInt("id", id);
         Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentAnnouncmentDetail2, bundle);
     }
+
+
 
     private void getAppVersion() {
         appVersionModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<AppVersionModel>() {
@@ -289,6 +300,21 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+    public List<String> getMainCity(){
+        Gson gson=new Gson();
 
+        String s=sharedPreferences.getString("main_city","w");
+
+        Type type=new TypeToken<List<String>>(){
+
+        }.getType();
+
+        List<String>  j=gson.fromJson(s,type);
+
+
+
+        Log.d("sfesfsef", "getCategoryId: "+j.get(0));
+        return j;
+    }
 
 }

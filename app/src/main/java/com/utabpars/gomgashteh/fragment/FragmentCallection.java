@@ -81,7 +81,7 @@ public class FragmentCallection extends Fragment {
                     binding.setProgress(false);
                     collectionAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
-                        public void getCategoryId(View view, int id,int position) {
+                        public void getCategoryId(View view, String id,int position) {
                             if (test.equals("1")){
                                 Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx {cpllent}");
                                 Bundle bundle=new Bundle();

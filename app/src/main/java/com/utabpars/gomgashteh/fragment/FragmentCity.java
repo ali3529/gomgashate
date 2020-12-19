@@ -72,7 +72,7 @@ public class FragmentCity extends Fragment {
 
                      categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                          @Override
-                         public void getCategoryId(View view, int id, int position) {
+                         public void getCategoryId(View view, String id, int position) {
 
                              //shared
                              SharedPreferences.Editor editor=sharedPreferences.edit();

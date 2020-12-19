@@ -51,7 +51,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
 
             @Override
             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                Toast.makeText(context, "timeout", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "timeout"+e.toString(), Toast.LENGTH_LONG).show();
                 binding.setLayoutvisibility(true);
                 binding.setProgress(false);
                 binding.setRefresh(false);

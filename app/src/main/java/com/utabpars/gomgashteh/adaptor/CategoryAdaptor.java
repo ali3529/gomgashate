@@ -36,6 +36,8 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
         this.categoryList = categoryListt;
     }
 
+
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,7 +54,7 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
             public void onClick(View view) {
                 categoryCallBack.getCategoryId(view,categoryList.get(position).getId(),position);
                 if (itemSelectedCallback!=null){
-                    itemSelectedCallback.getSelectedItem(view,categoryList.get(position),position);
+                    itemSelectedCallback.getSelectedItem(view,categoryList.get(position),position,false);
                 }
 
             }

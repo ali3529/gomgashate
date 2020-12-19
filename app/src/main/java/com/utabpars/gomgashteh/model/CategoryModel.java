@@ -28,7 +28,7 @@ public class CategoryModel {
 
     public class ListData{
         @SerializedName("id")
-        private int id;
+        private String id;
         @SerializedName("name")
         private String categoryName;
 
@@ -42,11 +42,11 @@ public class CategoryModel {
 
         private boolean selected;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

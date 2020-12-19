@@ -53,7 +53,7 @@ public class FragmentList extends Fragment {
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_list,container,false);
         initViews();
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        categoryViewModel=new ViewModelProvider(this).get(CategoryViewModel.class);
+        categoryViewModel=new ViewModelProvider(getActivity()).get(CategoryViewModel.class);
 
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -80,7 +80,7 @@ public class FragmentList extends Fragment {
                     binding.setProgress(false);
                     categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
-                        public void getCategoryId(View view, int id,int position) {
+                        public void getCategoryId(View view, String id,int position) {
                             if (test.equals("1")){
                                 Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]");
 

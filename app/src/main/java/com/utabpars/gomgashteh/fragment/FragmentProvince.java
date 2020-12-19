@@ -54,34 +54,41 @@ public class FragmentProvince extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navigate=getArguments().getString("navigate");
+
+
         provinceViewModel.categoryModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
             @Override
             public void onChanged(CategoryModel categoryModel) {
                 categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                     @Override
-                    public void getCategoryId(View view, int id, int position) {
-                        if (navigate.equals("city_add")) {
+                    public void getCategoryId(View view, String id, int position) {
+                        try {
+                            navigate=getArguments().getString("navigate");
+                            if (navigate.equals("city_add")) {
 
 
+                                Bundle bundle = new Bundle();
+                                bundle.putString("province", String.valueOf(id));
+                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("navigate", navigate);
+                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
+                            }else if (navigate.equals("otherCity")){
+                                Bundle bundle = new Bundle();
+                                bundle.putString("province", String.valueOf(id));
+                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("navigate", "otherCity");
+                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
+                            }
+                        }catch (Exception e){
+
                             Bundle bundle = new Bundle();
                             bundle.putString("province", String.valueOf(id));
                             bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
-                            bundle.putString("navigate", navigate);
-                            Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
-                        }else if (navigate.equals("otherCity")){
-                            Bundle bundle = new Bundle();
-                            bundle.putString("province", String.valueOf(id));
-                            bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
-                            Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
+                            Navigation.findNavController(view).navigate(R.id.action_fragmentProvince_to_fragmentMainCity2, bundle);
                         }
-                        else if (navigate.equals("choose")){
-                            Bundle bundle = new Bundle();
-                            bundle.putString("province", String.valueOf(id));
-                            bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
-                            bundle.putString("navigate", "choose");
-                            Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
-                        }
+
+
+
                     }
                 });
                 recyclerView.setAdapter(categoryAdaptor);

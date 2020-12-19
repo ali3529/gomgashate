@@ -51,7 +51,7 @@
         android:layout_height="250dp"
         app:sliderAnimationDuration="600"
         app:sliderAutoCycleDirection="right"
-        app:sliderAutoCycleEnabled="true"
+        app:sliderAutoCycleEnabled="false"
         android:background="@color/white"
 
 

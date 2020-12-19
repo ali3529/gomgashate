@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".adaptor.maincity.FragmentMainCity">
+
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/mainRe4cyclerview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/rrr"/>
+
+
+  <RelativeLayout
+      android:id="@+id/rrr"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:layout_alignParentBottom="true"
+      android:background="@color/toolbar_background">
+
+  </RelativeLayout>
+</RelativeLayout>
+</layout>

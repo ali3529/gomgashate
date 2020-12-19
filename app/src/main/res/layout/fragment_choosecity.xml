@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="frag"
+            type="com.utabpars.gomgashteh.adaptor.maincity.FragmentChoosecity" />
+    </data>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".adaptor.maincity.FragmentChoosecity">
+
+
+
+    <RelativeLayout
+        android:id="@+id/fff"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/toolbar_background">
+
+        <RelativeLayout
+            android:id="@+id/set_main_city"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="6dp"
+
+            android:background="@color/colorPrimary"
+            >
+            <TextView
+                android:id="@+id/save_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="بعدی"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_18"
+                android:onClick="@{() -> frag.ttt()}"/>
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/below_progress"
+                android:layout_width="270dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/progress"
+                android:visibility="gone"
+                android:background="@color/gray"
+
+
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_city_navigation"
+        android:layout_above="@id/fff"/>
+
+</RelativeLayout>
+</layout>

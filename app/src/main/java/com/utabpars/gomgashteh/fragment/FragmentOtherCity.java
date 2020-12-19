@@ -45,7 +45,7 @@ public class FragmentOtherCity extends Fragment {
     FragmentOtherCityBinding binding;
     RecyclerView recyclerView;
     CategoryAdaptor otherCityAdaptor;
-   static SharedPreferences sharedPreferences;
+    static SharedPreferences sharedPreferences;
     static SharedPreferences.Editor editor;
     static List<String> otherCityList =new ArrayList<>();
     Gson gson;
@@ -68,6 +68,7 @@ public class FragmentOtherCity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         String province_id=getArguments().getString("province");
         String province_name=getArguments().getString("province_name");
+        String navigate=getArguments().getString("navigate");
 
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
@@ -96,9 +97,9 @@ public class FragmentOtherCity extends Fragment {
 
                         otherCityAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                             @Override
-                            public void getCategoryId(View view, int id, int position) {
+                            public void getCategoryId(View view, String id, int position) {
 
-                               // Navigation.findNavController(view).navigate(R.id.action_fragmentOtherCity_to_add);
+                                // Navigation.findNavController(view).navigate(R.id.action_fragmentOtherCity_to_add);
 
                             }
                         },itemSelectedCallback);
@@ -124,7 +125,8 @@ public class FragmentOtherCity extends Fragment {
 
     ItemSelectedCallback itemSelectedCallback=new ItemSelectedCallback() {
         @Override
-        public void getSelectedItem(View view, CategoryModel.ListData categoryModel, int position) {
+        public void getSelectedItem(View view, CategoryModel.ListData categoryModel, int position,boolean a) {
+
             if (categoryModel.isSelected()){
 
 
