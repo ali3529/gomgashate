@@ -49,9 +49,10 @@ public class TopFilterAdaptor extends RecyclerView.Adapter<TopFilterAdaptor.Filt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                topFilterCallBack.OnClickCallback(lists.get(position).getId());
-
                 holder.getSlected(lists.get(position));
+                topFilterCallBack.OnClickCallback(lists.get(position).getId(),lists.get(position).isIs_selected(),holder.binding);
+
+
 
             }
         });
@@ -72,6 +73,7 @@ public class TopFilterAdaptor extends RecyclerView.Adapter<TopFilterAdaptor.Filt
 
         public void getSlected(RmModel.TopFilterData anoncmentModel){
 
+
             if (anoncmentModel.isIs_selected()){
                 anoncmentModel.setIs_selected(false);
 
@@ -83,13 +85,6 @@ public class TopFilterAdaptor extends RecyclerView.Adapter<TopFilterAdaptor.Filt
                 binding.itemfilterlayout.setBackground(ContextCompat.getDrawable(context,R.drawable.shape_filter_item_selected));
                 binding.txt.setTextColor(context.getResources().getColor(R.color.white));
 
-//                for (int i = 0; i < lists.size(); i++) {
-//                    lists.get(i).setIs_selected(false);
-//                    if (lists.get(i).getId().equals(anoncmentModel.getId())){
-//                        lists.get(i).setIs_selected(true);
-//                        liveData.setValue(true);
-//                    }
-//                }
 
 
             }

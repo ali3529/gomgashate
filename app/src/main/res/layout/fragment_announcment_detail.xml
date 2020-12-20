@@ -37,6 +37,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/chat_btn"
        >
 
 
@@ -280,5 +281,48 @@
        android:onClick="@{() -> viemodel.test(did)}"/>
 
        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chat_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/toolbar_background">
+        <RelativeLayout
+            android:id="@+id/send_otp"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="6dp"
+            android:onClick=""
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="چت با آگهی دهنده"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_18"/>
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/below_progress"
+                android:layout_width="270dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/progress"
+                android:visibility="gone"
+                android:background="@color/gray"
+
+
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
 </RelativeLayout>
 </layout>

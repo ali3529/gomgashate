@@ -38,6 +38,16 @@ public class DetailModel {
         @SerializedName("detail")
         private String detail;
 
+        @SerializedName("announcer_id")
+        private String announcer_id;
+
+        public String getAnnouncer_id() {
+            return announcer_id;
+        }
+
+        public void setAnnouncer_id(String announcer_id) {
+            this.announcer_id = announcer_id;
+        }
 
         @SerializedName("category")
         private String collection;

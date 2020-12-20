@@ -1,8 +1,11 @@
 package com.utabpars.gomgashteh.paging.provinceFilter;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
 import com.utabpars.gomgashteh.api.ApiClient;
@@ -18,6 +21,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.Detile> {
     static String province_id;
+
     public static final int PAGE=1;
 
     public ProvinceFilterDataSource() {
@@ -25,6 +29,7 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
 
     public ProvinceFilterDataSource(String province_id) {
         this.province_id = province_id;
+
     }
 
     @Override
@@ -44,6 +49,7 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                             Log.d("vxcvdxvs", "onSuccess: gooooood");
 
                         }
+
 
                     }
 

@@ -218,7 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/layout_img_recyclerview"
-                    android:layout_below="@id/set_othercity"
+                    android:layout_below="@id/type_layout"
                     android:padding="8dp">
                     <TextView
                         android:id="@+id/title_add_image"
@@ -351,33 +351,52 @@
                     android:id="@+id/type_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layout_detail"
+                    android:layout_below="@id/set_othercity"
                     android:layout_alignParentRight="true"
                     android:layout_marginHorizontal="18dp"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="12dp"
+                  >
+                    <TextView
+                        android:id="@+id/type_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="نوع آگهی"
+
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_18"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="8dp"
+                        android:textStyle="bold"
+
+
+                        />
                     <RadioGroup
                         android:id="@+id/radiogroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:background="@drawable/botten_shape"
+                        android:layout_below="@id/type_title"
+                        android:layout_alignParentRight="true">
                         <RadioButton
                             android:id="@+id/find"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sans"
                             android:onClick="@{(View) -> Frag.onClickRadio(View)}"
-                            android:textSize="@dimen/text_size_16"
+                            android:textSize="@dimen/text_size_18"
                             android:text="پیدا شده"
-                            android:layout_margin="6dp"
-                            android:textColor="@color/text_color_black"/>
+                            android:layout_margin="10dp"
+                            android:textColor="@color/text_color_black"
+                            />
                         <RadioButton
                             android:id="@+id/lost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sans"
-                            android:layout_margin="6dp"
+                            android:layout_margin="10dp"
                             android:onClick="@{(View) -> Frag.onClickRadio(View)}"
-                            android:textSize="@dimen/text_size_16"
+                            android:textSize="@dimen/text_size_18"
                             android:text="گم شده"
                             android:textColor="@color/text_color_black"/>
                     </RadioGroup>

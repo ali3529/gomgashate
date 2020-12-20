@@ -9,6 +9,7 @@ public class SaveAnnouncementModel {
     private String response;
     @SerializedName("message")
     private List<String> masg;
+
     @SerializedName("announce_id")
     private String announce_id;
 
