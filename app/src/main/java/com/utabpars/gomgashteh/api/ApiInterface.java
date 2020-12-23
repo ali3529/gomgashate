@@ -2,6 +2,8 @@ package com.utabpars.gomgashteh.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.utabpars.gomgashteh.chat.ChatStatusModel;
+import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
@@ -72,11 +74,6 @@ public interface ApiInterface {
     Single<SaveAnnouncementModel> insertAnnouncment(@PartMap Map<String,RequestBody> requestBody,
                                                     @Part List<MultipartBody.Part> file);
 
-
-
-
-
-
     @POST("userAuthentication")
     @FormUrlEncoded
     Single<RmModel> userAuthentication(@Field("phone_num") String phone_num);
@@ -105,5 +102,15 @@ public interface ApiInterface {
     @POST("provinceFilter")
     @FormUrlEncoded
     Single<AnoncmentModel> filterByProvince(@Field("province_id") String province_id);
+
+
+    @POST("statusUser")
+    @FormUrlEncoded
+    Single<ChatStatusModel> getChatStatus(@Field("user_id") String user_id,@Field("announcement_id") String announcement_id);
+
+    @POST("insertTicket")
+    @Multipart
+    Single<StatusModel> sendFirstAnnouncementMassage(@Part List<MultipartBody.Part> parts,
+                                                     @PartMap Map<String,RequestBody> requestBody);
 
 }

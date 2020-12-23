@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".chat.FirstMassageBottomSheet">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_18"
+        android:layout_gravity="top|center"
+        android:layout_margin="16dp"
+        android:text="آگر این آگهی میتواند به شما کمک کند لطفا در یک پیام اطلاعات مورد نیاز را برای  آگهی دهنده  ارسال کنید و منتظر پاسخ باشید"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:behavior_peekHeight="520dp"
+        app:behavior_hideable="true"
+        android:padding="8dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/attach"
+                android:layout_marginRight="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="6dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/masage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="rtl"
+                    android:focusable="true"
+                    android:textColor="@color/text_color_black"
+                    android:cursorVisible="true"
+                    android:background="@drawable/botton_sheet_yes_no_shape"
+                    android:hint="پیام"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_end"
+              android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/attach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_attach"
+                android:layout_toLeftOf="@id/send"
+                android:layout_centerInParent="true"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/image_first_massage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mm"
+                android:layout_marginTop="35dp"/>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

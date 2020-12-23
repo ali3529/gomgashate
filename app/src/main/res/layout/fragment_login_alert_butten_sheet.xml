@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="frag"
+            type="com.utabpars.gomgashteh.chat.LoginAlertBottomSheet" />
+    </data>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chat.LoginAlertBottomSheet"
+ >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:behavior_peekHeight="280dp"
+        app:behavior_hideable="true"
+        android:padding="8dp">
+
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="برای چت با آگهی دهنده باید وارد کاربری گمگشته خود شوید"
+        android:layout_centerInParent="true"
+        android:textColor="@color/text_color_black"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_16"
+   android:layout_above="@id/login"
+        android:layout_marginBottom="8dp"
+        />
+
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="ورود به حساب کاربری"
+            android:textSize="@dimen/text_size_18"
+            android:background="@drawable/botton_sheet_yes_no_shape"
+
+            android:textColor="@color/colorPrimary"
+
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+
+            android:onClick="@{() -> frag.login()}"
+            />
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

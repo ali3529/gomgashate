@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/G:/sdk/icons/material/materialicons/error_outline/baseline_error_outline_24.xml" />
+                                      <entry key="url" value="file:/G:/sdk/icons/material/materialicons/attach_file/baseline_attach_file_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,7 +33,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_error_outline_24" />
+                            <entry key="outputName" value="ic_attach" />
                             <entry key="sourceFile" value="C:\Users\alireza\AndroidStudioProjects\gomgashteh" />
                           </map>
                         </option>

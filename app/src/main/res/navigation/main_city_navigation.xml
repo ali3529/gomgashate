@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentMainCity2"
-        android:name="com.utabpars.gomgashteh.adaptor.maincity.FragmentMainCity"
+        android:name="com.utabpars.gomgashteh.maincity.FragmentMainCity"
         android:label="FragmentMainCity" />
 </navigation>

@@ -20,6 +20,10 @@
         <variable
             name="did"
             type="Integer" />
+        <variable
+            name="chatviewmodel"
+            type="com.utabpars.gomgashteh.fragment.FragmentAnnouncmentDetail" />
+
     </data>
 
 
@@ -295,8 +299,9 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_margin="6dp"
-            android:onClick=""
-            android:background="@color/colorPrimary">
+            android:onClick="@{ () -> chatviewmodel.checkChatStatus()}"
+            android:background="@color/colorPrimary"
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

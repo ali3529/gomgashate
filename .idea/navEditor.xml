@@ -94,6 +94,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_announcement_to_fragmentChoosecity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_announcement_to_fragmentCity">
                               <value>
                                 <LayoutPositions />
@@ -161,8 +166,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="939" />
-                            <option name="y" value="762" />
+                            <option name="x" value="1057" />
+                            <option name="y" value="790" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -402,6 +407,27 @@
                               </value>
                             </entry>
                             <entry key="action_list_to_fragmentCallection">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="loginAlertBottomSheet">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2771" />
+                            <option name="y" value="1162" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_loginAlertBottomSheet_to_fragmentLogin">
                               <value>
                                 <LayoutPositions />
                               </value>
