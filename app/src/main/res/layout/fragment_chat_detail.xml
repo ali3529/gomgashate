@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="massagelayoutvisibility"
+            type="Boolean" />
+
+        <variable
+            name="secendmassagevisibility"
+            type="Boolean" />
+    </data>
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chat.FragmentChatDetail">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:padding="6dp"
+            />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@id/back_arrow"
+                tools:text="یک عدد دو چرخه گم شده"
+                android:gravity="center"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_16"
+                android:layout_marginRight="8dp"/>
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/massage_layout"
+    android:layout_below="@id/toolbar">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+</RelativeLayout>
+
+
+<RelativeLayout
+    android:id="@+id/massage_layout"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_alignParentBottom="true"
+    android:visibility="visible"
+    app:setLayoutVisi="@{massagelayoutvisibility}">
+    <ImageView
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_end"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/send"
+        android:layout_toRightOf="@id/attach"
+        android:layout_marginRight="12dp"
+
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginHorizontal="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/masage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="rtl"
+            android:focusable="true"
+            android:textColor="@color/text_color_black"
+            android:cursorVisible="true"
+            android:background="@drawable/botton_sheet_yes_no_shape"
+            android:hint="پیامی بنویسید"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/attach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_attach"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"/>
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        app:setLayoutVisi="@{secendmassagevisibility}">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_size_18"
+            android:text="کاربر گرامی شما پیام خود را قبلا ارسال کردید لطفا منتظر پاسخ آگهی دهنده باشید"/>
+    </RelativeLayout>
+
+</RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class StatusModel {
     @SerializedName("status")
     private String status;
-
+    @SerializedName("message")
+    private String massage;
     public String getMassage() {
         return massage;
     }
@@ -14,8 +15,7 @@ public class StatusModel {
         this.massage = massage;
     }
 
-    @SerializedName("message")
-    private String massage;
+
 
     public String getStatus() {
         return status;

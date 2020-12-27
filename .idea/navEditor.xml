@@ -166,9 +166,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1057" />
-                            <option name="y" value="790" />
+                            <option name="x" value="1110" />
+                            <option name="y" value="1093" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentAnnouncmentDetail_to_fragmentChatDetail">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_fragmentAnnouncmentDetail_to_fragmentLogin">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -190,6 +204,27 @@
                               </value>
                             </entry>
                             <entry key="action_fragmentCallection_to_fragmentAnnouncCollection">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentChatDetail">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1449" />
+                            <option name="y" value="-1441" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentChatDetail_to_fragmentAnnouncmentDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -407,27 +442,6 @@
                               </value>
                             </entry>
                             <entry key="action_list_to_fragmentCallection">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="loginAlertBottomSheet">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="2771" />
-                            <option name="y" value="1162" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_loginAlertBottomSheet_to_fragmentLogin">
                               <value>
                                 <LayoutPositions />
                               </value>

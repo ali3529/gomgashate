@@ -139,12 +139,13 @@
             app:popExitAnim="@anim/fragment_open_enter" />
 
         <action
-            android:id="@+id/action_fragmentAnnouncmentDetail_to_chat"
-            app:destination="@id/chat"
+            android:id="@+id/action_fragmentAnnouncmentDetail_to_fragmentChatDetail"
+            app:destination="@id/fragmentChatDetail"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_enter" />
+            app:popExitAnim="@anim/fragment_open_exit"
+         />
     </fragment>
     <fragment
         android:id="@+id/fragmentCallection"
@@ -276,4 +277,13 @@
         android:name="com.utabpars.gomgashteh.maincity.FragmentChoosecity"
         android:label="fragment_choosecity"
         tools:layout="@layout/fragment_choosecity" />
+    <fragment
+        android:id="@+id/fragmentChatDetail"
+        android:name="com.utabpars.gomgashteh.chat.FragmentChatDetail"
+        android:label="FragmentChatDetail" >
+        <action
+            android:id="@+id/action_fragmentChatDetail_to_fragmentAnnouncmentDetail"
+            app:destination="@id/fragmentAnnouncmentDetail"
+            app:popUpTo="@id/fragmentAnnouncmentDetail" />
+    </fragment>
 </navigation>

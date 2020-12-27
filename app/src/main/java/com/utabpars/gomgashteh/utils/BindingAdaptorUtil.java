@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.smarteist.autoimageslider.SliderView;
+import com.squareup.picasso.Picasso;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.ImageSliderAdaptor;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
@@ -90,6 +92,10 @@ public class BindingAdaptorUtil {
     }
 
 
+    @BindingAdapter("imagebinddd")
+    public static void getImageMassage(RoundedImageView imageView, String s){
 
+        Picasso.get().load(Uri.parse(s)).into(imageView);
+    }
 
 }

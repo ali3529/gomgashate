@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="doublcheck"
+            type="Boolean" />
+
+        <variable
+            name="check"
+            type="Boolean" />
+    </data>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/massage_shape"
+    android:padding="12dp"
+    android:layout_margin="6dp"
+    android:layout_alignParentLeft="true">
+    <TextView
+        android:id="@+id/massage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="سلام من این آگهی را پیدا کردم"
+        android:textColor="@color/text_color_black"
+        android:layout_margin="6dp"/>
+
+    <ImageView
+        android:id="@+id/check_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic__check_24"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/massage"
+        app:setLayoutVisi="@{check}"/>
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/ic_doul_check"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/massage"
+        android:layout_toRightOf="@id/check_1"
+        android:visibility="gone"
+        app:setLayoutVisi="@{doublcheck}"/>
+</RelativeLayout>
+</RelativeLayout>
+
+</layout>

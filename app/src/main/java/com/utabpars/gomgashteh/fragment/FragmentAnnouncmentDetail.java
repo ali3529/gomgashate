@@ -40,7 +40,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
     DetailViewModel viewModel;
     ChatAuthViewModel chatAuthViewModel;
     SharedPreferences sharedPreferences;
-    String anouns_id, user_id,sender_id;
+    String anouns_id, user_id,sender_id,title;
     boolean user_status;
     LoginAlertBottomSheet loginAlertBottomSheet;
     FirstMassageBottomSheet firstMassageBottomSheet;
@@ -85,6 +85,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
                 binding.setDetails(data);
                 anouns_id=String.valueOf(data.getId());
                 sender_id=data.getAnnouncer_id();
+                title=data.getTitle();
             }
         });
 
@@ -103,7 +104,11 @@ public class FragmentAnnouncmentDetail extends Fragment {
                        Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getTicket_id());
                        Bundle bundle=new Bundle();
                        bundle.putString("ticket_id",chatStatusModel.getTicket_id());
-                       Navigation.findNavController(view).navigate(R.id.action_fragmentAnnouncmentDetail_to_chat,bundle);
+                       bundle.putString("title",title);
+                       bundle.putString("recever_id",sender_id);
+                       bundle.putString("announcer_id",anouns_id);
+                       Navigation.findNavController(view).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentChatDetail,bundle);
+
                    }
                 }else {
                     Toast.makeText(getActivity(), "امکان چت با این آگهی برای شما وجود ندارد", Toast.LENGTH_SHORT).show();

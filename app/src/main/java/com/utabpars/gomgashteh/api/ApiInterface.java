@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.utabpars.gomgashteh.chat.ChatStatusModel;
 import com.utabpars.gomgashteh.chat.StatusModel;
+import com.utabpars.gomgashteh.chat.TicketResponseModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
@@ -112,5 +113,9 @@ public interface ApiInterface {
     @Multipart
     Single<StatusModel> sendFirstAnnouncementMassage(@Part List<MultipartBody.Part> parts,
                                                      @PartMap Map<String,RequestBody> requestBody);
+
+    @POST("showTicket")
+    @FormUrlEncoded
+    Single<TicketResponseModel> getTicketInfo(@Field("ticket_id") String ticket_id,@Field("user_id") String user_id);
 
 }
