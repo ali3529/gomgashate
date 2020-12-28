@@ -182,7 +182,7 @@ public class FragmentAddAnnouncement extends Fragment  {
             @Override
             public void onClick(View view) {
 
-                if (Utils.checkPermissionStorage(getContext())) {
+                if (Utils.checkPermissionStorage(getContext()) && Utils.checkPermissionStorageWrite(getContext())) {
                     setImageAnnounsmenet();
 
 

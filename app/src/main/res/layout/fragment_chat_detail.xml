@@ -19,12 +19,14 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.FragmentChatDetail">
+    tools:context=".chat.FragmentChatDetail"
+ >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="@color/toolbar_background">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -53,12 +55,19 @@
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/toolbar"
+    android:background="@drawable/chat_background">
+
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@id/massage_layout"
-    android:layout_below="@id/toolbar">
+
+  >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
@@ -131,6 +140,7 @@
             android:textSize="@dimen/text_size_18"
             android:text="کاربر گرامی شما پیام خود را قبلا ارسال کردید لطفا منتظر پاسخ آگهی دهنده باشید"/>
     </RelativeLayout>
+</RelativeLayout>
 
 </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

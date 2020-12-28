@@ -37,6 +37,7 @@ import com.utabpars.gomgashteh.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -51,6 +52,8 @@ import static com.utabpars.gomgashteh.utils.Utils.getFileExtantion;
 
 public class BottomSheetChooseImage extends BottomSheetDialogFragment {
     PassDataCallBack passDataCallBack;
+    private final int REQCODE=100;
+    private final int REQCODE2=200;
 
     FragmentBottomsheetAddimageBinding binding;
     Intent intent;
@@ -118,7 +121,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode==100){
+        if (requestCode==REQCODE){
             if (resultCode==RESULT_OK){
 
                 try {
@@ -141,14 +144,15 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
 
         }
 
-        else if (requestCode==200) {
+        else if (requestCode==REQCODE2) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getContext(), "sdg", Toast.LENGTH_SHORT).show();
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
-                String f = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, "Title", null).toString();
-                Uri uri = Uri.parse(f.toString());
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, b);
+                String f = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, "Title", "null");
+
+                Uri uri = Uri.parse(f);
 
                 passDataCallBack.passUri(uri,partList);
                 Log.d("tfhtrfhd", "onActivityResult: "+uri.toString());
@@ -161,7 +165,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
         if (requestCode == ReadExternalRequestCode) { // با کلید مربوط به خواندن مموری نتیجه را می خوانیم
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // اگر از درخواست دسترسی جواب مثبت برگشت دستورات شرط اجرا می شود.
                 intent=new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivityForResult(intent,200);
+                startActivityForResult(intent,REQCODE2);
 
                 Toast.makeText(getContext(), "permision granted", Toast.LENGTH_SHORT).show();
             } else {

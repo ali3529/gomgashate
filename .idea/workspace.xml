@@ -6,8 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="dfgdfgfd" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="AutoImportSettings">
@@ -25,16 +24,22 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/api/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/api/ApiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/StatusModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/StatusModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/FragmentChatDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/FragmentChatDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/BottomSheetChooseImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/BottomSheetChooseImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAddAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAddAnnouncement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncmentDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncmentDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/utils/BindingAdaptorUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/utils/BindingAdaptorUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_announcment_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_announcment_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_detail.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigate.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigate.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,8 +67,8 @@
         <option value="Interface" />
         <option value="navigationResourceFile" />
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -77,11 +82,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="A2C6R20602011672" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-12-28T09:57:18.500Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android-custom-viewC:/Users/alireza/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0-rc01/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-rc01-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
     <property name="android.sdk.path" value="G:/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MyTets" />
     <property name="multi-representation-previewC:/Users/alireza/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0-rc01/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-rc01-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
@@ -89,12 +96,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\raw" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.utabpars.gomgashteh" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\font" />
     </key>
     <key name="android.template.808836593">
       <recent name="com.utabpars.gomgashteh.fragment" />
@@ -102,9 +110,9 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.utabpars.gomgashteh.adaptor.maincity" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\font" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\raw" />
     </key>
   </component>
   <component name="RunManager">
@@ -227,10 +235,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1608723681969" />
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607330494768">
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609151267403">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1607330494768" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1609151267403" />
     <state x="413" y="110" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1607331847791">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -247,42 +255,42 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="291" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604821451126" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1608732902909">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1609151296935">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1608732902909" />
-    <state width="1323" height="205" key="GridCell.Tab.0.bottom" timestamp="1609064342934">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609151296935" />
+    <state width="1323" height="205" key="GridCell.Tab.0.bottom" timestamp="1609149317238">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609064342934" />
-    <state width="1323" height="205" key="GridCell.Tab.0.center" timestamp="1609064342933">
+    <state width="1323" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609149317238" />
+    <state width="1323" height="205" key="GridCell.Tab.0.center" timestamp="1609149317238">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609064342933" />
-    <state width="1323" height="205" key="GridCell.Tab.0.left" timestamp="1609064342933">
+    <state width="1323" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609149317238" />
+    <state width="1323" height="205" key="GridCell.Tab.0.left" timestamp="1609149317238">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609064342933" />
-    <state width="1323" height="205" key="GridCell.Tab.0.right" timestamp="1609064342934">
+    <state width="1323" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609149317238" />
+    <state width="1323" height="205" key="GridCell.Tab.0.right" timestamp="1609149317238">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609064342934" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1608725124755">
+    <state width="1323" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609149317238" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1609076353708">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608725124755" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1608725124754">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609076353708" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1609076353707">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608725124754" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1608725124754">
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1609076353707" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1609076353707">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608725124754" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1608725124754">
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1609076353707" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1609076353708">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608725124754" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1609076353708" />
     <state x="261" y="12" key="SettingsEditor" timestamp="1606906727506">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -341,7 +349,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/BottomSheetChooseImage.java</url>
-          <line>124</line>
+          <line>127</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -371,7 +379,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/FragmentChatDetail.java</url>
-          <line>78</line>
+          <line>80</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
@@ -381,6 +389,12 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/ChatAuthViewModel.java</url>
+          <line>29</line>
+          <properties class="com.utabpars.gomgashteh.chat.ChatAuthViewModel" method="chatValidate" />
+          <option name="timeStamp" value="107" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

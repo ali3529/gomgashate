@@ -25,10 +25,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentChatDetailBinding;
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
+import com.utabpars.gomgashteh.utils.NavigateHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,6 +111,7 @@ public class FragmentChatDetail extends Fragment {
                     massageAdaptor.notifyDataSetChanged();
                     binding.masage.setText("");
                     scrollToBottom(recyclerView);
+
                 }
 
             }
@@ -122,22 +125,22 @@ public class FragmentChatDetail extends Fragment {
                 bottomSheetChooseImage.passData(passDataCallBack);
             }
         });
-
-        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
-
-            @Override
-            public void handleOnBackPressed() {
-
-
-
-
-
-            };
-
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
-
-    }
+//
+//        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
+//
+//            @Override
+//            public void handleOnBackPressed() {
+//                Navigation.findNavController(view).popBackStack(R.id.fragmentAnnouncmentDetail,true);
+//                //Navigation.findNavController(view).popBackStack();
+////               Navigation.findNavController(view).navigateUp();
+//                NavigateHelper.navigate=false;
+//
+//            };
+//
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(),callback);
+////
+  }
 
 
     private void initViews() {

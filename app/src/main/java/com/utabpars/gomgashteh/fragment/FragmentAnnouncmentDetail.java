@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.utabpars.gomgashteh.chat.FirstMassageBottomSheet;
 import com.utabpars.gomgashteh.chat.LoginAlertBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncmentDetailBinding;
 import com.utabpars.gomgashteh.model.DetailModel;
+import com.utabpars.gomgashteh.utils.NavigateHelper;
 import com.utabpars.gomgashteh.viewmodel.DetailViewModel;
 
 import java.util.List;
@@ -51,7 +53,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
                              Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_announcment_detail,container,false);
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
-        chatAuthViewModel=new ViewModelProvider(this).get(ChatAuthViewModel.class);
+        chatAuthViewModel=new ViewModelProvider(getActivity()).get(ChatAuthViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("user_login", Context.MODE_PRIVATE);
         firstMassageBottomSheet=new FirstMassageBottomSheet();
     // Inflate the layout for this fragment
@@ -75,6 +77,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
 
       user_id =sharedPreferences.getString("user_id","0000");
       user_status=sharedPreferences.getBoolean("user_login",false);
+
 
 
         dataMutableLiveData.observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
@@ -107,7 +110,10 @@ public class FragmentAnnouncmentDetail extends Fragment {
                        bundle.putString("title",title);
                        bundle.putString("recever_id",sender_id);
                        bundle.putString("announcer_id",anouns_id);
-                       Navigation.findNavController(view).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentChatDetail,bundle);
+
+                           Navigation.findNavController(view).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentChatDetail,bundle);
+
+
 
                    }
                 }else {
@@ -116,7 +122,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
 
             }
         });
-        
+
         
         loginAlertBottomSheet.viewMutableLiveData.observe(getViewLifecycleOwner(), view1 -> {
             //go to login fragment
@@ -129,6 +135,13 @@ public class FragmentAnnouncmentDetail extends Fragment {
             @Override
             public void onChanged(String s) {
                 firstMassageBottomSheet.dismiss();
+            }
+        });
+
+        binding.chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkChatStatus();
             }
         });
     }
@@ -152,5 +165,12 @@ public void checkChatStatus(){
 
         }
 
+
+
 }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

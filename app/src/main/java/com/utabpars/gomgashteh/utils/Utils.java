@@ -32,6 +32,7 @@ import java.util.List;
 public class Utils {
 
     public static final int ReadExternalRequestCode = 200;
+    public static final int WriteExternalRequestCode = 300;
 
     public static void toast(Context context,String massage){
         Toast.makeText(context, massage, Toast.LENGTH_SHORT).show();
@@ -116,6 +117,22 @@ public class Utils {
 
         Log.d("sfesfsef", "getCategoryId: "+j.get(0));
         return j;
+    }
+
+
+    public static boolean checkPermissionStorageWrite(Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= Build.VERSION_CODES.M) { // ابتدا کنترل می کند تا اندروید بالاتر M باشد
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { // اگر دسترسی خواندن مموری را نداشته باشد دستورات داخل شرط اجرا می شود.
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WriteExternalRequestCode);
+
+                return false;// دسترسی تایید نشده باشد جواب منفی داده می شود.
+            } else {
+                return true;// دسترسی تایید شده جواب مثبت می شود.
+            }
+        } else {
+            return true;// دسترسی تایید شده جواب مثبت می شود.
+        }
     }
 }
 
