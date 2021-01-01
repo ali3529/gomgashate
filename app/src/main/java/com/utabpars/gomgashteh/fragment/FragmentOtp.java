@@ -35,7 +35,7 @@ public class FragmentOtp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_otp,container,false);
         viewModel=new ViewModelProvider(this).get(UserAuthenticationViewModel.class);
@@ -198,13 +198,7 @@ public class FragmentOtp extends Fragment {
 
 
     public void backstack(){
-        binding.arrowBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_fragmentOtp_to_fragmentLogin);
-              ;
-            }
-        });
+     Navigation.findNavController(getView()).navigateUp();
     }
 
     public void validateOtp(String phone,String code){

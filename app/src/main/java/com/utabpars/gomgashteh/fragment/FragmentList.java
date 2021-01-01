@@ -155,28 +155,28 @@ public class FragmentList extends Fragment {
         toolbar=binding.toolbar;
     }
 
-
-    private void getCategory(){
-        ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getcategories()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull CategoryModel categoryModel) {
-                        if (categoryModel.getResponse().equals("1")){
-                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getResponse());
-                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getListData().get(0).getCategoryName());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        Log.d("dsfsd", "onError: "+e.toString());
-                    }
-                }));
-    }
+//
+//    private void getCategory(){
+//        ApiInterface apiInterface= ApiClient.getApiClient();
+//        CompositeDisposable compositeDisposable=new CompositeDisposable();
+//        compositeDisposable.add(apiInterface.getcategories("")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
+//                    @Override
+//                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull CategoryModel categoryModel) {
+//                        if (categoryModel.getResponse().equals("1")){
+//                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getResponse());
+//                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getListData().get(0).getCategoryName());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//                        Log.d("dsfsd", "onError: "+e.toString());
+//                    }
+//                }));
+//    }
 
 
 }

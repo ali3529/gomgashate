@@ -55,9 +55,10 @@ public class FragmentProfile extends Fragment {
                     if (aBoolean){
                         binding.title.setText(" شما با شماره موبایل "+phobe_num+" وارد شده اید و آگهی های ثبت شده با این شماره را مشاهده می کنید");
                         binding.textLog.setText("خروج از حساب");
+                        binding.loginLayout.setVisibility(View.VISIBLE);
                     }else {
                         binding.title.setText("برای استفاده از تمام امکانات گمگشته مانند ثبت آگهی و چت وارد حساب گمگشته خود شوید");
-
+                        binding.loginLayout.setVisibility(View.GONE);
                         binding.textLog.setText("ورود به حساب");
                     }
 
@@ -93,6 +94,14 @@ public class FragmentProfile extends Fragment {
                 }else{
                     bottomSheetLogout.dismiss();
                 }
+            }
+        });
+
+
+        binding.announcment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_perofile_to_fragmentMyAnnouncment2);
             }
         });
 

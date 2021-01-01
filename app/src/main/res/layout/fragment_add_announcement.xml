@@ -31,7 +31,10 @@
         android:id="@+id/islogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:setLayoutVisi="@{isLogin}">
+        app:setLayoutVisi="@{isLogin}"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_gravity="center">
 
 
         <TextView
@@ -41,7 +44,8 @@
             android:text="برای ثبت آگهی لطفا وارد حساب کاربری خود شوید."
             android:layout_centerInParent="true"
             android:textStyle="bold"
-            android:textSize="@dimen/text_size_18"/>
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_16"/>
         <Button
             android:id="@+id/add_login"
             android:layout_width="wrap_content"
@@ -59,7 +63,7 @@
         android:layout_height="match_parent"
         tools:context=".fragment.FragmentAddAnnouncement"
         android:background="@color/white"
-        android:visibility="gone"
+        android:visibility="visible"
         app:setLayoutVisi="@{isLogined}">
 
 
@@ -119,7 +123,7 @@
                         android:text="دسته بندی"
                         android:layout_alignParentRight="true"
                         android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_black"/>
 
                     <TextView
@@ -129,7 +133,7 @@
                         android:hint="انتخاب کنید"
                         android:layout_alignParentLeft="true"
                         android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_low_black"/>
                 </RelativeLayout>
                 <RelativeLayout
@@ -157,7 +161,7 @@
                         android:text="محدوده آگهی"
                         android:layout_alignParentRight="true"
                         android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_black" />
 
                     <TextView
@@ -168,7 +172,7 @@
                         android:hint="انتخاب کنید"
                         android:layout_alignParentLeft="true"
                         android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_low_black"/>
                     <View
 
@@ -185,15 +189,24 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:layout_below="@id/setcity"
+
                     >
+                    <ImageView
+                        android:id="@+id/add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_add_city"
+                        android:layout_alignParentRight="true"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="شهر های دیگر"
-                        android:layout_alignParentRight="true"
+
                         android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_18"
-                        android:textColor="@color/text_color_black" />
+                        android:textSize="@dimen/text_size_16"
+                        android:textColor="@color/text_color_black"
+                        android:layout_toLeftOf="@id/add"/>
 
                     <TextView
                         android:id="@+id/othercity"
@@ -203,7 +216,7 @@
                         android:hint="انتخاب کنید"
                         android:layout_alignParentLeft="true"
                         android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_low_black"/>
                     <View
 
@@ -227,7 +240,7 @@
                         android:text="عکس آگهی"
 
                         android:textColor="@color/text_color_black"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                        android:layout_alignParentRight="true"
                         android:layout_margin="8dp"
                         android:textStyle="bold"
@@ -279,7 +292,7 @@
                         android:textStyle="bold"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:textSize="23dp"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_black"
                         android:layout_marginHorizontal="18dp"
                         />
@@ -298,7 +311,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textDirection="rtl"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:saveEnabled="true"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -319,7 +333,7 @@
                         android:textStyle="bold"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:textSize="23dp"
+                        android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_black"
                         android:layout_marginHorizontal="18dp"
                         />
@@ -342,7 +356,8 @@
                             android:lines="8"
                             android:minLines="3"
                             android:textDirection="rtl"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:saveEnabled="true"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -352,7 +367,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/set_othercity"
-                    android:layout_alignParentRight="true"
+
                     android:layout_marginHorizontal="18dp"
                     android:layout_marginTop="12dp"
                   >
@@ -363,7 +378,7 @@
                         android:text="نوع آگهی"
 
                         android:textColor="@color/text_color_black"
-                        android:textSize="@dimen/text_size_18"
+                        android:textSize="@dimen/text_size_16"
                         android:layout_alignParentRight="true"
                         android:layout_margin="8dp"
                         android:textStyle="bold"
@@ -372,22 +387,25 @@
                         />
                     <RadioGroup
                         android:id="@+id/radiogroup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:background="@drawable/botten_shape"
                         android:layout_below="@id/type_title"
-                        android:layout_alignParentRight="true">
+                        android:gravity="center"
+                    >
                         <RadioButton
                             android:id="@+id/find"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sans"
                             android:onClick="@{(View) -> Frag.onClickRadio(View)}"
-                            android:textSize="@dimen/text_size_18"
+                            android:textSize="@dimen/text_size_16"
                             android:text="پیدا شده"
                             android:layout_margin="10dp"
                             android:textColor="@color/text_color_black"
+
+
                             />
                         <RadioButton
                             android:id="@+id/lost"
@@ -396,10 +414,44 @@
                             android:fontFamily="@font/sans"
                             android:layout_margin="10dp"
                             android:onClick="@{(View) -> Frag.onClickRadio(View)}"
-                            android:textSize="@dimen/text_size_18"
+                            android:textSize="@dimen/text_size_16"
                             android:text="گم شده"
-                            android:textColor="@color/text_color_black"/>
+                            android:textColor="@color/text_color_black"
+                           />
                     </RadioGroup>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/suprise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/layout_detail"
+                    android:layout_alignParentRight="true"
+                    android:padding="18dp"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/text_suprise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="مژدگانی"
+
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_16"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/text_suprise"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/surprise_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -415,19 +467,44 @@
             android:background="@color/toolbar_background"
 
             >
-            <Button
+            <RelativeLayout
                 android:id="@+id/saveAnnounce"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:layout_margin="8dp">
+
+
+            <TextView
+
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
                 android:text="ثبت آگهی"
                 android:textStyle="bold"
-                android:textSize="@dimen/text_size_18"
-                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/text_size_16"
+                android:gravity="center"
                 android:layout_centerInParent="true"
                 android:layout_margin="6dp"
                 android:textAlignment="center"
+                android:textColor="@color/white"
 
            />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/add_progress"
+                    android:layout_width="270dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/progress"
+                    android:visibility="gone"
+                    android:background="@color/white"
+
+                    />
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 

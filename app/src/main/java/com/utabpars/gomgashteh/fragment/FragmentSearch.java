@@ -56,6 +56,7 @@ public class FragmentSearch extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this
        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_search,container,false);
+       getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         initViews();
 
         return binding.getRoot();

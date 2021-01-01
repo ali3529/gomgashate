@@ -55,6 +55,19 @@
                     />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:fillViewport="true"
+            android:layout_above="@id/layput_otp">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
 
         <TextView
             android:id="@+id/title"
@@ -67,7 +80,7 @@
             android:textColor="@color/text_color_black"
             android:layout_alignParentRight="true"
             android:layout_margin="16dp"
-            android:layout_below="@id/toolbar"/>
+          />
 
 
         <TextView
@@ -203,7 +216,10 @@
             </RelativeLayout>
         </RelativeLayout>
 
+</RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
         <RelativeLayout
+            android:id="@+id/layput_otp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
@@ -225,7 +241,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_18"/>
+                    android:textSize="@dimen/text_size_16"/>
 
 
                 <com.airbnb.lottie.LottieAnimationView
@@ -248,7 +264,7 @@
                 android:layout_height="match_parent"
                 tools:text="00:19"
                 android:textStyle="bold"
-                android:textSize="@dimen/text_size_18"
+                android:textSize="@dimen/text_size_16"
                 android:layout_alignParentRight="true"
 
                 android:layout_margin="6dp"

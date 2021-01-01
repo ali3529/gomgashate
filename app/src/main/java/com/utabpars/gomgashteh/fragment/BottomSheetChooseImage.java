@@ -36,6 +36,7 @@ import com.utabpars.gomgashteh.utils.Utils;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Objects;
 
@@ -46,6 +47,7 @@ import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
 import static com.utabpars.gomgashteh.utils.Utils.ReadExternalRequestCode;
+import static com.utabpars.gomgashteh.utils.Utils.WriteExternalRequestCode;
 import static com.utabpars.gomgashteh.utils.Utils.getByts;
 import static com.utabpars.gomgashteh.utils.Utils.getFileExtantion;
 
@@ -122,6 +124,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==REQCODE){
+            Log.d("kiiiirkhar", "onActivityResult: gallery");
             if (resultCode==RESULT_OK){
 
                 try {
@@ -132,8 +135,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
 
 
                     passDataCallBack.passUri(data.getData(),partList);
-
-
+                    Log.d("tfhtrfhd", "onActivityResult: "+data.getData().toString());
 
 
                 } catch (Exception e) {
@@ -145,14 +147,26 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
         }
 
         else if (requestCode==REQCODE2) {
+
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getContext(), "sdg", Toast.LENGTH_SHORT).show();
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, b);
-                String f = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, "Title", "null");
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+                String f = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, "Title", null).toString();
 
-                Uri uri = Uri.parse(f);
+                Uri uri = Uri.parse(f.toString());
+                Log.d("kiiiirkhar", "onActivityResult: camera"+data.getData());
+                Log.d("kiiiirkhar", "onActivityResult: camera"+data.getExtras().get("data"));
+                Log.d("kiiiirkhar", "onActivityResult: camera");
+
+                InputStream inputStream= null;
+                try {
+                    inputStream = getActivity().getContentResolver().openInputStream(uri);
+                    sendUploadRequest(getByts(inputStream),f);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 passDataCallBack.passUri(uri,partList);
                 Log.d("tfhtrfhd", "onActivityResult: "+uri.toString());
@@ -163,6 +177,15 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == ReadExternalRequestCode) { // با کلید مربوط به خواندن مموری نتیجه را می خوانیم
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // اگر از درخواست دسترسی جواب مثبت برگشت دستورات شرط اجرا می شود.
+                intent=new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intent,REQCODE);
+
+                Toast.makeText(getContext(), "permision granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "دسترسی داده نشد!", Toast.LENGTH_LONG).show(); // در صورتی که جواب منفی گرفتیم پیام دسترسی داده نشد را نمایش می دهیم.
+            }
+        }else if (requestCode==WriteExternalRequestCode){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // اگر از درخواست دسترسی جواب مثبت برگشت دستورات شرط اجرا می شود.
                 intent=new Intent("android.media.action.IMAGE_CAPTURE");
                 startActivityForResult(intent,REQCODE2);

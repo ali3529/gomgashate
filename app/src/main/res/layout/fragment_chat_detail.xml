@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
         <variable
@@ -12,24 +13,25 @@
             name="secendmassagevisibility"
             type="Boolean" />
     </data>
-  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.FragmentChatDetail"
  >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        android:background="@color/toolbar_background">
+        android:background="#2CB6B4B4"
+        android:layoutDirection="rtl"
+
+
+        >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
         <ImageView
             android:id="@+id/back_arrow"
@@ -50,28 +52,33 @@
                 tools:text="یک عدد دو چرخه گم شده"
                 android:gravity="center"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_14"
                 android:layout_marginRight="8dp"/>
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/toolbar"
-    android:background="@drawable/chat_background">
+
+
+
+
 
 
 <RelativeLayout
+    android:id="@+id/recyccler_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@id/toolbar"
+    android:background="#2CB6B4B4"
     android:layout_above="@id/massage_layout"
+
+ >
 
   >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+       />
 
 
 
@@ -83,6 +90,7 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_alignParentBottom="true"
+
     android:visibility="visible"
     app:setLayoutVisi="@{massagelayoutvisibility}">
     <ImageView
@@ -93,27 +101,29 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"/>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mm"
+        android:id="@+id/mmm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/send"
         android:layout_toRightOf="@id/attach"
         android:layout_marginRight="12dp"
-
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginHorizontal="8dp">
+        android:hint="پیامی بنویسید"
+        android:background="@drawable/botton_sheet_yes_no_shape"
+      >
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/masage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textDirection="rtl"
-            android:focusable="true"
             android:textColor="@color/text_color_black"
             android:cursorVisible="true"
-            android:background="@drawable/botton_sheet_yes_no_shape"
-            android:hint="پیامی بنویسید"/>
+
+
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <ImageView
         android:id="@+id/attach"
@@ -137,12 +147,11 @@
             android:layout_centerInParent="true"
             android:textAlignment="center"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_18"
+            android:textSize="@dimen/text_size_16"
             android:text="کاربر گرامی شما پیام خود را قبلا ارسال کردید لطفا منتظر پاسخ آگهی دهنده باشید"/>
     </RelativeLayout>
 </RelativeLayout>
 
-</RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </layout>

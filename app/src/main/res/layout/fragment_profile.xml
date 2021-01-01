@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="پروفایل"
-            android:textSize="@dimen/text_size_18"
+            android:textSize="@dimen/text_size_16"
             android:fontFamily="@font/sans"
             android:textStyle="bold"
             android:textColor="@color/text_color_black"
@@ -64,7 +64,7 @@
             android:layout_margin="8dp"
             android:textColor="@color/lowblack"
         android:textStyle="bold"
-            android:textSize="@dimen/text_size_16"
+            android:textSize="@dimen/text_size_14"
             android:gravity="center"
 
             />
@@ -81,15 +81,183 @@
 
 
 
-    <fragment
-        android:id="@+id/tfragment"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/profile"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/test_navigation"
 
-       />
+        android:layout_margin="8dp">
+
+<RelativeLayout
+    android:id="@+id/login_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/announcment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_person"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/img"
+            android:text="آگهی های من"
+            android:layout_marginRight="12dp"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/text_color_black"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_more"/>
+    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/peyment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/announcment"
+            android:layout_marginTop="18dp">
+
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_credit_card_24"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/img1"
+                android:text="پرداخت های من"
+                android:layout_marginRight="12dp"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/text_color_black"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_more"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/peyment"
+            android:layout_marginTop="18dp">
+
+
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_bookmark_24"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/img2"
+                android:text="نشان ها"
+                android:layout_marginRight="12dp"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/text_color_black"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_more"/>
+        </RelativeLayout>
+
+
+        <View
+            android:id="@+id/hr"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/save"
+            android:background="#25100F0F"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="6dp"
+            />
+</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rols"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_layout"
+            android:layout_marginTop="18dp">
+
+
+            <ImageView
+                android:id="@+id/img5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_donut_large_24"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/img5"
+                android:text="پشتیبانی و قوانین"
+                android:layout_marginRight="12dp"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/text_color_black"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_more"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rols"
+            android:layout_marginTop="18dp">
+
+
+            <ImageView
+                android:id="@+id/img6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_error_outline_24"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/img6"
+                android:text="درباره گمگشته"
+                android:layout_marginRight="12dp"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/text_color_black"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_more"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
 

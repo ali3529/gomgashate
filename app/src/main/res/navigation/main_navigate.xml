@@ -93,6 +93,13 @@
         <action
             android:id="@+id/action_chat_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_chat_to_fragmentChatDetail"
+            app:destination="@id/fragmentChatDetail"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
 
     </fragment>
     <fragment
@@ -124,6 +131,9 @@
             app:destination="@id/fragmentLogin"
             app:enterAnim="@anim/fade_out"
             app:exitAnim="@anim/fade_out_left" />
+        <action
+            android:id="@+id/action_perofile_to_fragmentMyAnnouncment2"
+            app:destination="@id/fragmentMyAnnouncment2" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -143,9 +153,9 @@
             app:destination="@id/fragmentChatDetail"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
-            app:launchSingleTop="true"
             app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_exit" />
+            app:popExitAnim="@anim/fragment_open_exit"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCallection"
@@ -228,11 +238,6 @@
             app:destination="@id/announcement" />
     </fragment>
     <fragment
-        android:id="@+id/test"
-        android:name="com.utabpars.gomgashteh.fragment.BottomSheetChooseImage"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_bottomsheet_addimage" />
-    <fragment
         android:id="@+id/fragmentLogin"
         android:name="com.utabpars.gomgashteh.fragment.FragmentLogin"
         android:label="fragment_login"
@@ -281,4 +286,13 @@
         android:id="@+id/fragmentChatDetail"
         android:name="com.utabpars.gomgashteh.chat.FragmentChatDetail"
         android:label="FragmentChatDetail" />
+    <fragment
+        android:id="@+id/fragmentMyAnnouncment2"
+        android:name="com.utabpars.gomgashteh.myannouncment.FragmentMyAnnouncment"
+        android:label="fragment_my_announcment"
+        tools:layout="@layout/fragment_my_announcment" >
+        <action
+            android:id="@+id/action_fragmentMyAnnouncment2_to_fragmentAnnouncmentDetail"
+            app:destination="@id/fragmentAnnouncmentDetail" />
+    </fragment>
 </navigation>

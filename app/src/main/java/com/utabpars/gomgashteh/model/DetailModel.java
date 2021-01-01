@@ -55,10 +55,20 @@ public class DetailModel {
         private String type;
         @SerializedName("announcer")
         private String announcer;
-        @SerializedName("created_at")
+        @SerializedName("create")
         private String created_at;
         @SerializedName("pictures")
         private List<String> pictures=new ArrayList<>();
+        @SerializedName("other_city")
+        private List<String> otherCity;
+
+        public List<String> getOtherCity() {
+            return otherCity;
+        }
+
+        public void setOtherCity(List<String> otherCity) {
+            this.otherCity = otherCity;
+        }
 
         public int getId() {
             return id;

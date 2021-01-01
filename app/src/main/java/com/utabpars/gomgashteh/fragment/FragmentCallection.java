@@ -42,6 +42,7 @@ public class FragmentCallection extends Fragment {
     String title;
     String list_id;
     SharedPreferences sharedPreferences;
+    String ca;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,15 +64,16 @@ public class FragmentCallection extends Fragment {
 
         try {
             test=getArguments().getString("test");
+            ca="";
         }catch (Exception e){
-
+            ca="category";
         }
 
         binding.setTitle(title);
 
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getcallection(list_id)
+        compositeDisposable.add(apiInterface.getcallection(list_id,ca)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableSingleObserver<CategoryModel>() {

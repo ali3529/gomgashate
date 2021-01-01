@@ -39,7 +39,7 @@
                 app:riv_border_width="1dip"
                 app:riv_border_color="@color/gray"
                 app:riv_mutate_background="true"
-                app:riv_tile_mode="mirror"
+                app:riv_tile_mode="clamp"
                 app:riv_oval="false"
 
 
@@ -64,7 +64,7 @@
                 android:textAlignment="textStart"
                 android:fontFamily="@font/sans"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18"
+                android:textSize="@dimen/text_size_16"
                 android:layout_alignParentTop="true"
 
 
@@ -78,7 +78,7 @@
                 android:textColor="#A933424C"
                 android:fontFamily="@font/sans"
                android:layout_above="@id/date"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_14"
 
 
 
@@ -91,7 +91,7 @@
                 tools:text="لحظاتی پیش"
                 android:textColor="@color/lowblack"
                 android:fontFamily="@font/sans"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_14"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
 

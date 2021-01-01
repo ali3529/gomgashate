@@ -35,6 +35,7 @@ public class FragmentChoosecity extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_choosecity,container,false);
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
         return binding.getRoot();

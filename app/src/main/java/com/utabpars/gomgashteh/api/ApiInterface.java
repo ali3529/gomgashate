@@ -7,7 +7,9 @@ import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.chat.TicketResponseModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
+import com.utabpars.gomgashteh.model.BlockModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
+import com.utabpars.gomgashteh.model.ChatsModel;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
@@ -52,7 +54,7 @@ public interface ApiInterface {
 
     @POST("collections")
     @FormUrlEncoded
-    Single<CategoryModel> getcallection(@Field("category_id") String category_id);
+    Single<CategoryModel> getcallection(@Field("category_id") String category_id,@Field("type") String type);
 
     @POST("collectionFilter")
     @FormUrlEncoded
@@ -117,5 +119,18 @@ public interface ApiInterface {
     @POST("showTicket")
     @FormUrlEncoded
     Single<TicketResponseModel> getTicketInfo(@Field("ticket_id") String ticket_id,@Field("user_id") String user_id);
+
+    @POST("myTickets")
+    @FormUrlEncoded
+    Single<ChatsModel> getTickets(@Field("user_id") String user_id);
+
+    @POST("myAnnounce")
+    @FormUrlEncoded
+    Single<AnoncmentModel> getMyAnnouncment(@Field("user_id") String user_id);
+
+
+    @POST("blockUser")
+    @FormUrlEncoded
+    Single<BlockModel> blockUeer(@Field("blocker") String blocker,@Field("blocked") String blocked  );
 
 }

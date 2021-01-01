@@ -28,13 +28,14 @@ import com.utabpars.gomgashteh.chat.ChatStatusModel;
 import com.utabpars.gomgashteh.chat.FirstMassageBottomSheet;
 import com.utabpars.gomgashteh.chat.LoginAlertBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncmentDetailBinding;
+import com.utabpars.gomgashteh.interfaces.ChatCallBack;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.utils.NavigateHelper;
 import com.utabpars.gomgashteh.viewmodel.DetailViewModel;
 
 import java.util.List;
 
-public class FragmentAnnouncmentDetail extends Fragment {
+public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack {
     MutableLiveData<DetailModel.Data> dataMutableLiveData;
     ImageSliderAdaptor sliderAdaptor;
     SliderView sliderView;
@@ -46,6 +47,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
     boolean user_status;
     LoginAlertBottomSheet loginAlertBottomSheet;
     FirstMassageBottomSheet firstMassageBottomSheet;
+    boolean isMark=false;
 
 
     @Override
@@ -56,8 +58,8 @@ public class FragmentAnnouncmentDetail extends Fragment {
         chatAuthViewModel=new ViewModelProvider(getActivity()).get(ChatAuthViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("user_login", Context.MODE_PRIVATE);
         firstMassageBottomSheet=new FirstMassageBottomSheet();
-    // Inflate the layout for this fragment
-         loginAlertBottomSheet=new LoginAlertBottomSheet();
+        // Inflate the layout for this fragment
+        loginAlertBottomSheet=new LoginAlertBottomSheet();
         sliderView=binding.slider;
         return binding.getRoot();
     }
@@ -67,6 +69,7 @@ public class FragmentAnnouncmentDetail extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.setProgress(true);
         int id=getArguments().getInt("id");
+        Log.d("sdvdsvsdv", "onViewCreated: "+id);
         viewModel= new ViewModelProvider(this).get(DetailViewModel.class);
         viewModel.getDetail(id);
         viewModel.getView(binding);
@@ -74,9 +77,9 @@ public class FragmentAnnouncmentDetail extends Fragment {
         binding.setChatviewmodel(this);
         binding.setDid(id);
         dataMutableLiveData=viewModel.getMutableDetail();
-
-      user_id =sharedPreferences.getString("user_id","0000");
-      user_status=sharedPreferences.getBoolean("user_login",false);
+        chatAuthViewModel.ChatInterface(this::ChatListener);
+        user_id =sharedPreferences.getString("user_id","0000");
+        user_status=sharedPreferences.getBoolean("user_login",false);
 
 
 
@@ -89,41 +92,26 @@ public class FragmentAnnouncmentDetail extends Fragment {
                 anouns_id=String.valueOf(data.getId());
                 sender_id=data.getAnnouncer_id();
                 title=data.getTitle();
-            }
-        });
-
-        chatAuthViewModel.statusMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ChatStatusModel>() {
-            @Override
-            public void onChanged(ChatStatusModel chatStatusModel) {
-                if (chatStatusModel.getBlock_status().equals("no_block")){
-                   if (chatStatusModel.getStatus_ticket().equals("first")){
-                       Log.d("fdhgdfg", "onChanged: first "+anouns_id+"    "+sender_id+" "+user_id);
-                     firstMassageBottomSheet.getInfo(anouns_id,sender_id,user_id);
-
-
-                       firstMassageBottomSheet.show(getActivity().getSupportFragmentManager(),"massage");
-                   }else if (chatStatusModel.getStatus_ticket().equals("second")){
-                       Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getStatus_ticket());
-                       Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getTicket_id());
-                       Bundle bundle=new Bundle();
-                       bundle.putString("ticket_id",chatStatusModel.getTicket_id());
-                       bundle.putString("title",title);
-                       bundle.putString("recever_id",sender_id);
-                       bundle.putString("announcer_id",anouns_id);
-
-                           Navigation.findNavController(view).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentChatDetail,bundle);
-
-
-
-                   }
+                if (data.getAnnouncer_id().equals(user_id)){
+                    binding.chatBtn.setVisibility(View.GONE);
                 }else {
-                    Toast.makeText(getActivity(), "امکان چت با این آگهی برای شما وجود ندارد", Toast.LENGTH_SHORT).show();
+                    binding.chatBtn.setVisibility(View.VISIBLE);
                 }
 
+                if (data.getOtherCity()==null){
+                    binding.othercityLayout.setVisibility(View.GONE);
+                }else {
+                    for (String s:data.getOtherCity()) {
+                        binding.otherCitys.append(s+" , ");
+                    }
+                }
             }
         });
 
-        
+        bookmanrStatus();
+
+
+
         loginAlertBottomSheet.viewMutableLiveData.observe(getViewLifecycleOwner(), view1 -> {
             //go to login fragment
             // use live data as interface
@@ -141,8 +129,23 @@ public class FragmentAnnouncmentDetail extends Fragment {
         binding.chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkChatStatus();
+                    checkChatStatus();
+
+
             }
+        });
+    }
+
+    private void bookmanrStatus() {
+        binding.mark.setOnClickListener(v ->{
+            if (isMark){
+                binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
+                isMark=false;
+            }else {
+                binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
+                isMark=true;
+            }
+
         });
     }
 
@@ -152,25 +155,64 @@ public class FragmentAnnouncmentDetail extends Fragment {
         sliderView.setSliderAdapter(sliderAdaptor);
     }
 
-public void checkChatStatus(){
+    public void checkChatStatus(){
         if (user_status){
+            binding.chatProgress.setVisibility(View.VISIBLE);
             chatAuthViewModel.chatValidate(user_id,anouns_id);
 
 
 
         }else {
 
-          
+
             loginAlertBottomSheet.show(getActivity().getSupportFragmentManager(),"login");
 
         }
 
 
 
-}
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void ChatListener(ChatStatusModel chatStatusModel) {
+        try {
+            binding.chatProgress.setVisibility(View.GONE);
+            if (chatStatusModel.getBlock_status().equals("no_block")){
+                if (chatStatusModel.getStatus_ticket().equals("first")){
+                    Log.d("fdhgdfg", "onChanged: first "+anouns_id+"    "+sender_id+" "+user_id);
+                    firstMassageBottomSheet.getInfo(anouns_id,sender_id,user_id);
+
+
+                    firstMassageBottomSheet.show(getActivity().getSupportFragmentManager(),"massage");
+                }else if (chatStatusModel.getStatus_ticket().equals("second")){
+                    Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getStatus_ticket());
+                    Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getTicket_id());
+                    Bundle bundle=new Bundle();
+                    bundle.putString("ticket_id",chatStatusModel.getTicket_id());
+                    bundle.putString("title",title);
+                    bundle.putString("recever_id",sender_id);
+                    bundle.putString("announcer_id",anouns_id);
+
+                    Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentChatDetail,bundle);
+
+
+
+                }
+            }else {
+                Toast.makeText(getActivity(), "امکان چت با این آگهی برای شما وجود ندارد", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(getContext(), "لطفا صبر کنید", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void arrowBack(){
+        Navigation.findNavController(getView()).navigateUp();
     }
 }

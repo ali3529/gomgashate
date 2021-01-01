@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -60,7 +61,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
-
+   public int itemCoun;
     RecyclerView recyclerView,topFilterRecyclerview;
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
@@ -186,6 +187,30 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
             topFilterRecyclerview.setAdapter(topFilterAdaptor);
 
         });
+
+        //when go to last item item dont underbottom navigation
+        lastAnnouncmentAboveBtNavigation();
+
+
+    }
+
+    private void lastAnnouncmentAboveBtNavigation() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.gggg.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+                int itemcount=layoutManager.getItemCount();
+                int lastvisi=layoutManager.findLastVisibleItemPosition();
+                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
+                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
+                if (lastvisi==itemcount-1){
+                    Log.d("dsgfdgfdg", "last: ");
+                    binding.gggg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void setAnounsmentFilter() {
@@ -206,7 +231,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
                     adaptor.submitList(province);
 
-
                 });
 
 
@@ -215,7 +239,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                     @Override
                     public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
                         adaptor.submitList(detiles);
-
 
                     }
                 });
@@ -247,8 +270,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         topFilterRecyclerview=binding.topListRecyclerview;
         topFilterRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,LinearLayoutManager.HORIZONTAL));
         topFilterRecyclerview.setHasFixedSize(true);
-        topfilterViewModel=new ViewModelProvider(getActivity()).get(TopFilterViewModel.class);
-        topFilterViewModelPaging=new ViewModelProvider(getActivity()).get(TopFilterViewModelPaging.class);
+        topfilterViewModel=new ViewModelProvider(this).get(TopFilterViewModel.class);
+        topFilterViewModelPaging=new ViewModelProvider(this).get(TopFilterViewModelPaging.class);
         provinceViewModel=new ViewModelProvider(getActivity()).get(FilterAnouncmentByProvinceViewModel.class);
 
 

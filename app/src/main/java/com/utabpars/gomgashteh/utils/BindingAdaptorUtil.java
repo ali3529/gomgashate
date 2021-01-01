@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
@@ -27,6 +28,8 @@ import com.squareup.picasso.Picasso;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.ImageSliderAdaptor;
 import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
+
+import java.util.List;
 
 public class BindingAdaptorUtil {
 

@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -64,7 +65,7 @@ import static com.utabpars.gomgashteh.utils.Utils.ReadExternalRequestCode;
 public class FragmentAddAnnouncement extends Fragment  {
     FragmentAddAnnouncementBinding binding;
     EditText edTitle, edDescription;
-    Button save_announcement;
+    RelativeLayout save_announcement;
     SharedPreferences shPref,user_status;
     RadioGroup radioGroup;
     String type;
@@ -82,6 +83,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_add_announcement,container,false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
         user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
@@ -161,6 +163,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                 if (edTitle.getText().toString().length()!=0){
                     if (edDescription.getText().toString().length()!=0){
                         if (type!=null){
+                            binding.addProgress.setVisibility(View.VISIBLE);
                             sendAnnouncment(fetchdata());
                             Log.d("insetanosdijds", "onClick: goood");
 
@@ -203,7 +206,9 @@ public class FragmentAddAnnouncement extends Fragment  {
             @Override
             public void passUri(Uri uri, MultipartBody.Part partList) {
                 Toast.makeText(getContext(), "dsgsdgsdgsdg", Toast.LENGTH_SHORT).show();
-                Log.d("fdyheszhb", "passUri: asfasfsaf"+uriList);
+                Log.d("fdyheszhb", "Uri:"+partList.toString());
+                Log.d("fdyheszhb", "passUri:"+partList);
+                Log.d("fdyheszhb", "passUri_index:"+partList.body());
                 bottomSheetChooseImage.dismiss();
                 partLists.add(partList);
                 uriList.add(uri);
@@ -220,14 +225,19 @@ public class FragmentAddAnnouncement extends Fragment  {
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.find:
-                if (checked)
+                if (checked){
                     type="1";
-                Log.d("jhvhjvj", "onClickRadio: "+type);
+                    Log.d("jhvhjvj", "onClickRadio: "+type);
+                    binding.suprise.setVisibility(View.GONE);
+                }
+
                 break;
             case R.id.lost:
-                if (checked)
-                    type="2";
-                Log.d("jhvhjvj", "onClickRadio: "+type);
+                if (checked) {
+                    type = "2";
+                    Log.d("jhvhjvj", "onClickRadio: " + type);
+                    binding.suprise.setVisibility(View.VISIBLE);
+                }
                 break;
         }
     }
@@ -275,6 +285,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                         if (saveAnnouncementModel.getResponse().equals("1")){
                             Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
                             Log.d("insetanosdijds", "onSuccess: "+saveAnnouncementModel.getMasg());
+                            binding.addProgress.setVisibility(View.GONE);
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -287,18 +298,22 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     SharedPreferences.Editor editor1=sharedPreferences.edit();
                                     editor1.clear();
                                     editor1.apply();
+
                                 }
                             },2000);
                         }else {
                             Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
+                            binding.addProgress.setVisibility(View.GONE);
 
                         }
                     }
 
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "ارتباط با اینترنت قطع میباشد", Toast.LENGTH_SHORT).show();
                         Log.d("insetanosdijds", "onSuccess: "+e.toString());
+                        binding.addProgress.setVisibility(View.GONE);
+
                     }
                 }));
     }
@@ -314,6 +329,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",""));
         RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",""));
         RequestBody detail=RequestBody.create(MediaType.parse("detail"),edDescription.getText().toString());
+        RequestBody reward=RequestBody.create(MediaType.parse("reward"),binding.surpriseText.getText().toString());
 
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
         RequestBody other_city;
@@ -337,6 +353,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         addAnnouncement.put("other_city",other_city);
         addAnnouncement.put("detail",detail);
         addAnnouncement.put("announcer_id",announcer_id);
+        addAnnouncement.put("reward",reward);
 
 
 

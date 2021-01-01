@@ -40,7 +40,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_18"
+                android:textSize="@dimen/text_size_16"
                 android:onClick="@{() -> frag.ttt()}"/>
 
 

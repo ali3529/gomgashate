@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.interfaces.ChatCallBack;
 
 
 import java.util.List;
@@ -21,10 +22,14 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class ChatAuthViewModel extends ViewModel {
-
-   public MutableLiveData<ChatStatusModel> statusMutableLiveData=new MutableLiveData<>();
+    ChatCallBack chatCallBack;
    public MutableLiveData<StatusModel> firstChatStatus=new MutableLiveData<>();
     public ChatAuthViewModel() {
+
+    }
+
+    public void ChatInterface(ChatCallBack chatCallBack){
+        this.chatCallBack=chatCallBack;
     }
 
     public void chatValidate( String user_id,String announcement_id){
@@ -36,7 +41,8 @@ public class ChatAuthViewModel extends ViewModel {
         .subscribeWith(new DisposableSingleObserver<ChatStatusModel>() {
             @Override
             public void onSuccess(@NonNull ChatStatusModel chatStatusModel) {
-                statusMutableLiveData.postValue(chatStatusModel);
+
+                chatCallBack.ChatListener(chatStatusModel);
                 Log.d("dsfsdf", "chatValidate: chat"+chatStatusModel.getMassage());
             }
 
@@ -66,5 +72,11 @@ public class ChatAuthViewModel extends ViewModel {
                 Log.d("dsfsdfsdf", "onError: "+e.toString());
             }
         }));
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+
     }
 }

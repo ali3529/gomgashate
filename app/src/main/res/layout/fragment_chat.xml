@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentChat">
-    <TextView
-        android:id="@+id/chat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="chat"
-        android:layout_centerInParent="true"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_18"
-        android:visibility="gone"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="لیست پیام ها"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color_black"
+            android:textSize="22dp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+
+<View
+    android:id="@+id/hr"
+    android:layout_width="match_parent"
+    android:layout_height="0.8dp"
+    android:background="@color/hr_color"
+    android:layout_below="@id/toolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/hr"
+        android:layout_above="@id/gggg"/>
+
+
+    <View
+        android:id="@+id/gggg"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+
+        />
+
 <RelativeLayout
     android:id="@+id/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone">
+    android:visibility="gone"
+    android:gravity="center">
 
 
     <TextView
@@ -28,8 +59,9 @@
         android:layout_height="wrap_content"
         android:text="برای مشاهده چت ها وارد حساب کاربری خود شوید."
         android:layout_centerInParent="true"
+        android:textAlignment="center"
         android:textStyle="bold"
-        android:textSize="@dimen/text_size_18"/>
+        android:textSize="@dimen/text_size_16"/>
     <Button
         android:id="@+id/chat_login"
         android:layout_width="wrap_content"

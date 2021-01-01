@@ -97,6 +97,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
 
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         Integer key = true? params.key + 1 : null;
+      //  Integer key = (params.key > 1) ? params.key + 1 : null;
         compositeDisposable.add(apiInterface.getAnnouncement(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -104,10 +105,14 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
                         if (anoncmentModel.getResponse()!=null) {
-                            if (anoncmentModel.getResponse().equals("1") && anoncmentModel.getData()!=null) {
-                                lastPage=anoncmentModel.getLast_page();
-                                callback.onResult(anoncmentModel.getData(), key);
-                                binding.setProgressbelow(false);
+                            if (anoncmentModel.getResponse().equals("1") && anoncmentModel.getNext_page_url()!=null) {
+
+                                    lastPage=anoncmentModel.getLast_page();
+                                    callback.onResult(anoncmentModel.getData(), key);
+                                    binding.setProgressbelow(false);
+                                    Log.d("pagingcheck", "onSuccess: after");
+
+
                             }
                         }
                     }

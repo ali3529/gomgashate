@@ -91,6 +91,8 @@ public String sender_id;
             public void onClick(View view) {
              if (binding.masage.getText().toString().length()!=0){
                  viewModel.sendFirstMassage(partLists,fetchData());
+                 binding.firstMassageProgress.setVisibility(View.VISIBLE);
+                 binding.textinputlayout.setVisibility(View.GONE);
                  Log.d("iufdsbfdhs", "onClick: onsss");
              }else {
                  Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
@@ -114,7 +116,8 @@ public String sender_id;
             @Override
             public void onChanged(StatusModel rmModel) {
                 Toast.makeText(getContext(), rmModel.getMassage()+rmModel.getStatus(), Toast.LENGTH_SHORT).show();
-
+                binding.firstMassageProgress.setVisibility(View.GONE);
+                binding.textinputlayout.setVisibility(View.VISIBLE);
                 closeBottensheet.setValue(rmModel.getStatus());
             }
         });

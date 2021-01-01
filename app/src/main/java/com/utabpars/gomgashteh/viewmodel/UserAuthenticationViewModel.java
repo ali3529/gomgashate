@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.interfaces.LoginRespondeCallBack;
 import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 
@@ -18,6 +19,8 @@ import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class UserAuthenticationViewModel extends ViewModel {
+    LoginRespondeCallBack loginRespondeCallBack;
+
     public MutableLiveData<RmModel> phoneNumberResponseLiveData=new MutableLiveData<>();
     public MutableLiveData<RegisterModel> otpResponseLiveData=new MutableLiveData<>();
     public MutableLiveData<RegisterModel> registerUserLiveData=new MutableLiveData<>();
@@ -26,6 +29,10 @@ public class UserAuthenticationViewModel extends ViewModel {
     public MutableLiveData<String> error=new MutableLiveData<>();
 
     public MutableLiveData<String> timerOtpFinish=new MutableLiveData<>();
+
+    public void phoneNumberInterface(LoginRespondeCallBack loginRespondeCallBack) {
+        this.loginRespondeCallBack = loginRespondeCallBack;
+    }
 
     public void userAuthentication(String phoneNum){
         ApiInterface apiInterface= ApiClient.getApiClient();
@@ -37,7 +44,7 @@ public class UserAuthenticationViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull RmModel rmModel) {
 
-                        phoneNumberResponseLiveData.postValue(rmModel);
+                     loginRespondeCallBack.otpCallback(rmModel);
 
 
                     }
@@ -108,3 +115,4 @@ public class UserAuthenticationViewModel extends ViewModel {
                 }));
     }
 }
+

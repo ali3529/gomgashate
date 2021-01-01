@@ -20,10 +20,11 @@ import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentLoginBinding;
+import com.utabpars.gomgashteh.interfaces.LoginRespondeCallBack;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.viewmodel.UserAuthenticationViewModel;
 
-public class FragmentLogin extends Fragment {
+public class FragmentLogin extends Fragment implements LoginRespondeCallBack {
     FragmentLoginBinding binding;
     UserAuthenticationViewModel viewModel;
 
@@ -50,31 +51,7 @@ public class FragmentLogin extends Fragment {
 //                    binding.inputPhonenumber.getApplicationWindowToken(),
 //                    InputMethodManager.SHOW_FORCED, 0);
 
-
-
-        viewModel.phoneNumberResponseLiveData.observe(getViewLifecycleOwner(), new Observer<RmModel>() {
-            @Override
-            public void onChanged(RmModel rmModel) {
-                if (rmModel.getResponse().equals("1")){
-                    Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
-                    binding.setProgress(false);
-                    Bundle bundle=new Bundle();
-                    bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
-                    bundle.putBoolean("is_validate",true);
-                    Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
-                }else if (rmModel.getResponse().equals("0")){
-                    Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
-                    binding.setProgress(false);
-                    Bundle bundle=new Bundle();
-                    bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
-                    bundle.putBoolean("is_validate",false);
-                    Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
-                }
-
-
-
-            }
-        });
+viewModel.phoneNumberInterface(this::otpCallback);
 
         viewModel.error.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -98,5 +75,24 @@ public class FragmentLogin extends Fragment {
     public void backStack(){
         Navigation.findNavController(getView()).popBackStack();
         Toast.makeText(getContext(), "sdfgestggzsd", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void otpCallback(RmModel rmModel) {
+        if (rmModel.getResponse().equals("1")){
+            Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+            binding.setProgress(false);
+            Bundle bundle=new Bundle();
+            bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
+            bundle.putBoolean("is_validate",true);
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+        }else if (rmModel.getResponse().equals("0")){
+            Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+            binding.setProgress(false);
+            Bundle bundle=new Bundle();
+            bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
+            bundle.putBoolean("is_validate",false);
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+        }
     }
 }

@@ -37,7 +37,7 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
 
         @Override
         public boolean areContentsTheSame(@NonNull AnoncmentModel.Detile oldItem, @NonNull AnoncmentModel.Detile newItem) {
-            return oldItem==newItem;
+            return oldItem.equals(newItem);
         }
     };
 

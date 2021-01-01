@@ -8,12 +8,12 @@
         app:showAsAction="always"/>
 
     <item android:id="@+id/chat"
-        android:title="چت"
+        android:title="پیام"
         android:icon="@drawable/ic_chat"/>
 
     <item android:id="@+id/add"
         android:title="ثبت اگهی"
-        android:icon="@drawable/ic_add"/>
+        android:icon="@drawable/ic_add" />
 
     <item android:id="@+id/list"
         android:title="دسته ها"

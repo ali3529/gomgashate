@@ -20,7 +20,7 @@
     android:padding="12dp"
     android:layout_margin="6dp"
     android:layout_alignParentLeft="true">
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/massage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
