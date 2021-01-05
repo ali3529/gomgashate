@@ -62,6 +62,17 @@ public class DetailModel {
         @SerializedName("other_city")
         private List<String> otherCity;
 
+        @SerializedName("is_mark")
+        private boolean isMark;
+
+        public boolean isMark() {
+            return isMark;
+        }
+
+        public void setMark(boolean mark) {
+            isMark = mark;
+        }
+
         public List<String> getOtherCity() {
             return otherCity;
         }

@@ -105,6 +105,13 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+        binding.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_perofile_to_fragmentMark);
+            }
+        });
+
     }
 
     @Override

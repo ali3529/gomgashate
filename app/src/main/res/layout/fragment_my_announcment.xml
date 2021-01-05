@@ -35,11 +35,20 @@
         android:background="@color/hr_color"
         android:layout_below="@id/toolbar"/>
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:layout_below="@id/hr"
+        />
+
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recyclerview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/hr"
+    android:layout_below="@id/progressbar"
     android:layout_above="@id/gggg"/>
 
     <View

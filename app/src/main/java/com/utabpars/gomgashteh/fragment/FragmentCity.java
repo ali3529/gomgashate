@@ -90,6 +90,17 @@ public class FragmentCity extends Fragment {
                                  editor1.putString("city_name_announcment",province_name);
                                  editor1.putString("province_id",province_id);
                                  editor1.apply();
+                             }else if (navigation.equals("city_edit")){
+
+                                 Log.d("sdvsdvdsvdv", "getCategoryId: editttt");
+                                 SharedPreferences preferences=getActivity().getSharedPreferences("editcity",Context.MODE_PRIVATE);
+                                 SharedPreferences.Editor editor_city=preferences.edit();
+                                 editor_city.putString("province_id",province_id);
+                                 editor_city.putString("province_name",province_name);
+                                 editor_city.putString("city_id",String.valueOf(id));
+                                 editor_city.putString("city_name",categoryModel.getListData().get(position).getCategoryName());
+                                 editor_city.apply();
+                                 Navigation.findNavController(view).popBackStack(R.id.editAnnouncementFragment,false);
                              }
 
 

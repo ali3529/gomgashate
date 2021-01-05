@@ -19,7 +19,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.ChatsAdaptor;
@@ -36,6 +38,7 @@ public class FragmentChat extends Fragment {
     String user_id;
     ChatsAdaptor chatsAdaptor;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class FragmentChat extends Fragment {
         recyclerView=binding.chatRecyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+        progressBar=binding.progressbar;
     }
 
     @Override
@@ -67,7 +71,8 @@ public class FragmentChat extends Fragment {
         }else {
             binding.chatRecyclerview.setVisibility(View.VISIBLE);
             chatsViewModel.getTickets(user_id);
-
+            progressBar.setVisibility(View.VISIBLE);
+            Log.d("bdfbfdbdf", "onChanged: logined "+user_id);
         }
 
 
@@ -82,14 +87,17 @@ public class FragmentChat extends Fragment {
         chatsViewModel.chatsModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ChatsModel>() {
             @Override
             public void onChanged(ChatsModel chatsModel) {
-                Log.d("sdfsdf", "onChanged: ");
+                Log.d("bdfbfdbdf", "onChanged: ");
+                progressBar.setVisibility(View.GONE);
                 chatsAdaptor=new ChatsAdaptor(chatsModel.getTicketList(),chatOnclick);
                 recyclerView.setAdapter(chatsAdaptor);
+
               
             }
         });
 
         lastAnnouncmentAboveBtNavigation();
+
 
     }
 
@@ -114,13 +122,15 @@ public class FragmentChat extends Fragment {
 
     ChatOnclick chatOnclick=new ChatOnclick() {
         @Override
-        public void onChatItemClicked(View view, String ticketId,String title,String announcer_id,String announcement_id) {
+        public void onChatItemClicked(View view, String ticketId,String title,String announcer_id,String announcement_id,boolean block) {
             Bundle bundle=new Bundle();
             bundle.putString("ticket_id",ticketId);
             bundle.putString("user_id",user_id);
             bundle.putString("title",title);
             bundle.putString("recever_id",announcer_id);
             bundle.putString("announcer_id",announcement_id);
+            bundle.putBoolean("block",block);
+            Log.d("ticketid", "onChatItemClicked: ticketid"+ticketId);
             Navigation.findNavController(view).navigate(R.id.action_chat_to_fragmentChatDetail,bundle);
         }
     };

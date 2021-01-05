@@ -41,7 +41,8 @@ public class ChatsAdaptor extends RecyclerView.Adapter<ChatsAdaptor.ChatViewHold
                     chats.get(position).getTicket_id(),
                     chats.get(position).getAnnouncement_title(),
                     chats.get(position).getUser_id(),
-                    chats.get(position).getAnnouncement_id());
+                    chats.get(position).getAnnouncement_id(),
+                    chats.get(position).isBlock());
         });
 
         Picasso.get().load(chats.get(position).getPicture()).into(holder.binding.image);

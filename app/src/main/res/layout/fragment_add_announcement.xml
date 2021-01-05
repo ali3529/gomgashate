@@ -443,12 +443,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/text_suprise"
+                        android:hint="تومان"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         >
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/surprise_text"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:focusable="false"
+                            android:inputType="number"
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -465,8 +469,36 @@
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:background="@color/toolbar_background"
-
             >
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@id/saveAnnounce">
+
+
+            <TextView
+                android:id="@+id/link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ruls"
+                android:textAlignment="center"
+                android:padding="4dp"
+               android:layout_centerInParent="true"
+                android:textSize="@dimen/text_size_16"
+                android:layout_toLeftOf="@id/checkruls"
+                android:onClick="@{() -> Frag.goToRuls()}"/>
+            <CheckBox
+                android:id="@+id/checkruls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:padding="4dp"
+                />
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/saveAnnounce"
                 android:layout_width="180dp"
@@ -474,7 +506,8 @@
                 android:background="@color/colorPrimary"
                 android:layout_alignParentLeft="true"
                 android:gravity="center"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                >
 
 
             <TextView
@@ -489,6 +522,7 @@
                 android:layout_margin="6dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:enabled="false"
 
            />
 
@@ -502,6 +536,33 @@
                     app:lottie_rawRes="@raw/progress"
                     android:visibility="gone"
                     android:background="@color/white"
+
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/desablsave"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:background="#9E80B1"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:layout_margin="8dp"
+                >
+
+
+                <TextView
+
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:text="ثبت آگهی"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_16"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:enabled="false"
 
                     />
             </RelativeLayout>

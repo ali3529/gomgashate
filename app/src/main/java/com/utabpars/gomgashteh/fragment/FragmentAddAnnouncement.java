@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -192,6 +194,26 @@ public class FragmentAddAnnouncement extends Fragment  {
                 }
             }
         });
+        RelativeLayout layout = binding.saveAnnounce;
+        binding.checkruls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.checkruls.isChecked()){
+                    layout.setVisibility(View.VISIBLE);
+                    binding.desablsave.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "else"+binding.checkruls.isChecked(), Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getContext(), "if"+binding.checkruls.isChecked(), Toast.LENGTH_SHORT).show();
+                    layout.setVisibility(View.GONE);
+                    binding.desablsave.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+        binding.desablsave.setOnClickListener(t ->{
+            Toast.makeText(getContext(), "لطفا قوانین را مطالعه و تایید کنید", Toast.LENGTH_SHORT).show();
+        });
+
 
 
     }
@@ -394,6 +416,9 @@ public class FragmentAddAnnouncement extends Fragment  {
     public void getRegister(){
         Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentLogin);
     }
-
+public void goToRuls(){
+      //  Navigation.findNavController(getView()).navigate(R.layout);
+    Toast.makeText(getContext(), "ruls", Toast.LENGTH_SHORT).show();
+}
 }
 

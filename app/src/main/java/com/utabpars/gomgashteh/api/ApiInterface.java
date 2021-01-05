@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.utabpars.gomgashteh.chat.ChatStatusModel;
 import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.chat.TicketResponseModel;
+import com.utabpars.gomgashteh.managerAnnouncement.ManageModel;
+import com.utabpars.gomgashteh.markannouncment.MarkModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.BlockModel;
@@ -43,7 +45,7 @@ public interface ApiInterface {
 
     @POST("detailAnnouncement")
     @FormUrlEncoded
-    Single<DetailModel> getDetail(@Field("id") int id);
+    Single<DetailModel> getDetail(@Field("id") int id,@Field("user_id") String user_id);
 
     @POST("splash")
     Single<AppVersionModel> update();
@@ -133,4 +135,24 @@ public interface ApiInterface {
     @FormUrlEncoded
     Single<BlockModel> blockUeer(@Field("blocker") String blocker,@Field("blocked") String blocked  );
 
+
+    @POST("mark")
+    @FormUrlEncoded
+    Single<MarkModel> markAnnouncement(@Field("user_id") String user_id,@Field("announce_id") String announce_id);
+
+
+    @POST("myMark")
+    @FormUrlEncoded
+    Single<AnoncmentModel> mymarkAnnouncment(@Field("user_id") String user_id);
+
+
+    @POST("tabs")
+    @FormUrlEncoded
+    Single<ManageModel> getTabs(@Field("announce_id") String announce_id);
+
+    @POST("editAnnounce")
+    @Multipart
+    Single<SaveAnnouncementModel> edittAnnouncment(@PartMap Map<String,RequestBody> requestBody,
+                                                    @Part List<MultipartBody.Part> file);
 }
+

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -62,10 +63,16 @@ public class FragmentChatDetail extends Fragment {
     List<TicketResponseModel.Massage> TicketResponseModels =new ArrayList<>();
     SharedPreferences sharedPreferences;
     String user_id,ticket_id,title,recever_id,anouncer_id;
+    MutableLiveData<Boolean> block=new MutableLiveData<>();
     TicketViewModel viewModel;
     BottomSheetChooseImage bottomSheetChooseImage=new BottomSheetChooseImage();
     ChatAuthViewModel chatAuthViewModel;
     Toolbar toolbar;
+    boolean isBlock=false;
+    MutableLiveData<BlockModel> blockLiveData=new MutableLiveData<>();
+
+    boolean test1;
+    boolean test2;
 
 
     @Override
@@ -88,6 +95,13 @@ public class FragmentChatDetail extends Fragment {
         title=getArguments().getString("title");
         recever_id=getArguments().getString("recever_id");
         anouncer_id=getArguments().getString("announcer_id");
+        try {
+         //    block=getArguments().getBoolean("block");
+
+        }catch (Exception e){
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
 
         binding.title.setText(title);
         viewModel.getTicket(ticket_id,user_id);
@@ -96,13 +110,10 @@ public class FragmentChatDetail extends Fragment {
             public void onChanged(TicketResponseModel ticketResponseModel) {
                 massageAdaptor.getMassageList(ticketResponseModel.getMassages());
                 recyclerView.setAdapter(massageAdaptor);
-                if (ticketResponseModel.status.equals("0")){
-                    binding.setMassagelayoutvisibility(false);
-                    binding.setSecendmassagevisibility(true);
-                }else {
-                    binding.setMassagelayoutvisibility(true);
-                    binding.setSecendmassagevisibility(false);
-                }
+                block.setValue(ticketResponseModel.isBlock());
+                setBlockAndmassageStatus(ticketResponseModel);
+
+
                 scrollToBottom(recyclerView);
             }
         });
@@ -157,7 +168,46 @@ public class FragmentChatDetail extends Fragment {
         });
 
         refresh();
-  }
+    }
+
+    private void setBlockAndmassageStatus(TicketResponseModel ticketResponseModel) {
+        if (ticketResponseModel.isBlockFromAnnouncer()){
+            binding.setMassagelayoutvisibility(false);
+            binding.setSecendmassagevisibility(true);
+            binding.setMassage("کاربر گرامی شما مسدود شداید و امکان ارسال پیام ندارید ");
+        }else {
+            if (ticketResponseModel.status.equals("0")){
+                test1=false;
+                test2=true;
+
+                binding.setMassage("کاربر گرامی شما پیام خود را قبلا ارسال کردید لطفا منتظر پاسخ آگهی دهنده باشید");
+            }else {
+
+                test1=true;
+                test2=false;
+            }
+            //always true
+            if (ticketResponseModel.isBlock()){
+                test1=false;
+                test2=true;
+                binding.setMassage("کاربر گرامی شما این آگهی را مسدود کرده اید و امکان ارسال پیام ندارید  ");
+
+            }else {
+                if (ticketResponseModel.status.equals("0")){
+                    test1=false;
+                    test2=true;
+                }else {
+                    test1=true;
+                    test2=false;
+                }
+
+
+
+            }
+            binding.setMassagelayoutvisibility(test1);
+            binding.setSecendmassagevisibility(test2);
+        }
+    }
 
 
     private void initViews() {
@@ -236,56 +286,95 @@ public class FragmentChatDetail extends Fragment {
 
         return massageData;
     }
-public void refresh(){
-    new CountDownTimer(30000, 1000) {
-        @Override
-        public void onTick(long l) {
+    public void refresh(){
+        new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long l) {
 
-        }
+            }
 
-        @Override
-        public void onFinish() {
-            Log.d("fsdfsdfdsf", "onFinish: ok");
-            viewModel.getTicket(ticket_id,user_id);
-            scrollToBottom(recyclerView);
-            refresh();
-        }
-    }.start();
-}
+            @Override
+            public void onFinish() {
+                Log.d("fsdfsdfdsf", "onFinish: ok");
+                viewModel.getTicket(ticket_id,user_id);
+                scrollToBottom(recyclerView);
+                refresh();
+            }
+        }.start();
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.chat_menu,menu);
+        block.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean){
+                    menu.getItem(0).setTitle("ازاد");
+                    Log.d("vbfbfdbfg", "onOptionsItemSelected:  inf "+block);
+
+                }else {
+                    menu.getItem(0).setTitle(" مسدود");
+                    Log.d("vbfbfdbfg", "onOptionsItemSelected:  inf"+block);
+                }
+            }
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        blockLiveData.observe(getViewLifecycleOwner(), new Observer<BlockModel>() {
+            @Override
+            public void onChanged(BlockModel blockModel) {
+                if (blockModel.isBlock()){
+                    item.setTitle("ازاد");
+                    binding.setMassagelayoutvisibility(false);
+                    binding.setSecendmassagevisibility(true);
+                    binding.setMassage("کاربر گرامی شما این آگهی را مسدود کرده اید و امکان ارسال پیام ندارید  ");
+                    Log.d("vbfbfdb", "onOptionsItemSelected: "+isBlock);
+
+                }else {
+                    item.setTitle(" مسدود");
+                    binding.setMassagelayoutvisibility(true);
+                    binding.setSecendmassagevisibility(false);
+                    Log.d("vbfbfdb", "onOptionsItemSelected: "+isBlock);
+
+
+                }
+            }
+        });
         switch (item.getItemId()){
             case R.id.block:
 
                 blockUser(user_id,recever_id);
+
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+
     public void blockUser(String blocker,String blocked){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.blockUeer(blocker,blocked)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<BlockModel>() {
-            @Override
-            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull BlockModel blockModel) {
-                Toast.makeText(getContext(), blockModel.getMassage(), Toast.LENGTH_SHORT).show();
-            }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<BlockModel>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull BlockModel blockModel) {
+                        Toast.makeText(getContext(), blockModel.getMassage(), Toast.LENGTH_SHORT).show();
+                        Log.d("vbfbfdb", "onSuccess: block"+blockModel.isBlock());
+                        blockLiveData.setValue(blockModel);
+                    }
 
-            @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
 
-            }
-        }));
+                    }
+                }));
     }
 }

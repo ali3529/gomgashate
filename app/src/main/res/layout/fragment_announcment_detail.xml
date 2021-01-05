@@ -21,6 +21,9 @@
             name="did"
             type="Integer" />
         <variable
+            name="user"
+            type="String" />
+        <variable
             name="chatviewmodel"
             type="com.utabpars.gomgashteh.fragment.FragmentAnnouncmentDetail" />
 
@@ -38,7 +41,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2CB6B4B4">
+        android:background="@color/transparent"
+        >
+<!--        android:background="#2CB6B4B4">-->
      <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="match_parent"
@@ -515,7 +520,7 @@
        android:layout_height="wrap_content"
       android:text="tryagain"
       android:layout_centerInParent="true"
-       android:onClick="@{() -> viemodel.test(did)}"/>
+       android:onClick="@{() -> viemodel.test(did,user)}"/>
 
        </RelativeLayout>
 

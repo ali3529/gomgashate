@@ -41,6 +41,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+import static com.utabpars.gomgashteh.utils.NavigateHelper.navigate;
+
 public class FragmentOtherCity extends Fragment {
     FragmentOtherCityBinding binding;
     RecyclerView recyclerView;
@@ -49,6 +51,7 @@ public class FragmentOtherCity extends Fragment {
     static SharedPreferences.Editor editor;
     static List<String> otherCityList =new ArrayList<>();
     Gson gson;
+    String navigate;
 
 
 
@@ -68,7 +71,16 @@ public class FragmentOtherCity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         String province_id=getArguments().getString("province");
         String province_name=getArguments().getString("province_name");
-        String navigate=getArguments().getString("navigate");
+         navigate=getArguments().getString("navigate");
+        if (navigate.equals("otherCityEdit")){
+            sharedPreferences=getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
+            editor=sharedPreferences.edit();
+            Log.d("fhfdgdfg", "onViewCreated: edit");
+        }else {
+            sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+            editor=sharedPreferences.edit();
+            Log.d("fhfdgdfg", "onViewCreated: other");
+        }
 
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
@@ -118,8 +130,8 @@ public class FragmentOtherCity extends Fragment {
         recyclerView=binding.recyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
-        editor=sharedPreferences.edit();
+
+
 
     }
 
@@ -173,7 +185,15 @@ public class FragmentOtherCity extends Fragment {
 
     public List<String> getSHaredList(){
         Gson gson=new Gson();
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("other_city",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences;
+        if (navigate.equals("otherCityEdit")){
+            sharedPreferences=getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
+            Log.d("fhfdgdfg", "onViewCreated: edit ee");
+        }else {
+            sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+            Log.d("fhfdgdfg", "onViewCreated: other ee");
+        }
+
         String s=sharedPreferences.getString("otherCityList","w");
         Type type=new TypeToken<List<String>>(){
 

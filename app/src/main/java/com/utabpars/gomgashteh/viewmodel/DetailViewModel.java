@@ -18,13 +18,14 @@ import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DetailViewModel extends ViewModel {
-    private MutableLiveData<DetailModel.Data> dataMutableLiveData=new MutableLiveData<>();
-    CompositeDisposable compositeDisposable;
+    public MutableLiveData<DetailModel.Data> dataMutableLiveData=new MutableLiveData<>();
+
     FragmentAnnouncmentDetailBinding binding;
-    public void getDetail(int id){
+    public void getDetail(int id,String user_id){
+        Log.d("dsfdsfds33f", "getDetail: "+user_id);
         ApiInterface apiInterface= ApiClient.getApiClient();
-         compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getDetail(id)
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        compositeDisposable.add(apiInterface.getDetail(id,user_id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableSingleObserver<DetailModel>() {
@@ -33,13 +34,14 @@ public class DetailViewModel extends ViewModel {
                 if (detailModel.getResponse()!=null){
                     if (detailModel.getResponse().equals("1")){
                         dataMutableLiveData.setValue(detailModel.getData());
+
                     }
                 }
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.d("dfsd", "onError: "+e);
+                Log.d("dfsdre", "onError: "+e);
                 binding.setLayoutvisibility(true);
                 binding.setProgress(false);
             }
@@ -54,8 +56,8 @@ public class DetailViewModel extends ViewModel {
         this.binding=binding;
    }
 
-public void test(int id){
-      getDetail(id);
+public void test(int id,String user_id){
+      getDetail(id,user_id);
       binding.setLayoutvisibility(false);
       binding.setProgress(true);
 }

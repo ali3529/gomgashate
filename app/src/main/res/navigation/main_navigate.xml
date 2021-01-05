@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/announcement">
+    app:startDestination="@id/fragmentSplash">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -25,7 +25,7 @@
         android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncement"
         android:label="fragment_announcement"
         tools:layout="@layout/fragment_announcement"
-        app:startDestination="@id/action_announcement_to_fragmentCity">
+        app:startDestination="@id/action_announcement_to_fragmentChoosecity">
         <action
             android:id="@+id/action_announcement_to_fragmentAnnouncmentDetail2"
             app:destination="@id/fragmentAnnouncmentDetail"
@@ -134,6 +134,9 @@
         <action
             android:id="@+id/action_perofile_to_fragmentMyAnnouncment2"
             app:destination="@id/fragmentMyAnnouncment2" />
+        <action
+            android:id="@+id/action_perofile_to_fragmentMark"
+            app:destination="@id/fragmentMark" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -294,5 +297,38 @@
         <action
             android:id="@+id/action_fragmentMyAnnouncment2_to_fragmentAnnouncmentDetail"
             app:destination="@id/fragmentAnnouncmentDetail" />
+        <action
+            android:id="@+id/action_fragmentMyAnnouncment2_to_fragmentOptions"
+            app:destination="@id/fragmentOptions" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMark"
+        android:name="com.utabpars.gomgashteh.markannouncment.FragmentMark"
+        android:label="fragment_mark"
+        tools:layout="@layout/fragment_mark" >
+        <action
+            android:id="@+id/action_fragmentMark_to_fragmentAnnouncmentDetail"
+            app:destination="@id/fragmentAnnouncmentDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOptions"
+        android:name="com.utabpars.gomgashteh.managerAnnouncement.FragmentOptions"
+        android:label="FragmentOptions" >
+        <action
+            android:id="@+id/action_fragmentOptions_to_editAnnouncementFragment"
+            app:destination="@id/editAnnouncementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAnnouncementFragment"
+        android:name="com.utabpars.gomgashteh.editAnnouncment.EditAnnouncementFragment"
+        android:label="EditAnnouncementFragment" >
+        <action
+            android:id="@+id/action_editAnnouncementFragment_to_fragmentCity"
+            app:destination="@id/fragmentCity" />
+        <action
+            android:id="@+id/action_editAnnouncementFragment_to_fragmentAnnouncmentDetail"
+            app:destination="@id/fragmentAnnouncmentDetail"
+            app:popUpTo="@id/fragmentAnnouncmentDetail"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

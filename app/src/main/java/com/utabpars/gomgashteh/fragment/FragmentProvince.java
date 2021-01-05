@@ -78,6 +78,18 @@ public class FragmentProvince extends Fragment {
                                 bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
                                 bundle.putString("navigate", "otherCity");
                                 Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
+                            }else if (navigate.equals("city_edit")){
+                                Bundle bundle = new Bundle();
+                                bundle.putString("province", String.valueOf(id));
+                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("navigate", "city_edit");
+                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
+                            }else if (navigate.equals("otherCityEdit")){
+                                Bundle bundle = new Bundle();
+                                bundle.putString("province", String.valueOf(id));
+                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("navigate", "otherCityEdit");
+                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
                             }
                         }catch (Exception e){
 

@@ -40,13 +40,13 @@ public class ChatsModel {
         @SerializedName("pictures")
         private String picture;
         @SerializedName("block")
-        private String block;
+        private boolean block;
 
-        public String getBlock() {
+        public boolean isBlock() {
             return block;
         }
 
-        public void setBlock(String block) {
+        public void setBlock(boolean block) {
             this.block = block;
         }
 

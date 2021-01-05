@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -29,6 +30,8 @@ import com.utabpars.gomgashteh.chat.FirstMassageBottomSheet;
 import com.utabpars.gomgashteh.chat.LoginAlertBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncmentDetailBinding;
 import com.utabpars.gomgashteh.interfaces.ChatCallBack;
+import com.utabpars.gomgashteh.markannouncment.MarkModel;
+import com.utabpars.gomgashteh.markannouncment.MarkViewModel;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.utils.NavigateHelper;
 import com.utabpars.gomgashteh.viewmodel.DetailViewModel;
@@ -47,7 +50,9 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
     boolean user_status;
     LoginAlertBottomSheet loginAlertBottomSheet;
     FirstMassageBottomSheet firstMassageBottomSheet;
-    boolean isMark=false;
+
+    MarkViewModel markViewModel;
+    String edit_status;
 
 
     @Override
@@ -58,9 +63,11 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
         chatAuthViewModel=new ViewModelProvider(getActivity()).get(ChatAuthViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("user_login", Context.MODE_PRIVATE);
         firstMassageBottomSheet=new FirstMassageBottomSheet();
+
         // Inflate the layout for this fragment
         loginAlertBottomSheet=new LoginAlertBottomSheet();
         sliderView=binding.slider;
+        markViewModel=new ViewModelProvider(this).get(MarkViewModel.class);
         return binding.getRoot();
     }
 
@@ -69,23 +76,32 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
         super.onViewCreated(view, savedInstanceState);
         binding.setProgress(true);
         int id=getArguments().getInt("id");
-        Log.d("sdvdsvsdv", "onViewCreated: "+id);
+        try {
+            edit_status=getArguments().getString("edit");
+        }catch (Exception e){
+            edit_status="a";
+        }
+        user_id =sharedPreferences.getString("user_id","000");
+        user_status=sharedPreferences.getBoolean("user_login",false);
         viewModel= new ViewModelProvider(this).get(DetailViewModel.class);
-        viewModel.getDetail(id);
+
+        viewModel.getDetail(id,user_id);
         viewModel.getView(binding);
         binding.setViemodel(viewModel);
         binding.setChatviewmodel(this);
         binding.setDid(id);
+        binding.setUser(user_id);
         dataMutableLiveData=viewModel.getMutableDetail();
         chatAuthViewModel.ChatInterface(this::ChatListener);
-        user_id =sharedPreferences.getString("user_id","0000");
-        user_status=sharedPreferences.getBoolean("user_login",false);
+
+
 
 
 
         dataMutableLiveData.observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
             @Override
             public void onChanged(DetailModel.Data data) {
+                Log.d("sdfgsdgsdgsd", "onChanged: if"+data.isMark());
                 setSlider(data.getPictures());
                 binding.setProgress(false);
                 binding.setDetails(data);
@@ -105,6 +121,22 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                         binding.otherCitys.append(s+" , ");
                     }
                 }
+
+
+                if (data.isMark()){
+                    binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
+                    Log.d("sdfgsdgsdgsd", "onChanged: if"+data.isMark());
+
+
+                }else {
+
+                    binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
+                    Log.d("sdfgsdgsdgsd", "onChanged: else "+data.isMark());
+
+
+                }
+
+
             }
         });
 
@@ -134,17 +166,56 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
             }
         });
+        markViewModel.markModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<MarkModel>() {
+            @Override
+            public void onChanged(MarkModel markModel) {
+                //todo set ismark
+                Toast.makeText(getContext(), markModel.getMessage(), Toast.LENGTH_SHORT).show();
+                if (markModel.isMark()){
+
+                    binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
+
+                }else {
+                    binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
+
+
+                }
+            }
+        });
+
+//        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
+//
+//            @Override
+//            public void handleOnBackPressed() {
+//
+//                //   Navigation.findNavController(getView()).navigate(R.id.action_chat_to_announcement);
+//                if (edit_status.equals("edit")){
+//
+//                    Navigation.findNavController(view).popBackStack(R.id.editAnnouncementFragment,true);
+//                }else {
+//                    Navigation.findNavController(view).navigateUp();
+//                }
+//
+//
+//
+//            };
+//
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(),callback);
+
     }
 
     private void bookmanrStatus() {
         binding.mark.setOnClickListener(v ->{
-            if (isMark){
-                binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
-                isMark=false;
-            }else {
-                binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
-                isMark=true;
-            }
+//            if (isMark){
+                markViewModel.markAnnouncement(user_id,anouns_id);
+//                binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
+//                isMark=false;
+//            }else {
+//                markViewModel.markAnnouncement(user_id,anouns_id);
+//                binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
+//                isMark=true;
+//            }
 
         });
     }

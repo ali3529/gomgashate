@@ -7,6 +7,16 @@ public class BlockModel {
     private String status;
     @SerializedName("massage")
     private String massage;
+    @SerializedName("is_block")
+    boolean isBlock;
+
+    public boolean isBlock() {
+        return isBlock;
+    }
+
+    public void setBlock(boolean block) {
+        isBlock = block;
+    }
 
     public String getStatus() {
         return status;

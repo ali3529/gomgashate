@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="status"
+        type="String" />
+</data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مدیریت آگهی"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"/>
+        </androidx.appcompat.widget.Toolbar>
+
+<RelativeLayout
+    android:id="@+id/status"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/toolbar"
+    android:layout_margin="12dp">
+    <TextView
+        android:id="@+id/stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{status}"
+        tools:text="در انتظار تایید"
+        android:textSize="22dp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/text_color_black"/>
+
+    <TextView
+        android:id="@+id/fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stat"
+        android:textSize="@dimen/text_size_16"
+    android:layout_alignParentRight="true"
+        />
+</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/status">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+<RelativeLayout
+    android:id="@+id/load"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="@color/white">
+
+</RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

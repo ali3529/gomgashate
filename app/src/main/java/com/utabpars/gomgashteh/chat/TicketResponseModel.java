@@ -16,6 +16,26 @@ public class TicketResponseModel {
     public String status;
     @SerializedName("response")
     public String response;
+    @SerializedName("blocker")
+    private boolean block;
+    @SerializedName("isBlock")
+    private boolean isBlockFromAnnouncer;
+
+    public boolean isBlockFromAnnouncer() {
+        return isBlockFromAnnouncer;
+    }
+
+    public void setBlockFromAnnouncer(boolean blockFromAnnouncer) {
+        isBlockFromAnnouncer = blockFromAnnouncer;
+    }
+
+    public boolean isBlock() {
+        return block;
+    }
+
+    public void setBlock(boolean block) {
+        this.block = block;
+    }
 
     public TicketResponseModel(List<Massage> massages) {
         this.massages = massages;
