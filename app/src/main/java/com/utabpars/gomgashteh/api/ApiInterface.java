@@ -99,10 +99,12 @@ public interface ApiInterface {
     @POST("categoriesInHeader")
     Single<RmModel> getTopFilter();
 
-    @POST("categoriesFilterInHeader")
+    @POST("filter")
     @FormUrlEncoded
-    Single<AnoncmentModel> getTopFilterAnnouncement(@Query("page") int page,
-                                                    @Field("id") String id);
+    Single<AnoncmentModel> getFilterAnnouncement(@Query("page") int page,
+                                                    @Field("city") String city,
+                                                 @Field("type") String type,
+                                                 @Field("key") String key);
 
     @POST("provinceFilter")
     @FormUrlEncoded

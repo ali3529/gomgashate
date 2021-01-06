@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="6dp"
+
+        >
+        <RelativeLayout
+            android:id="@+id/itemfilterlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_selected_city"
+            android:paddingHorizontal="12dp"
+
+            >
+            <TextView
+                android:id="@+id/txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="دسته بندی"
+                android:text="@{title}"
+                android:textSize="16dp"
+                android:textColor="@color/text_color_black"
+                android:textAlignment="center"
+                android:fontFamily="@font/sans"
+                android:paddingHorizontal="6dp"
+
+
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

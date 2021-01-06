@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,22 +27,16 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.TopFilterAdaptor;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
-import com.utabpars.gomgashteh.databinding.ItemFilterTopBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
-import com.utabpars.gomgashteh.interfaces.TopFilterCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.RmModel;
@@ -50,19 +44,17 @@ import com.utabpars.gomgashteh.paging.AnnouncementViewModel;
 import com.utabpars.gomgashteh.paging.ItemDataSource;
 import com.utabpars.gomgashteh.paging.PagingAdaptor;
 import com.utabpars.gomgashteh.paging.provinceFilter.ProvinceFilterDataSource;
-import com.utabpars.gomgashteh.paging.topfilterpaging.TopFilterDataSource;
-import com.utabpars.gomgashteh.paging.topfilterpaging.TopFilterViewModelPaging;
+
 import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
 import com.utabpars.gomgashteh.paging.provinceFilter.FilterAnouncmentByProvinceViewModel;
-import com.utabpars.gomgashteh.viewmodel.TopFilterViewModel;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
-   public int itemCoun;
-    RecyclerView recyclerView,topFilterRecyclerview;
+    RecyclerView recyclerView;
+
     PagingAdaptor adaptor;
     FragmentAnnouncementBinding binding;
     AnnouncementViewModel viewModel;
@@ -72,13 +64,9 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
     MaterialSearchBar searchView;
     SharedPreferences shPref;
-    TopFilterViewModel topfilterViewModel;
-    TopFilterDataSource topFilterDataSource;
-    TopFilterViewModelPaging topFilterViewModelPaging;
-    TopFilterAdaptor topFilterAdaptor;
+
     FilterAnouncmentByProvinceViewModel provinceViewModel;
     ProvinceFilterDataSource provinceFilterDataSource;
-    static MutableLiveData<RmModel> rmModelMutableLiveDatattt;
 
     SharedPreferences sharedPreferences;
 
@@ -161,35 +149,19 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         recyclerView.setAdapter(adaptor);
 
 
-        topfilterViewModel.rmModelMutableLiveData.observe(getActivity(), topFilter -> {
-            topFilterAdaptor = new TopFilterAdaptor(getContext(), topFilter.getTopFilterData(), new TopFilterCallBack() {
-                @Override
-                public void OnClickCallback(String id,boolean selected, ItemFilterTopBinding binding) {
-                    if (selected) {
-
-
-                    topFilterDataSource = new TopFilterDataSource(id);
-                    topFilterViewModelPaging.topFilterd();
-
-                    Log.d("sdfsdfdf", "onViewCreated: interface onclick");
-
-
-                    topFilterViewModelPaging.listLiveData.observe(getViewLifecycleOwner(), detail -> {
-                        adaptor.submitList(detail);
-
-                        Log.d("sdfsdfdf", "onViewCreated: viewmodel");
-                    });
-                    }else {
-                        setAnounsmentFilter();
-                    }
-                }
-            });
-            topFilterRecyclerview.setAdapter(topFilterAdaptor);
-
-        });
-
         //when go to last item item dont underbottom navigation
         lastAnnouncmentAboveBtNavigation();
+
+
+        binding.lost.setOnClickListener(o ->{
+
+            setFilterViews(1);
+        });
+
+        binding.find.setOnClickListener(o ->{
+
+            setFilterViews(2);
+        });
 
 
     }
@@ -266,12 +238,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         toolbar=binding.toolbar;
         searchView=binding.search;
         searchView.setPlaceHolder("جستجو در همه آگهی ها");
-
-        topFilterRecyclerview=binding.topListRecyclerview;
-        topFilterRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,LinearLayoutManager.HORIZONTAL));
-        topFilterRecyclerview.setHasFixedSize(true);
-        topfilterViewModel=new ViewModelProvider(this).get(TopFilterViewModel.class);
-        topFilterViewModelPaging=new ViewModelProvider(this).get(TopFilterViewModelPaging.class);
         provinceViewModel=new ViewModelProvider(getActivity()).get(FilterAnouncmentByProvinceViewModel.class);
 
 
@@ -372,6 +338,20 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         Log.d("sfesfsef", "getCategoryId: "+j.get(0));
         return j;
+    }
+
+    public void setFilterViews(int i){
+        if (i==1){
+            binding.lost.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.shape_filter_item_selected));
+            binding.find.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.shape_filter_item));
+            binding.lost.setTextColor(getContext().getResources().getColor(R.color.white));
+            binding.find.setTextColor(getContext().getResources().getColor(R.color.text_color_black));
+        }else if (i==2){
+            binding.find.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.item_shape_selected));
+            binding.lost.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.item_left_shape));
+            binding.find.setTextColor(getContext().getResources().getColor(R.color.white));
+            binding.lost.setTextColor(getContext().getResources().getColor(R.color.text_color_black));
+        }
     }
 
 }

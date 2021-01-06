@@ -82,7 +82,7 @@ public class TopFilterAdaptor extends RecyclerView.Adapter<TopFilterAdaptor.Filt
                 binding.txt.setTextColor(context.getResources().getColor(R.color.text_color_black));
             }else {
                 anoncmentModel.setIs_selected(true);
-                binding.itemfilterlayout.setBackground(ContextCompat.getDrawable(context,R.drawable.shape_filter_item_selected));
+
                 binding.txt.setTextColor(context.getResources().getColor(R.color.white));
 
 

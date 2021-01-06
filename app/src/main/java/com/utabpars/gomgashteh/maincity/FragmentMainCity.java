@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +37,7 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;
    static List<CategoryModel.ListData> listData=new ArrayList<>();
+  static MutableLiveData< List<CategoryModel.ListData>> listDataMutableLiveData=new MutableLiveData<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +94,7 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
 
         if (is_checked){
             listData.add(categoryModel);
+            listDataMutableLiveData.setValue(listData);
             for (int i = 0; i < listData.size(); i++) {
                 Log.d("htgdfgvdfg", "getSelectedItem: "+listData.get(i).getId());
                 Log.d("htgdfgvdfg", "getSelectedItem: "+listData.get(i).getCategoryName());
@@ -105,6 +108,7 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
                         Log.d("htgdfgvdfg", "getSelectedItem: " + listData.get(i).getId());
                         Log.d("htgdfgvdfg", "getSelectedItem: " + listData.get(i).getCategoryName());
                         listData.remove(i);
+                        listDataMutableLiveData.setValue(listData);
                     }
 
                 }

@@ -112,20 +112,65 @@
             </RelativeLayout>
          </androidx.appcompat.widget.Toolbar>
 
-         <androidx.recyclerview.widget.RecyclerView
-             android:id="@+id/topListRecyclerview"
-             android:layout_width="match_parent"
-             android:layout_height="50dp"
+<!--         <androidx.recyclerview.widget.RecyclerView-->
+<!--             android:id="@+id/topListRecyclerview"-->
+<!--             android:layout_width="match_parent"-->
+<!--             android:layout_height="50dp"-->
+<!--             android:layout_below="@id/toolbar"-->
+<!--             android:background="@color/toolbar_background"-->
+<!--             android:layoutDirection="rtl"-->
+<!--             android:visibility="gone"/>-->
+         <RelativeLayout
+             android:id="@+id/topfilterlayout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+
+             android:paddingHorizontal="12dp"
              android:layout_below="@id/toolbar"
-             android:background="@color/toolbar_background"
-             android:layoutDirection="rtl"/>
+             android:gravity="center"
+
+             >
+            <TextView
+                android:id="@+id/lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="گم شده"
+                android:textSize="19dp"
+                android:textColor="@color/text_color_black"
+                android:textAlignment="center"
+                android:fontFamily="@font/sans"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/item_left_shape"
+              android:layout_centerInParent="true"
+                android:paddingHorizontal="60dp"
+
+
+                />
+
+            <TextView
+                android:id="@+id/find"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="پیدا شده"
+                android:textSize="19dp"
+                android:textColor="@color/text_color_black"
+                android:textAlignment="center"
+                android:fontFamily="@font/sans"
+                android:layout_toLeftOf="@id/lost"
+                android:background="@drawable/shape_filter_item"
+                android:layout_marginRight="18dp"
+                android:paddingHorizontal="60dp"
+
+                />
+         </RelativeLayout>
 
          <androidx.recyclerview.widget.RecyclerView
              android:id="@+id/recycler"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:layout_above="@id/gggg"
-             android:layout_below="@id/topListRecyclerview"
+             android:layout_below="@id/topfilterlayout"
              app:floatingSearch_leftActionMode="showHamburger"
              app:floatingSearch_close_search_on_keyboard_dismiss="true"
 

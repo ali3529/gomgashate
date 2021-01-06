@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +32,8 @@ public class FragmentChoosecity extends Fragment {
    static SharedPreferences sharedPreferences;
    static SharedPreferences.Editor editor;
     Gson gson;
+    RecyclerView recyclerView;
+    SelectetdCityAdaptor adaptor;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,14 +42,31 @@ public class FragmentChoosecity extends Fragment {
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
+        initViews();
         return binding.getRoot();
 
+    }
+
+    private void initViews() {
+        recyclerView=binding.showSelectedRecyclerview;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.setFrag(this);
+
+        FragmentMainCity.listDataMutableLiveData.observe(getViewLifecycleOwner(), t->{
+            if (t.size()>0){
+                Log.d("ffdvf", "onViewCreated: okkk"+t.get(0).getId());
+                Log.d("ffdvf", "onViewCreated: okkk"+t.get(0).getCategoryName());
+                Log.d("ffdvf", "onViewCreated: okkk"+t.size());
+                adaptor=new SelectetdCityAdaptor(t);
+                recyclerView.setAdapter(adaptor);
+            }
+
+        });
 
     }
 
