@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -53,6 +54,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
     MarkViewModel markViewModel;
     String edit_status;
+    String share_link;
 
 
     @Override
@@ -74,18 +76,34 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.toolbar.bringToFront();
         binding.setProgress(true);
         int id=getArguments().getInt("id");
+        String code=getArguments().getString("code");
         try {
             edit_status=getArguments().getString("edit");
         }catch (Exception e){
             edit_status="a";
         }
+
         user_id =sharedPreferences.getString("user_id","000");
         user_status=sharedPreferences.getBoolean("user_login",false);
         viewModel= new ViewModelProvider(this).get(DetailViewModel.class);
+        try {
+            //get detail whit id
+            if (id==0){
+                viewModel.getDetail(0,user_id,code);
+            }else {
+                viewModel.getDetail(id,user_id,"");
+            }
 
-        viewModel.getDetail(id,user_id);
+            Log.d("sfesfesff", "onViewCreated: code"+code);
+        }catch (Exception e){
+            //get detail whit share link
+            viewModel.getDetail(0,user_id,code);
+            Log.d("sfesfesff", "onViewCreated: code"+code);
+        }
+
         viewModel.getView(binding);
         binding.setViemodel(viewModel);
         binding.setChatviewmodel(this);
@@ -135,7 +153,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
 
                 }
-
+                share_link=data.getShareLink();
 
             }
         });
@@ -203,12 +221,24 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 //        };
 //        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(),callback);
 
+        binding.share.setOnClickListener( o ->{
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, share_link);
+            startActivity(Intent.createChooser(shareIntent, "لینک آگهی"));
+        });
+
     }
 
     private void bookmanrStatus() {
         binding.mark.setOnClickListener(v ->{
 //            if (isMark){
+            if (user_status){
                 markViewModel.markAnnouncement(user_id,anouns_id);
+            }else {
+                Toast.makeText(getContext(), "لطفا از قسمت پروفایل وارد حساب کارری خود شوید", Toast.LENGTH_SHORT).show();
+            }
+
 //                binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
 //                isMark=false;
 //            }else {

@@ -110,7 +110,7 @@ public class FragmentChat extends Fragment {
             public void handleOnBackPressed() {
 
              //   Navigation.findNavController(getView()).navigate(R.id.action_chat_to_announcement);
-                Navigation.findNavController(getView()).navigateUp();
+                Navigation.findNavController(getView()).navigate(R.id.action_chat_to_announcement);
 
 
             };

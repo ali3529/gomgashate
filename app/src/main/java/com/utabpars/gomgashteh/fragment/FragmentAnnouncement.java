@@ -34,7 +34,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
-import com.utabpars.gomgashteh.adaptor.TopFilterAdaptor;
+
+import com.utabpars.gomgashteh.api.ApiClient;
+import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
@@ -50,7 +52,13 @@ import com.utabpars.gomgashteh.viewmodel.CheckUpdateViewModel;
 import com.utabpars.gomgashteh.paging.provinceFilter.FilterAnouncmentByProvinceViewModel;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     RecyclerView recyclerView;
@@ -61,6 +69,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     CheckUpdateViewModel updateViewModel;
     MutableLiveData<AppVersionModel> appVersionModelMutableLiveData;
     Toolbar toolbar;
+    String type="",test="";
+    static int type_for_view=0;
 
     MaterialSearchBar searchView;
     SharedPreferences shPref;
@@ -87,6 +97,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         appVersionModelMutableLiveData = updateViewModel.getAppVersionModelLiveData();
         getAppVersion();
+        setFilterViews(type_for_view);
 
 
         return binding.getRoot();
@@ -116,7 +127,9 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         binding.search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentSearch);
+                Bundle bundle=new Bundle();
+                bundle.putString("type",type);
+                Navigation.findNavController(view).navigate(R.id.action_announcement_to_fragmentSearch,bundle);
             }
         });
 
@@ -144,7 +157,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
         //todo
         // province filter anouncmement
-      setAnounsmentFilter();
+        setAnounsmentFilter();
 
         recyclerView.setAdapter(adaptor);
 
@@ -156,6 +169,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         binding.lost.setOnClickListener(o ->{
 
             setFilterViews(1);
+
         });
 
         binding.find.setOnClickListener(o ->{
@@ -189,12 +203,15 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         try {
             if (getMainCity()!=null) {
 
+                //todo
+
+                Log.d("Sgsgsgse", "onViewCreated: getcity ok "+getMainCity().toString());
 
 
-                Log.d("Sgsgsgse", "onViewCreated: "+getMainCity().toString());
 
-                provinceFilterDataSource = new ProvinceFilterDataSource(getMainCity().toString());
+                provinceFilterDataSource.FilterDataSource(getMainCity().toString(),type,"");
                 provinceViewModel.getProvinceFilter();
+                Log.d("Sgsgsgse", "setAnounsmentFilter: "+type);
 
 
                 provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
@@ -206,30 +223,60 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                 });
 
 
-            }else {
+            }
+        }catch (Exception e){
+
+            if (type.length()>0){
+
+                provinceFilterDataSource.FilterDataSource("",type,"");
+                provinceViewModel.getProvinceFilter();
+
+
+                provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
+
+
+
+                    adaptor.submitList(province);
+
+                    Log.d("Sgsgsgse", "onViewCreated: getcity null type ok "+type);
+
+                });
+
+
+            }
+            else {
                 viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
                     @Override
                     public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
                         adaptor.submitList(detiles);
 
+
                     }
                 });
-
-
+                Log.d("Sgsgsgse", "onViewCreated: getcity null type null  all "+type);
             }
-        }catch (Exception e){
-
-            viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
-                @Override
-                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
-                    adaptor.submitList(detiles);
-
-
-                }
-            });
 
 
         }
+
+//        ApiInterface apiInterface= ApiClient.getApiClient();
+//        CompositeDisposable compositeDisposable=new CompositeDisposable();
+//        List<String> list=new ArrayList<>();
+//        list.add("17");
+//        compositeDisposable.add(apiInterface.filterAnnouncement(getMainCity().toString())
+//        .subscribeOn(Schedulers.io())
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
+//            @Override
+//            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
+//                Log.d("sgsdfsdf", "onSuccess: ");
+//            }
+//
+//            @Override
+//            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//                Log.d("sgsdfsdf", "onError: "+e.toString());
+//            }
+//        }));
     }
 
 
@@ -239,6 +286,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         searchView=binding.search;
         searchView.setPlaceHolder("جستجو در همه آگهی ها");
         provinceViewModel=new ViewModelProvider(getActivity()).get(FilterAnouncmentByProvinceViewModel.class);
+        provinceFilterDataSource = new ProvinceFilterDataSource();
 
 
 
@@ -346,11 +394,40 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
             binding.find.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.shape_filter_item));
             binding.lost.setTextColor(getContext().getResources().getColor(R.color.white));
             binding.find.setTextColor(getContext().getResources().getColor(R.color.text_color_black));
+            type_for_view=1;
+
+
+            if (type.equals("2")){
+                binding.lost.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.item_left_shape));
+                binding.lost.setTextColor(getContext().getResources().getColor(R.color.text_color_black));
+                type="";
+
+            }else {
+                type="2";
+            }
+
+
+
+            setAnounsmentFilter();
         }else if (i==2){
             binding.find.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.item_shape_selected));
             binding.lost.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.item_left_shape));
             binding.find.setTextColor(getContext().getResources().getColor(R.color.white));
             binding.lost.setTextColor(getContext().getResources().getColor(R.color.text_color_black));
+
+            type_for_view=2;
+            if (type.equals("1")){
+                binding.find.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.shape_filter_item));
+                binding.find.setTextColor(getContext().getResources().getColor(R.color.text_color_black));
+                type="";
+            }else {
+                type="1";
+
+            }
+
+
+
+            setAnounsmentFilter();
         }
     }
 

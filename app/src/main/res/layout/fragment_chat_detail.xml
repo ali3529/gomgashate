@@ -62,8 +62,31 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+  <RelativeLayout
+        android:id="@+id/ph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B2FAE36D"
+      android:layout_below="@id/toolbar"
+      android:padding="4dp">
+        <CheckBox
+            android:id="@+id/phone_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/phone_check"
 
+            android:layout_marginRight="6dp"
+            android:layout_centerInParent="true"
+            android:textDirection="rtl"
+            android:text="با تایید این گزینه شماره همراه شما برای شخص مقابل قابل نمایش است"
+            />
 
+  </RelativeLayout>
 
 
 
@@ -71,7 +94,7 @@
     android:id="@+id/recyccler_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/toolbar"
+    android:layout_below="@id/ph"
     android:background="#2CB6B4B4"
     android:layout_above="@id/massage_layout"
 
@@ -97,6 +120,14 @@
 
     android:visibility="visible"
     app:setLayoutVisi="@{massagelayoutvisibility}">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+     >
+
+
     <ImageView
         android:id="@+id/send"
         android:layout_width="wrap_content"
@@ -111,10 +142,10 @@
         android:layout_toLeftOf="@id/send"
         android:layout_toRightOf="@id/attach"
         android:layout_marginRight="12dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_centerInParent="true"
-        android:hint="پیامی بنویسید"
-        android:background="@drawable/botton_sheet_yes_no_shape"
+
+
       >
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -124,6 +155,8 @@
             android:textDirection="rtl"
             android:textColor="@color/text_color_black"
             android:cursorVisible="true"
+            android:hint="پیامی بنویسید"
+
 
 
 
@@ -136,7 +169,7 @@
         android:src="@drawable/ic_attach"
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"/>
-
+    </RelativeLayout>
 </RelativeLayout>
 
     <RelativeLayout

@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.managerAnnouncement;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class ManagerAdaptor extends RecyclerView.Adapter<ManagerAdaptor.OptionVi
         holder.binding.setCat(options.get(position));
         holder.itemView.setOnClickListener( o ->{
             detileCallBack.onItemClicked(o,options.get(position).getId());
+            Log.d("sacsac", "onBindViewHolder: "+options.get(position).getId());
         });
     }
 

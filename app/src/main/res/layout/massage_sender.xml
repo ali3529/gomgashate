@@ -13,7 +13,8 @@
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,23 +26,24 @@
                 android:id="@+id/massage2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="سلام من این آگهی را پیدا کردم"
+
                 android:textColor="@color/text_color_black"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:textSize="14sp"/>
 
             <ImageView
                 android:id="@+id/check_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic__check_24"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@id/massage2"
                 app:setLayoutVisi="@{check}"/>
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_doul_check"
-         android:layout_alignParentStart="true"
+         android:layout_alignParentLeft="true"
                 android:layout_below="@id/massage2"
 
                 android:visibility="gone"

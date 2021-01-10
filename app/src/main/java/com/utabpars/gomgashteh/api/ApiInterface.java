@@ -1,10 +1,10 @@
 package com.utabpars.gomgashteh.api;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.utabpars.gomgashteh.chat.ChatStatusModel;
+import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmModel;
 import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.chat.TicketResponseModel;
+import com.utabpars.gomgashteh.chat.reportchat.ReportModel;
 import com.utabpars.gomgashteh.managerAnnouncement.ManageModel;
 import com.utabpars.gomgashteh.markannouncment.MarkModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
@@ -16,7 +16,6 @@ import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
-import com.utabpars.gomgashteh.model.AddImageModel;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +23,6 @@ import java.util.Map;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
@@ -45,7 +42,7 @@ public interface ApiInterface {
 
     @POST("detailAnnouncement")
     @FormUrlEncoded
-    Single<DetailModel> getDetail(@Field("id") int id,@Field("user_id") String user_id);
+    Single<DetailModel> getDetail(@Field("id") int id,@Field("user_id") String user_id,@Field("code") String code);
 
     @POST("splash")
     Single<AppVersionModel> update();
@@ -101,8 +98,7 @@ public interface ApiInterface {
 
     @POST("filter")
     @FormUrlEncoded
-    Single<AnoncmentModel> getFilterAnnouncement(@Query("page") int page,
-                                                    @Field("city") String city,
+    Single<AnoncmentModel> filterAnnouncement(@Field("city") String city,
                                                  @Field("type") String type,
                                                  @Field("key") String key);
 
@@ -156,5 +152,24 @@ public interface ApiInterface {
     @Multipart
     Single<SaveAnnouncementModel> edittAnnouncment(@PartMap Map<String,RequestBody> requestBody,
                                                     @Part List<MultipartBody.Part> file);
+
+    @POST("deleteAnnounce")
+    @FormUrlEncoded
+    Single<SaveAnnouncementModel> deleteAnnouncement(@Field("announce_id") String announce_id,@Field("result") String result);
+
+    @POST("showMyAnnounce")
+    @FormUrlEncoded
+    Single<DetailModel> showEditDetail(@Field("announce_id") int id);
+
+    @POST("reportUser")
+    @FormUrlEncoded
+    Single<ReportModel> reportUser(@Field("blocker") String blocker,
+                                   @Field("blocked") String blocked,
+                                   @Field("block_report") String block_report);
+
+    @POST("confirmUser")
+    @FormUrlEncoded
+    Single<PhoneConfirmModel> phoneConfirm(@Field("user_id") String user_id,
+                                           @Field("ticket_id") String ticket_id);
 }
 

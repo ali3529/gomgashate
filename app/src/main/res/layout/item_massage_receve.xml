@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="doublcheck"
@@ -11,22 +12,26 @@
     </data>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/massage_shape"
     android:padding="12dp"
     android:layout_margin="6dp"
-    android:layout_alignParentLeft="true">
+    android:layout_alignParentLeft="true"
+    android:layoutDirection="ltr">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/massage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="سلام من این آگهی را پیدا کردم"
+        tools:text="سلام من این آگهی را پیدا کردم"
         android:textColor="@color/text_color_black"
-        android:layout_margin="6dp"/>
+        android:layout_margin="6dp"
+        android:textSize="14sp"/>
 
     <ImageView
         android:id="@+id/check_1"

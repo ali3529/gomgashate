@@ -37,11 +37,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmModel;
+import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmViewModel;
+import com.utabpars.gomgashteh.chat.reportchat.FragmentReportBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentChatDetailBinding;
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.BlockModel;
 import com.utabpars.gomgashteh.utils.NavigateHelper;
+import com.utabpars.gomgashteh.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,9 +74,13 @@ public class FragmentChatDetail extends Fragment {
     Toolbar toolbar;
     boolean isBlock=false;
     MutableLiveData<BlockModel> blockLiveData=new MutableLiveData<>();
-
+    FragmentReportBottomSheet fragmentReportBottomSheet=new FragmentReportBottomSheet();
+    List<String> list=new ArrayList<>();
     boolean test1;
     boolean test2;
+    MutableLiveData<Boolean> isReport=new MutableLiveData<>();
+    PhoneConfirmViewModel phoneConfirmViewModel;
+
 
 
     @Override
@@ -110,9 +118,16 @@ public class FragmentChatDetail extends Fragment {
             public void onChanged(TicketResponseModel ticketResponseModel) {
                 massageAdaptor.getMassageList(ticketResponseModel.getMassages());
                 recyclerView.setAdapter(massageAdaptor);
-                block.setValue(ticketResponseModel.isBlock());
-                setBlockAndmassageStatus(ticketResponseModel);
+                if (ticketResponseModel.isReport()){
+                    isReport.setValue(true);
+                }else {
+                    block.setValue(ticketResponseModel.isBlock());
+                }
 
+                setBlockAndmassageStatus(ticketResponseModel);
+                list=ticketResponseModel.getReport_list();
+
+                fragmentReportBottomSheet.getList(ticketResponseModel.getReport_list());
 
                 scrollToBottom(recyclerView);
             }
@@ -149,8 +164,11 @@ public class FragmentChatDetail extends Fragment {
         binding.attach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bottomSheetChooseImage.show(getActivity().getSupportFragmentManager(),"attachsecond");
-                bottomSheetChooseImage.passData(passDataCallBack);
+                if (Utils.checkPermissionStorage(getContext()) && Utils.checkPermissionStorageWrite(getContext())) {
+                    bottomSheetChooseImage.show(getActivity().getSupportFragmentManager(), "attachsecond");
+                    bottomSheetChooseImage.passData(passDataCallBack);
+                }
+
             }
         });
 
@@ -168,6 +186,28 @@ public class FragmentChatDetail extends Fragment {
         });
 
         refresh();
+
+        fragmentReportBottomSheet.reportResponsLiveData.observe(getViewLifecycleOwner(), t->{
+            fragmentReportBottomSheet.dismiss();
+            binding.setMassagelayoutvisibility(false);
+            binding.setSecendmassagevisibility(true);
+            viewModel.getTicket(ticket_id,user_id);
+        });
+
+
+        binding.phoneCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneConfirmViewModel.confirmPhone(user_id,ticket_id);
+            }
+        });
+
+        phoneConfirmViewModel.phoneConfirmModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<PhoneConfirmModel>() {
+            @Override
+            public void onChanged(PhoneConfirmModel phoneConfirmModel) {
+                Toast.makeText(getContext(), phoneConfirmModel.getMassage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setBlockAndmassageStatus(TicketResponseModel ticketResponseModel) {
@@ -223,26 +263,31 @@ public class FragmentChatDetail extends Fragment {
         toolbar=binding.toolbar;
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
+        phoneConfirmViewModel=new ViewModelProvider(this).get(PhoneConfirmViewModel.class);
     }
 
     private void scrollToBottom(final RecyclerView recyclerView) {
         // scroll to last item to get the view of last item
-        final LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-        final RecyclerView.Adapter adapter = recyclerView.getAdapter();
-        final int lastItemPosition = adapter.getItemCount() - 1;
+        try {
+            final LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            final RecyclerView.Adapter adapter = recyclerView.getAdapter();
+            final int lastItemPosition = adapter.getItemCount() - 1;
 
-        layoutManager.scrollToPositionWithOffset(lastItemPosition, 0);
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                // then scroll to specific offset
-                View target = layoutManager.findViewByPosition(lastItemPosition);
-                if (target != null) {
-                    int offset = recyclerView.getMeasuredHeight() - target.getMeasuredHeight();
-                    layoutManager.scrollToPositionWithOffset(lastItemPosition, offset);
+            layoutManager.scrollToPositionWithOffset(lastItemPosition, 0);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    // then scroll to specific offset
+                    View target = layoutManager.findViewByPosition(lastItemPosition);
+                    if (target != null) {
+                        int offset = recyclerView.getMeasuredHeight() - target.getMeasuredHeight();
+                        layoutManager.scrollToPositionWithOffset(lastItemPosition, offset);
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+
+        }
 
 
 
@@ -320,15 +365,21 @@ public class FragmentChatDetail extends Fragment {
             }
         });
 
+        isReport.observe(getViewLifecycleOwner(),t ->{
+            menu.getItem(0).setEnabled(false);
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+
         blockLiveData.observe(getViewLifecycleOwner(), new Observer<BlockModel>() {
             @Override
             public void onChanged(BlockModel blockModel) {
+
                 if (blockModel.isBlock()){
                     item.setTitle("ازاد");
                     binding.setMassagelayoutvisibility(false);
@@ -352,7 +403,13 @@ public class FragmentChatDetail extends Fragment {
                 blockUser(user_id,recever_id);
 
                 break;
+            case R.id.report:
+                fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"");
+                fragmentReportBottomSheet.getUsers(user_id,recever_id);
+                Log.d("sdfdsfdsfdsf", "getUsers: "+user_id+"  "+recever_id);
+
         }
+
         return super.onOptionsItemSelected(item);
     }
 

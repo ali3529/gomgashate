@@ -31,501 +31,510 @@
 
 
 
-<RelativeLayout
+    <RelativeLayout
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.FragmentAnnouncmentDetail"
-    android:background="@color/white">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/transparent"
-        >
-<!--        android:background="#2CB6B4B4">-->
-     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         >
-         <ImageView
-             android:id="@+id/arrow_back"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:src="@drawable/ic_baseline_arrow_forward_24"
-             android:layout_centerInParent="true"
-             android:layout_alignParentRight="true"
-             android:layout_margin="8dp"
-             android:onClick="@{() -> chatviewmodel.arrowBack()}"/>
-
-         <ImageView
-             android:id="@+id/mark"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:src="@drawable/ic_bookmark_unselected24"
-             android:layout_centerInParent="true"
-            android:layout_toRightOf="@id/share"
-             android:layout_marginRight="12dp"
-             android:layout_marginLeft="12dp"/>
-         <ImageView
-             android:id="@+id/share"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:src="@drawable/ic_share_24"
-             android:layout_centerInParent="true"
-             android:layout_margin="12dp"
-             android:layout_alignParentLeft="true"/>
-     </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/toolbar"
-    >
-
-
-
-
-    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/chat_layout"
-       >
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    <com.smarteist.autoimageslider.SliderView
-        android:id="@+id/slider"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:sliderAnimationDuration="600"
-        app:sliderAutoCycleDirection="right"
-        app:sliderAutoCycleEnabled="false"
-        android:background="@color/white"
-
-
-        app:sliderIndicatorAnimationDuration="600"
-
-        app:sliderIndicatorMargin="15dp"
-        app:sliderIndicatorOrientation="horizontal"
-        app:sliderIndicatorPadding="6dp"
-        app:sliderIndicatorRadius="2dp"
-
-
-        app:sliderScrollTimeInSec="3"
-        app:sliderStartAutoCycle="true"
-
-        />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/slider"
-            android:padding="8dp">
-
-
-            <RelativeLayout
-                android:id="@+id/laoyut_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:gravity="right"
-                android:padding="@dimen/detail_padding">
-
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:fontFamily="@font/sans"
-                    android:text="@{details.title}"
-                    android:textColor="@color/text_color_black"
-                    android:textSize="@dimen/detail_size"
-                    tools:text="پژو 206 مدل 94" />
-                <TextView
-                    android:id="@+id/edit_announcment"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="ویرایش"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:padding="4dp"
-                    android:background="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_14"
-                    android:textStyle="bold"
-                    android:visibility="gone"/>
-
-                <TextView
-                    android:id="@+id/city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/title"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="@font/sans"
-                    android:text="@{details.created_at}"
-                    android:textColor="@color/text_color_low_black"
-                    android:textSize="@dimen/detail_size"
-                    tools:text="شیراز گویم" />
-            </RelativeLayout>
-
-            <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="12dp"
-        android:background="@color/hr_color"
-        android:layout_below="@id/laoyut_title"/>
-    <RelativeLayout
-        android:id="@+id/layout_catrgory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view1"
-        android:gravity="right"
-        android:padding="@dimen/detail_padding"
-        android:layout_marginTop="1dp"
-        >
-        <TextView
-          android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="دسته بندی"
-            android:textSize="@dimen/detail_size"
-            android:fontFamily="@font/sans"
-            android:textColor="@color/text_color_low_black"
-
-
-            android:layout_marginTop="6dp"
-            android:layout_alignParentRight="true"/>
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="کالا"
-            android:text="@{details.collection}"
-            android:textSize="@dimen/detail_size"
-            android:fontFamily="@font/sans"
-            android:textColor="@color/text_color_black"
-
-            android:layout_marginTop="6dp"
-            android:layout_alignParentLeft="true"/>
-        <View
-            android:id="@+id/view2"
+        tools:context=".fragment.FragmentAnnouncmentDetail"
+        android:background="@color/white">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="2dp"
-            android:background="@color/hr_color"
-            android:layout_below="@id/category"
-            android:layout_marginTop="6dp"/>
-
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/layout_collection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_catrgory"
-        android:gravity="right"
-        android:padding="@dimen/detail_padding"
-        android:layout_marginTop="1dp"
-        >
-        <TextView
-            android:id="@+id/collection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="وضعیت"
-            android:textSize="@dimen/detail_size"
-            android:fontFamily="@font/sans"
-            android:textColor="@color/text_color_low_black"
-
-            android:layout_marginTop="4dp"
-            android:layout_alignParentRight="true"/>
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="گم شده"
-            android:text="@{details.type}"
-            android:textSize="@dimen/detail_size"
-            android:fontFamily="@font/sans"
-            android:textColor="@color/text_color_black"
-
-            android:layout_marginTop="6dp"
-            android:layout_alignParentLeft="true"/>
-        <View
-            android:id="@+id/view3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="2dp"
-            android:background="@color/hr_color"
-            android:layout_below="@id/collection"
-            android:layout_marginTop="6dp"/>
-
-
-
-    </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/othercity_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layout_collection"
-                android:gravity="right"
-                android:padding="@dimen/detail_padding"
-                android:layout_marginTop="1dp"
-                >
-                <TextView
-                    android:id="@+id/othercity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="شهر های دیگر"
-                    android:textSize="@dimen/detail_size"
-                    android:fontFamily="@font/sans"
-                    android:textColor="@color/text_color_low_black"
-
-                    android:layout_marginTop="4dp"
-                    android:layout_alignParentRight="true"/>
-                <TextView
-                    android:id="@+id/other_citys"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="ناموجود"
-                    android:textSize="@dimen/detail_size"
-                    android:fontFamily="@font/sans"
-                    android:textColor="@color/text_color_black"
-
-                    android:layout_marginTop="6dp"
-                    android:layout_alignParentLeft="true"/>
-                <View
-                    android:id="@+id/view4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="2dp"
-                    android:background="@color/hr_color"
-                    android:layout_below="@id/othercity"
-                    android:layout_marginTop="6dp"/>
-
-
-
-            </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/layout_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/othercity_layout"
-        android:gravity="right"
-        android:padding="@dimen/detail_padding"
-        android:layout_marginTop="6dp"
-
-        >
-        <TextView
-            android:id="@+id/detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="توضیحات"
-            android:textSize="@dimen/detail_size"
-            android:fontFamily="@font/sans"
-            android:textColor="@color/text_color_black"
-            android:layout_marginTop="6dp"
-            android:layout_alignParentRight="true"/>
-
-        <TextView
-            android:id="@+id/deeee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="@string/lorem"
-            android:text="@{details.detail}"
-
-            android:textSize="@dimen/detail_size"
-            android:fontFamily="@font/sans"
-            android:textColor="@color/text_color_low_black"
-            android:layout_below="@id/detail"
-            android:layout_marginTop="6dp"
-            android:layout_alignParentRight="true"
-            android:layout_margin="12dp"
-            android:lineSpacingExtra="7dp"/>
-        <View
-            android:id="@+id/view_detail"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="2dp"
-            android:background="@color/hr_color"
-            android:layout_below="@id/deeee"
-            android:layout_marginTop="4dp"/>
-    </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/report"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layout_detail"
-                android:gravity="right"
-                android:padding="@dimen/detail_padding"
-                android:layout_marginTop="1dp"
-                >
-                <ImageView
-                    android:id="@+id/img6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_error_outline_24"
-                    android:layout_centerInParent="true"
-
-
-                    />
-                <TextView
-                    android:id="@+id/report_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="گزارش مشکل آگهی"
-                    android:textSize="@dimen/detail_size"
-                    android:fontFamily="@font/sans"
-                    android:textColor="@color/text_color_black"
-                    android:layout_marginTop="2dp"
-                    android:layout_toLeftOf="@id/img6"
-                    android:layout_marginRight="4dp"
-                    android:layout_centerInParent="true"
-                    />
-
-
-
-
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/ruls_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/report"
-                android:gravity="right"
-                android:padding="@dimen/detail_padding"
-                android:layout_marginTop="1dp"
-                >
-                <ImageView
-                    android:id="@+id/img7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_help_24"
-                    android:layout_centerInParent="true"
-
-
-                    />
-                <TextView
-                    android:id="@+id/ruls_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="شرایط و قوانین"
-                    android:textSize="@dimen/detail_size"
-                    android:fontFamily="@font/sans"
-                    android:textColor="@color/text_color_black"
-                    android:layout_marginTop="-4dp"
-                    android:layout_toLeftOf="@id/img7"
-                    android:layout_marginRight="4dp"
-                    android:layout_centerInParent="true"
-                    />
-
-                <View
-                    android:id="@+id/ruls_report"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="2dp"
-                    android:background="@color/hr_color"
-                    android:layout_below="@id/ruls_title"
-                    android:layout_marginTop="6dp"/>
-
-
-
-            </RelativeLayout>
-    </RelativeLayout>
-    </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-    <RelativeLayout
-        android:id="@+id/chat_layout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/toolbar_background">
-        <RelativeLayout
-            android:id="@+id/chat_btn"
-            android:layout_width="180dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_margin="6dp"
-
-            android:background="@color/colorPrimary"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/transparent"
             >
-            <TextView
+            <!--        android:background="#2CB6B4B4">-->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="پیام به آگهی دهنده"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16"/>
+                >
+                <ImageView
+                    android:id="@+id/arrow_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_arrow_forward_24"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="8dp"
+                    android:onClick="@{() -> chatviewmodel.arrowBack()}"/>
+
+                <ImageView
+                    android:id="@+id/mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_bookmark_unselected24"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/share"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"/>
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_share_24"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="12dp"
+                    android:layout_alignParentLeft="true"/>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
 
 
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/chat_layout"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <com.smarteist.autoimageslider.SliderView
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:sliderAnimationDuration="600"
+                        app:sliderAutoCycleDirection="right"
+                        app:sliderAutoCycleEnabled="false"
+                        android:background="@color/white"
+
+
+                        app:sliderIndicatorAnimationDuration="600"
+
+                        app:sliderIndicatorMargin="15dp"
+                        app:sliderIndicatorOrientation="horizontal"
+                        app:sliderIndicatorPadding="6dp"
+                        app:sliderIndicatorRadius="2dp"
+
+
+                        app:sliderScrollTimeInSec="3"
+                        app:sliderStartAutoCycle="true"
+
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/slider"
+                        android:padding="8dp">
+
+
+                        <RelativeLayout
+                            android:id="@+id/laoyut_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding">
+
+
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/sans"
+                                android:text="@{details.title}"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="@dimen/detail_size"
+                                tools:text="پژو 206 مدل 94" />
+                            <TextView
+                                android:id="@+id/edit_announcment"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:text="ویرایش"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:padding="4dp"
+                                android:background="@color/colorPrimary"
+                                android:textSize="@dimen/text_size_14"
+                                android:textStyle="bold"
+                                android:visibility="gone"/>
+
+                            <TextView
+                                android:id="@+id/city"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/title"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/sans"
+                                android:text="@{details.created_at}"
+                                android:textColor="@color/text_color_low_black"
+                                android:textSize="@dimen/detail_size"
+                                tools:text="شیراز گویم" />
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="12dp"
+                            android:background="@color/hr_color"
+                            android:layout_below="@id/laoyut_title"/>
+                        <RelativeLayout
+                            android:id="@+id/layout_catrgory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/view1"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+                            >
+                            <LinearLayout
+                                android:id="@+id/vv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="کالا"
+                                    android:text="@{details.collection}"
+                                    android:textSize="@dimen/detail_size"
+                                    android:fontFamily="@font/sans"
+                                    android:textColor="@color/text_color_black"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_weight="1"
+                                    android:gravity="left"/>
+
+                            <TextView
+                                android:id="@+id/category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="دسته بندی"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+                                android:gravity="right"
+                                android:layout_marginTop="6dp"
+                                android:layout_weight="1"
+                         />
+
+                            </LinearLayout>
+                            <View
+                                android:id="@+id/view2"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/vv"
+                                android:layout_marginTop="6dp"/>
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layout_collection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layout_catrgory"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+                            >
+                            <TextView
+                                android:id="@+id/collection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="وضعیت"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+
+                                android:layout_marginTop="4dp"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="گم شده"
+                                android:text="@{details.type}"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentLeft="true"/>
+                            <View
+                                android:id="@+id/view3"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/collection"
+                                android:layout_marginTop="6dp"/>
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/othercity_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layout_collection"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+                            >
+                            <TextView
+                                android:id="@+id/othercity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="شهر های دیگر"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+
+                                android:layout_marginTop="4dp"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+                                android:id="@+id/other_citys"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="ناموجود"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentLeft="true"/>
+                            <View
+                                android:id="@+id/view4"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/othercity"
+                                android:layout_marginTop="6dp"/>
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/layout_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/othercity_layout"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="6dp"
+
+                            >
+                            <TextView
+                                android:id="@+id/detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="توضیحات"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentRight="true"/>
+
+                            <TextView
+                                android:id="@+id/deeee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="@string/lorem"
+                                android:text="@{details.detail}"
+
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+                                android:layout_below="@id/detail"
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="12dp"
+                                android:lineSpacingExtra="7dp"/>
+                            <View
+                                android:id="@+id/view_detail"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/deeee"
+                                android:layout_marginTop="4dp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layout_detail"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+                            >
+                            <ImageView
+                                android:id="@+id/img6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_error_outline_24"
+                                android:layout_centerInParent="true"
+
+
+                                />
+                            <TextView
+                                android:id="@+id/report_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="گزارش مشکل آگهی"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_marginTop="2dp"
+                                android:layout_toLeftOf="@id/img6"
+                                android:layout_marginRight="4dp"
+                                android:layout_centerInParent="true"
+                                />
+
+
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/ruls_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/report"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+                            >
+                            <ImageView
+                                android:id="@+id/img7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_help_24"
+                                android:layout_centerInParent="true"
+
+
+                                />
+                            <TextView
+                                android:id="@+id/ruls_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ruls_detail"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_marginTop="-4dp"
+                                android:layout_toLeftOf="@id/img7"
+                                android:layout_marginRight="4dp"
+                                android:layout_centerInParent="true"
+                                />
+
+                            <View
+                                android:id="@+id/ruls_report"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/ruls_title"
+                                android:layout_marginTop="6dp"/>
+
+
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
+            <RelativeLayout
+                android:id="@+id/chat_layout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/toolbar_background">
+                <RelativeLayout
+                    android:id="@+id/chat_btn"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="6dp"
+
+                    android:background="@color/colorPrimary"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="پیام به آگهی دهنده"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_16"/>
+
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/chat_progress"
+                        android:layout_width="270dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/progress"
+                        android:visibility="gone"
+                        android:background="@color/gray"
+
+
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:setImageSliderProgress="@{progress}"
+            android:background="@color/white"
+            android:gravity="center"
+            android:visibility="gone">
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/chat_progress"
                 android:layout_width="270dp"
                 android:layout_height="60dp"
-                android:layout_centerInParent="true"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/progress"
-                android:visibility="gone"
-                android:background="@color/gray"
-
-
+                android:visibility="visible"
                 />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:setLayoutVisi="@{layoutvisibility}"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/refredh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tryagain"
+                android:layout_centerInParent="true"
+                android:onClick="@{() -> viemodel.test(did,user)}"/>
+
+        </RelativeLayout>
+
+
+
+
     </RelativeLayout>
-</RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        app:setImageSliderProgress="@{progress}"
-        android:background="@color/white"
-        android:gravity="center"
-        android:visibility="gone">
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="270dp"
-            android:layout_height="60dp"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/progress"
-            android:visibility="visible"
-          />
-    </RelativeLayout>
-
-       <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:background="@color/white"
-       app:setLayoutVisi="@{layoutvisibility}"
-       android:visibility="gone">
-
-   <Button
-       android:id="@+id/refredh"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-      android:text="tryagain"
-      android:layout_centerInParent="true"
-       android:onClick="@{() -> viemodel.test(did,user)}"/>
-
-       </RelativeLayout>
-
-
-
-
-</RelativeLayout>
 </layout>

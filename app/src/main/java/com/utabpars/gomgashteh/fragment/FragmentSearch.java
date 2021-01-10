@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,8 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.SearchAdaptor;
@@ -35,6 +38,9 @@ import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentSearchBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -50,6 +56,7 @@ public class FragmentSearch extends Fragment  {
     SearchAdaptor searchAdaptor;
     ImageView backArrow,clear_text;
     static AnoncmentModel Save_anoncmentModel;
+    SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +64,7 @@ public class FragmentSearch extends Fragment  {
         // Inflate the layout for this
        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_search,container,false);
        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
+        sharedPreferences=getActivity().getSharedPreferences("main_city",Context.MODE_PRIVATE);
         initViews();
 
         return binding.getRoot();
@@ -68,6 +76,7 @@ public class FragmentSearch extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String type=getArguments().getString("type");
         InputMethodManager inputMethodManager =
                 (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (searchBar.requestFocus()){
@@ -99,7 +108,17 @@ public class FragmentSearch extends Fragment  {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searcgKey(charSequence.toString());
+                try {
+                    if (getMainCity()!=null){
+                        searcgKey(getMainCity().toString(),type,charSequence.toString());
+                        Log.d("dsvdsv", "onTextChanged: getcity");
+                    }
+                }catch (Exception e){
+                    searcgKey("",type,charSequence.toString());
+                    Log.d("dsvdsv", "onTextChanged: type"+type);
+                }
+
+
                 binding.setProgres(true);
             }
 
@@ -139,17 +158,17 @@ public class FragmentSearch extends Fragment  {
         searchRecyClerView.setHasFixedSize(true);
     }
 
-    private void searcgKey(String query) {
+    private void searcgKey(String city,String type,String keySearch) {
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.Search(query)
+        compositeDisposable.add(apiInterface.filterAnnouncement(city,type,keySearch)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
                         if (anoncmentModel.getResponse().equals("1")){
-                            Toast.makeText(getContext(), ""+anoncmentModel.getData().size(), Toast.LENGTH_SHORT).show();
+
                             binding.setSearchvisibility(true);
                             binding.setProgres(false);
                             binding.setLayouterror(false);
@@ -181,6 +200,23 @@ public class FragmentSearch extends Fragment  {
                         Log.d("vfrtert", "onSuccess: "+ e.toString());
                     }
                 }));
+    }
+
+    public List<String> getMainCity(){
+        Gson gson=new Gson();
+
+        String s=sharedPreferences.getString("main_city","w");
+
+        Type type=new TypeToken<List<String>>(){
+
+        }.getType();
+
+        List<String>  j=gson.fromJson(s,type);
+
+
+
+        Log.d("sfesfsef", "getCategoryId: "+j.get(0));
+        return j;
     }
 
 

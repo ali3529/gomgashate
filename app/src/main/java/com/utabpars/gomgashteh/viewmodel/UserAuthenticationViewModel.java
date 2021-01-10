@@ -43,8 +43,12 @@ public class UserAuthenticationViewModel extends ViewModel {
                 .subscribeWith(new DisposableSingleObserver<RmModel>() {
                     @Override
                     public void onSuccess(@NonNull RmModel rmModel) {
+                        if (rmModel.getResponse().equals("1")){
+                            Log.d("ewtwet[pl", "onSuccess: "+rmModel.getResponse());
+                            loginRespondeCallBack.otpCallback(rmModel);
 
-                     loginRespondeCallBack.otpCallback(rmModel);
+                        }
+
 
 
                     }

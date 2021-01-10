@@ -34,6 +34,10 @@ public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdap
     @Override
     public void onBindViewHolder(@NonNull SelectedViewHolder holder, int position) {
         holder.binding.setTitle(listData.get(position).getCategoryName());
+        holder.binding.delete.setOnClickListener(o ->{
+            listData.remove(position);
+            notifyDataSetChanged();
+        });
     }
 
     @Override

@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +30,12 @@ public class FragmentOptions extends Fragment {
     ManagerAdaptor adaptor;
     OptionViewModel viewModel;
     int annoouncment_id;
+    FragmentDeleteBottonSheet deleteBottonSheet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().findViewById(R.id.bottomnav).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_options,container,false);
         viewModel=new ViewModelProvider(this).get(OptionViewModel.class);
         return binding.getRoot();
@@ -47,9 +49,11 @@ public class FragmentOptions extends Fragment {
                 recyclerView=binding.recyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         int id=getArguments().getInt("id");
+        Log.d("fdffvcdsv", "onViewCreated: id"+id);
+        Log.d("fdffvcdsv", "onViewCreated: id_announce"+annoouncment_id);
         viewModel.getTabs(String.valueOf(id));
         binding.load.setVisibility(View.VISIBLE);
-
+        deleteBottonSheet=new FragmentDeleteBottonSheet();
         viewModel.manageModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ManageModel>() {
             @Override
             public void onChanged(ManageModel manageModel) {
@@ -70,21 +74,39 @@ public class FragmentOptions extends Fragment {
                     binding.stat.setTextColor(getResources().getColor(R.color.red));
                     binding.fff.setText("آگهی شما توسط رد شده است");
                 }else if (manageModel.getStatus_type().equals("5")){
-                    binding.stat.setTextColor(getResources().getColor(R.color.lowblack));
+                    binding.stat.setTextColor(getResources().getColor(R.color.red));
                     binding.fff.setText("آگهی شما حذف شده است");
                 }
             }
         });
+        deleteBottonSheet.isDelete.observe(getViewLifecycleOwner(),t ->{
+            if (t){
+                Toast.makeText(getContext(), "آگهی شما با موفقیت حذف شد", Toast.LENGTH_SHORT).show();
+                deleteBottonSheet.dismiss();
+                viewModel.getTabs(String.valueOf(id));
+
+            }
+
+        });
+
 
     }
 
    DetileCallBack detileCallBack=new DetileCallBack() {
        @Override
        public void onItemClicked(View view, int id) {
-           if (id==3){
+           if (id==1){
                Bundle bundle=new Bundle();
                bundle.putInt("id",annoouncment_id);
+               Navigation.findNavController(getView()).navigate(R.id.action_fragmentOptions_to_fragmentShowEdit,bundle);
+           } else if (id==3){
+               Bundle bundle=new Bundle();
+               bundle.putInt("id",annoouncment_id);
+               Log.d("onclick", "onItemClicked: "+annoouncment_id);
                Navigation.findNavController(view).navigate(R.id.action_fragmentOptions_to_editAnnouncementFragment,bundle);
+           }else if (id==4){
+
+               deleteBottonSheet.show(getActivity().getSupportFragmentManager(),String.valueOf(annoouncment_id));
            }
            Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
        }

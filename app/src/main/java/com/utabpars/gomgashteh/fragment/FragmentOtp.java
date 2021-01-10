@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentOtpBinding;
+import com.utabpars.gomgashteh.interfaces.LoginRespondeCallBack;
 import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.viewmodel.UserAuthenticationViewModel;
@@ -55,7 +56,7 @@ public class FragmentOtp extends Fragment {
 
 
         binding.ttt.setText("کد تایید پیامک شده به "+" "+phone_num+" "+"وارد کنید");
-
+        viewModel.phoneNumberInterface(loginRespondeCallBack);
         if (is_validate) {
 
 
@@ -154,6 +155,8 @@ public class FragmentOtp extends Fragment {
                         viewModel.timerOtp();
                         viewModel.userAuthentication(phone_num);
                         binding.setProgress(true);
+
+
                     }
                 });
             }
@@ -209,4 +212,11 @@ public class FragmentOtp extends Fragment {
 
         viewModel.registerUser(phone,code,name,lastName);
     }
+    LoginRespondeCallBack loginRespondeCallBack=new LoginRespondeCallBack() {
+        @Override
+        public void otpCallback(RmModel rmModel) {
+            Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+            binding.setProgress(false);
+        }
+    };
 }

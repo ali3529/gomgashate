@@ -20,15 +20,20 @@ import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.Detile> {
-    static String province_id;
+    static String city;
+    static String type;
+     static String key_search;
 
     public static final int PAGE=1;
 
     public ProvinceFilterDataSource() {
     }
 
-    public ProvinceFilterDataSource(String province_id) {
-        this.province_id = province_id;
+    public void FilterDataSource(String city,String type,String key_search) {
+        this.city=city;
+        this.type=type;
+        this.key_search=key_search;
+        Log.d("dsfdsfdsf", "FilterDataSource: "+city);
 
     }
 
@@ -38,7 +43,10 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
 
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.filterByProvince(province_id)
+        compositeDisposable.add(apiInterface.filterAnnouncement(
+                city,
+                type,
+                key_search)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {

@@ -3,6 +3,7 @@ package com.utabpars.gomgashteh.chat;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketResponseModel {
@@ -20,6 +21,26 @@ public class TicketResponseModel {
     private boolean block;
     @SerializedName("isBlock")
     private boolean isBlockFromAnnouncer;
+    @SerializedName("report_list")
+    List<String> report_list=new ArrayList<>();
+    @SerializedName("is_report")
+    private boolean report;
+
+    public boolean isReport() {
+        return report;
+    }
+
+    public void setReport(boolean report) {
+        this.report = report;
+    }
+
+    public List<String> getReport_list() {
+        return report_list;
+    }
+
+    public void setReport_list(List<String> report_list) {
+        this.report_list = report_list;
+    }
 
     public boolean isBlockFromAnnouncer() {
         return isBlockFromAnnouncer;

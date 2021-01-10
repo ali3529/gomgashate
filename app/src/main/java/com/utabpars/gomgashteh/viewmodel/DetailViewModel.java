@@ -21,11 +21,11 @@ public class DetailViewModel extends ViewModel {
     public MutableLiveData<DetailModel.Data> dataMutableLiveData=new MutableLiveData<>();
 
     FragmentAnnouncmentDetailBinding binding;
-    public void getDetail(int id,String user_id){
+    public void getDetail(int id,String user_id,String code){
         Log.d("dsfdsfds33f", "getDetail: "+user_id);
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getDetail(id,user_id)
+        compositeDisposable.add(apiInterface.getDetail(id,user_id,code)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableSingleObserver<DetailModel>() {
@@ -57,7 +57,7 @@ public class DetailViewModel extends ViewModel {
    }
 
 public void test(int id,String user_id){
-      getDetail(id,user_id);
+      getDetail(id,user_id,"");
       binding.setLayoutvisibility(false);
       binding.setProgress(true);
 }

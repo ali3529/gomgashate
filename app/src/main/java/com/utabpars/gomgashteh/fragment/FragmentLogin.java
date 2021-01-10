@@ -24,7 +24,7 @@ import com.utabpars.gomgashteh.interfaces.LoginRespondeCallBack;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.viewmodel.UserAuthenticationViewModel;
 
-public class FragmentLogin extends Fragment implements LoginRespondeCallBack {
+public class FragmentLogin extends Fragment  {
     FragmentLoginBinding binding;
     UserAuthenticationViewModel viewModel;
 
@@ -51,7 +51,7 @@ public class FragmentLogin extends Fragment implements LoginRespondeCallBack {
 //                    binding.inputPhonenumber.getApplicationWindowToken(),
 //                    InputMethodManager.SHOW_FORCED, 0);
 
-viewModel.phoneNumberInterface(this::otpCallback);
+viewModel.phoneNumberInterface(loginRespondeCallBack);
 
         viewModel.error.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -77,22 +77,26 @@ viewModel.phoneNumberInterface(this::otpCallback);
         Toast.makeText(getContext(), "sdfgestggzsd", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void otpCallback(RmModel rmModel) {
-        if (rmModel.getResponse().equals("1")){
-            Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
-            binding.setProgress(false);
-            Bundle bundle=new Bundle();
-            bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
-            bundle.putBoolean("is_validate",true);
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
-        }else if (rmModel.getResponse().equals("0")){
-            Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
-            binding.setProgress(false);
-            Bundle bundle=new Bundle();
-            bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
-            bundle.putBoolean("is_validate",false);
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+
+
+    LoginRespondeCallBack loginRespondeCallBack=new LoginRespondeCallBack() {
+        @Override
+        public void otpCallback(RmModel rmModel) {
+            if (rmModel.getResponse().equals("1")){
+                Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+                binding.setProgress(false);
+                Bundle bundle=new Bundle();
+                bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
+                bundle.putBoolean("is_validate",true);
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+            }else if (rmModel.getResponse().equals("0")){
+                Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+                binding.setProgress(false);
+                Bundle bundle=new Bundle();
+                bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
+                bundle.putBoolean("is_validate",false);
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+            }
         }
-    }
+    };
 }

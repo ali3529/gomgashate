@@ -129,8 +129,26 @@ public class FragmentList extends Fragment {
 //        }
 
 
+        lastAnnouncmentAboveBtNavigation();
 
-
+    }
+    private void lastAnnouncmentAboveBtNavigation() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.gggg.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+                int itemcount=layoutManager.getItemCount();
+                int lastvisi=layoutManager.findLastVisibleItemPosition();
+                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
+                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
+                if (lastvisi==itemcount-1){
+                    Log.d("dsgfdgfdg", "last: ");
+                    binding.gggg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override

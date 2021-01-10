@@ -410,8 +410,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="2343" />
-                            <option name="y" value="2005" />
+                            <option name="x" value="2260" />
+                            <option name="y" value="1972" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -490,6 +490,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentShowEdit">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2656" />
+                            <option name="y" value="2300" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

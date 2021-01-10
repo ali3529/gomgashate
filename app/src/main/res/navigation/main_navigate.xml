@@ -142,7 +142,7 @@
         android:id="@+id/fragmentAnnouncmentDetail"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAnnouncmentDetail"
         android:label="fragment_announcment_detail"
-        tools:layout="@layout/fragment_announcment_detail" >
+        tools:layout="@layout/fragment_announcment_detail">
         <action
             android:id="@+id/action_fragmentAnnouncmentDetail_to_fragmentLogin"
             app:destination="@id/fragmentLogin"
@@ -159,6 +159,12 @@
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit"
             app:popUpToInclusive="false" />
+        <argument
+            android:name="code"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="https://gomgashteh.com/detail/{code}" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCallection"
@@ -317,6 +323,9 @@
         <action
             android:id="@+id/action_fragmentOptions_to_editAnnouncementFragment"
             app:destination="@id/editAnnouncementFragment" />
+        <action
+            android:id="@+id/action_fragmentOptions_to_fragmentShowEdit"
+            app:destination="@id/fragmentShowEdit" />
     </fragment>
     <fragment
         android:id="@+id/editAnnouncementFragment"
@@ -331,4 +340,8 @@
             app:popUpTo="@id/fragmentAnnouncmentDetail"
             app:popUpToInclusive="false" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentShowEdit"
+        android:name="com.utabpars.gomgashteh.managerAnnouncement.FragmentShowEdit"
+        android:label="FragmentShowEdit"/>
 </navigation>

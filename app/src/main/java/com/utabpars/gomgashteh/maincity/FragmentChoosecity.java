@@ -64,6 +64,13 @@ public class FragmentChoosecity extends Fragment {
                 Log.d("ffdvf", "onViewCreated: okkk"+t.size());
                 adaptor=new SelectetdCityAdaptor(t);
                 recyclerView.setAdapter(adaptor);
+            }else {
+                try {
+                    adaptor.notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+
             }
 
         });
@@ -79,9 +86,12 @@ public class FragmentChoosecity extends Fragment {
             popback();
 
         } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), "انتخاب حداقل یک شهر الزامی است", Toast.LENGTH_SHORT).show();
-            Log.d("bhvhvhvg", "ttt: "+e.toString());
+//            e.printStackTrace();
+//            Toast.makeText(getContext(), "انتخاب حداقل یک شهر الزامی است", Toast.LENGTH_SHORT).show();
+//            Log.d("bhvhvhvg", "ttt: "+e.toString());
+            editor.clear();
+            editor.commit();
+            popback();
         }
     }
 

@@ -3,4 +3,7 @@
 <item android:id="@+id/block"
     android:title="مسدود"
     android:icon="@drawable/ic_block_24"/>
+    <item android:id="@+id/report"
+        android:title="گزارش"
+        android:icon="@drawable/ic_block_24"/>
 </menu>

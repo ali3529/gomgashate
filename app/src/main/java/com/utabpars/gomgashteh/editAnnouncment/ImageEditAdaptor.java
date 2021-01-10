@@ -2,7 +2,6 @@ package com.utabpars.gomgashteh.editAnnouncment;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,9 +17,10 @@ import java.util.List;
 
 public class ImageEditAdaptor extends RecyclerView.Adapter<ImageEditAdaptor.ImageViewHolder> {
     List<String> images=new ArrayList<>();
-
-    public ImageEditAdaptor(List<String> list) {
+    onDeleteImage onDeleteImage;
+    public ImageEditAdaptor(List<String> list,onDeleteImage onDeleteImage) {
         this.images = list;
+        this.onDeleteImage=onDeleteImage;
     }
 
     @NonNull
@@ -28,14 +28,19 @@ public class ImageEditAdaptor extends RecyclerView.Adapter<ImageEditAdaptor.Imag
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
         ItemImageAddAnnounsmentBinding binding= DataBindingUtil.inflate(inflater, R.layout.item_image_add_announsment,parent,false);
+
         return new ImageViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        for (int i = 0; i < images.size(); i++) {
-            Picasso.get().load(Uri.parse(images.get(i))).into(holder.binding.img);
-        }
+
+            Picasso.get().load(Uri.parse(images.get(position))).into(holder.binding.img);
+
+        holder.binding.deletImg.setOnClickListener( o->{
+            images.remove(position);
+            onDeleteImage.deleteImage(images);
+        });
     }
 
     @Override
@@ -50,4 +55,8 @@ public class ImageEditAdaptor extends RecyclerView.Adapter<ImageEditAdaptor.Imag
             this.binding=binding;
         }
     }
+
+}
+ interface onDeleteImage{
+    void deleteImage(List<String> list);
 }

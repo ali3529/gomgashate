@@ -2,13 +2,13 @@ package com.utabpars.gomgashteh.editAnnouncment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -25,12 +25,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentEditAnnouncementBinding;
+import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
+import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
-import com.utabpars.gomgashteh.viewmodel.DetailViewModel;
+import com.utabpars.gomgashteh.utils.Utils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -48,13 +51,19 @@ import okhttp3.RequestBody;
 
 public class EditAnnouncementFragment extends Fragment {
     FragmentEditAnnouncementBinding binding;
-    DetailViewModel viewModel;
+    EditAnnouncementViewModel viewModel;
     int id;
     boolean load=true;
-    RecyclerView recyclerView;
-    ImageEditAdaptor adaptor;
+    RecyclerView oldRecyclerView,recyclerView;
+    ImageEditAdaptor oldAdaptor;
     SharedPreferences sharedPreferences,user_status;
     String type;
+    BottomSheetChooseImage bottomSheetChooseImage;
+    AddImageAnnouncmentAdaptor adaptor;
+    List<Uri> uriList=new ArrayList<>();
+    List<MultipartBody.Part> partLists=new ArrayList<>();
+    List<String> old_pic=new ArrayList<>();
+
 
 
 
@@ -66,14 +75,17 @@ public class EditAnnouncementFragment extends Fragment {
         // Inflate the layout for this fragment
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_edit_announcement,container,false);
-        viewModel=new ViewModelProvider(getActivity()).get(DetailViewModel.class);
+        viewModel=new ViewModelProvider(this).get(EditAnnouncementViewModel.class);
         initViews();
         return binding.getRoot();
     }
 
     private void initViews() {
+        //for old pic
+        oldRecyclerView =binding.oldReyclerview;
         recyclerView=binding.imgRecyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        oldRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         sharedPreferences = getActivity().getSharedPreferences("editcity", Context.MODE_PRIVATE);
         user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
     }
@@ -82,13 +94,13 @@ public class EditAnnouncementFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         id=getArguments().getInt("id");
-      //  id=457;
+       // id=519;
         binding.setFrag(this);
         Log.d("asfcascc", "onViewCreated: "+id);
         binding.load.setVisibility(View.VISIBLE);
-        viewModel.getDetail(id,"0");
+        viewModel.getEditDetail(id);
 
-        viewModel.getMutableDetail().observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
+        viewModel.dataMutableLiveData.observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
             @Override
             public void onChanged(DetailModel.Data data) {
                 Log.d("safsafsaf", "onChanged: "+data.getId());
@@ -142,20 +154,22 @@ public class EditAnnouncementFragment extends Fragment {
         //    binding.fgfd.setText(sharedPreferences.getString("city_name",""));
 
         binding.saveAnnounce.setOnClickListener(o ->{
-            List<MultipartBody.Part> file=new ArrayList<>();
             ApiInterface apiInterface= ApiClient.getApiClient();
             CompositeDisposable compositeDisposable=new CompositeDisposable();
-            compositeDisposable.add(apiInterface.edittAnnouncment(fetchdata(),file)
+            compositeDisposable.add(apiInterface.edittAnnouncment(fetchdata(),partLists)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(new DisposableSingleObserver<SaveAnnouncementModel>() {
                 @Override
                 public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull SaveAnnouncementModel saveAnnouncementModel) {
-                    Toast.makeText(getContext(), ""+saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
-                    Bundle bundle=new Bundle();
-                    bundle.putInt("id",id);
-                    bundle.putString("edit","edit");
-                    Navigation.findNavController(view).navigateUp();
+                    if (saveAnnouncementModel.getResponse().equals("1")){
+                        Toast.makeText(getContext(), ""+saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
+                        Bundle bundle=new Bundle();
+                        bundle.putInt("id",id);
+                        bundle.putString("edit","edit");
+                        Navigation.findNavController(view).navigateUp();
+                    }
+
 
                 }
 
@@ -167,14 +181,28 @@ public class EditAnnouncementFragment extends Fragment {
 
         });
 
+
+        binding.layoutAddImage.setOnClickListener(o ->{
+            if (Utils.checkPermissionStorage(getContext()) && Utils.checkPermissionStorageWrite(getContext())) {
+                bottomSheetChooseImage=new BottomSheetChooseImage();
+                bottomSheetChooseImage.show(getActivity().getSupportFragmentManager(),"");
+                bottomSheetChooseImage.passData(passDataCallBack);
+
+            }
+        });
+
+
+
     }
 
     private void loadData(DetailModel.Data data) {
         binding.setData(data);
         binding.title.setText(data.getTitle());
         binding.description.setText(data.getTitle());
-        adaptor=new ImageEditAdaptor(data.getPictures());
-        recyclerView.setAdapter(adaptor);
+        binding.fgfd.setText(data.getCity());
+        oldAdaptor =new ImageEditAdaptor(data.getPictures(),DeleteImage);
+        Log.d("scdzvdzvdijkl", "loadData: "+data.getPictures().get(0));
+        oldRecyclerView.setAdapter(oldAdaptor);
         try {
             for (int i = 0; i < data.getOtherCity().size(); i++) {
                 binding.othercity.append(data.getOtherCity().get(i)+" ");
@@ -242,6 +270,7 @@ public class EditAnnouncementFragment extends Fragment {
         RequestBody detail=RequestBody.create(MediaType.parse("detail"),binding.description.getText().toString());
         RequestBody reward=RequestBody.create(MediaType.parse("reward"),binding.surpriseText.getText().toString());
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
+        RequestBody picture_old=RequestBody.create(MediaType.parse("old_picture"),old_pic.toString());
         RequestBody other_city;
         if (getSHaredList()==null){
             other_city=RequestBody.create(MediaType.parse("other_city"),"");
@@ -269,6 +298,7 @@ public class EditAnnouncementFragment extends Fragment {
         addAnnouncement.put("announcer_id",announcer_id);
         addAnnouncement.put("reward",reward);
         addAnnouncement.put("id",id_announc);
+        addAnnouncement.put("old_picture",picture_old);
 
 
 
@@ -276,4 +306,27 @@ public class EditAnnouncementFragment extends Fragment {
 
         return addAnnouncement;
     }
+
+PassDataCallBack passDataCallBack=new PassDataCallBack() {
+    @Override
+    public void passUri(Uri uri, MultipartBody.Part partList) {
+        Toast.makeText(getContext(), "hi bech", Toast.LENGTH_SHORT).show();
+        uriList.add(uri);
+        partLists.add(partList);
+        adaptor=new AddImageAnnouncmentAdaptor(uriList);
+        recyclerView.setAdapter(adaptor);
+        bottomSheetChooseImage.dismiss();
+    }
+};
+
+    onDeleteImage DeleteImage=new onDeleteImage() {
+        @Override
+        public void deleteImage(List<String> list) {
+            Log.d("fbcgnfng", "deleteImage: "+list.size());
+        oldAdaptor.notifyDataSetChanged();
+        old_pic=list;
+
+        }
+    };
+
 }

@@ -65,6 +65,17 @@ public class DetailModel {
         @SerializedName("is_mark")
         private boolean isMark;
 
+        @SerializedName("share_link")
+        private String shareLink;
+
+        public String getShareLink() {
+            return shareLink;
+        }
+
+        public void setShareLink(String shareLink) {
+            this.shareLink = shareLink;
+        }
+
         public boolean isMark() {
             return isMark;
         }

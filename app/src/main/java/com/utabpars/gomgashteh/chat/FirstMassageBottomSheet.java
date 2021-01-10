@@ -25,6 +25,7 @@ import com.utabpars.gomgashteh.databinding.FragmentFirstMassageBottomSheetBindin
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.RmModel;
+import com.utabpars.gomgashteh.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,9 +106,10 @@ public String sender_id;
         binding.attach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                bottomSheetChooseImage.show(getActivity().getSupportFragmentManager(),"c");
-                bottomSheetChooseImage.passData(passDataCallBack);
+                if (Utils.checkPermissionStorage(getContext()) && Utils.checkPermissionStorageWrite(getContext())) {
+                    bottomSheetChooseImage.show(getActivity().getSupportFragmentManager(), "c");
+                    bottomSheetChooseImage.passData(passDataCallBack);
+                }
             }
         });
 
