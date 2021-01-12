@@ -7,6 +7,7 @@ import com.utabpars.gomgashteh.chat.TicketResponseModel;
 import com.utabpars.gomgashteh.chat.reportchat.ReportModel;
 import com.utabpars.gomgashteh.managerAnnouncement.ManageModel;
 import com.utabpars.gomgashteh.markannouncment.MarkModel;
+import com.utabpars.gomgashteh.model.AboutModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.BlockModel;
@@ -171,5 +172,12 @@ public interface ApiInterface {
     @FormUrlEncoded
     Single<PhoneConfirmModel> phoneConfirm(@Field("user_id") String user_id,
                                            @Field("ticket_id") String ticket_id);
+
+    @POST("about-me")
+    Single<AboutModel> getAboutMe();
+
+    @POST("subsets")
+    @FormUrlEncoded
+    Single<CategoryModel> getSubsets(@Field("callection_id") String callection_id);
 }
 

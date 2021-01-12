@@ -65,6 +65,10 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+        binding.about.setOnClickListener( o->{
+            Navigation.findNavController(o).navigate(R.id.action_perofile_to_fragmentAboutMe);
+        });
+
 
 
         binding.logout.setOnClickListener(new View.OnClickListener() {

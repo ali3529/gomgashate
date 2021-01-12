@@ -201,7 +201,6 @@ public class EditAnnouncementFragment extends Fragment {
         binding.description.setText(data.getTitle());
         binding.fgfd.setText(data.getCity());
         oldAdaptor =new ImageEditAdaptor(data.getPictures(),DeleteImage);
-        Log.d("scdzvdzvdijkl", "loadData: "+data.getPictures().get(0));
         oldRecyclerView.setAdapter(oldAdaptor);
         try {
             for (int i = 0; i < data.getOtherCity().size(); i++) {
@@ -217,6 +216,13 @@ public class EditAnnouncementFragment extends Fragment {
             binding.lost.toggle();
             type="2";
         }
+        if (data.getPictures().get(0).equals("https://gomgashteh.com/uploads/announce/camera-icon.jpg")){
+            Toast.makeText(getContext(), "not [ivture", Toast.LENGTH_SHORT).show();
+            data.getPictures().remove(0);
+        }
+        old_pic=data.getPictures();
+        Log.d("sfsefesf", "fetchdata: "+data.getPictures().toString());
+        Log.d("sfsefesf", "fetchdata: "+old_pic.toString());
     }
 
     public List<String> getSHaredList() {
@@ -271,6 +277,7 @@ public class EditAnnouncementFragment extends Fragment {
         RequestBody reward=RequestBody.create(MediaType.parse("reward"),binding.surpriseText.getText().toString());
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
         RequestBody picture_old=RequestBody.create(MediaType.parse("old_picture"),old_pic.toString());
+
         RequestBody other_city;
         if (getSHaredList()==null){
             other_city=RequestBody.create(MediaType.parse("other_city"),"");
@@ -310,7 +317,6 @@ public class EditAnnouncementFragment extends Fragment {
 PassDataCallBack passDataCallBack=new PassDataCallBack() {
     @Override
     public void passUri(Uri uri, MultipartBody.Part partList) {
-        Toast.makeText(getContext(), "hi bech", Toast.LENGTH_SHORT).show();
         uriList.add(uri);
         partLists.add(partList);
         adaptor=new AddImageAnnouncmentAdaptor(uriList);
@@ -324,7 +330,9 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
         public void deleteImage(List<String> list) {
             Log.d("fbcgnfng", "deleteImage: "+list.size());
         oldAdaptor.notifyDataSetChanged();
+            Log.d("sfsefesf", "deleteImage: "+list.toString());
         old_pic=list;
+            Log.d("sfsefesf", "deleteImage: "+old_pic.toString());
 
         }
     };

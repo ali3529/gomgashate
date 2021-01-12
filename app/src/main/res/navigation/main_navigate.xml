@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/fragmentSplash">
+    app:startDestination="@id/fragmentSubset">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -137,6 +137,9 @@
         <action
             android:id="@+id/action_perofile_to_fragmentMark"
             app:destination="@id/fragmentMark" />
+        <action
+            android:id="@+id/action_perofile_to_fragmentAboutMe"
+            app:destination="@id/fragmentAboutMe" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -185,6 +188,9 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_fragmentCallection_to_fragmentSubset"
+            app:destination="@id/fragmentSubset" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncCollection"
@@ -344,4 +350,12 @@
         android:id="@+id/fragmentShowEdit"
         android:name="com.utabpars.gomgashteh.managerAnnouncement.FragmentShowEdit"
         android:label="FragmentShowEdit"/>
+    <fragment
+        android:id="@+id/fragmentAboutMe"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentAboutMe"
+        android:label="FragmentAboutMe" />
+    <fragment
+        android:id="@+id/fragmentSubset"
+        android:name="com.utabpars.gomgashteh.category.FragmentSubset"
+        android:label="FragmentSubset" />
 </navigation>

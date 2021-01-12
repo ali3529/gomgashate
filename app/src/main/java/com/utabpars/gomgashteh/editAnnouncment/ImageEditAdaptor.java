@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.editAnnouncment;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -21,6 +22,7 @@ public class ImageEditAdaptor extends RecyclerView.Adapter<ImageEditAdaptor.Imag
     public ImageEditAdaptor(List<String> list,onDeleteImage onDeleteImage) {
         this.images = list;
         this.onDeleteImage=onDeleteImage;
+        Log.d("sfsefesf", "ImageEditAdaptor: "+images.toString());
     }
 
     @NonNull

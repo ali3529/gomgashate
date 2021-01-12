@@ -58,6 +58,7 @@ public class FragmentCallection extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("fghfdgdfhh", "onViewCreated:  callection");
         binding.setProgress(true);
          title=getArguments().getString("title");
          list_id=getArguments().getString("id");

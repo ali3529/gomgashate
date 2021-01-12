@@ -171,6 +171,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentAboutMe">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="3467" />
+                            <option name="y" value="1500" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentAnnouncCollection">
                     <value>
                       <LayoutPositions>
@@ -213,6 +225,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="deepLink2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -223,8 +240,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="997" />
-                            <option name="y" value="-1856" />
+                            <option name="x" value="1004" />
+                            <option name="y" value="-1889" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -421,6 +438,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_fragmentOptions_to_fragmentShowEdit">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -527,6 +549,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentSubset">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1016" />
+                            <option name="y" value="-2557" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="list">
                     <value>
                       <LayoutPositions>
@@ -558,13 +592,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1797" />
-                            <option name="y" value="646" />
+                            <option name="x" value="1838" />
+                            <option name="y" value="663" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_perofile_to_announcement">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_perofile_to_fragmentAboutMe">
                               <value>
                                 <LayoutPositions />
                               </value>
