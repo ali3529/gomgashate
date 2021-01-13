@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.FragmentList">
+        >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -21,9 +21,10 @@
 
             >
             <TextView
+                android:id="@+id/toolbartitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="زیر دسته بندی "
+
                 android:layout_gravity="center"
                 android:textSize="22dp"
                 android:fontFamily="@font/sans"

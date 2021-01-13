@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,21 +21,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.CategoryAdaptor;
-import com.utabpars.gomgashteh.api.ApiClient;
-import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentListBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.viewmodel.CategoryViewModel;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FragmentList extends Fragment {
     FragmentListBinding binding;
@@ -45,7 +36,7 @@ public class FragmentList extends Fragment {
     CategoryViewModel categoryViewModel;
     static MutableLiveData<CategoryModel> saveInstanceList;
     Toolbar toolbar;
-    String test="0";
+    String type ="0";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,38 +58,31 @@ public class FragmentList extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         try {
-            test=getArguments().getString("test");
+            type =getArguments().getString("type");
         }catch (Exception e){
-
+            type="category";
         }
 
 
 
-        if (true){
+
+
             categoryViewModel.categoriesMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
                 @Override
                 public void onChanged(CategoryModel categoryModel) {
                     binding.setProgress(false);
                     categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
-                        public void getCategoryId(View view, String id,int position) {
-                            if (test.equals("1")){
+                        public void getCategoryId(View view, String id,int position,String title) {
+
                                 Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]");
 
                                 Bundle bundle = new Bundle();
                                 bundle.putString("title", categoryModel.getListData().get(position).getCategoryName());
                                 bundle.putString("id", String.valueOf(id));
-                                bundle.putString("test", test);
+                                bundle.putString("type", type);
                                 Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection, bundle);
-                            }else {
 
-
-                                Bundle bundle = new Bundle();
-                                bundle.putString("title", categoryModel.getListData().get(position).getCategoryName());
-                                bundle.putString("id", String.valueOf(id));
-                                bundle.putString("test", "0");
-                                Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection, bundle);
-                            }
                         }
                     });
                     Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
@@ -107,7 +91,7 @@ public class FragmentList extends Fragment {
                     saveInstanceList =categoryViewModel.categoriesMutableLiveData();
                 }
             });
-       }
+
 //        else {
 //            saveInstanceList.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
 //                @Override

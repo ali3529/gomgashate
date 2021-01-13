@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.category.SubSetModel;
 import com.utabpars.gomgashteh.databinding.ItemCategoryBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
 import com.utabpars.gomgashteh.interfaces.ItemSelectedCallback;
@@ -20,6 +21,7 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
     private List<CategoryModel.ListData> categoryList;
     private CategoryCallBack categoryCallBack;
     public ItemSelectedCallback itemSelectedCallback;
+
 
     public CategoryAdaptor(List<CategoryModel.ListData> categoryList, CategoryCallBack categoryCallBack, ItemSelectedCallback itemSelectedCallback) {
         this.categoryList = categoryList;
@@ -38,6 +40,7 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
 
 
 
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,7 +55,7 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                categoryCallBack.getCategoryId(view,categoryList.get(position).getId(),position);
+                categoryCallBack.getCategoryId(view,categoryList.get(position).getId(),position,categoryList.get(position).getCategoryName());
                 if (itemSelectedCallback!=null){
                     itemSelectedCallback.getSelectedItem(view,categoryList.get(position),position,false);
                 }

@@ -61,7 +61,7 @@ public class FragmentProvince extends Fragment {
             public void onChanged(CategoryModel categoryModel) {
                 categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                     @Override
-                    public void getCategoryId(View view, String id, int position) {
+                    public void getCategoryId(View view, String id, int position,String title) {
                         try {
                             navigate=getArguments().getString("navigate");
                             if (navigate.equals("city_add")) {

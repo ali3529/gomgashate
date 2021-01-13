@@ -113,7 +113,7 @@ public class FragmentAddAnnouncement extends Fragment  {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
-                bundle.putString("test","1");
+                bundle.putString("type","");
                 Navigation.findNavController(view).navigate(R.id.action_add_to_list,bundle);
             }
         });
@@ -137,10 +137,11 @@ public class FragmentAddAnnouncement extends Fragment  {
         });
 
         //set category
-        String title=shPref.getString("title_list","انتخاب کنید");
-        String title_collection=shPref.getString("title_categ","");
-        String id=shPref.getString("id_categ",null);
-        String id_list=shPref.getString("id_list",null);
+        String title=shPref.getString("collaction_id","انتخاب کنید");
+        String title_collection=shPref.getString("type","");
+        String id=shPref.getString("collaction_id",null);
+        String type_collaction=shPref.getString("type",null);
+        //todo
 
         binding.setCategory(title+", "+title_collection);
 
@@ -346,8 +347,9 @@ public class FragmentAddAnnouncement extends Fragment  {
 
         RequestBody title=RequestBody.create(MediaType.parse("title"),edTitle.getText().toString());
         RequestBody utype=RequestBody.create(MediaType.parse("type"),type);
-        RequestBody category_id=RequestBody.create(MediaType.parse("category_id"),shPref.getString("id_list",""));
-        RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("id_categ",""));
+        RequestBody category_id=RequestBody.create(MediaType.parse("case"),shPref.getString("type",null));
+        //todo
+        RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("collaction_id",""));
         RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",""));
         RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",""));
         RequestBody detail=RequestBody.create(MediaType.parse("detail"),edDescription.getText().toString());
@@ -368,7 +370,7 @@ public class FragmentAddAnnouncement extends Fragment  {
 
         addAnnouncement.put("title",title);
         addAnnouncement.put("type",utype);
-        addAnnouncement.put("category_id",category_id);
+        addAnnouncement.put("case",category_id);
         addAnnouncement.put("collection_id",collection_id);
         addAnnouncement.put("province_id",province_id);
         addAnnouncement.put("city_id",city_id);
@@ -376,6 +378,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         addAnnouncement.put("detail",detail);
         addAnnouncement.put("announcer_id",announcer_id);
         addAnnouncement.put("reward",reward);
+
 
 
 

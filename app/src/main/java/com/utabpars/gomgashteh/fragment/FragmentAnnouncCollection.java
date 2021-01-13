@@ -50,9 +50,10 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String id=getArguments().getString("id");
+        String type=getArguments().getString("type");
         Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
         filterItemDataSource=new FilterItemDataSource();
-        filterItemDataSource.getCallectionId(id);
+        filterItemDataSource.getCallectionId(id,type);
         filterItemDataSource.getBind(binding);
         binding.setViemodel(viewModel);
         pagingAdaptor=new PagingAdaptor();

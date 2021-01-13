@@ -235,13 +235,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentAttrebute">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2668" />
+                            <option name="y" value="-2932" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentCallection">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1004" />
-                            <option name="y" value="-1889" />
+                            <option name="x" value="1037" />
+                            <option name="y" value="-1922" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -252,6 +264,16 @@
                               </value>
                             </entry>
                             <entry key="action_fragmentCallection_to_fragmentAnnouncCollection">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_fragmentCallection_to_fragmentAttrebute">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_fragmentCallection_to_fragmentSubset">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -549,18 +571,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="fragmentSubset">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="1016" />
-                            <option name="y" value="-2557" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="list">
                     <value>
                       <LayoutPositions>
@@ -580,6 +590,91 @@
                             <entry key="action_list_to_fragmentCallection">
                               <value>
                                 <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1599" />
+                            <option name="y" value="-3052" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_global_add">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_global_fragmentAnnouncCollection">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_global_fragmentAttrebute">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="fragmentSubThree">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="500" />
+                                      <option name="y" value="12" />
+                                    </Point>
+                                  </option>
+                                </LayoutPositions>
+                              </value>
+                            </entry>
+                            <entry key="fragmentSubTwo">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="256" />
+                                      <option name="y" value="12" />
+                                    </Point>
+                                  </option>
+                                  <option name="myPositions">
+                                    <map>
+                                      <entry key="action_fragmentSubTwo_to_fragmentSubThree">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                </LayoutPositions>
+                              </value>
+                            </entry>
+                            <entry key="fragmentSubset">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="12" />
+                                      <option name="y" value="12" />
+                                    </Point>
+                                  </option>
+                                  <option name="myPositions">
+                                    <map>
+                                      <entry key="action_fragmentSubset_to_fragmentSubTwo">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                </LayoutPositions>
                               </value>
                             </entry>
                           </map>

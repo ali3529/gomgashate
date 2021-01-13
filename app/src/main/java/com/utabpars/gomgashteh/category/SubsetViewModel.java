@@ -16,19 +16,28 @@ import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SubsetViewModel extends ViewModel {
-    MutableLiveData<CategoryModel> subsetMutableLiveData=new MutableLiveData<>();
+    MutableLiveData<SubSetModel> subsetMutableLiveData=new MutableLiveData<>();
+    MutableLiveData<Boolean> emptySubSet=new MutableLiveData<>();
+    MutableLiveData<SubSetModel> attributeMutableLiveData=new MutableLiveData<>();
+    static SubSetCallBack subSetCallBack;
 
-    public void getSubset(String collection_id){
+    public void getSubset(String collection_id,String sub_name,String type){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getSubsets(collection_id)
+        compositeDisposable.add(apiInterface.getSubsets(collection_id,sub_name,type)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
+        .subscribeWith(new DisposableSingleObserver<SubSetModel>() {
             @Override
-            public void onSuccess(@NonNull CategoryModel categoryModel) {
-                if (categoryModel.getResponse().equals("1")){
-                    subsetMutableLiveData.setValue(categoryModel);
+            public void onSuccess(@NonNull SubSetModel subSetModel) {
+                Log.d("gdsgsgsdg", "onSuccess: "+subSetModel.getResponse());
+                Log.d("gdsgsgsdg", "onSuccess: id"+collection_id);
+                if (subSetModel.getResponse().equals("1")){
+                    subSetCallBack.onSubsetCallback(subSetModel);
+                }else if (subSetModel.getResponse().equals("0")){
+                    subSetCallBack.emptyCallback(false,subSetModel);
+                }else if (subSetModel.getResponse().equals("2")){
+                    subSetCallBack.onAttributeCallback(subSetModel);
                 }
             }
 
@@ -37,5 +46,9 @@ public class SubsetViewModel extends ViewModel {
                 Log.d("safcaccv", "onError: "+e.toString());
             }
         }));
+    }
+
+    public void getCallBack(SubSetCallBack subSetCallBack){
+        this.subSetCallBack=subSetCallBack;
     }
 }

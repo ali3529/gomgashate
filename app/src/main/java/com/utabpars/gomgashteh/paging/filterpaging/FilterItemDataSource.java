@@ -18,6 +18,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FilterItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.Detile> {
     static private String id;
+    static private String type;
     //@SuppressLint("StaticFieldLeak")
     static FragmentAnnouncCollectionBinding binding;
     @Override
@@ -25,7 +26,7 @@ public class FilterItemDataSource extends PageKeyedDataSource<Integer, Anoncment
         binding.setProgress(true);
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getFilterAnnouncment(id)
+        compositeDisposable.add(apiInterface.getFilterAnnouncment(id,type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
@@ -64,8 +65,9 @@ public class FilterItemDataSource extends PageKeyedDataSource<Integer, Anoncment
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, AnoncmentModel.Detile> callback) {
 
     }
-    public void getCallectionId(String id){
+    public void getCallectionId(String id,String type){
         this.id=id;
+        this.type=type;
     }
 
     public void getBind(FragmentAnnouncCollectionBinding binding){

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/fragmentSubset">
+    app:startDestination="@id/announcement">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -190,7 +190,14 @@
             app:popExitAnim="@anim/fragment_open_exit" />
         <action
             android:id="@+id/action_fragmentCallection_to_fragmentSubset"
-            app:destination="@id/fragmentSubset" />
+            app:destination="@id/navigation"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_out_right"
+            app:popExitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_fragmentCallection_to_fragmentAttrebute"
+            app:destination="@id/fragmentAttrebute" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncCollection"
@@ -354,8 +361,52 @@
         android:id="@+id/fragmentAboutMe"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAboutMe"
         android:label="FragmentAboutMe" />
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/fragmentSubset">
+        <fragment
+            android:id="@+id/fragmentSubTwo"
+            android:name="com.utabpars.gomgashteh.category.FragmentSubTwo"
+            android:label="FragmentSubTwo">
+            <action
+                android:id="@+id/action_fragmentSubTwo_to_fragmentSubThree"
+                app:destination="@id/fragmentSubThree"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_out_right"
+                app:popExitAnim="@android:anim/slide_in_left" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentSubset"
+            android:name="com.utabpars.gomgashteh.category.FragmentSubset"
+            android:label="FragmentSubset">
+            <action
+                android:id="@+id/action_fragmentSubset_to_fragmentSubTwo"
+                app:destination="@id/fragmentSubTwo"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_out_right"
+                app:popExitAnim="@android:anim/slide_in_left" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentSubThree"
+            android:name="com.utabpars.gomgashteh.category.FragmentSubThree"
+            android:label="FragmentSubThree" />
+        <action
+            android:id="@+id/action_global_fragmentAnnouncCollection"
+            app:destination="@id/fragmentAnnouncCollection" />
+        <action
+            android:id="@+id/action_global_fragmentAttrebute"
+            app:destination="@id/fragmentAttrebute" />
+        <action
+            android:id="@+id/action_global_add"
+            app:destination="@id/add" />
+    </navigation>
     <fragment
-        android:id="@+id/fragmentSubset"
-        android:name="com.utabpars.gomgashteh.category.FragmentSubset"
-        android:label="FragmentSubset" />
+        android:id="@+id/fragmentAttrebute"
+        android:name="com.utabpars.gomgashteh.category.attrebute.FragmentAttrebute"
+        android:label="FragmentAttrebute" >
+        <action
+            android:id="@+id/action_fragmentAttrebute_to_add"
+            app:destination="@id/add" />
+    </fragment>
 </navigation>

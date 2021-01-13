@@ -1,5 +1,7 @@
 package com.utabpars.gomgashteh.api;
 
+import com.utabpars.gomgashteh.category.SubSetModel;
+import com.utabpars.gomgashteh.category.attrebute.SpinnerModel;
 import com.utabpars.gomgashteh.chat.ChatStatusModel;
 import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmModel;
 import com.utabpars.gomgashteh.chat.StatusModel;
@@ -58,7 +60,7 @@ public interface ApiInterface {
 
     @POST("collectionFilter")
     @FormUrlEncoded
-    Single<AnoncmentModel> getFilterAnnouncment(@Field("collection_id") String collection_id);
+    Single<AnoncmentModel> getFilterAnnouncment(@Field("collection_id") String collection_id,@Field("case") String type);
 
     @POST("keySearch")
     @FormUrlEncoded
@@ -178,6 +180,11 @@ public interface ApiInterface {
 
     @POST("subsets")
     @FormUrlEncoded
-    Single<CategoryModel> getSubsets(@Field("callection_id") String callection_id);
+    Single<SubSetModel> getSubsets(@Field("collection_id") String callection_id,@Field("case") String subName,@Field("type") String type);
+
+
+    @POST("attributes")
+    @FormUrlEncoded
+    Single<SpinnerModel> getAttrebute(@Field("collection_id") String callection_id, @Field("case") String subName);
 }
 

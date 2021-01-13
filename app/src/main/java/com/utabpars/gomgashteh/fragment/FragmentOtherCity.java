@@ -109,7 +109,7 @@ public class FragmentOtherCity extends Fragment {
 
                         otherCityAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                             @Override
-                            public void getCategoryId(View view, String id, int position) {
+                            public void getCategoryId(View view, String id, int position,String title) {
 
                                 // Navigation.findNavController(view).navigate(R.id.action_fragmentOtherCity_to_add);
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="text"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ddd"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:textSize="14.5sp"
+            app:spinner_arrow_gravity="end"
+            app:spinner_arrow_padding="8dp"
+            app:spinner_divider_color="#fff"
+            app:spinner_divider_show="true"
+            app:spinner_divider_size="0.4dp"
+            app:spinner_popup_animation="dropdown"
+            app:spinner_popup_background="#fff"
+            app:spinner_popup_elevation="14dp"
+            android:layout_marginBottom="6dp"
+            android:hint="@{text}"/>
+    </RelativeLayout>
+</layout>
