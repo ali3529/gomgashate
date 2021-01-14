@@ -22,11 +22,13 @@ import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.databinding.FragmentReportBottomSheetBinding;
+import com.utabpars.gomgashteh.model.RmModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -37,6 +39,7 @@ public class FragmentReportBottomSheet extends BottomSheetDialogFragment {
     RecyclerView recyclerView;
     ReportTextAdaptor adaptor;
     String blocker,blocked;
+    String announce_id,user_id;
     public MutableLiveData<Boolean> reportResponsLiveData=new MutableLiveData<>();
 
     @Override
@@ -74,11 +77,24 @@ public class FragmentReportBottomSheet extends BottomSheetDialogFragment {
         this.blocker=blocker;
 
     }
+    public void getAnnounceid(String announceid,String user_id){
+        this.announce_id=announceid;
+        this.user_id=user_id;
+        Log.d("sdfdsfdsf", "getAnnounceid: "+announceid);
+        Log.d("sdfdsfdsf", "getAnnounceid: "+user_id);
+
+    }
     ReportClick reportClick=new ReportClick() {
         @Override
         public void reportTextClick(String rText) {
-            Toast.makeText(getContext(), rText, Toast.LENGTH_SHORT).show();
-            reportUser(blocker,blocked,rText);
+          //  Toast.makeText(getContext(), rText, Toast.LENGTH_SHORT).show();
+            if (getTag().equals("report_announcment")){
+                reportAnnounce(announce_id,user_id,rText);
+
+            }else {
+                reportUser(blocker,blocked,rText);
+            }
+
         }
     };
 
@@ -100,6 +116,26 @@ public void reportUser(String blocker,String blocked,String report_text){
         @Override
         public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
             Log.d("Dsfdsfdsf", "onError: "+e.toString());
+        }
+    }));
+}
+
+public void reportAnnounce(String announce_id,String user_id,String text){
+    ApiInterface apiInterface= ApiClient.getApiClient();
+    CompositeDisposable compositeDisposable=new CompositeDisposable();
+    compositeDisposable.add(apiInterface.reportAnnouncement(announce_id,user_id,text)
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribeWith(new DisposableSingleObserver<RmModel>() {
+        @Override
+        public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RmModel rmModel) {
+            Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+            reportResponsLiveData.setValue(true);
+        }
+
+        @Override
+        public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+            Log.d("dvdsvsdvdsv", "onError: "+e.toString());
         }
     }));
 }

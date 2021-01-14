@@ -9,10 +9,6 @@ import java.util.List;
 public class TicketResponseModel {
     @SerializedName("data")
     public List<Massage> massages;
-    @SerializedName("phone_sender")
-    public String phone_sender;
-    @SerializedName("phone_receiver")
-    public String phone_receiver;
     @SerializedName("enable")
     public String status;
     @SerializedName("response")
@@ -25,6 +21,36 @@ public class TicketResponseModel {
     List<String> report_list=new ArrayList<>();
     @SerializedName("is_report")
     private boolean report;
+    @SerializedName("user_confirmation")
+    private boolean user_confirmation;
+    @SerializedName("phone_number")
+    private String phone_number;
+    @SerializedName("respondent_user")
+    private boolean respondent_user;
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public boolean isRespondent_user() {
+        return respondent_user;
+    }
+
+    public void setRespondent_user(boolean respondent_user) {
+        this.respondent_user = respondent_user;
+    }
+
+    public boolean isUser_confirmation() {
+        return user_confirmation;
+    }
+
+    public void setUser_confirmation(boolean user_confirmation) {
+        this.user_confirmation = user_confirmation;
+    }
 
     public boolean isReport() {
         return report;
@@ -70,21 +96,6 @@ public class TicketResponseModel {
         this.massages = massages;
     }
 
-    public String getPhone_sender() {
-        return phone_sender;
-    }
-
-    public void setPhone_sender(String phone_sender) {
-        this.phone_sender = phone_sender;
-    }
-
-    public String getPhone_receiver() {
-        return phone_receiver;
-    }
-
-    public void setPhone_receiver(String phone_receiver) {
-        this.phone_receiver = phone_receiver;
-    }
 
     public String getStatus() {
         return status;

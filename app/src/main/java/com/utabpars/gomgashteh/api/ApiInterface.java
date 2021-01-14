@@ -186,5 +186,9 @@ public interface ApiInterface {
     @POST("attributes")
     @FormUrlEncoded
     Single<SpinnerModel> getAttrebute(@Field("collection_id") String callection_id, @Field("case") String subName);
+
+    @POST("reportAnnounce")
+    @FormUrlEncoded
+    Single<RmModel> reportAnnouncement(@Field("announce_id") String announce_id,@Field("user_id") String user_id,@Field("text") String text);
 }
 

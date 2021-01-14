@@ -76,6 +76,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"/>
         <TextView
+            android:id="@+id/phone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/phone_check"
@@ -83,6 +84,8 @@
             android:layout_marginRight="6dp"
             android:layout_centerInParent="true"
             android:textDirection="rtl"
+            android:autoLink="phone"
+
             android:text="با تایید این گزینه شماره همراه شما برای شخص مقابل قابل نمایش است"
             />
 

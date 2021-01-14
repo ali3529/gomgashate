@@ -29,6 +29,7 @@ import com.utabpars.gomgashteh.chat.ChatAuthViewModel;
 import com.utabpars.gomgashteh.chat.ChatStatusModel;
 import com.utabpars.gomgashteh.chat.FirstMassageBottomSheet;
 import com.utabpars.gomgashteh.chat.LoginAlertBottomSheet;
+import com.utabpars.gomgashteh.chat.reportchat.FragmentReportBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncmentDetailBinding;
 import com.utabpars.gomgashteh.interfaces.ChatCallBack;
 import com.utabpars.gomgashteh.markannouncment.MarkModel;
@@ -55,6 +56,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
     MarkViewModel markViewModel;
     String edit_status;
     String share_link;
+    FragmentReportBottomSheet fragmentReportBottomSheet=new FragmentReportBottomSheet();
 
 
     @Override
@@ -155,6 +157,18 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 }
                 share_link=data.getShareLink();
 
+                if (data.isReport()){
+                    binding.report.setVisibility(View.GONE);
+                }
+                if (user_id.equals(data.getId())){
+                    binding.report.setVisibility(View.GONE);
+                }
+
+
+
+               fragmentReportBottomSheet.getList(data.getReport_list());
+                fragmentReportBottomSheet.getAnnounceid(anouns_id,user_id);
+
             }
         });
 
@@ -228,6 +242,10 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
             startActivity(Intent.createChooser(shareIntent, "لینک آگهی"));
         });
 
+        fragmentReportBottomSheet.reportResponsLiveData.observe(getViewLifecycleOwner(), t->{
+
+            fragmentReportBottomSheet.dismiss();
+        });
     }
 
     private void bookmanrStatus() {
@@ -315,5 +333,15 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
     public void arrowBack(){
         Navigation.findNavController(getView()).navigateUp();
+    }
+    
+    public void goToRulst(){
+  Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentRuls);
+    }
+
+
+    public void reportAnnouncment(){
+
+        fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"report_announcment");
     }
 }

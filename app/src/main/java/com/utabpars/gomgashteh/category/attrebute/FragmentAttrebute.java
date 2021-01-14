@@ -92,6 +92,7 @@ public class FragmentAttrebute extends Fragment {
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("collaction_id",attrList.toString());
             editor.putString("type","");
+            editor.putString("title","ویژگی");
             editor.apply();
             Navigation.findNavController(o).navigate(R.id.action_fragmentAttrebute_to_add);
         });

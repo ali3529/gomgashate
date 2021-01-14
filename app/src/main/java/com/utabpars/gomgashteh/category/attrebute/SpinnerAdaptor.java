@@ -38,8 +38,6 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
 
     @Override
     public void onBindViewHolder(@NonNull SpinnerViewHolder holder, int position) {
-        Log.d("gdsdgdsdsg", "onBindViewHolder: "+spinnerModel.getAttrebuteData().get(0).getName());
-        Log.d("gdsdgdsdsg", "onBindViewHolder: "+spinnerModel.getAttrebuteData().get(1).getName());
         holder.binding.spinner.setSpinnerPopupAnimation(SpinnerAnimation.BOUNCE);
         List<String> list=new ArrayList<>();
         for (String s:spinnerModel.getAttrebuteData().get(position).getValues()) {

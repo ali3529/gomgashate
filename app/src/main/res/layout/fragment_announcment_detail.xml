@@ -385,6 +385,7 @@
                             android:gravity="right"
                             android:padding="@dimen/detail_padding"
                             android:layout_marginTop="1dp"
+                            android:onClick="@{() -> chatviewmodel.reportAnnouncment()}"
                             >
                             <ImageView
                                 android:id="@+id/img6"
@@ -423,6 +424,7 @@
                             android:gravity="right"
                             android:padding="@dimen/detail_padding"
                             android:layout_marginTop="1dp"
+                            android:onClick="@{() -> chatviewmodel.goToRulst()}"
                             >
                             <ImageView
                                 android:id="@+id/img7"

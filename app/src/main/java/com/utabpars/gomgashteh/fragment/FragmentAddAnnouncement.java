@@ -137,13 +137,13 @@ public class FragmentAddAnnouncement extends Fragment  {
         });
 
         //set category
-        String title=shPref.getString("collaction_id","انتخاب کنید");
+        String title=shPref.getString("title","انتخاب کنید");
         String title_collection=shPref.getString("type","");
         String id=shPref.getString("collaction_id",null);
         String type_collaction=shPref.getString("type",null);
         //todo
 
-        binding.setCategory(title+", "+title_collection);
+        binding.setCategory(title);
 
 
 
@@ -312,7 +312,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_announcement);
+                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentMyAnnouncment2);
                                     SharedPreferences.Editor editor=shPref.edit();
                                     editor.clear();
                                     editor.apply();
@@ -323,7 +323,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     editor1.apply();
 
                                 }
-                            },2000);
+                            },1000);
                         }else {
                             Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
                             binding.addProgress.setVisibility(View.GONE);

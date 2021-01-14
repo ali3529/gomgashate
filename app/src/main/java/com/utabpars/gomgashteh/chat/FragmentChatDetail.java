@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -130,7 +131,23 @@ public class FragmentChatDetail extends Fragment {
                 fragmentReportBottomSheet.getList(ticketResponseModel.getReport_list());
 
                 scrollToBottom(recyclerView);
+
+                if (ticketResponseModel.isUser_confirmation()){
+                    binding.phoneCheck.setChecked(true);
+                    binding.phoneCheck.setEnabled(false);
+                    if (ticketResponseModel.isRespondent_user()){
+                        binding.phoneText.setText(ticketResponseModel.getPhone_number());
+                    }
+                }else binding.phoneCheck.setChecked(false);
+
+//                binding.phoneText.setOnClickListener( o->{
+//                    Intent intent = new Intent(Intent.ACTION_DIAL);
+//                    intent.setData(Uri.parse("tel:"+ticketResponseModel.getPhone_number()));
+//                    startActivityForResult(intent,100);
+//                });
             }
+
+
         });
 
 //        binding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

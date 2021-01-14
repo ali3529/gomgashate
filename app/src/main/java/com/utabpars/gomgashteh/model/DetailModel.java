@@ -68,6 +68,28 @@ public class DetailModel {
         @SerializedName("share_link")
         private String shareLink;
 
+        @SerializedName("report_list")
+        List<String> report_list=new ArrayList<>();
+
+        @SerializedName("is_report")
+        private boolean report;
+
+        public boolean isReport() {
+            return report;
+        }
+
+        public void setReport(boolean report) {
+            this.report = report;
+        }
+
+        public List<String> getReport_list() {
+            return report_list;
+        }
+
+        public void setReport_list(List<String> report_list) {
+            this.report_list = report_list;
+        }
+
         public String getShareLink() {
             return shareLink;
         }

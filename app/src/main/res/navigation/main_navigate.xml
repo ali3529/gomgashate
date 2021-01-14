@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_add_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_add_to_fragmentMyAnnouncment2"
+            app:destination="@id/fragmentMyAnnouncment2" />
     </fragment>
     <fragment
         android:id="@+id/chat"
@@ -168,6 +171,9 @@
         <deepLink
             android:id="@+id/deepLink2"
             app:uri="https://gomgashteh.com/detail/{code}" />
+        <action
+            android:id="@+id/action_fragmentAnnouncmentDetail_to_fragmentRuls"
+            app:destination="@id/fragmentRuls" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCallection"
@@ -409,4 +415,9 @@
             android:id="@+id/action_fragmentAttrebute_to_add"
             app:destination="@id/add" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentRuls"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentRuls"
+        android:label="fragment_ruls"
+        tools:layout="@layout/fragment_ruls" />
 </navigation>

@@ -47,8 +47,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="684" />
-                            <option name="y" value="-1328" />
+                            <option name="x" value="744" />
+                            <option name="y" value="-1368" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -64,6 +64,11 @@
                               </value>
                             </entry>
                             <entry key="action_add_to_fragmentLogin">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_add_to_fragmentMyAnnouncment2">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -243,6 +248,15 @@
                             <option name="x" value="2668" />
                             <option name="y" value="-2932" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentAttrebute_to_add">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -513,6 +527,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentRuls">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-200" />
+                            <option name="y" value="2130" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

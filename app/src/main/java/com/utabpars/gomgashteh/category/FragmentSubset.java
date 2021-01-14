@@ -113,6 +113,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("collaction_id",id);
             editor.putString("type","sub_one");
+            editor.putString("title",title);
             editor.apply();
             Toast.makeText(getContext(), "emtyyyyy", Toast.LENGTH_SHORT).show();
             Navigation.findNavController(getView()).navigate(R.id.action_global_add);
