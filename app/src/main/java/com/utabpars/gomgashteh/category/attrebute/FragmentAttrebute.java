@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentAttrebuteBinding;
@@ -25,13 +26,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentAttrebute extends Fragment {
+public class FragmentAttrebute extends Fragment implements SpiinerCallback{
     FragmentAttrebuteBinding binding;
     RecyclerView recyclerView;
     SpinnerAdaptor spinnerAdaptor;
     AttrebuteViewModel viewModel;
-    List<String> attrList=new ArrayList<>();
     SharedPreferences sharedPreferences;
+    ArrayList<AtttrModel> spinnerlist=new ArrayList<>();
+    int adaptorItemCount;
+
+
 
 
     @Override
@@ -56,63 +60,78 @@ public class FragmentAttrebute extends Fragment {
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
         viewModel.getAttrebute(id,type);
-        Log.d("hg,mhg,gh,", "onViewCreated: "+id);
-        Log.d("hg,mhg,gh,", "onViewCreated: "+type);
 
         viewModel.spinnerModelMutableLiveData.observe(getViewLifecycleOwner(),t ->{
-            spinnerAdaptor=new SpinnerAdaptor(t,spiinerCallback);
+            spinnerAdaptor=new SpinnerAdaptor(t, this);
             recyclerView.setAdapter(spinnerAdaptor);
+            adaptorItemCount=recyclerView.getAdapter().getItemCount();
+            setIndec();
         });
 
 
-//        List<SpinnerModel.AttrebuteData> spiModels=new ArrayList<>();
-//        List<String> list=new ArrayList<>();
-//        list.add("قرمز-12");
-//        list.add("ابی-62");
-//        list.add("سبز-553");
-//
-//        List<String> list2=new ArrayList<>();
-//        list2.add("قرمز-500");
-//        list2.add("ابی-501");
-//        list2.add("سبز-502");
-//
-//        List<String> list3=new ArrayList<>();
-//        list3.add("قرمز-600");
-//        list3.add("ابی-601");
-//        list3.add("سبز-602");
-//
-//        spiModels.add(new SpinnerModel.AttrebuteData("رنگ", "1", list));
-//        spiModels.add(new SpinnerModel.AttrebuteData("شکسدگی", "2", list2));
-//        spiModels.add(new SpinnerModel.AttrebuteData("سایز", "3", list3));
-//        spinnerModel.setAttrebuteData(spiModels);
-//        spinnerAdaptor=new SpinnerAdaptor(spinnerModel,spiinerCallback);
-//        recyclerView.setAdapter(spinnerAdaptor);
-
         binding.save.setOnClickListener( o->{
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putString("collaction_id",attrList.toString());
+            editor.putString("collaction_id",getData().toString());
             editor.putString("type","");
             editor.putString("title","ویژگی");
             editor.apply();
             Navigation.findNavController(o).navigate(R.id.action_fragmentAttrebute_to_add);
+            Log.d("sgfsegesgeg", "onViewCreated: "+getData().toString());
+
+
         });
+
     }
 
-    SpiinerCallback spiinerCallback=new SpiinerCallback() {
-        @Override
-        public void SpinnerItemCallBack(String id, String value) {
 
-                String[] strings=value.split("@");
-                Log.d("dvsdvdsv", "onBindViewHolder: "+strings[0].toString());
-                Log.d("dvsdvdsv", "onBindViewHolder: "+strings[1].toString());
+    @Override
+    public void SpinnerItemCallBack(String id, String value,boolean isCkeck,int position) {
+        String ischeck;
 
-            attrList.add(id);
-            attrList.add(strings[0]);
-            Log.d("uuiytuyt", "onValueClicked: id      "+id);
-            Log.d("uuiytuyt", "onValueClicked: value     "+strings[0]);
-            Log.d("uuiytuyt", "onValueClicked: arry     "+attrList.toString());
+        if (isCkeck){
+            ischeck="1";
+        }else {
+            ischeck="0";
+        }
+        AtttrModel atttrModel=new AtttrModel(id,value,ischeck);
 
+        spinnerlist.set(position,atttrModel);
+
+        for (int i = 0; i < spinnerlist.size(); i++) {
+            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getId());
+            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getValue());
+            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getIscheck());
+            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.size());
+            Log.d("sdgsdvbbvmmmm", "-------------------------------------------------");
+        }
+
+
+
+    }
+    public void setIndec(){
+        for (int i = 0; i < adaptorItemCount; i++) {
+            spinnerlist.add(new AtttrModel("","",""));
 
         }
-    };
+    }
+    public List<String> getData(){
+        List<String> list=new ArrayList<>();
+        for (int i = 0; i < spinnerlist.size(); i++) {
+            String[] strings=spinnerlist.get(i).getValue().split("@");
+            list.add(spinnerlist.get(i).getId().replaceAll("\\s+",""));
+            list.add(strings[0].replaceAll("\\s+",""));
+            list.add(spinnerlist.get(i).getIscheck().replaceAll("\\s+",""));
+        }
+        return list;
+    }
+
+    public void getDataspace(){
+
+
+        Log.d("fgdfhdfh", "getDataspace: "+getData().get(1).replaceAll("\\s+",""));
+
+
+    }
+
+
 }

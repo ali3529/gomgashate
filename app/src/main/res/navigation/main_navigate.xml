@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/announcement">
+    app:startDestination="@id/fragmentSplash">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -84,6 +84,9 @@
         <action
             android:id="@+id/action_add_to_fragmentMyAnnouncment2"
             app:destination="@id/fragmentMyAnnouncment2" />
+        <action
+            android:id="@+id/action_add_to_fragmentRuls"
+            app:destination="@id/fragmentRuls" />
     </fragment>
     <fragment
         android:id="@+id/chat"

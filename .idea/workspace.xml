@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="dvdsvsdvdsv" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="sgfsegesgeg" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -25,25 +25,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/api/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/api/ApiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/FragmentSubThree.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/FragmentSubThree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/FragmentSubTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/FragmentSubTwo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/FragmentSubset.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/FragmentSubset.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/attrebute/FragmentAttrebute.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/attrebute/FragmentAttrebute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/attrebute/SpiinerCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/attrebute/SpiinerCallback.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/attrebute/SpinnerAdaptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/category/attrebute/SpinnerAdaptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/FragmentChatDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/FragmentChatDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/TicketResponseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/TicketResponseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/reportchat/FragmentReportBottomSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/chat/reportchat/FragmentReportBottomSheet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAddAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAddAnnouncement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncmentDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/fragment/FragmentAnnouncmentDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/model/DetailModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/model/DetailModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_announcment_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_announcment_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/myannouncment/FragmentMyAnnouncment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/utabpars/gomgashteh/myannouncment/FragmentMyAnnouncment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_spinner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_spinner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigate.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigate.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,13 +91,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\raw" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.utabpars.gomgashteh" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable-v24" />
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\font" />
     </key>
     <key name="android.template.808836593">
       <recent name="com.utabpars.gomgashteh.fragment" />
@@ -117,9 +104,10 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.utabpars.gomgashteh.adaptor.maincity" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\raw" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\alireza\AndroidStudioProjects\gomgashteh\app\src\main\res\font" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -340,18 +328,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1608455196539" />
-    <state x="629" y="95" key="#com.intellij.ide.util.MemberChooser" timestamp="1610612967832">
+    <state x="629" y="95" key="#com.intellij.ide.util.MemberChooser" timestamp="1610615635997">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="629" y="95" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1610612967832" />
+    <state x="629" y="95" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1610615635997" />
     <state x="230" y="289" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1610025854829">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="230" y="289" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1610025854829" />
-    <state x="466" y="232" width="433" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1609503210534">
+    <state x="466" y="232" width="494" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1610625984894">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="466" y="232" width="433" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1609503210534" />
+    <state x="466" y="232" width="494" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1610625984894" />
     <state x="479" y="244" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1610025856045">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -380,42 +368,42 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="291" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604821451126" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1610609410821">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1610633503609">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1610609410821" />
-    <state width="1323" height="205" key="GridCell.Tab.0.bottom" timestamp="1610612872909">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1610633503609" />
+    <state width="1323" height="230" key="GridCell.Tab.0.bottom" timestamp="1610632856389">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610612872909" />
-    <state width="1323" height="205" key="GridCell.Tab.0.center" timestamp="1610612872909">
+    <state width="1323" height="230" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610632856389" />
+    <state width="1323" height="230" key="GridCell.Tab.0.center" timestamp="1610632856388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610612872909" />
-    <state width="1323" height="205" key="GridCell.Tab.0.left" timestamp="1610612872909">
+    <state width="1323" height="230" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610632856388" />
+    <state width="1323" height="230" key="GridCell.Tab.0.left" timestamp="1610632856388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610612872909" />
-    <state width="1323" height="205" key="GridCell.Tab.0.right" timestamp="1610612872909">
+    <state width="1323" height="230" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610632856388" />
+    <state width="1323" height="230" key="GridCell.Tab.0.right" timestamp="1610632856388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610612872909" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1610556853451">
+    <state width="1323" height="230" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610632856388" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1610628038816">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610556853451" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1610556853451">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610628038816" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1610628038816">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1610556853451" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1610556853451">
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1610628038816" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1610628038815">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1610556853451" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1610556853451">
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1610628038815" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1610628038816">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1610556853451" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1610628038816" />
     <state x="261" y="12" key="SettingsEditor" timestamp="1606906727506">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

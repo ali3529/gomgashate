@@ -37,6 +37,7 @@ public class FragmentMyAnnouncment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.VISIBLE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_my_announcment,container,false);
         sharedPreferences=getActivity().getSharedPreferences("user_login", Context.MODE_PRIVATE);
         viewModel=new ViewModelProvider(this).get(MyAnnouncmentViewModel.class);

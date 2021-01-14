@@ -22,7 +22,7 @@ import java.util.List;
 public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerViewHolder> {
     SpinnerModel spinnerModel;
     SpiinerCallback spiinerCallback;
-
+    boolean isckeck;
     public SpinnerAdaptor(SpinnerModel spinnerModel, SpiinerCallback spiinerCallback) {
         this.spinnerModel = spinnerModel;
         this.spiinerCallback = spiinerCallback;
@@ -38,6 +38,7 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
 
     @Override
     public void onBindViewHolder(@NonNull SpinnerViewHolder holder, int position) {
+
         holder.binding.spinner.setSpinnerPopupAnimation(SpinnerAnimation.BOUNCE);
         List<String> list=new ArrayList<>();
         for (String s:spinnerModel.getAttrebuteData().get(position).getValues()) {
@@ -59,9 +60,21 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
                 Log.d("Dsfdsfdsf", "onItemSelected: il "+i1);
                 Log.d("Dsfdsfdsf", "onItemSelected: id "+spinnerModel.getAttrebuteData().get(position).getId());
                 Log.d("Dsfdsfdsf", "onItemSelected: i "+spinnerModel.getAttrebuteData().get(position).getValues().get(i1));
-                spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1));
+                spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),holder.binding.emportent.isChecked(),position);
+
+                holder.binding.emportent.setOnClickListener( o->{
+                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
+                    spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
+                            holder.binding.emportent.isChecked(),
+                            position);
+                });
             }
         });
+
+//        holder.binding.emportent.setOnClickListener( o->{
+//            isckeck=holder.binding.emportent.isChecked();
+//            Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
+//        });
     }
 
     @Override

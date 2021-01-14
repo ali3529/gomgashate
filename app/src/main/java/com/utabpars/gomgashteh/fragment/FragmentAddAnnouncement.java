@@ -421,7 +421,7 @@ public class FragmentAddAnnouncement extends Fragment  {
     }
 public void goToRuls(){
       //  Navigation.findNavController(getView()).navigate(R.layout);
-    Toast.makeText(getContext(), "ruls", Toast.LENGTH_SHORT).show();
+ Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentRuls);
 }
 }
 
