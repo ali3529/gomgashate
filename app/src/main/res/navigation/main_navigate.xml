@@ -82,11 +82,15 @@
             android:id="@+id/action_add_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
         <action
-            android:id="@+id/action_add_to_fragmentMyAnnouncment2"
-            app:destination="@id/fragmentMyAnnouncment2" />
-        <action
             android:id="@+id/action_add_to_fragmentRuls"
             app:destination="@id/fragmentRuls" />
+        <action
+            android:id="@+id/action_add_to_fragmentOptions"
+            app:destination="@id/fragmentOptions"
+            />
+        <action
+            android:id="@+id/action_add_to_fragmentShowEdit"
+            app:destination="@id/fragmentShowEdit" />
     </fragment>
     <fragment
         android:id="@+id/chat"
@@ -146,6 +150,9 @@
         <action
             android:id="@+id/action_perofile_to_fragmentAboutMe"
             app:destination="@id/fragmentAboutMe" />
+        <action
+            android:id="@+id/action_perofile_to_fragmentRuls"
+            app:destination="@id/fragmentRuls" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -348,6 +355,9 @@
         <action
             android:id="@+id/action_fragmentOptions_to_fragmentShowEdit"
             app:destination="@id/fragmentShowEdit" />
+        <action
+            android:id="@+id/action_fragmentOptions_to_fragmentMyAnnouncment2"
+            app:destination="@id/fragmentMyAnnouncment2" />
     </fragment>
     <fragment
         android:id="@+id/editAnnouncementFragment"
@@ -365,7 +375,11 @@
     <fragment
         android:id="@+id/fragmentShowEdit"
         android:name="com.utabpars.gomgashteh.managerAnnouncement.FragmentShowEdit"
-        android:label="FragmentShowEdit"/>
+        android:label="FragmentShowEdit">
+        <action
+            android:id="@+id/action_fragmentShowEdit_to_fragmentMyAnnouncment2"
+            app:destination="@id/fragmentMyAnnouncment2" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentAboutMe"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAboutMe"

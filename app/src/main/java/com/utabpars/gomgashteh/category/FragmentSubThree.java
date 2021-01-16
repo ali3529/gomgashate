@@ -64,6 +64,7 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
             subsetViewModel.getSubset(id,"attr",type);
             Log.d("dsdsfdsf", "onViewCreated: "+type);
             t_id=id;
+            saveCategoryNames(title);
         }
     };
     private void initViews() {
@@ -85,7 +86,12 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
         Bundle bundle=new Bundle();
         bundle.putString("id",t_id);
         bundle.putString("type","attr");
-        Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+        try {
+            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+        }catch (Exception e){
+
+        }
+
     }
 
     @Override
@@ -95,16 +101,35 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
             Bundle bundle=new Bundle();
             bundle.putString("id",t_id);
             bundle.putString("type","attr");
-            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
+            bundle.putString("title",title);
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
+            }catch (Exception e){
+
+            }
+
         }else {
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("collaction_id",t_id);
             editor.putString("type","attr");
             editor.putString("title",title);
             editor.apply();
-            Toast.makeText(getContext(), "emtyyyyy", Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+            Toast.makeText(getContext(), "emty_three", Toast.LENGTH_SHORT).show();
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+            }catch (Exception e){
+
+            }
+
         }
 
+    }
+    private void saveCategoryNames(String title) {
+        SharedPreferences SaveCategoryName;
+        SharedPreferences.Editor SaveCategoryNameEditor;
+        SaveCategoryName=getActivity().getSharedPreferences("save_category_name",Context.MODE_PRIVATE);
+        SaveCategoryNameEditor=SaveCategoryName.edit();
+        SaveCategoryNameEditor.putString("sub_three",title);
+        SaveCategoryNameEditor.apply();
     }
 }

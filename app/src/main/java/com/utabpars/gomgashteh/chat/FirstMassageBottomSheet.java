@@ -133,7 +133,16 @@ public String sender_id;
             Toast.makeText(getContext(), "hi bech", Toast.LENGTH_SHORT).show();
             uriList.add(uri);
             partLists.add(partList);
-            adaptor=new AddImageAnnouncmentAdaptor(uriList);
+            adaptor=new AddImageAnnouncmentAdaptor(uriList, new AddImageAnnouncmentAdaptor.onDeleteImages() {
+                @Override
+                public void deleteImage(List<Uri> list, int position) {
+                    uriList.remove(position);
+                    partLists.remove(position);
+                    adaptor.notifyDataSetChanged();
+                    Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
+                    Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
+                }
+            });
             recyclerView.setAdapter(adaptor);
             bottomSheetChooseImage.dismiss();
 

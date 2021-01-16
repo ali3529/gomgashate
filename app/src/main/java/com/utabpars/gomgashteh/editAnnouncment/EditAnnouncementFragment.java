@@ -57,6 +57,7 @@ public class EditAnnouncementFragment extends Fragment {
     RecyclerView oldRecyclerView,recyclerView;
     ImageEditAdaptor oldAdaptor;
     SharedPreferences sharedPreferences,user_status;
+
     String type;
     BottomSheetChooseImage bottomSheetChooseImage;
     AddImageAnnouncmentAdaptor adaptor;
@@ -88,6 +89,7 @@ public class EditAnnouncementFragment extends Fragment {
         oldRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         sharedPreferences = getActivity().getSharedPreferences("editcity", Context.MODE_PRIVATE);
         user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
+
     }
 
     @Override
@@ -144,6 +146,16 @@ public class EditAnnouncementFragment extends Fragment {
 //            binding.othercity.setText("انتخاب کنید");
         }else {
             binding.othercity.setText(getSHaredList().size()+"شهر");
+        }
+
+
+        try {
+            adaptor.notifyDataSetChanged();
+            recyclerView.setAdapter(adaptor);
+            oldRecyclerView.setAdapter(oldAdaptor);
+
+        }catch (Exception r){
+            Toast.makeText(getContext(), ""+r, Toast.LENGTH_SHORT).show();
         }
 
 

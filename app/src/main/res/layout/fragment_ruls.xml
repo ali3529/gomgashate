@@ -1,14 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.FragmentRuls">
+<layout>
+    <data>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    </data>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".fragment.FragmentAboutMe"
+        android:layout_margin="6dp"
+        android:layoutDirection="rtl">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <TextView
 
-</FrameLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" قانون و مقررات"
+                android:textDirection="rtl"
+                android:textSize="20dp"
+                android:textColor="@color/text_color_black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_below="@id/toolbar">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl">
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/ruls"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+           >
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" قوانین"
+                android:textDirection="rtl"
+                android:textSize="20dp"
+                android:textColor="@color/text_color_black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/des1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:textDirection="rtl"
+                android:textSize="@dimen/text_size_16"
+                android:layout_below="@id/title"
+                android:padding="4dp"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/pri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_below="@id/ruls">
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" حریم خصوصی"
+                android:textDirection="rtl"
+                android:textSize="20dp"
+                android:textColor="@color/text_color_black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/des2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:textDirection="rtl"
+                android:textSize="@dimen/text_size_16"
+                android:layout_below="@id/title2"
+                android:padding="4dp"
+                />
+        </RelativeLayout>
+                </RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+
+</layout>

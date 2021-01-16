@@ -2,6 +2,9 @@ package com.utabpars.gomgashteh.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,58 +12,71 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.databinding.FragmentRulsBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentRuls#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentRuls extends Fragment {
+FragmentRulsBinding binding;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FragmentRuls() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentRuls.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentRuls newInstance(String param1, String param2) {
-        FragmentRuls fragment = new FragmentRuls();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ruls, container, false);
+        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_ruls,container,false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        String s="\n" +
+                " \n" +
+                "تلاش گم گشته نشر آگهی با اطلاعات صحیح و درست است ( که همکاری کاربران عزیز را در این ضمینه خواستاریم) لذا این سایت نمی تواند صحت آگهی ها را تضمین کند و هیچ گونه مسئولیت یا تعهدی در قبال آگهی ها بر عهده نمی گیرد و مسئولیت آن بر عهده کاربران است.\n" +
+                "با توجه به این که این سایت جهت رفاه حال هموطنان عزیز برای پیدا کردن گم شده های خود بوجود آمده و جهت جلوگیری ار به هدر رفتن زمان و هزینه های نسبتا سنگین برای پیدا کردن ..... خود بوجود آمده که این امر در وقت و هزینه و جلوگیری از اسراف های به وجود آمده که این امر در وقت و هزینه های مختلف کاملا مشهود است، لذا از کلیه کاربران جهت رعایت قوانین شرعی و جمهوری اسلامی ایران در این امر را خواستاریم.\n" +
+                "تصویر موارد اگر مورد اخلاقی یا غیر قابل قبول برای قانون و جامعه باشد ممنوع بوده و حذف می شود.\n" +
+                "عکس مطالب باید با عنوان مندرج در آگهی تطابق داشته باشد.\n" +
+                "عکس تصاویر باید کاملا واضح باشد که مخاطب متوجه گم شده و یا پیدا شده شما باشد.\n" +
+                "خصوصیات کلیدی و تاثیر گذار در توضیحات و تصاویر برای شما جهت تسریع در روند پیدا کردن گم شده نقش به سزائی دارد.\n" +
+                "از اطلاعات تماس خود مانند شماره موبایل و تلفن و آدرس الکترونیک و غیره در عنوان و توضیحات آگهی توصیه نمی شود این روند در مراحل پایانی و در چت کردن و با اطمینان کامل و رضایت طرفین حاصل می شود.\n" +
+                "با توجه به فارسی بودن زبان سایت و اپلیکیشن برای هموطنان عزیز خواهشا توجه فرمایید که مطالب فقط به زبان فارسی درج شود. در غیر اینصورت آگهی شما رد می شود.\n" +
+                "با توجه به موضوع مژدگانی برای اشخاص پیدا کننده توجه داشته باشید که مبلغ مژدگانی باید متعارف باشد و درج هرگونه شماره حساب بانکی، تصویر عابر بانک و یا هرگونه مواردی که منجر به سوءاستفاده از اموال اشخاص شود در شرح آگهی غیر مجاز است و موجب رد آگهی می شود.\n" +
+                "با توجه به امکانات این سایت در مورد چند شهری بودن ( که اگر کسی فکر می کند گم شده خود ممکن است در چند شهر باشد) تفکیک چند شهر مورد نظر و جزییات مطلوب در مورد گم شده خود مدنظر قرار گیرد که دیگران را در پیدا شدن گم شده خود یاری کند.\n" +
+                "محتویات آگهی با املاء صحیح و بدون اشتباه درج شود.\n" +
+                "درج اطلاعات شخصی و خصوصی در عنوان و توضیحات آگهی ممنوع می باشد و موجب رد آگهی می شود.\n" +
+                "اگر شخصی بدون ثبت آگهی اعم از گم شده و یا پیدا شده ورود به چت کند صحیح نبوده و هیچ گونه مسئولیتی در قبال هرگونه تخلف بر عهده سایت نمی باشد.\n" +
+                "هر ثبت آگهی باید مشمول یک مورد گم شده باشد و برای موارد دیگر باید اگهی جدید ثبت نمایید. در صورت مشاهده موجب رد آگهی می شود.\n" +
+                "این سایت هیچ گونه مسئولیتی در برابر اموال اشخاص در زمینه (سرقت یا هر مورد تخلف) ندارد.\n" +
+                "با توجه به این که اگر اموال یا اشخاصی مورد سرقت یا تخلف قرارگیرد شخص متخلف با توجه به پیگیری های قانونی جهت صلب آزادی خود در پی صاحب اصلی مطالب مورد نظر نیست لذا هیچ گونه مسئولیتی برای کاربران نمی باشد.\n" +
+                "در صورت مجاز نبودن تصاویر یا متن اگهی، آگهی شما رد شده و به کاربر به صورت پیامک ابلاغ می شود.\n" +
+                "با توجه به خیر خواهانه بودن طرح و سایت گم گشته جهت رساندن گم شده ها به صاحبان اصلی خود در موارد سرقت اموال یا اشخاص یا اینکه اگر به همراه موارد پیدا شده توسط هم وطنان عزیز و کاربران خیرخواه، اموال دیگری بوده و فعل حال نیست، هیچ گونه مسئولیتی برای کاربران عزیز وبسایت نمی باشد و هیچ گونه ادعایی قابل قبول نیست.\n" +
+                "مدت زمان آگهی های ثبت شده متفاوت است.\n" +
+                "موارد فنی و یا خطای انسانی را میتوان با شماره پیشتیبانی 07191010013 در میان بگذارید.";
+
+        String f="\n" +
+                "گم گشته به حریم خصوصی کاربران خود احترام می\u200Cگذارد و متعهد به حفاظت از اطلاعات شخصی است که شما در اختیار آن می\u200Cگذارید. از آنجا که جمع\u200Cآوری و پردازش اطلاعات شخصی بخش غیرقابل اجتنابی در فرآیندهای مبتنی بر تلفن همراه و اینترنت است لذا به منظور آگاهی کامل از سیاست و عملکرد گم گشته در این زمینه، مطالعه این سند تحت عنوان «سیاست\u200Cنامه حریم خصوصی» و هر گونه پیام دیگری که در خصوص جمعآوری و پردازش اطلاعات توسط گم گشته به حساب کاربری شما ارسال میشود، ضروری است.\n" +
+                "\n" +
+                "این سند مشتمل بر موارد ذیل است:\n" +
+                "\n" +
+                "۱-         تغییرات این سند و تکلیف شما به اطلاعرسانی تغییر اطلاعات شخصی\n" +
+                "\n" +
+                "۲-         سایت و خدمات اشخاص ثالث\n" +
+                "\n" +
+                "۳-         کدام اطلاعات شخصی توسط دیوار جمعآوری میشوند\n" +
+                "\n" +
+                "۴-         از اطلاعات شخصی چه استفادهای میکنیم\n" +
+                "\n" +
+                "۵-         اطلاعات شخصی در اختیار چه اشخاصی قرار میگیرند\n" +
+                "\n" +
+                "۶-         امنیت اطلاعات شخصی\n" +
+                "\n" +
+                "۷-         پرسشها و درخواستهای شما\n" +
+                "\n" +
+                "۸-        شرایط درخواست\n" +
+                "\n" +
+                "در این سند، منظور از «گم گشته» و «ما»، شرکت همیاران گمگشته دلها هفتصد و هشتاد است";
+       binding.des1.setText(s);
+        binding.des2.setText(f);
     }
 }

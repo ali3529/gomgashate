@@ -2,6 +2,7 @@ package com.utabpars.gomgashteh.managerAnnouncement;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -31,6 +32,7 @@ public class FragmentOptions extends Fragment {
     OptionViewModel viewModel;
     int annoouncment_id;
     FragmentDeleteBottonSheet deleteBottonSheet;
+    String desteniion="g";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +51,11 @@ public class FragmentOptions extends Fragment {
                 recyclerView=binding.recyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         int id=getArguments().getInt("id");
+        try {
+            desteniion=getArguments().getString("desti");
+        }catch (Exception e){
+
+        }
         Log.d("fdffvcdsv", "onViewCreated: id"+id);
         Log.d("fdffvcdsv", "onViewCreated: id_announce"+annoouncment_id);
         viewModel.getTabs(String.valueOf(id));
@@ -88,6 +95,31 @@ public class FragmentOptions extends Fragment {
             }
 
         });
+
+//
+//        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
+//
+//            @Override
+//            public void handleOnBackPressed() {
+//
+//                //   Navigation.findNavController(getView()).navigate(R.id.action_chat_to_announcement);
+//                try {
+//                    if (desteniion.equals("add")){
+//                        Navigation.findNavController(getView()).navigate(R.id.action_fragmentOptions_to_fragmentMyAnnouncment2);
+//                    }else {
+//                        Navigation.findNavController(view).navigateUp();
+//                    }
+//                }catch (Exception e){
+//                    Navigation.findNavController(view).navigateUp();
+//                }
+//
+//
+//
+//
+//            };
+//
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(),callback);
 
 
     }

@@ -12,6 +12,7 @@ import com.utabpars.gomgashteh.markannouncment.MarkModel;
 import com.utabpars.gomgashteh.model.AboutModel;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
+import com.utabpars.gomgashteh.model.AtrrNameModel;
 import com.utabpars.gomgashteh.model.BlockModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.ChatsModel;
@@ -190,5 +191,9 @@ public interface ApiInterface {
     @POST("reportAnnounce")
     @FormUrlEncoded
     Single<RmModel> reportAnnouncement(@Field("announce_id") String announce_id,@Field("user_id") String user_id,@Field("text") String text);
+
+    @POST("selectedAttributes")
+    @FormUrlEncoded
+    Single<AtrrNameModel> getAttributesName(@Field("collection_id") String callection_id);
 }
 

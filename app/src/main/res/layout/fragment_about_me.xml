@@ -12,15 +12,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentAboutMe"
-    android:layout_margin="6dp">
+    android:layout_margin="6dp"
+    android:layoutDirection="rtl">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="درباره ما"
+            android:textDirection="rtl"
+            android:textSize="20dp"
+            android:textColor="@color/text_color_black"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:layout_below="@id/toolbar">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@{aboutme}"
-        android:layoutDirection="rtl"/>
+        android:textDirection="rtl"
+        android:textSize="@dimen/text_size_16"
+
+        android:padding="4dp"
+     />
 </RelativeLayout>
 
 </RelativeLayout>

@@ -47,11 +47,12 @@ public class FragmentOtherCity extends Fragment {
     FragmentOtherCityBinding binding;
     RecyclerView recyclerView;
     CategoryAdaptor otherCityAdaptor;
-    static SharedPreferences sharedPreferences;
-    static SharedPreferences.Editor editor;
-    static List<String> otherCityList =new ArrayList<>();
+     SharedPreferences sharedPreferences;
+     SharedPreferences.Editor editor;
+     List<String> otherCityList =new ArrayList<>();
     Gson gson;
     String navigate;
+    List<String> city_name=new ArrayList<>();
 
 
 
@@ -147,10 +148,13 @@ public class FragmentOtherCity extends Fragment {
                         categoryModel.setSelected(false);
                         otherCityAdaptor.notifyDataSetChanged();
                         otherCityList.remove(i);
+                        city_name.remove(i);
                         gson=new Gson();
                         String s=gson.toJson(otherCityList);
                         editor.putString("otherCityList", s);
+                        editor.putString("otherCity_name", city_name.toString());
                         editor.apply();
+
                     }
 
                 }
@@ -164,16 +168,20 @@ public class FragmentOtherCity extends Fragment {
                         otherCityAdaptor.notifyDataSetChanged();
                         gson=new Gson();
                         otherCityList.add(String.valueOf(categoryModel.getId()));
+                        city_name.add(categoryModel.getCategoryName());
                         String s=gson.toJson(otherCityList);
                         editor.putString("otherCityList", s);
+                        editor.putString("otherCity_name", city_name.toString());
                         editor.apply();
                     }
                 }catch (Exception e){   categoryModel.setSelected(true);
                     otherCityAdaptor.notifyDataSetChanged();
                     gson=new Gson();
                     otherCityList.add(String.valueOf(categoryModel.getId()));
+                    city_name.add(categoryModel.getCategoryName());
                     String s=gson.toJson(otherCityList);
                     editor.putString("otherCityList", s);
+                    editor.putString("otherCity_name", city_name.toString());
                     editor.apply();}
 
 

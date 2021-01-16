@@ -116,6 +116,10 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+        binding.rols.setOnClickListener(o ->{
+            Navigation.findNavController(o).navigate(R.id.action_perofile_to_fragmentRuls);
+        });
+
     }
 
     @Override

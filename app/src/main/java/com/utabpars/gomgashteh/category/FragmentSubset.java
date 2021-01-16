@@ -73,6 +73,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             Log.d("safasdsadsadwz", "getCategoryId: sub one "+id);
             subsetViewModel.getSubset(id,"sub_two",type);
             id_anounce=id;
+            saveCategoryNames(title);
 
         }
     };
@@ -86,8 +87,13 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             recyclerView.setAdapter(adaptor);
         }else if (subSetModel.getMasasge().equals("sub_two")){
             bundle.putString("type",type);
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubset_to_fragmentSubTwo,bundle);
-            Log.d("safcaccv", "onViewCreated: gggg");
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubset_to_fragmentSubTwo,bundle);
+            }catch (Exception e){
+
+            }
+
+
         }
     }
 
@@ -97,7 +103,12 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
         Bundle bundle=new Bundle();
         bundle.putString("id",id_anounce);
         bundle.putString("type","sub_two");
-        Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+        try {
+            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+        }catch (Exception e){
+
+        }
+
     }
 
     @Override
@@ -107,6 +118,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             Bundle bundle=new Bundle();
             bundle.putString("id",id);
             bundle.putString("type","sub_one");
+            bundle.putString("title",title);
             Log.d("saavavavs", "emptyCallback: iiiiiiiiiiii");
             Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
         }else {
@@ -115,11 +127,26 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             editor.putString("type","sub_one");
             editor.putString("title",title);
             editor.apply();
-            Toast.makeText(getContext(), "emtyyyyy", Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+            Toast.makeText(getContext(), "emty_one", Toast.LENGTH_SHORT).show();
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+            }catch (Exception e){
+
+            }
+
         }
 
 
 
+    }
+    private void saveCategoryNames(String title) {
+        SharedPreferences SaveCategoryName;
+        SharedPreferences.Editor SaveCategoryNameEditor;
+        SaveCategoryName=getActivity().getSharedPreferences("save_category_name",Context.MODE_PRIVATE);
+        SaveCategoryNameEditor=SaveCategoryName.edit();
+        SaveCategoryNameEditor.putString("sub_one",title);
+        SaveCategoryNameEditor.putString("sub_two","");
+        SaveCategoryNameEditor.putString("sub_three","");
+        SaveCategoryNameEditor.apply();
     }
 }

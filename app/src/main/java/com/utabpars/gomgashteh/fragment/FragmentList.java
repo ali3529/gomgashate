@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -76,7 +77,7 @@ public class FragmentList extends Fragment {
                         public void getCategoryId(View view, String id,int position,String title) {
 
                                 Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]");
-
+                            saveCategoryNames(title);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("title", categoryModel.getListData().get(position).getCategoryName());
                                 bundle.putString("id", String.valueOf(id));
@@ -144,7 +145,8 @@ public class FragmentList extends Fragment {
             @Override
             public void handleOnBackPressed() {
 
-                Navigation.findNavController(getView()).navigate(R.id.action_list_to_announcement);
+              //  Navigation.findNavController(getView()).navigate(R.id.action_list_to_announcement);
+               Navigation.findNavController(getView()).popBackStack();
 
 
             };
@@ -180,6 +182,14 @@ public class FragmentList extends Fragment {
 //                    }
 //                }));
 //    }
+private void saveCategoryNames(String title) {
+    SharedPreferences SaveCategoryName;
+    SharedPreferences.Editor SaveCategoryNameEditor;
+    SaveCategoryName = getActivity().getSharedPreferences("save_category_name", Context.MODE_PRIVATE);
+    SaveCategoryNameEditor = SaveCategoryName.edit();
+    SaveCategoryNameEditor.putString("category", title);
+    SaveCategoryNameEditor.apply();
+}
 
 
 }

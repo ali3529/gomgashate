@@ -82,7 +82,8 @@ public class FragmentCity extends Fragment {
                              editor.putString("city_name",categoryModel.getListData().get(position).getCategoryName());
                              editor.apply();
                              if (navigation.equals("city_add")){
-                                 Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_add);
+                                // Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_add);
+                                 Navigation.findNavController(view).popBackStack(R.id.add,false);
                              }else if (navigation.equals("choose")){
                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity2_to_announcement);
                                SharedPreferences preferences=getActivity().getSharedPreferences("cityName",Context.MODE_PRIVATE);

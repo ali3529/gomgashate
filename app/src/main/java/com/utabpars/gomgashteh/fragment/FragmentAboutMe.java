@@ -37,21 +37,52 @@ public class FragmentAboutMe extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getAboutMe()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<AboutModel>() {
-            @Override
-            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AboutModel aboutModel) {
-                binding.setAboutme(aboutModel.getAbout_me());
-            }
+//        ApiInterface apiInterface= ApiClient.getApiClient();
+//        CompositeDisposable compositeDisposable=new CompositeDisposable();
+//        compositeDisposable.add(apiInterface.getAboutMe()
+//        .subscribeOn(Schedulers.io())
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribeWith(new DisposableSingleObserver<AboutModel>() {
+//            @Override
+//            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AboutModel aboutModel) {
+//                binding.setAboutme(aboutModel.getAbout_me());
+//            }
+//
+//            @Override
+//            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//                Log.d("dsvdsv", "onError: "+e.toString());
+//            }
+//        }));
+        String s="\n" +
+                "ای گمگشته دلها به جهان بازآی، ای منتقم خون خدا بازآی ، با این همه جرم و گنه باز منتظریم ، چون (لاتقنطو من رحمه الله) بازآی ،  السلام علیک یا صاحب الزمان (عج)\n" +
+                "\n" +
+                "شرکت همیاران گمگشته دلها 780 در سال 1399 با شماره ثبت .... با عنایات الطاف الهی و استمداد از قطب عالم امکان حضرت ولی عصر (عج) برای رفاه حال هموطنان عزیز ایران اسلامی جهت پیدا کردن گمشده های خود بوجود آمده که تاثیر به سزائی در هزینه، وقت و جلوگیری از اسراف در امور مردم و دولت عزیز می باشد که نیازمند همکاری شما هموطنان عزیز در این امر خیرخواهانه هستیم.\n" +
+                "\n" +
+                " \n" +
+                "\n" +
+                "1399 © تمامی حقوق برای شرکت همیاران گمگشته دلها محفوظ می باشد.\n" +
+                "\n" +
+                "" +
+                " طراحی و توسعه: یوتاب پارس" +
+                "" +
+                "" +
+                "" +
+                "" +
+                "شماره تماس شرکت : 07191010013\n" +
+                "\n" +
+                "داخلی واحد پشتیبانی عدد 1\n" +
+                "\n" +
+                "داخلی صدای مشتری عدد2\n" +
+                "\n" +
+                "داخلی ارتباط با مدیریت عدد 0\n" +
+                "\n" +
+                "ایمیل:\n" +
+                "\n" +
+                "info@gomgashteh.com\n" +
+                "\n" +
+                "آدرس: فارس، شیراز، محله خاتون"
 
-            @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                Log.d("dsvdsv", "onError: "+e.toString());
-            }
-        }));
+                ;
+        binding.setAboutme(s);
     }
 }

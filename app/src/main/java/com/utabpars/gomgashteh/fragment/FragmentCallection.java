@@ -49,6 +49,7 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     String idg,titleg;
     SubsetViewModel subsetViewModel;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,7 +93,10 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
                             Log.d("fdhdfhnfdnfd", "getCategoryId: "+id);
                              idg=id;
                              titleg=title;
+                            Log.d("fdhdfhnfdnfd", "getCategoryId: "+title);
                              subsetViewModel.getSubset(id,"sub_one",type);
+                             saveCategoryNames(title);
+
 
 
 
@@ -131,6 +135,18 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
 
     }
 
+    private void saveCategoryNames(String title) {
+        SharedPreferences SaveCategoryName;
+        SharedPreferences.Editor SaveCategoryNameEditor;
+        SaveCategoryName=getActivity().getSharedPreferences("save_category_name",Context.MODE_PRIVATE);
+        SaveCategoryNameEditor=SaveCategoryName.edit();
+        SaveCategoryNameEditor.putString("collection",title);
+        SaveCategoryNameEditor.putString("sub_one","");
+        SaveCategoryNameEditor.putString("sub_two","");
+        SaveCategoryNameEditor.putString("sub_three","");
+        SaveCategoryNameEditor.apply();
+    }
+
     private void initViews() {
         toolbar=binding.toolbar;
         recyclerView=binding.recyvlerview;
@@ -161,7 +177,12 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
         Bundle bundle=new Bundle();
         bundle.putString("id",idg);
         bundle.putString("type","sub_one");
-        Navigation.findNavController(getView()).navigate(R.id.action_fragmentCallection_to_fragmentAttrebute,bundle);
+        try {
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentCallection_to_fragmentAttrebute,bundle);
+        }catch (Exception e){
+
+        }
+
     }
 
     @Override
@@ -171,13 +192,25 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
             Bundle bundle=new Bundle();
             bundle.putString("id",idg);
             bundle.putString("type","sub_one");
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentCallection_to_fragmentAnnouncCollection,bundle);
+            bundle.putString("title",title);
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentCallection_to_fragmentAnnouncCollection,bundle);
+            }catch (Exception e){
+
+            }
+
         }else {
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("collaction_id",idg);
             editor.putString("type","sub_one");
+            editor.putString("title",title);
             editor.apply();
-            Toast.makeText(getContext(), "emtyyyyy", Toast.LENGTH_SHORT).show();
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentCallection_to_add);
+            }catch (Exception e){
+
+            }
+
         }
 
 

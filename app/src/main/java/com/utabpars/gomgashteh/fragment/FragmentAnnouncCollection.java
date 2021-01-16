@@ -51,7 +51,9 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
         super.onViewCreated(view, savedInstanceState);
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
+        String title=getArguments().getString("title");
         Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
+        binding.toolbartitle.setText(title);
         filterItemDataSource=new FilterItemDataSource();
         filterItemDataSource.getCallectionId(id,type);
         filterItemDataSource.getBind(binding);

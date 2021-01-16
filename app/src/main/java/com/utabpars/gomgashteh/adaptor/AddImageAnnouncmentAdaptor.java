@@ -17,9 +17,23 @@ import java.util.List;
 
 public class AddImageAnnouncmentAdaptor extends RecyclerView.Adapter<AddImageAnnouncmentAdaptor.TViewHolder> {
     List<Uri> uris=new ArrayList<>();
+    onDeleteImages onDeleteImage;
 
     public AddImageAnnouncmentAdaptor(List<Uri> uris) {
         this.uris = uris;
+    }
+
+    public AddImageAnnouncmentAdaptor(List<Uri> uris, onDeleteImages onDeleteImage) {
+        this.uris = uris;
+        this.onDeleteImage=onDeleteImage;
+    }
+
+    public void AddImageAnnouncmentAdaptor(List<Uri> uris, onDeleteImages onDeleteImage) {
+        this.uris = uris;
+        this.onDeleteImage=onDeleteImage;
+    }
+
+    public AddImageAnnouncmentAdaptor() {
     }
 
     @NonNull
@@ -33,6 +47,9 @@ public class AddImageAnnouncmentAdaptor extends RecyclerView.Adapter<AddImageAnn
     @Override
     public void onBindViewHolder(@NonNull TViewHolder holder, int position) {
         holder.binding.img.setImageURI(uris.get(position));
+        holder.binding.deletImg.setOnClickListener(o ->{
+            onDeleteImage.deleteImage(uris,position);
+        });
     }
 
     @Override
@@ -47,5 +64,8 @@ public class AddImageAnnouncmentAdaptor extends RecyclerView.Adapter<AddImageAnn
             this.binding=binding;
 
         }
+    }
+    public interface onDeleteImages{
+        void deleteImage(List<Uri> list,int position);
     }
 }

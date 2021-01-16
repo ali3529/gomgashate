@@ -74,6 +74,7 @@ FragmentSubTwoBinding binding;
             bundle.putString("id",id);
             bundle.putString("title",title);
             subsetViewModel.getSubset(id,"sub_three",type);
+            saveCategoryNames(title);
 
         }
     };
@@ -92,7 +93,12 @@ FragmentSubTwoBinding binding;
             recyclerView.setAdapter(adaptor);
         }else if (subSetModel.getMasasge().equals("sub_three")){
             bundle.putString("type",type);
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubTwo_to_fragmentSubThree,bundle);
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubTwo_to_fragmentSubThree,bundle);
+            }catch (Exception e){
+
+            }
+
         }
 
 
@@ -105,7 +111,12 @@ FragmentSubTwoBinding binding;
         Bundle bundle=new Bundle();
         bundle.putString("id",id_show_announce);
         bundle.putString("type","sub_three");
-        Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+        try {
+            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+        }catch (Exception e){
+
+        }
+
     }
 
     @Override
@@ -116,6 +127,7 @@ FragmentSubTwoBinding binding;
             Bundle bundle=new Bundle();
             bundle.putString("id",id_show_announce);
             bundle.putString("type","sub_three");
+            bundle.putString("title",title);
             Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
         }else {
             SharedPreferences.Editor editor=sharedPreferences.edit();
@@ -123,9 +135,23 @@ FragmentSubTwoBinding binding;
             editor.putString("type","sub_three");
             editor.putString("title",title);
             editor.apply();
-            Toast.makeText(getContext(), "emtyyyyy", Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+            Toast.makeText(getContext(), "emty_two", Toast.LENGTH_SHORT).show();
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+            }catch (Exception e){
+
+            }
+
         }
 
+    }
+    private void saveCategoryNames(String title) {
+        SharedPreferences SaveCategoryName;
+        SharedPreferences.Editor SaveCategoryNameEditor;
+        SaveCategoryName=getActivity().getSharedPreferences("save_category_name",Context.MODE_PRIVATE);
+        SaveCategoryNameEditor=SaveCategoryName.edit();
+        SaveCategoryNameEditor.putString("sub_two",title);
+        SaveCategoryNameEditor.putString("sub_three","");
+        SaveCategoryNameEditor.apply();
     }
 }

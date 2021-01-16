@@ -12,19 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
-import android.text.method.LinkMovementMethod;
-import android.text.method.MovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -32,24 +30,21 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 
+import com.utabpars.gomgashteh.category.attrebute.AttrebuteViewModel;
 import com.utabpars.gomgashteh.databinding.FragmentAddAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
 import com.utabpars.gomgashteh.utils.Utils;
+import com.utabpars.gomgashteh.viewmodel.AttrebuteNameViewModel;
 
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,7 +55,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okio.ByteString;
 
 import static com.utabpars.gomgashteh.utils.Utils.ReadExternalRequestCode;
 
@@ -68,15 +62,18 @@ public class FragmentAddAnnouncement extends Fragment  {
     FragmentAddAnnouncementBinding binding;
     EditText edTitle, edDescription;
     RelativeLayout save_announcement;
-    SharedPreferences shPref,user_status;
+    SharedPreferences shPref,user_status,save_state,category_name;
+    SharedPreferences.Editor editor_savestate;
     RadioGroup radioGroup;
     String type;
-    RecyclerView addImageRecyclerview;
+     RecyclerView addImageRecyclerview;
     Intent intent;
-    AddImageAnnouncmentAdaptor addImageAnnouncmentAdaptor;
-    List<Uri> uriList =new ArrayList<>();
-    List<MultipartBody.Part> partLists=new ArrayList<>();
+    static AddImageAnnouncmentAdaptor addImageAnnouncmentAdaptor;
+    static List<Uri> uriList =new ArrayList<>();
+    static List<MultipartBody.Part> partLists=new ArrayList<>();
     BottomSheetChooseImage bottomSheetChooseImage;
+    String title;
+    AttrebuteNameViewModel attrebuteNameViewModel;
 
 
 
@@ -109,11 +106,27 @@ public class FragmentAddAnnouncement extends Fragment  {
         }
         RelativeLayout button=binding.setcategory;
         RelativeLayout city=binding.setcity;
+        type=save_state.getString("type","");
+        binding.title.setText(save_state.getString("title",""));
+        binding.description.setText(save_state.getString("descrip",""));
+
+        if (type.equals("1")){
+            binding.find.setChecked(true);
+        }else if (type.equals("2")){
+            binding.lost.setChecked(true);
+        }
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
                 bundle.putString("type","");
+
+                editor_savestate.putString("title",binding.title.getText().toString());
+                editor_savestate.putString("descrip",binding.description.getText().toString());
+                editor_savestate.putString("type",type);
+                editor_savestate.apply();
                 Navigation.findNavController(view).navigate(R.id.action_add_to_list,bundle);
             }
         });
@@ -137,14 +150,28 @@ public class FragmentAddAnnouncement extends Fragment  {
         });
 
         //set category
-        String title=shPref.getString("title","انتخاب کنید");
+         title=shPref.getString("title","انتخاب کنید");
         String title_collection=shPref.getString("type","");
         String id=shPref.getString("collaction_id",null);
         String type_collaction=shPref.getString("type",null);
         //todo
+        attrebuteNameViewModel.getAttrName(shPref.getString("collaction_id",null));
 
         binding.setCategory(title);
 
+        binding.categoryName.setText(category_name.getString("category","")+" - "+
+                category_name.getString("collection","")+" - "+
+                category_name.getString("sub_one","")+" - "+
+                category_name.getString("sub_two","")+" - "+
+                category_name.getString("sub_three",""));
+
+        attrebuteNameViewModel.nameModelMutableLiveData.observe(getViewLifecycleOwner(),t->{
+            binding.categoryName.setText(category_name.getString("category","")+" - "+
+                    category_name.getString("collection","")+" - "+
+                    category_name.getString("sub_one","")+" - "+
+                    category_name.getString("sub_two","")+" - "+
+                    category_name.getString("sub_three","")+" - "+t);
+        });
 
 
         //set other city
@@ -153,21 +180,33 @@ public class FragmentAddAnnouncement extends Fragment  {
         }else {
             binding.othercity.setText(getSHaredList().size()+"شهر");
         }
+        SharedPreferences city_name = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+        binding.cityName.setText(city_name.getString("otherCity_name",""));
 
 
 
         //set city
-        binding.setCity(shPref.getString("city_name","انتخاب کنید")+", "+shPref.getString("province_name",""));
+        binding.setCity(shPref.getString("province_name","انتخاب کنید")+", "+shPref.getString("city_name",""));
+        //notify image change
+        try {
+            addImageAnnouncmentAdaptor.notifyDataSetChanged();
+            addImageRecyclerview.setAdapter(addImageAnnouncmentAdaptor);
+        }catch (Exception r){
+        }
 
 
         save_announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("id",560);
+                bundle.putString("desti","add");
+                Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentShowEdit,bundle);
                 if (edTitle.getText().toString().length()!=0){
                     if (edDescription.getText().toString().length()!=0){
                         if (type!=null){
                             binding.addProgress.setVisibility(View.VISIBLE);
-                            sendAnnouncment(fetchdata());
+                            //sendAnnouncment(fetchdata());
                             Log.d("insetanosdijds", "onClick: goood");
 
 
@@ -215,6 +254,54 @@ public class FragmentAddAnnouncement extends Fragment  {
             Toast.makeText(getContext(), "لطفا قوانین را مطالعه و تایید کنید", Toast.LENGTH_SHORT).show();
         });
 
+        binding.restore.setOnClickListener( o->{
+            //todo
+            SharedPreferences.Editor add_category=shPref.edit();
+            add_category.clear();
+            add_category.apply();
+            editor_savestate.clear();
+            editor_savestate.apply();
+            uriList.clear();
+            partLists.clear();
+            //othercity
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor1=sharedPreferences.edit();
+            editor1.clear();
+            editor1.apply();
+
+
+
+
+            type=save_state.getString("type","");
+            binding.title.setText(save_state.getString("title",""));
+            binding.description.setText(save_state.getString("descrip",""));
+             title=shPref.getString("title","انتخاب کنید");
+            binding.surpriseText.setText("");
+            binding.setCity(shPref.getString("city_name","انتخاب کنید")+", "+shPref.getString("province_name",""));
+            binding.setCategory(title);
+                binding.find.setChecked(false);
+
+                binding.lost.setChecked(false);
+                try {
+                    addImageAnnouncmentAdaptor.notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+
+            //set other city
+            if (getSHaredList()==null){
+                binding.othercity.setText("انتخاب کنید");
+            }else {
+                binding.othercity.setText(getSHaredList().size()+"شهر");
+            }
+            SharedPreferences.Editor editor_category=category_name.edit();
+            editor_category.clear();
+            editor_category.apply();
+            binding.cityName.setText("");
+            binding.categoryName.setText("");
+
+        });
+
 
 
     }
@@ -235,12 +322,25 @@ public class FragmentAddAnnouncement extends Fragment  {
                 bottomSheetChooseImage.dismiss();
                 partLists.add(partList);
                 uriList.add(uri);
-                addImageAnnouncmentAdaptor=new AddImageAnnouncmentAdaptor(uriList);
+                Log.d("dssdvsdvv", ": add "+uriList.size());
+                Log.d("dssdvsdvv", ":  add"+partLists.size());
+
+                addImageAnnouncmentAdaptor=new AddImageAnnouncmentAdaptor(uriList, new AddImageAnnouncmentAdaptor.onDeleteImages() {
+                    @Override
+                    public void deleteImage(List<Uri> list, int position) {
+                        uriList.remove(position);
+                        partLists.remove(position);
+                        addImageAnnouncmentAdaptor.notifyDataSetChanged();
+                        Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
+                        Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
+                    }
+                });
                 addImageRecyclerview.setAdapter(addImageAnnouncmentAdaptor);
 
             }
         });
     }
+    
 
     public void onClickRadio(View view){
         boolean checked = ((RadioButton) view).isChecked();
@@ -253,6 +353,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                     Log.d("jhvhjvj", "onClickRadio: "+type);
                     binding.suprise.setVisibility(View.GONE);
                 }
+                //todo
 
                 break;
             case R.id.lost:
@@ -290,6 +391,10 @@ public class FragmentAddAnnouncement extends Fragment  {
         addImageRecyclerview=binding.imgRecyclerview;
         addImageRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true));
         addImageRecyclerview.setHasFixedSize(true);
+        save_state=getActivity().getSharedPreferences("save_state",Context.MODE_PRIVATE);
+        editor_savestate =save_state.edit();
+        category_name = getActivity().getSharedPreferences("save_category_name", Context.MODE_PRIVATE);
+        attrebuteNameViewModel =new ViewModelProvider(this).get(AttrebuteNameViewModel.class);
 
 
     }
@@ -312,7 +417,11 @@ public class FragmentAddAnnouncement extends Fragment  {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentMyAnnouncment2);
+                                    Bundle bundle=new Bundle();
+                                    bundle.putInt("id",Integer.parseInt(saveAnnouncementModel.getAnnounce_id()));
+                                    bundle.putString("desti","add");
+                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentShowEdit,bundle);
+                                    getActivity().getSupportFragmentManager().popBackStack();
                                     SharedPreferences.Editor editor=shPref.edit();
                                     editor.clear();
                                     editor.apply();
@@ -321,6 +430,19 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     SharedPreferences.Editor editor1=sharedPreferences.edit();
                                     editor1.clear();
                                     editor1.apply();
+
+                                    SharedPreferences.Editor add_category=shPref.edit();
+                                    add_category.clear();
+                                    add_category.apply();
+                                    editor_savestate.clear();
+                                    editor_savestate.apply();
+                                    uriList.clear();
+                                    partLists.clear();
+                                    SharedPreferences.Editor editor_category=category_name.edit();
+                                    editor_category.clear();
+                                    editor_category.apply();
+
+
 
                                 }
                             },1000);
@@ -348,7 +470,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         RequestBody title=RequestBody.create(MediaType.parse("title"),edTitle.getText().toString());
         RequestBody utype=RequestBody.create(MediaType.parse("type"),type);
         RequestBody category_id=RequestBody.create(MediaType.parse("case"),shPref.getString("type",null));
-        //todo
+
         RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("collaction_id",""));
         RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",""));
         RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",""));

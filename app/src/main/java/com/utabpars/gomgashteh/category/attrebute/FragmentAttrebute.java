@@ -85,7 +85,7 @@ public class FragmentAttrebute extends Fragment implements SpiinerCallback{
 
 
     @Override
-    public void SpinnerItemCallBack(String id, String value,boolean isCkeck,int position) {
+    public void SpinnerItemCallBack(String id, String value,boolean isCkeck,int position,List<String> list) {
         String ischeck;
 
         if (isCkeck){
@@ -118,20 +118,11 @@ public class FragmentAttrebute extends Fragment implements SpiinerCallback{
         List<String> list=new ArrayList<>();
         for (int i = 0; i < spinnerlist.size(); i++) {
             String[] strings=spinnerlist.get(i).getValue().split("@");
-            list.add(spinnerlist.get(i).getId().replaceAll("\\s+",""));
-            list.add(strings[0].replaceAll("\\s+",""));
-            list.add(spinnerlist.get(i).getIscheck().replaceAll("\\s+",""));
+            list.add(spinnerlist.get(i).getId());
+            list.add(strings[0]);
+            list.add(spinnerlist.get(i).getIscheck());
         }
         return list;
     }
-
-    public void getDataspace(){
-
-
-        Log.d("fgdfhdfh", "getDataspace: "+getData().get(1).replaceAll("\\s+",""));
-
-
-    }
-
 
 }

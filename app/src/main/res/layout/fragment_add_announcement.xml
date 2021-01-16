@@ -85,6 +85,15 @@
                 android:layout_gravity="center"
                 android:textColor="@color/text_color_black"
                 />
+            <ImageView
+                android:id="@+id/restore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_efresh_24"
+                android:layout_gravity="left"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                />
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
@@ -118,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp">
                     <TextView
+                        android:id="@+id/category_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="دسته بندی"
@@ -135,6 +145,15 @@
                         android:fontFamily="@font/sans"
                         android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_low_black"/>
+                    <TextView
+                        android:id="@+id/category_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/category_title"
+                        tools:text="fvdjsvfdsvf"
+                        android:textDirection="rtl"
+                        android:layout_marginTop="3dp"/>
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/hr_callection"
@@ -199,6 +218,7 @@
                         android:layout_alignParentRight="true"
                         />
                     <TextView
+                        android:id="@+id/city_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="شهر های دیگر"
@@ -218,12 +238,21 @@
                         android:fontFamily="@font/sans"
                         android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_low_black"/>
+                    <TextView
+                        android:id="@+id/city_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/city_title"
+                        tools:text="fvdjsvfdsvf"
+                        android:textDirection="rtl"
+                        android:layout_marginTop="3dp"/>
                     <View
 
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/hr_color"
-                        android:layout_below="@id/othercity"
+                        android:layout_below="@id/city_name"
                         android:layout_marginTop="6dp"
                         />
                 </RelativeLayout>
@@ -427,7 +456,7 @@
                     android:layout_below="@id/layout_detail"
                     android:layout_alignParentRight="true"
                     android:padding="18dp"
-                    android:visibility="gone">
+                    android:visibility="visible">
                     <TextView
                         android:id="@+id/text_suprise"
                         android:layout_width="wrap_content"
@@ -450,7 +479,6 @@
                             android:id="@+id/surprise_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:focusable="false"
                             android:inputType="number"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
