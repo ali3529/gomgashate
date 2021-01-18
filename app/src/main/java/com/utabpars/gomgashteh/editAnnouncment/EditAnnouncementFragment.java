@@ -155,7 +155,7 @@ public class EditAnnouncementFragment extends Fragment {
             oldRecyclerView.setAdapter(oldAdaptor);
 
         }catch (Exception r){
-            Toast.makeText(getContext(), ""+r, Toast.LENGTH_SHORT).show();
+
         }
 
 
@@ -210,7 +210,7 @@ public class EditAnnouncementFragment extends Fragment {
     private void loadData(DetailModel.Data data) {
         binding.setData(data);
         binding.title.setText(data.getTitle());
-        binding.description.setText(data.getTitle());
+        binding.description.setText(data.getDetail());
         binding.fgfd.setText(data.getCity());
         oldAdaptor =new ImageEditAdaptor(data.getPictures(),DeleteImage);
         oldRecyclerView.setAdapter(oldAdaptor);

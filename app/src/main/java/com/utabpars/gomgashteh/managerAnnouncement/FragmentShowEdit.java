@@ -62,6 +62,20 @@ public class FragmentShowEdit extends Fragment {
                 binding.setProgress(false);
             }
         });
+        try {
+            if (desteniion.equals("add")){
+                binding.back.setVisibility(View.VISIBLE);
+            }else {
+                binding.back.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            binding.back.setVisibility(View.GONE);
+        }
+
+
+        binding.back.setOnClickListener( o->{
+            Navigation.findNavController(view).navigate(R.id.action_fragmentShowEdit_to_fragmentMyAnnouncment2);
+        });
 //
 //        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
 //

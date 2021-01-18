@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,7 @@ viewModel.phoneNumberInterface(loginRespondeCallBack);
                 bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
                 bundle.putBoolean("is_validate",true);
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+                Log.d("drgdrggdr", "otpCallback: 1   -- "+rmModel.getResponse());
             }else if (rmModel.getResponse().equals("0")){
                 Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
                 binding.setProgress(false);
@@ -96,6 +98,7 @@ viewModel.phoneNumberInterface(loginRespondeCallBack);
                 bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
                 bundle.putBoolean("is_validate",false);
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
+                Log.d("drgdrggdr", "otpCallback: 2   -- "+rmModel.getResponse());
             }
         }
     };

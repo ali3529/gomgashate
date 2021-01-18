@@ -54,6 +54,7 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
         binding.toolbartitle.setText(title);
         subsetViewModel.getSubset(id,"sub_three",type);
         subsetViewModel.getCallBack(this);
+        lastAnnouncmentAboveBtNavigation();
 
     }
 
@@ -131,5 +132,24 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
         SaveCategoryNameEditor=SaveCategoryName.edit();
         SaveCategoryNameEditor.putString("sub_three",title);
         SaveCategoryNameEditor.apply();
+    }
+
+    private void lastAnnouncmentAboveBtNavigation() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.gggg.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+                int itemcount=layoutManager.getItemCount();
+                int lastvisi=layoutManager.findLastVisibleItemPosition();
+                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
+                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
+                if (lastvisi==itemcount-1){
+                    Log.d("dsgfdgfdg", "last: ");
+                    binding.gggg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 }

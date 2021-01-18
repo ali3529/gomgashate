@@ -61,7 +61,7 @@ FragmentSubTwoBinding binding;
         subsetViewModel.getSubset(id,"sub_two",type);
         subsetViewModel.getCallBack(this);
         Log.d("sadsadsad", "getCategoryId: "+id);
-
+        lastAnnouncmentAboveBtNavigation();
 
     }
 
@@ -154,4 +154,24 @@ FragmentSubTwoBinding binding;
         SaveCategoryNameEditor.putString("sub_three","");
         SaveCategoryNameEditor.apply();
     }
+
+    private void lastAnnouncmentAboveBtNavigation() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.gggg.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+                int itemcount=layoutManager.getItemCount();
+                int lastvisi=layoutManager.findLastVisibleItemPosition();
+                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
+                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
+                if (lastvisi==itemcount-1){
+                    Log.d("dsgfdgfdg", "last: ");
+                    binding.gggg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
 }
+

@@ -139,32 +139,43 @@ public class FragmentOtherCity extends Fragment {
     ItemSelectedCallback itemSelectedCallback=new ItemSelectedCallback() {
         @Override
         public void getSelectedItem(View view, CategoryModel.ListData categoryModel, int position,boolean a) {
+            try {
 
-            if (categoryModel.isSelected()){
+                if (categoryModel.isSelected()){
 
 
-                for (int i = 0; i < getSHaredList().size(); i++) {
-                    if (String.valueOf(categoryModel.getId()).equals(getSHaredList().get(i))){
-                        categoryModel.setSelected(false);
-                        otherCityAdaptor.notifyDataSetChanged();
-                        otherCityList.remove(i);
-                        city_name.remove(i);
-                        gson=new Gson();
-                        String s=gson.toJson(otherCityList);
-                        editor.putString("otherCityList", s);
-                        editor.putString("otherCity_name", city_name.toString());
-                        editor.apply();
+                    for (int i = 0; i < getSHaredList().size(); i++) {
+                        if (String.valueOf(categoryModel.getId()).equals(getSHaredList().get(i))){
+                            categoryModel.setSelected(false);
+                            otherCityAdaptor.notifyDataSetChanged();
+                            otherCityList.remove(i);
+                            city_name.remove(i);
+                            gson=new Gson();
+                            String s=gson.toJson(otherCityList);
+                            editor.putString("otherCityList", s);
+                            editor.putString("otherCity_name", city_name.toString());
+                            editor.apply();
+
+                        }
 
                     }
+                }else {
+                    try {
+                        if (getSHaredList().size()>=10){
+                            Toast.makeText(getContext(), "برای هر آگهی مجاز به انتخاب ده شهر هستید", Toast.LENGTH_SHORT).show();
 
-                }
-            }else {
-                try {
-                    if (getSHaredList().size()>=10){
-                        Toast.makeText(getContext(), "برای هر آگهی مجاز به انتخاب ده شهر هستید", Toast.LENGTH_SHORT).show();
-
-                    }else {
-                        categoryModel.setSelected(true);
+                        }else {
+                            categoryModel.setSelected(true);
+                            otherCityAdaptor.notifyDataSetChanged();
+                            gson=new Gson();
+                            otherCityList.add(String.valueOf(categoryModel.getId()));
+                            city_name.add(categoryModel.getCategoryName());
+                            String s=gson.toJson(otherCityList);
+                            editor.putString("otherCityList", s);
+                            editor.putString("otherCity_name", city_name.toString());
+                            editor.apply();
+                        }
+                    }catch (Exception e){   categoryModel.setSelected(true);
                         otherCityAdaptor.notifyDataSetChanged();
                         gson=new Gson();
                         otherCityList.add(String.valueOf(categoryModel.getId()));
@@ -172,21 +183,21 @@ public class FragmentOtherCity extends Fragment {
                         String s=gson.toJson(otherCityList);
                         editor.putString("otherCityList", s);
                         editor.putString("otherCity_name", city_name.toString());
-                        editor.apply();
-                    }
-                }catch (Exception e){   categoryModel.setSelected(true);
-                    otherCityAdaptor.notifyDataSetChanged();
-                    gson=new Gson();
-                    otherCityList.add(String.valueOf(categoryModel.getId()));
-                    city_name.add(categoryModel.getCategoryName());
-                    String s=gson.toJson(otherCityList);
-                    editor.putString("otherCityList", s);
-                    editor.putString("otherCity_name", city_name.toString());
-                    editor.apply();}
+                        editor.apply();}
 
 
+                }
+//not work
+            }catch (Exception e){
+                otherCityAdaptor.notifyDataSetChanged();
+                gson=new Gson();
+                otherCityList.add(String.valueOf(categoryModel.getId()));
+                city_name.add(categoryModel.getCategoryName());
+                String s=gson.toJson(otherCityList);
+                editor.putString("otherCityList", s);
+                editor.putString("otherCity_name", city_name.toString());
+                editor.apply();
             }
-
         }
     };
 
@@ -208,7 +219,6 @@ public class FragmentOtherCity extends Fragment {
         }.getType();
         List<String>  j=gson.fromJson(s,type);
 
-        Log.d("sfesfsef", "getCategoryId: "+j.get(0));
         return j;
     }
 

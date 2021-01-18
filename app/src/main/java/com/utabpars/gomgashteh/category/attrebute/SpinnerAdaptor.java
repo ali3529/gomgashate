@@ -22,12 +22,13 @@ import java.util.List;
 
 public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerViewHolder> {
     SpinnerModel spinnerModel;
-    SpiinerCallback spiinerCallback;
-    SpinnerViewHolder holderG;
+
+    int positionT;
+    BottonShettCallback bottonShettCallback;
     boolean isckeck;
-    public SpinnerAdaptor(SpinnerModel spinnerModel, SpiinerCallback spiinerCallback) {
+    public SpinnerAdaptor(SpinnerModel spinnerModel, BottonShettCallback bottonShettCallback) {
         this.spinnerModel = spinnerModel;
-        this.spiinerCallback = spiinerCallback;
+        this.bottonShettCallback=bottonShettCallback;
     }
 
     @NonNull
@@ -40,7 +41,7 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
 
     @Override
     public void onBindViewHolder(@NonNull SpinnerViewHolder holder, int position) {
-        holderG=holder;
+        positionT=position;
 //        holder.binding.spinner.setSpinnerPopupAnimation(SpinnerAnimation.BOUNCE);
         List<String> list=new ArrayList<>();
         for (String s:spinnerModel.getAttrebuteData().get(position).getValues()) {
@@ -53,27 +54,42 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
         holder.binding.setText(spinnerModel.getAttrebuteData().get(position).getName());
 
 
-        holder.binding.spinner.setItems(list);
+        holder.binding.spinner.setOnClickListener(o ->{
+            bottonShettCallback.onClickSpinner(spinnerModel.getAttrebuteData().get(position).getId(),
+                    spinnerModel.getAttrebuteData().get(position).getValues(),position);
 
-        holder.binding.spinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<String>() {
-            @Override
-            public void onItemSelected(int i, @Nullable String s, int i1, String t1) {
-                Log.d("Dsfdsfdsf", "onItemSelected: "+t1);
-                Log.d("Dsfdsfdsf", "onItemSelected: il "+i1);
-                Log.d("Dsfdsfdsf", "onItemSelected: id "+spinnerModel.getAttrebuteData().get(position).getId());
-                Log.d("Dsfdsfdsf", "onItemSelected: i "+spinnerModel.getAttrebuteData().get(position).getValues().get(i1));
-                spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
-                        holder.binding.emportent.isChecked(),position,
-                        list);
+//            holder.binding.emportent.setOnClickListener( ou->{
+//                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
+//                bottonShettCallback.onClickSpinner(spinnerModel.getAttrebuteData().get(position).getId(),
+//                        spinnerModel.getAttrebuteData().get(position).getValues(),position);
+//                });
 
-                holder.binding.emportent.setOnClickListener( o->{
-                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
-                    spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
-                            holder.binding.emportent.isChecked(),
-                            position,list);
-                });
-            }
         });
+        holder.binding.emportent.setOnClickListener(o ->{
+            bottonShettCallback.onClickSpinnerisCheck(holder.binding.emportent.isChecked());
+        });
+
+       // holder.binding.spinner.setItems(list);
+
+//        holder.binding.spinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<String>() {
+//            @Override
+//            public void onItemSelected(int i, @Nullable String s, int i1, String t1) {
+//                Log.d("Dsfdsfdsf", "onItemSelected: "+t1);
+//                Log.d("Dsfdsfdsf", "onItemSelected: il "+i1);
+//                Log.d("Dsfdsfdsf", "onItemSelected: id "+spinnerModel.getAttrebuteData().get(position).getId());
+//                Log.d("Dsfdsfdsf", "onItemSelected: i "+spinnerModel.getAttrebuteData().get(position).getValues().get(i1));
+//                spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
+//                        holder.binding.emportent.isChecked(),position,
+//                        list);
+//
+//                holder.binding.emportent.setOnClickListener( o->{
+//                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
+//                    spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
+//                            holder.binding.emportent.isChecked(),
+//                            position,list);
+//                });
+//            }
+//        });
 
 
     }
@@ -91,6 +107,11 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
         }
     }
 
+    public void setText(String text,int position){
+        spinnerModel.getAttrebuteData().get(position).setName(text);
+        notifyDataSetChanged();
+        Log.d("dsfdsf", "setText: "+position);
+    }
 
 
 }

@@ -47,6 +47,8 @@ public class UserAuthenticationViewModel extends ViewModel {
                             Log.d("ewtwet[pl", "onSuccess: "+rmModel.getResponse());
                             loginRespondeCallBack.otpCallback(rmModel);
 
+                        }else if (rmModel.getResponse().equals("0")){
+                            loginRespondeCallBack.otpCallback(rmModel);
                         }
 
 

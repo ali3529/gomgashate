@@ -62,6 +62,8 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
         Log.d("ytjuyi", "onViewCreated: "+id);
         subsetViewModel.getCallBack(this);
 
+        lastAnnouncmentAboveBtNavigation();
+
     }
 
     CategoryCallBack categoryCallBack=new CategoryCallBack() {
@@ -73,6 +75,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             Log.d("safasdsadsadwz", "getCategoryId: sub one "+id);
             subsetViewModel.getSubset(id,"sub_two",type);
             id_anounce=id;
+            Log.d("sdvsbsdsnn", "getCategoryId: "+id_anounce);
             saveCategoryNames(title);
 
         }
@@ -99,10 +102,11 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
 
     @Override
     public void onAttributeCallback(SubSetModel SubSetModel) {
-        Toast.makeText(getContext(), "attribute 1", Toast.LENGTH_SHORT).show();
+
         Bundle bundle=new Bundle();
         bundle.putString("id",id_anounce);
         bundle.putString("type","sub_two");
+        Toast.makeText(getContext(), id_anounce, Toast.LENGTH_SHORT).show();
         try {
             Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
         }catch (Exception e){
@@ -119,8 +123,14 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             bundle.putString("id",id);
             bundle.putString("type","sub_one");
             bundle.putString("title",title);
-            Log.d("saavavavs", "emptyCallback: iiiiiiiiiiii");
-            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
+            Log.d("saavavavs", "emptyCallback: iiiiiiiiiiii"+id);
+            Log.d("saavavavs", "emptyCallback: iiiiiiiiiiii"+id_anounce);
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
+            }catch (Exception e){
+
+            }
+
         }else {
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("collaction_id",id);
@@ -148,5 +158,23 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
         SaveCategoryNameEditor.putString("sub_two","");
         SaveCategoryNameEditor.putString("sub_three","");
         SaveCategoryNameEditor.apply();
+    }
+    private void lastAnnouncmentAboveBtNavigation() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.gggg.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+                int itemcount=layoutManager.getItemCount();
+                int lastvisi=layoutManager.findLastVisibleItemPosition();
+                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
+                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
+                if (lastvisi==itemcount-1){
+                    Log.d("dsgfdgfdg", "last: ");
+                    binding.gggg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 }

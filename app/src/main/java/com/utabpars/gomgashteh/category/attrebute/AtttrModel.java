@@ -34,4 +34,9 @@ public class AtttrModel {
         this.value = value;
         this.ischeck = ischeck;
     }
+    public AtttrModel(String id, String value ) {
+        this.id = id;
+        this.value = value;
+
+    }
 }

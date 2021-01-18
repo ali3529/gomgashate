@@ -40,7 +40,17 @@
         android:id="@+id/recyvlerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"/>
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/gggg"/>
+
+    <View
+        android:id="@+id/gggg"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+
+        />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/below_progress"

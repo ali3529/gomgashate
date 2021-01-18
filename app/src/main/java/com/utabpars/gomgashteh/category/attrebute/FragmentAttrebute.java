@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentAttrebute extends Fragment implements SpiinerCallback{
+public class FragmentAttrebute extends Fragment implements BottonShettCallback{
     FragmentAttrebuteBinding binding;
     RecyclerView recyclerView;
     SpinnerAdaptor spinnerAdaptor;
@@ -34,6 +35,9 @@ public class FragmentAttrebute extends Fragment implements SpiinerCallback{
     SharedPreferences sharedPreferences;
     ArrayList<AtttrModel> spinnerlist=new ArrayList<>();
     int adaptorItemCount;
+    SpinnerBottomSheet spinnerBottomSheet;
+    int position;
+    MutableLiveData<String> isckeckNasesary=new MutableLiveData<>();
 
 
 
@@ -62,7 +66,7 @@ public class FragmentAttrebute extends Fragment implements SpiinerCallback{
         viewModel.getAttrebute(id,type);
 
         viewModel.spinnerModelMutableLiveData.observe(getViewLifecycleOwner(),t ->{
-            spinnerAdaptor=new SpinnerAdaptor(t, this);
+            spinnerAdaptor=new SpinnerAdaptor(t,this);
             recyclerView.setAdapter(spinnerAdaptor);
             adaptorItemCount=recyclerView.getAdapter().getItemCount();
             setIndec();
@@ -84,30 +88,24 @@ public class FragmentAttrebute extends Fragment implements SpiinerCallback{
     }
 
 
-    @Override
-    public void SpinnerItemCallBack(String id, String value,boolean isCkeck,int position,List<String> list) {
-        String ischeck;
-
-        if (isCkeck){
-            ischeck="1";
-        }else {
-            ischeck="0";
-        }
-        AtttrModel atttrModel=new AtttrModel(id,value,ischeck);
-
-        spinnerlist.set(position,atttrModel);
-
-        for (int i = 0; i < spinnerlist.size(); i++) {
-            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getId());
-            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getValue());
-            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getIscheck());
-            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.size());
-            Log.d("sdgsdvbbvmmmm", "-------------------------------------------------");
-        }
-
-
-
-    }
+//    @Override
+//    public void SpinnerItemCallBack(String id, String value,boolean isCkeck,int position,List<String> list) {
+////
+////        AtttrModel atttrModel=new AtttrModel(id,value,isckeckNasesary);
+////
+////        spinnerlist.set(position,atttrModel);
+////
+////        for (int i = 0; i < spinnerlist.size(); i++) {
+////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getId());
+////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getValue());
+////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getIscheck());
+////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.size());
+////            Log.d("sdgsdvbbvmmmm", "-------------------------------------------------");
+////        }
+//
+//
+//
+//    }
     public void setIndec(){
         for (int i = 0; i < adaptorItemCount; i++) {
             spinnerlist.add(new AtttrModel("","",""));
@@ -125,4 +123,54 @@ public class FragmentAttrebute extends Fragment implements SpiinerCallback{
         return list;
     }
 
+    @Override
+    public void onClickSpinner(String id, List<String> values, int position) {
+        this.position=position;
+
+        spinnerBottomSheet=new SpinnerBottomSheet(values,id,attrCallback);
+        spinnerBottomSheet.show(getActivity().getSupportFragmentManager(),"");
+    }
+    SpinnerBottomSheet.AttrCallback attrCallback=new SpinnerBottomSheet.AttrCallback() {
+        @Override
+        public void getAttr(String id, String value, String value_id) {
+            spinnerBottomSheet.dismiss();
+            Log.d("sdgsdbmm", "ItemClick:--- "+value);
+            Log.d("sdgsdbmm", "ItemClick: -----"+value_id);
+            Log.d("sdgsdbmm", "ItemClick: -----"+id);
+            Log.d("sdgsdbmm", "ItemClick: -----"+isckeckNasesary);
+            spinnerAdaptor.setText(value,position);
+            AtttrModel atttrModel=new AtttrModel(id,value_id,"0");
+            spinnerlist.set(position,atttrModel);
+
+
+//            isckeckNasesary.observe(getViewLifecycleOwner(), t->{
+//                AtttrModel atttrModel=new AtttrModel(id,value_id,t);
+//                spinnerlist.set(position,atttrModel);
+//                Log.d("Dfbfdbfdb", "getAttr: clicked");
+//            });
+//            if (isckeckNasesary.getValue()==null){
+//                AtttrModel atttrModel=new AtttrModel(id,value_id,"0");
+//                spinnerlist.set(position,atttrModel);
+//                Log.d("Dfbfdbfdb", "getAttr: if null");
+//            }else {
+//                AtttrModel atttrModel=new AtttrModel(id,value_id,isckeckNasesary.getValue());
+//                spinnerlist.set(position,atttrModel);
+//                Log.d("Dfbfdbfdb", "getAttr: else");
+//            }
+
+        }
+    };
+
+    @Override
+    public void onClickSpinnerisCheck(boolean isckeck) {
+
+
+        if (isckeck){
+            isckeckNasesary.setValue("1");
+        }else {
+            isckeckNasesary.setValue("0");
+        }
+
+        Log.d("sdgsdbmm", "ItemClick: -----"+isckeckNasesary.getValue());
+    }
 }

@@ -198,15 +198,11 @@ public class FragmentAddAnnouncement extends Fragment  {
         save_announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("id",560);
-                bundle.putString("desti","add");
-                Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentShowEdit,bundle);
                 if (edTitle.getText().toString().length()!=0){
                     if (edDescription.getText().toString().length()!=0){
                         if (type!=null){
                             binding.addProgress.setVisibility(View.VISIBLE);
-                            //sendAnnouncment(fetchdata());
+                            sendAnnouncment(fetchdata());
                             Log.d("insetanosdijds", "onClick: goood");
 
 
@@ -421,7 +417,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     bundle.putInt("id",Integer.parseInt(saveAnnouncementModel.getAnnounce_id()));
                                     bundle.putString("desti","add");
                                     Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentShowEdit,bundle);
-                                    getActivity().getSupportFragmentManager().popBackStack();
+
                                     SharedPreferences.Editor editor=shPref.edit();
                                     editor.clear();
                                     editor.apply();
