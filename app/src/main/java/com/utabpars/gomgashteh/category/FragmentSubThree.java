@@ -61,9 +61,8 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
     CategoryCallBack categoryCallBack=new CategoryCallBack() {
         @Override
         public void getCategoryId(View view, String id, int position,String title) {
-            Log.d("safasdsadsadwz", "getCategoryId: sub three "+id);
+
             subsetViewModel.getSubset(id,"attr",type);
-            Log.d("dsdsfdsf", "onViewCreated: "+type);
             t_id=id;
             saveCategoryNames(title);
         }
@@ -76,14 +75,12 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
 
     @Override
     public void onSubsetCallback(SubSetModel subSetModel) {
-        Log.d("safcaccv", "onViewCreated: "+subSetModel.getListData().get(0).getCategoryName());
         adaptor=new CategoryAdaptor(subSetModel.getListData(),categoryCallBack);
         recyclerView.setAdapter(adaptor);
     }
 
     @Override
     public void onAttributeCallback(SubSetModel SubSetModel) {
-        Toast.makeText(getContext(), "attribute 3", Toast.LENGTH_SHORT).show();
         Bundle bundle=new Bundle();
         bundle.putString("id",t_id);
         bundle.putString("type","attr");
@@ -97,7 +94,6 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
 
     @Override
     public void emptyCallback(boolean empty,SubSetModel subSetModel) {
-        Toast.makeText(getContext(), "زیر مجموعه وجود ندارد", Toast.LENGTH_SHORT).show();
         if (type.equals("category")){
             Bundle bundle=new Bundle();
             bundle.putString("id",t_id);
@@ -115,7 +111,6 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
             editor.putString("type","attr");
             editor.putString("title",title);
             editor.apply();
-            Toast.makeText(getContext(), "emty_three", Toast.LENGTH_SHORT).show();
             try {
                 Navigation.findNavController(getView()).navigate(R.id.action_global_add);
             }catch (Exception e){

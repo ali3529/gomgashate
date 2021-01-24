@@ -13,6 +13,7 @@ import com.skydoves.powerspinner.OnSpinnerDismissListener;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.SpinnerAnimation;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.chat.ChatStatusModel;
 import com.utabpars.gomgashteh.databinding.ItemSpinnerBinding;
 
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerViewHolder> {
     SpinnerModel spinnerModel;
+    List<ChatStatusModel.attributes> attributes=new ArrayList<>();
 
     int positionT;
     BottonShettCallback bottonShettCallback;
@@ -29,6 +31,11 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
     public SpinnerAdaptor(SpinnerModel spinnerModel, BottonShettCallback bottonShettCallback) {
         this.spinnerModel = spinnerModel;
         this.bottonShettCallback=bottonShettCallback;
+    }
+
+    public SpinnerAdaptor(List<ChatStatusModel.attributes> attributes, BottonShettCallback bottonShettCallback) {
+        this.attributes = attributes;
+        this.bottonShettCallback = bottonShettCallback;
     }
 
     @NonNull
@@ -69,37 +76,18 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
             bottonShettCallback.onClickSpinnerisCheck(holder.binding.emportent.isChecked());
         });
 
-       // holder.binding.spinner.setItems(list);
-
-//        holder.binding.spinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<String>() {
-//            @Override
-//            public void onItemSelected(int i, @Nullable String s, int i1, String t1) {
-//                Log.d("Dsfdsfdsf", "onItemSelected: "+t1);
-//                Log.d("Dsfdsfdsf", "onItemSelected: il "+i1);
-//                Log.d("Dsfdsfdsf", "onItemSelected: id "+spinnerModel.getAttrebuteData().get(position).getId());
-//                Log.d("Dsfdsfdsf", "onItemSelected: i "+spinnerModel.getAttrebuteData().get(position).getValues().get(i1));
-//                spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
-//                        holder.binding.emportent.isChecked(),position,
-//                        list);
-//
-//                holder.binding.emportent.setOnClickListener( o->{
-//                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
-//                    spiinerCallback.SpinnerItemCallBack(spinnerModel.getAttrebuteData().get(position).getId(),spinnerModel.getAttrebuteData().get(position).getValues().get(i1),
-//                            holder.binding.emportent.isChecked(),
-//                            position,list);
-//                });
-//            }
-//        });
-
 
     }
 
     @Override
     public int getItemCount() {
-        return spinnerModel.getAttrebuteData().size();
+        if (attributes==null){
+            return spinnerModel.getAttrebuteData().size();
+        }else return attributes.size();
+
     }
 
-    class SpinnerViewHolder extends RecyclerView.ViewHolder {
+    public class SpinnerViewHolder extends RecyclerView.ViewHolder {
         ItemSpinnerBinding binding;
         public SpinnerViewHolder(@NonNull  ItemSpinnerBinding binding) {
             super(binding.getRoot());

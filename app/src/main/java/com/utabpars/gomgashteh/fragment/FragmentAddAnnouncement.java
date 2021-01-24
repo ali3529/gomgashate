@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -201,10 +202,13 @@ public class FragmentAddAnnouncement extends Fragment  {
                 if (edTitle.getText().toString().length()!=0){
                     if (edDescription.getText().toString().length()!=0){
                         if (type!=null){
-                            binding.addProgress.setVisibility(View.VISIBLE);
-                            sendAnnouncment(fetchdata());
-                            Log.d("insetanosdijds", "onClick: goood");
-
+                            if (!shPref.getString("collaction_id","0").equals("0")){
+                                binding.addProgress.setVisibility(View.VISIBLE);
+                                sendAnnouncment(fetchdata());
+                                Log.d("insetanosdijds", "onClick: goood");
+                            }else {
+                                Toast.makeText(getContext(), "لطفادسته بندی را مشخص کنید", Toast.LENGTH_SHORT).show();
+                            }
 
 
                         }else Toast.makeText(getContext(), "لطفا نوع آگهی را مشخص کنید", Toast.LENGTH_SHORT).show();
@@ -237,9 +241,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                 if (binding.checkruls.isChecked()){
                     layout.setVisibility(View.VISIBLE);
                     binding.desablsave.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "else"+binding.checkruls.isChecked(), Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getContext(), "if"+binding.checkruls.isChecked(), Toast.LENGTH_SHORT).show();
                     layout.setVisibility(View.GONE);
                     binding.desablsave.setVisibility(View.VISIBLE);
 
@@ -347,6 +349,8 @@ public class FragmentAddAnnouncement extends Fragment  {
                 if (checked){
                     type="1";
                     Log.d("jhvhjvj", "onClickRadio: "+type);
+                    editor_savestate.putString("type",type);
+                    editor_savestate.apply();
                     binding.suprise.setVisibility(View.GONE);
                 }
                 //todo
@@ -356,6 +360,8 @@ public class FragmentAddAnnouncement extends Fragment  {
                 if (checked) {
                     type = "2";
                     Log.d("jhvhjvj", "onClickRadio: " + type);
+                    editor_savestate.putString("type",type);
+                    editor_savestate.apply();
                     binding.suprise.setVisibility(View.VISIBLE);
                 }
                 break;
@@ -415,8 +421,11 @@ public class FragmentAddAnnouncement extends Fragment  {
                                 public void run() {
                                     Bundle bundle=new Bundle();
                                     bundle.putInt("id",Integer.parseInt(saveAnnouncementModel.getAnnounce_id()));
-                                    bundle.putString("desti","add");
-                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentShowEdit,bundle);
+                                    bundle.putString("add","add");
+                                    NavOptions navOptions = new NavOptions.Builder()
+                                            .setPopUpTo(R.id.add, false)
+                                            .build();
+                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentOptions,bundle,navOptions);
 
                                     SharedPreferences.Editor editor=shPref.edit();
                                     editor.clear();
@@ -465,7 +474,8 @@ public class FragmentAddAnnouncement extends Fragment  {
 
         RequestBody title=RequestBody.create(MediaType.parse("title"),edTitle.getText().toString());
         RequestBody utype=RequestBody.create(MediaType.parse("type"),type);
-        RequestBody category_id=RequestBody.create(MediaType.parse("case"),shPref.getString("type",null));
+        RequestBody category_id=RequestBody.create(MediaType.parse("case"),shPref.getString("type",""));
+        RequestBody attrId=RequestBody.create(MediaType.parse("attr_id"),shPref.getString("emty_status",""));
 
         RequestBody collection_id=RequestBody.create(MediaType.parse("collection_id"),shPref.getString("collaction_id",""));
         RequestBody province_id=RequestBody.create(MediaType.parse("province_id"),shPref.getString("province_id",""));
@@ -477,11 +487,23 @@ public class FragmentAddAnnouncement extends Fragment  {
         RequestBody other_city;
         if (getSHaredList()==null){
             other_city=RequestBody.create(MediaType.parse("other_city"),"");
+
         }else {
 
             other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
+            Log.d("fesbebdbbmi", "fetchdata: other city     "+getSHaredList().toString());
         }
 
+        Log.d("fesbebdbbmi", "fetchdata: title   "+edTitle.getText().toString());
+        Log.d("fesbebdbbmi", "fetchdata: type   "+type);
+        Log.d("fesbebdbbmi", "fetchdata: case   "+shPref.getString("type",""));
+        Log.d("fesbebdbbmi", "fetchdata: attr_id   "+shPref.getString("emty_status",""));
+        Log.d("fesbebdbbmi", "fetchdata: collection_id   "+shPref.getString("collaction_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: province_id    "+shPref.getString("province_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: city_id    "+shPref.getString("city_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: detail    "+edDescription.getText().toString());
+        Log.d("fesbebdbbmi", "fetchdata: reward    "+binding.surpriseText.getText().toString());
+        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
 
 
 
@@ -496,6 +518,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         addAnnouncement.put("detail",detail);
         addAnnouncement.put("announcer_id",announcer_id);
         addAnnouncement.put("reward",reward);
+        addAnnouncement.put("attr_id",attrId);
 
 
 

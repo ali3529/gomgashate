@@ -76,13 +76,14 @@ public class FragmentList extends Fragment {
                         @Override
                         public void getCategoryId(View view, String id,int position,String title) {
 
-                                Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]");
+
                             saveCategoryNames(title);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("title", categoryModel.getListData().get(position).getCategoryName());
                                 bundle.putString("id", String.valueOf(id));
                                 bundle.putString("type", type);
                                 Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection, bundle);
+                            Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]"+id);
 
                         }
                     });
@@ -147,6 +148,7 @@ public class FragmentList extends Fragment {
 
               //  Navigation.findNavController(getView()).navigate(R.id.action_list_to_announcement);
                Navigation.findNavController(getView()).popBackStack();
+
 
 
             };

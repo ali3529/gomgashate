@@ -70,7 +70,7 @@ public class SpinnerBottomSheet extends BottomSheetDialogFragment {
         }
     };
 
-    interface AttrCallback{
+    public interface AttrCallback{
         void getAttr(String id,String value,String value_id);
     }
 

@@ -214,6 +214,36 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_below="@id/layoit_lastname">
+
+
+                <TextView
+                    android:id="@+id/link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ruls"
+                    android:textAlignment="center"
+                    android:padding="4dp"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/text_size_16"
+                    android:layout_toLeftOf="@id/checkruls"
+                    android:onClick="@{() -> sendotp.goToRuls()}"/>
+                <CheckBox
+                    android:id="@+id/checkruls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:padding="4dp"
+                    />
+            </RelativeLayout>
+
         </RelativeLayout>
 
 </RelativeLayout>
@@ -258,6 +288,33 @@
 
                     />
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/desablsave"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:background="#9E80B1"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:layout_margin="8dp"
+                >
+
+
+                <TextView
+
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:text="بعدی"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_16"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:enabled="false"
+
+                    />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/timer_otp"
                 android:layout_width="180dp"
@@ -271,7 +328,7 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:background="@drawable/botten_shape"
-                android:layout_toRightOf="@id/validate_otp"
+
 
                 />
         </RelativeLayout>

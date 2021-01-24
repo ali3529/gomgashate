@@ -92,6 +92,16 @@ public class AnoncmentModel {
         @SerializedName("create")
         private String create;
 
+        @SerializedName("reward")
+        private String reward;
+
+        public String getReward() {
+            return reward;
+        }
+
+        public void setReward(String reward) {
+            this.reward = reward;
+        }
 
         public int getId() {
             return id;

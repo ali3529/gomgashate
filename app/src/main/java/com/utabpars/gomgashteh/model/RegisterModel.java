@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class RegisterModel {
     @SerializedName("data")
     private Data data;
-    @SerializedName("message")
+    @SerializedName("massage")
     private String message;
     @SerializedName("response")
     private String response;

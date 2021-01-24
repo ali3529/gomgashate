@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.os.Handler;
@@ -33,7 +34,10 @@ public class FragmentSplash extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Navigation.findNavController(view).navigate(R.id.action_fragmentSplash_to_fragmentAnnouncement);
+                NavOptions navOptions = new NavOptions.Builder()
+                        .setPopUpTo(R.id.fragmentSplash, true)
+                        .build();
+                Navigation.findNavController(view).navigate(R.id.action_fragmentSplash_to_fragmentAnnouncement,null,navOptions);
             }
         },2000);
     }

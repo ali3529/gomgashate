@@ -16,11 +16,35 @@
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_peekHeight="250dp"
     app:behavior_hideable="true">
-
+    <ImageView
+        android:id="@+id/tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icl_rule_24"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="انتخاب ویژگی"
+        android:textColor="@color/text_color_black"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_margin="6dp"
+        android:layout_below="@id/tab"/>
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/title"
+        android:background="@color/hr_color"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        android:layout_below="@id/view1"/>
 
 </RelativeLayout>
 

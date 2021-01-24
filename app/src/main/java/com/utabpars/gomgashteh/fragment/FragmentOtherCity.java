@@ -50,7 +50,7 @@ public class FragmentOtherCity extends Fragment {
      SharedPreferences sharedPreferences;
      SharedPreferences.Editor editor;
      List<String> otherCityList =new ArrayList<>();
-    Gson gson;
+    Gson gson,gson_name;
     String navigate;
     List<String> city_name=new ArrayList<>();
 
@@ -82,10 +82,23 @@ public class FragmentOtherCity extends Fragment {
             editor=sharedPreferences.edit();
             Log.d("fhfdgdfg", "onViewCreated: other");
         }
+        try {
+            if (otherCityList.size()==0){
+                otherCityList=getSHaredList();
+
+                Log.d("DSvdsvdsvdv", "onViewCreated: "+otherCityList.size());
+            }
+            if (city_name.size()==0){
+                city_name=getNameList();
+                Log.d("DSvdsvdsvdv", "onViewCreated: "+city_name.size());
+            }
+        }catch (Exception e){
+      
+        }
 
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.cities(province_id)
+        compositeDisposable.add(apiInterface.cities(province_id,"city")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
@@ -139,7 +152,7 @@ public class FragmentOtherCity extends Fragment {
     ItemSelectedCallback itemSelectedCallback=new ItemSelectedCallback() {
         @Override
         public void getSelectedItem(View view, CategoryModel.ListData categoryModel, int position,boolean a) {
-            try {
+
 
                 if (categoryModel.isSelected()){
 
@@ -151,9 +164,11 @@ public class FragmentOtherCity extends Fragment {
                             otherCityList.remove(i);
                             city_name.remove(i);
                             gson=new Gson();
+                            gson_name=new Gson();
                             String s=gson.toJson(otherCityList);
+                            String n=gson.toJson(city_name);
                             editor.putString("otherCityList", s);
-                            editor.putString("otherCity_name", city_name.toString());
+                            editor.putString("otherCity_name", n);
                             editor.apply();
 
                         }
@@ -168,36 +183,30 @@ public class FragmentOtherCity extends Fragment {
                             categoryModel.setSelected(true);
                             otherCityAdaptor.notifyDataSetChanged();
                             gson=new Gson();
+                            gson_name=new Gson();
                             otherCityList.add(String.valueOf(categoryModel.getId()));
                             city_name.add(categoryModel.getCategoryName());
                             String s=gson.toJson(otherCityList);
+                            String n=gson.toJson(city_name);
                             editor.putString("otherCityList", s);
-                            editor.putString("otherCity_name", city_name.toString());
+                            editor.putString("otherCity_name", n);
                             editor.apply();
                         }
                     }catch (Exception e){   categoryModel.setSelected(true);
                         otherCityAdaptor.notifyDataSetChanged();
                         gson=new Gson();
+                        gson_name=new Gson();
                         otherCityList.add(String.valueOf(categoryModel.getId()));
                         city_name.add(categoryModel.getCategoryName());
                         String s=gson.toJson(otherCityList);
+                        String n=gson.toJson(city_name);
                         editor.putString("otherCityList", s);
-                        editor.putString("otherCity_name", city_name.toString());
+                        editor.putString("otherCity_name", n);
                         editor.apply();}
 
 
                 }
-//not work
-            }catch (Exception e){
-                otherCityAdaptor.notifyDataSetChanged();
-                gson=new Gson();
-                otherCityList.add(String.valueOf(categoryModel.getId()));
-                city_name.add(categoryModel.getCategoryName());
-                String s=gson.toJson(otherCityList);
-                editor.putString("otherCityList", s);
-                editor.putString("otherCity_name", city_name.toString());
-                editor.apply();
-            }
+
         }
     };
 
@@ -214,6 +223,26 @@ public class FragmentOtherCity extends Fragment {
         }
 
         String s=sharedPreferences.getString("otherCityList","w");
+        Type type=new TypeToken<List<String>>(){
+
+        }.getType();
+        List<String>  j=gson.fromJson(s,type);
+
+        return j;
+    }
+
+    public List<String> getNameList(){
+        Gson gson=new Gson();
+        SharedPreferences sharedPreferences;
+        if (navigate.equals("otherCityEdit")){
+            sharedPreferences=getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
+            Log.d("fhfdgdfg", "onViewCreated: edit ee");
+        }else {
+            sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+            Log.d("fhfdgdfg", "onViewCreated: other ee");
+        }
+
+        String s=sharedPreferences.getString("otherCity_name","w");
         Type type=new TypeToken<List<String>>(){
 
         }.getType();

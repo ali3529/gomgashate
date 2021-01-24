@@ -58,7 +58,8 @@ public class FragmentOtp extends Fragment {
         binding.ttt.setText("کد تایید پیامک شده به "+" "+phone_num+" "+"وارد کنید");
         viewModel.phoneNumberInterface(loginRespondeCallBack);
         if (is_validate) {
-
+            binding.desablsave.setVisibility(View.GONE);
+            binding.validateOtp.setVisibility(View.VISIBLE);
 
             binding.validateOtp.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +74,8 @@ public class FragmentOtp extends Fragment {
             });
         }else {
             binding.layoutRegister.setVisibility(View.VISIBLE);
-
+            binding.desablsave.setVisibility(View.VISIBLE);
+            binding.validateOtp.setVisibility(View.GONE);
            binding.validateOtp.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
@@ -100,8 +102,20 @@ public class FragmentOtp extends Fragment {
                }
            });
         }
+        binding.checkruls.setOnClickListener(o->{
+            if (binding.checkruls.isChecked()){
+                binding.desablsave.setVisibility(View.GONE);
+                binding.validateOtp.setVisibility(View.VISIBLE);
+            }else {
+                binding.desablsave.setVisibility(View.VISIBLE);
+                binding.validateOtp.setVisibility(View.GONE);
+            }
+        });
+        binding.desablsave.setOnClickListener(o->{
+            Toast.makeText(getContext(), "لطفا قوانین را مطالعه و تایید کنید", Toast.LENGTH_SHORT).show();
+        });
 
-
+        //todo
 
         viewModel.phoneNumberResponseLiveData.observe(getViewLifecycleOwner(), new Observer<RmModel>() {
             @Override
@@ -116,7 +130,7 @@ public class FragmentOtp extends Fragment {
                 if (rmModel.getResponse().equals("1")){
 
 
-                Toast.makeText(getContext(), rmModel.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "وارد شدید", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putBoolean("user_login",true);
                     editor.putString("user_id",String.valueOf(rmModel.getData().getId()));
@@ -128,8 +142,11 @@ public class FragmentOtp extends Fragment {
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentOtp_to_perofile);
 
                 }else if (rmModel.getResponse().equals("2")){
-                    Toast.makeText(getContext(), rmModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "کد تایید اشتباه است", Toast.LENGTH_SHORT).show();
                     binding.setProgress(false);
+                }
+                else {
+                    Toast.makeText(getContext(), "خطا در ورود از قسمت پشتیبانی پیگیری کنید", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -219,4 +236,10 @@ public class FragmentOtp extends Fragment {
             binding.setProgress(false);
         }
     };
+
+
+
+    public void goToRuls(){
+
+    }
 }

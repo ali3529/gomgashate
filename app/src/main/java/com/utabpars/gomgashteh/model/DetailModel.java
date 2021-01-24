@@ -74,6 +74,28 @@ public class DetailModel {
         @SerializedName("is_report")
         private boolean report;
 
+        @SerializedName("reward")
+        private String reward;
+
+        @SerializedName("attributes")
+        private String attributes;
+
+        public String getAttributes() {
+            return attributes;
+        }
+
+        public void setAttributes(String attributes) {
+            this.attributes = attributes;
+        }
+
+        public String getReward() {
+            return reward;
+        }
+
+        public void setReward(String reward) {
+            this.reward = reward;
+        }
+
         public boolean isReport() {
             return report;
         }

@@ -58,16 +58,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+               <RelativeLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_toRightOf="@id/layout_location">
+                  <TextView
+                      android:id="@+id/search"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_gravity="end"
+                      android:text="جستجو..."
+                      android:textStyle="bold"
+                      android:textSize="20dp"
+                      android:padding="6dp"
+                      android:textAlignment="center"
+                      android:layoutDirection="ltr"
+                      android:textColor="@color/darkgray"
+                      android:drawableEnd="@drawable/ic_search_24"
+                      />
 
-               <com.mancj.materialsearchbar.MaterialSearchBar
-                   android:id="@+id/search"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_gravity="end"
-                   app:mt_placeholderColor="@color/darkgray"
-                   android:layout_toRightOf="@id/layout_location"
-                   android:layoutDirection="ltr"
-                   />
+
+               </RelativeLayout>
+
 
                <RelativeLayout
                    android:id="@+id/layout_location"
@@ -112,14 +124,7 @@
             </RelativeLayout>
          </androidx.appcompat.widget.Toolbar>
 
-<!--         <androidx.recyclerview.widget.RecyclerView-->
-<!--             android:id="@+id/topListRecyclerview"-->
-<!--             android:layout_width="match_parent"-->
-<!--             android:layout_height="50dp"-->
-<!--             android:layout_below="@id/toolbar"-->
-<!--             android:background="@color/toolbar_background"-->
-<!--             android:layoutDirection="rtl"-->
-<!--             android:visibility="gone"/>-->
+
          <LinearLayout
              android:id="@+id/topfilterlayout"
              android:layout_width="match_parent"

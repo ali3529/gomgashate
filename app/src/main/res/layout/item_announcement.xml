@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:padding="16dp"
@@ -19,13 +19,12 @@
 
         <RelativeLayout
             android:id="@+id/img_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
             android:orientation="horizontal"
             android:layout_marginRight="12dp"
             android:layout_marginBottom="10dp"
             android:layout_alignParentLeft="true">
-
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageviewaccon"
                 android:layout_width="120dp"
@@ -44,6 +43,7 @@
 
 
 
+
                 />
         </RelativeLayout>
         <RelativeLayout
@@ -55,17 +55,53 @@
             android:layout_alignParentRight="true"
             android:padding="4dp"
             >
+            <RelativeLayout
+                android:id="@+id/reward_layout"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="#FBEBAC"
+                android:layout_margin="4dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:elevation="2dp"
+               >
+
+
+                <TextView
+                    android:id="@+id/reward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@{announcment.reward}"
+                    android:text="2000000000"
+                    android:textAlignment="center"
+
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/txt_reward"
+                    />
+                <TextView
+                    android:id="@+id/txt_reward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مژدگانی : "
+                    android:textAlignment="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+
+
+                    />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="پراید مدل 96 بدون خظ وخش"
-                tools:text="@{announcment.title}"
+                tools:text="پراید مدل 96 بدون خظ وخش"
+                android:text="@{announcment.title}"
                 android:textAlignment="textStart"
                 android:fontFamily="@font/sans"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 android:layout_alignParentTop="true"
+                android:textDirection="rtl"
 
 
                 />
@@ -92,7 +128,7 @@
                 android:textColor="@color/lowblack"
                 android:fontFamily="@font/sans"
                 android:textSize="@dimen/text_size_14"
-                android:layout_alignParentBottom="true"
+                android:layout_above="@id/reward_layout"
                 android:layout_alignParentRight="true"
 
 

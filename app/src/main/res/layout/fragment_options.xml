@@ -54,14 +54,18 @@
         />
 </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rc_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/status">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
+
+
+
 <RelativeLayout
     android:id="@+id/load"
     android:layout_width="match_parent"

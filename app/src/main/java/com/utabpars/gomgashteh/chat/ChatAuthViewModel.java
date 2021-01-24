@@ -24,6 +24,7 @@ import okhttp3.RequestBody;
 public class ChatAuthViewModel extends ViewModel {
     ChatCallBack chatCallBack;
    public MutableLiveData<StatusModel> firstChatStatus=new MutableLiveData<>();
+   public MutableLiveData<Boolean> firstChatStatusError=new MutableLiveData<>();
     public ChatAuthViewModel() {
 
     }
@@ -49,6 +50,7 @@ public class ChatAuthViewModel extends ViewModel {
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.d("dsfsdf", "chatValidate: chat"+e.toString());
+                chatCallBack.ChatErrorListener();
             }
         }));
 
@@ -70,6 +72,7 @@ public class ChatAuthViewModel extends ViewModel {
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.d("dsfsdfsdf", "onError: "+e.toString());
+                firstChatStatusError.setValue(false);
             }
         }));
     }

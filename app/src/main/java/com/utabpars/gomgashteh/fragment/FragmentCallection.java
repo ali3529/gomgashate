@@ -66,12 +66,14 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("fghfdgdfhh", "onViewCreated:  callection");
+
         binding.setProgress(true);
          title=getArguments().getString("title");
          list_id=getArguments().getString("id");
 
             type =getArguments().getString("type");
+
+        Log.d("fdtjnfngdbfv", "onViewCreated:  callection"+list_id);
 
 
 
@@ -90,36 +92,12 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
                     collectionAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
                         @Override
                         public void getCategoryId(View view, String id,int position,String title) {
-                            Log.d("fdhdfhnfdnfd", "getCategoryId: "+id);
+
                              idg=id;
                              titleg=title;
-                            Log.d("fdhdfhnfdnfd", "getCategoryId: "+title);
                              subsetViewModel.getSubset(id,"sub_one",type);
                              saveCategoryNames(title);
 
-
-
-
-//                            if (test.equals("1")){
-//                                Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx {cpllent}");
-//                                Bundle bundle=new Bundle();
-//                                SharedPreferences.Editor editor=sharedPreferences.edit();
-//                                editor.putString("title_list",title);
-//                                editor.putString("id_categ",String.valueOf(id));
-//                                editor.putString("id_list",String.valueOf(list_id));
-//                                editor.putString("title_categ",categoryModel.getListData().get(position).getCategoryName());
-//                                editor.apply();
-//
-////                                bundle.putString("title_list",title);
-////                                bundle.putString("id_categ",String.valueOf(id));
-////                                bundle.putString("id_list",String.valueOf(list_id));
- //                              Navigation.findNavController(view).navigate(R.id.action_fragmentCallection_to_add,bundle);
-//                            }else {
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("id", String.valueOf(id));
-//                                Navigation.findNavController(view).navigate(R.id.action_fragmentCallection_to_fragmentAnnouncCollection, bundle);
-//                                Toast.makeText(getContext(), "" + id, Toast.LENGTH_SHORT).show();
-//                            }
                         }
                     });
                     recyclerView.setAdapter(collectionAdaptor);
@@ -157,7 +135,6 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
 
     @Override
     public void onSubsetCallback(SubSetModel subSetModel) {
-        Log.d("sdvsvdsvsdvrr", "emptyCallback: subset");
         Bundle bundle=new Bundle();
         bundle.putString("id",idg);
         bundle.putString("title",titleg);
@@ -172,8 +149,6 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
 
     @Override
     public void onAttributeCallback(SubSetModel SubSetModel) {
-        Toast.makeText(getContext(), "attrebuit", Toast.LENGTH_SHORT).show();
-        Log.d("sdvsvdsvsdvrr", "emptyCallback: attr");
         Bundle bundle=new Bundle();
         bundle.putString("id",idg);
         bundle.putString("type","sub_one");
@@ -188,7 +163,6 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     @Override
     public void emptyCallback(boolean empty, SubSetModel subSetModel) {
         if (type.equals("category")){
-            Log.d("sdvsvdsvsdvrr", "emptyCallback: emty");
             Bundle bundle=new Bundle();
             bundle.putString("id",idg);
             bundle.putString("type","sub_one");

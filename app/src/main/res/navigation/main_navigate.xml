@@ -207,10 +207,10 @@
         <action
             android:id="@+id/action_fragmentCallection_to_fragmentSubset"
             app:destination="@id/navigation"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_out_right"
-            app:popExitAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
         <action
             android:id="@+id/action_fragmentCallection_to_fragmentAttrebute"
             app:destination="@id/fragmentAttrebute" />
@@ -353,6 +353,9 @@
             android:id="@+id/action_fragmentOptions_to_editAnnouncementFragment"
             app:destination="@id/editAnnouncementFragment" />
         <action
+            android:id="@+id/action_fragmentOptions_to_announcement"
+            app:destination="@id/announcement" />
+        <action
             android:id="@+id/action_fragmentOptions_to_fragmentShowEdit"
             app:destination="@id/fragmentShowEdit" />
         <action
@@ -376,9 +379,7 @@
         android:id="@+id/fragmentShowEdit"
         android:name="com.utabpars.gomgashteh.managerAnnouncement.FragmentShowEdit"
         android:label="FragmentShowEdit">
-        <action
-            android:id="@+id/action_fragmentShowEdit_to_fragmentMyAnnouncment2"
-            app:destination="@id/fragmentMyAnnouncment2" />
+
     </fragment>
     <fragment
         android:id="@+id/fragmentAboutMe"
@@ -393,10 +394,10 @@
             <action
                 android:id="@+id/action_fragmentSubTwo_to_fragmentSubThree"
                 app:destination="@id/fragmentSubThree"
-                app:enterAnim="@android:anim/slide_in_left"
-                app:exitAnim="@android:anim/slide_out_right"
-                app:popEnterAnim="@android:anim/slide_out_right"
-                app:popExitAnim="@android:anim/slide_in_left" />
+                app:enterAnim="@anim/fragment_open_enter"
+                app:exitAnim="@anim/fragment_open_exit"
+                app:popEnterAnim="@anim/fragment_open_enter"
+                app:popExitAnim="@anim/fragment_open_exit" />
         </fragment>
         <fragment
             android:id="@+id/fragmentSubset"
@@ -405,10 +406,10 @@
             <action
                 android:id="@+id/action_fragmentSubset_to_fragmentSubTwo"
                 app:destination="@id/fragmentSubTwo"
-                app:enterAnim="@android:anim/slide_in_left"
-                app:exitAnim="@android:anim/slide_out_right"
-                app:popEnterAnim="@android:anim/slide_out_right"
-                app:popExitAnim="@android:anim/slide_in_left" />
+                app:enterAnim="@anim/fragment_open_enter"
+                app:exitAnim="@anim/fragment_open_exit"
+                app:popEnterAnim="@anim/fragment_open_enter"
+                app:popExitAnim="@anim/fragment_open_exit" />
         </fragment>
         <fragment
             android:id="@+id/fragmentSubThree"
@@ -416,10 +417,18 @@
             android:label="FragmentSubThree" />
         <action
             android:id="@+id/action_global_fragmentAnnouncCollection"
-            app:destination="@id/fragmentAnnouncCollection" />
+            app:destination="@id/fragmentAnnouncCollection"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
         <action
             android:id="@+id/action_global_fragmentAttrebute"
-            app:destination="@id/fragmentAttrebute" />
+            app:destination="@id/fragmentAttrebute"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
         <action
             android:id="@+id/action_global_add"
             app:destination="@id/add" />
@@ -430,7 +439,11 @@
         android:label="FragmentAttrebute" >
         <action
             android:id="@+id/action_fragmentAttrebute_to_add"
-            app:destination="@id/add" />
+            app:destination="@id/add"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRuls"

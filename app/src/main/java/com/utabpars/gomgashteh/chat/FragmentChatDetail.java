@@ -349,7 +349,7 @@ public class FragmentChatDetail extends Fragment {
         return massageData;
     }
     public void refresh(){
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long l) {
 
@@ -384,6 +384,7 @@ public class FragmentChatDetail extends Fragment {
 
         isReport.observe(getViewLifecycleOwner(),t ->{
             menu.getItem(0).setEnabled(false);
+            menu.getItem(1).setEnabled(false);
         });
 
         super.onCreateOptionsMenu(menu, inflater);
@@ -398,16 +399,28 @@ public class FragmentChatDetail extends Fragment {
             public void onChanged(BlockModel blockModel) {
 
                 if (blockModel.isBlock()){
-                    item.setTitle("ازاد");
-                    binding.setMassagelayoutvisibility(false);
-                    binding.setSecendmassagevisibility(true);
-                    binding.setMassage("کاربر گرامی شما این آگهی را مسدود کرده اید و امکان ارسال پیام ندارید  ");
+                    if (item.getItemId()==R.id.block){
+                        item.setTitle("ازاد");
+                        binding.setMassagelayoutvisibility(false);
+                        binding.setSecendmassagevisibility(true);
+                        binding.setMassage("کاربر گرامی شما این آگهی را مسدود کرده اید و امکان ارسال پیام ندارید  ");
+                        Log.d("dfdfbdfb", "onChanged: "+item.getItemId());
+                    }else {
+                        Log.d("dfdfbdfb", "onChanged: else");
+                    }
+
                     Log.d("vbfbfdb", "onOptionsItemSelected: "+isBlock);
 
                 }else {
-                    item.setTitle(" مسدود");
-                    binding.setMassagelayoutvisibility(true);
-                    binding.setSecendmassagevisibility(false);
+                    if (item.getItemId()==R.id.block) {
+                        item.setTitle(" مسدود");
+                        binding.setMassagelayoutvisibility(true);
+                        binding.setSecendmassagevisibility(false);
+                        Log.d("dfdfbdfb", "onChanged: "+item.getItemId());
+                    }else {
+                        Log.d("dfdfbdfb", "onChanged: else");
+                    }
+
                     Log.d("vbfbfdb", "onOptionsItemSelected: "+isBlock);
 
 

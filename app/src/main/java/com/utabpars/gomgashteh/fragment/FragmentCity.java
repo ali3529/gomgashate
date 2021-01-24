@@ -61,7 +61,7 @@ public class FragmentCity extends Fragment {
     private void getProvinces(String id){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.cities(id)
+        compositeDisposable.add(apiInterface.cities(id,"city")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<CategoryModel>() {

@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -72,7 +73,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     String type="",test="";
     static int type_for_view=0;
 
-    MaterialSearchBar searchView;
+    TextView searchView;
     SharedPreferences shPref;
 
     FilterAnouncmentByProvinceViewModel provinceViewModel;
@@ -117,7 +118,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         itemDataSource.getbind(binding, getContext());
         adaptor.getDEtail(this);
         viewModel.getProg(binding);
-
         binding.setViemodel(viewModel);
 
 
@@ -284,7 +284,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         recyclerView = binding.recycler;
         toolbar=binding.toolbar;
         searchView=binding.search;
-        searchView.setPlaceHolder("جستجو در همه آگهی ها");
         provinceViewModel=new ViewModelProvider(getActivity()).get(FilterAnouncmentByProvinceViewModel.class);
         provinceFilterDataSource = new ProvinceFilterDataSource();
 

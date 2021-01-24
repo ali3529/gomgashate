@@ -30,7 +30,6 @@ public class FragmentShowEdit extends Fragment {
     EditAnnouncementViewModel viewModel;
     ImageSliderAdaptor sliderAdaptor;
     SliderView sliderView;
-    String desteniion="g";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,11 +44,7 @@ public class FragmentShowEdit extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int id=getArguments().getInt("id");
-        try {
-            desteniion=getArguments().getString("desti");
-        }catch (Exception e){
 
-        }
 
         sliderView=binding.slider;
         binding.setProgress(true);
@@ -60,46 +55,17 @@ public class FragmentShowEdit extends Fragment {
                 binding.setDetails(data);
                 setSlider(data.getPictures());
                 binding.setProgress(false);
+                if (data.getOtherCity()==null){
+                    binding.othercityLayout.setVisibility(View.GONE);
+                }else {
+                    for (int i = 0; i < data.getOtherCity().size(); i++) {
+                        binding.otherCitys.append(data.getOtherCity().get(i)+",");
+                    }
+                }
+
             }
         });
-        try {
-            if (desteniion.equals("add")){
-                binding.back.setVisibility(View.VISIBLE);
-            }else {
-                binding.back.setVisibility(View.GONE);
-            }
-        }catch (Exception e){
-            binding.back.setVisibility(View.GONE);
-        }
 
-
-        binding.back.setOnClickListener( o->{
-            Navigation.findNavController(view).navigate(R.id.action_fragmentShowEdit_to_fragmentMyAnnouncment2);
-        });
-//
-//        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
-//
-//            @Override
-//            public void handleOnBackPressed() {
-//
-//                //   Navigation.findNavController(getView()).navigate(R.id.action_chat_to_announcement);
-//                try {
-//                    if (desteniion.equals("add")){
-//                        Navigation.findNavController(getView()).navigate(R.id.action_fragmentShowEdit_to_fragmentMyAnnouncment2);
-//                    }else {
-//                        Navigation.findNavController(getView()).navigateUp();
-//                    }
-//                }catch (Exception e){
-//                    Navigation.findNavController(view).navigateUp();
-//                }
-//
-//
-//
-//
-//            };
-//
-//        };
-//        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(),callback);
 
     }
     public void setSlider(List<String> pic){

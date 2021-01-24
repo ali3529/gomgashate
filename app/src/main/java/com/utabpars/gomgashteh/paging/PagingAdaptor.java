@@ -59,6 +59,9 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
                 detileCallBack.onItemClicked(view,getItem(position).getId());
             }
         });
+       if (getItem(position).getReward().equals("0")){
+           holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+       }
 
     }
 

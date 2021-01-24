@@ -78,15 +78,16 @@
                         android:padding="8dp">
 
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/set_categ"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{data.collection}"
-                            android:hint="انتخاب کنید"
+                            android:saveEnabled="true"
                             android:fontFamily="@font/sans"
                             android:textSize="@dimen/text_size_16"
                             android:textColor="@color/text_color_low_black"
-                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true"
+                            android:enabled="false"/>
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/hr_callection"
@@ -151,6 +152,7 @@
                             android:layout_alignParentRight="true"
                             />
                         <TextView
+                            android:id="@+id/citttt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="شهر های دیگر"
@@ -163,9 +165,8 @@
                             android:id="@+id/othercity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
-                            android:hint="انتخاب کنید"
-                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/citttt"
+                          android:layout_alignParentRight="true"
                             android:fontFamily="@font/sans"
                             android:textSize="@dimen/text_size_16"
                             android:textColor="@color/text_color_low_black"/>

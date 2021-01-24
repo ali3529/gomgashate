@@ -2,6 +2,9 @@ package com.utabpars.gomgashteh.chat;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChatStatusModel {
     @SerializedName("block_user")
     private String block_status;
@@ -13,6 +16,16 @@ public class ChatStatusModel {
     private String status;
     @SerializedName("ticket_id")
     private String ticket_id;
+    @SerializedName("attributes")
+    List<attributes> attributes=new ArrayList<>();
+
+    public List<ChatStatusModel.attributes> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<ChatStatusModel.attributes> attributes) {
+        this.attributes = attributes;
+    }
 
     public String getBlock_status() {
         return block_status;
@@ -52,5 +65,56 @@ public class ChatStatusModel {
 
     public void setTicket_id(String ticket_id) {
         this.ticket_id = ticket_id;
+    }
+
+    public class attributes{
+        @SerializedName("id")
+        private String id;
+        @SerializedName("name")
+        private String name;
+        @SerializedName("values")
+        private List<String> value;
+        @SerializedName("is_necessary")
+        private boolean necessary;
+
+        public attributes(String id, String name, List<String> value) {
+            this.id = id;
+            this.name = name;
+            this.value = value;
+        }
+
+        public boolean isNecessary() {
+            return necessary;
+        }
+
+        public void setNecessary(boolean necessary) {
+            this.necessary = necessary;
+        }
+
+        public List<String> getValue() {
+            return value;
+        }
+
+        public void setValue(List<String> value) {
+            this.value = value;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+
     }
 }

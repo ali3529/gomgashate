@@ -112,7 +112,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
         binding.setDid(id);
         binding.setUser(user_id);
         dataMutableLiveData=viewModel.getMutableDetail();
-        chatAuthViewModel.ChatInterface(this::ChatListener);
+        chatAuthViewModel.ChatInterface(this);
 
 
 
@@ -128,6 +128,13 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 anouns_id=String.valueOf(data.getId());
                 sender_id=data.getAnnouncer_id();
                 title=data.getTitle();
+
+                Log.d("sdvdsvdvbbb", "onChanged: "+data.getAttributes());
+                if (data.getAttributes().isEmpty()){
+                    binding.layoutAttrebuts.setVisibility(View.GONE);
+
+                }
+
                 if (data.getAnnouncer_id().equals(user_id)){
                     binding.chatBtn.setVisibility(View.GONE);
                 }else {
@@ -168,6 +175,9 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
                fragmentReportBottomSheet.getList(data.getReport_list());
                 fragmentReportBottomSheet.getAnnounceid(anouns_id,user_id);
+                if (data.getReward().equals("0")){
+                    binding.rewardLayout.setVisibility(View.GONE);
+                }
 
             }
         });
@@ -305,6 +315,14 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 if (chatStatusModel.getStatus_ticket().equals("first")){
                     Log.d("fdhgdfg", "onChanged: first "+anouns_id+"    "+sender_id+" "+user_id);
                     firstMassageBottomSheet.getInfo(anouns_id,sender_id,user_id);
+                    if (chatStatusModel.getAttributes().isEmpty()){
+
+                    }else {
+                        firstMassageBottomSheet.getAttr(chatStatusModel.getAttributes());
+                   //whit attrebute
+
+                    }
+
 
 
                     firstMassageBottomSheet.show(getActivity().getSupportFragmentManager(),"massage");
@@ -327,8 +345,14 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
             }
         }catch (Exception e){
             Toast.makeText(getContext(), "لطفا صبر کنید", Toast.LENGTH_SHORT).show();
+            Log.d("safasfsafas", "ChatListener: "+e.toString());
         }
 
+    }
+
+    @Override
+    public void ChatErrorListener() {
+        binding.chatProgress.setVisibility(View.GONE);
     }
 
     public void arrowBack(){

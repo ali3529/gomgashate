@@ -41,7 +41,6 @@ FragmentSubTwoBinding binding;
         subsetViewModel=new ViewModelProvider(this).get(SubsetViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
         initViews();
-        Log.d("mnm", "onCreateView: ffff");
         return binding.getRoot();
     }
 
@@ -52,7 +51,6 @@ FragmentSubTwoBinding binding;
             id=getArguments().getString("id");
             title=getArguments().getString("title");
             type =getArguments().getString("type");
-            Log.d("dsdsfdsf", "onViewCreated: "+type);
         }catch (Exception e){
 
         }
@@ -60,7 +58,6 @@ FragmentSubTwoBinding binding;
         binding.toolbartitle.setText(title);
         subsetViewModel.getSubset(id,"sub_two",type);
         subsetViewModel.getCallBack(this);
-        Log.d("sadsadsad", "getCategoryId: "+id);
         lastAnnouncmentAboveBtNavigation();
 
     }
@@ -68,7 +65,6 @@ FragmentSubTwoBinding binding;
     CategoryCallBack categoryCallBack=new CategoryCallBack() {
         @Override
         public void getCategoryId(View view, String id, int position,String title) {
-            Log.d("safasdsadsadwz", "getCategoryId: sub two "+id);
             id_show_announce=id;
              bundle=new Bundle();
             bundle.putString("id",id);
@@ -88,7 +84,6 @@ FragmentSubTwoBinding binding;
     public void onSubsetCallback(SubSetModel subSetModel) {
         //sub
         if (subSetModel.getMasasge().equals("sub_two")){
-            Log.d("safcaccv", "onViewCreated: "+subSetModel.getListData().get(0).getCategoryName());
             adaptor=new CategoryAdaptor(subSetModel.getListData(),categoryCallBack);
             recyclerView.setAdapter(adaptor);
         }else if (subSetModel.getMasasge().equals("sub_three")){
@@ -107,7 +102,6 @@ FragmentSubTwoBinding binding;
     @Override
     public void onAttributeCallback(SubSetModel SubSetModel) {
         //atrebiut
-        Toast.makeText(getContext(), "attribute 2", Toast.LENGTH_SHORT).show();
         Bundle bundle=new Bundle();
         bundle.putString("id",id_show_announce);
         bundle.putString("type","sub_three");
@@ -123,7 +117,6 @@ FragmentSubTwoBinding binding;
     public void emptyCallback(boolean empty,SubSetModel subSetModel) {
         //no sub no attrebute
         if (type.equals("category")){
-            Toast.makeText(getContext(), "زیر مجموعه وجود ندارد", Toast.LENGTH_SHORT).show();
             Bundle bundle=new Bundle();
             bundle.putString("id",id_show_announce);
             bundle.putString("type","sub_three");
@@ -135,7 +128,6 @@ FragmentSubTwoBinding binding;
             editor.putString("type","sub_three");
             editor.putString("title",title);
             editor.apply();
-            Toast.makeText(getContext(), "emty_two", Toast.LENGTH_SHORT).show();
             try {
                 Navigation.findNavController(getView()).navigate(R.id.action_global_add);
             }catch (Exception e){

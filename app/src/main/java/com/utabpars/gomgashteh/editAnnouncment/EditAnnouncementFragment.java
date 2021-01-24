@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -57,6 +58,9 @@ public class EditAnnouncementFragment extends Fragment {
     RecyclerView oldRecyclerView,recyclerView;
     ImageEditAdaptor oldAdaptor;
     SharedPreferences sharedPreferences,user_status;
+    SharedPreferences other_city;
+    SharedPreferences.Editor edit;
+
 
     String type;
     BottomSheetChooseImage bottomSheetChooseImage;
@@ -64,6 +68,9 @@ public class EditAnnouncementFragment extends Fragment {
     List<Uri> uriList=new ArrayList<>();
     List<MultipartBody.Part> partLists=new ArrayList<>();
     List<String> old_pic=new ArrayList<>();
+     List<String> othercity=new ArrayList<>();
+     static String city_save;
+
 
 
 
@@ -88,7 +95,9 @@ public class EditAnnouncementFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         oldRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         sharedPreferences = getActivity().getSharedPreferences("editcity", Context.MODE_PRIVATE);
+        other_city = getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
         user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
+        edit=other_city.edit();
 
     }
 
@@ -105,7 +114,7 @@ public class EditAnnouncementFragment extends Fragment {
         viewModel.dataMutableLiveData.observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
             @Override
             public void onChanged(DetailModel.Data data) {
-                Log.d("safsafsaf", "onChanged: "+data.getId());
+
 
                 if (load){
                     loadData(data);
@@ -118,6 +127,18 @@ public class EditAnnouncementFragment extends Fragment {
 
             }
         });
+
+//        if (load){
+//
+//        }else {
+//            try {
+//                for (int i = 0; i < othercity.size(); i++) {
+//                    binding.othercity.append(data.getOtherCity().get(i)+" ");
+//                }
+//            }catch (Exception e){
+//
+//            }
+//        }
 
 
 
@@ -144,8 +165,12 @@ public class EditAnnouncementFragment extends Fragment {
         //set other city
         if (getSHaredList()==null){
 //            binding.othercity.setText("انتخاب کنید");
+            for (int i = 0; i < othercity.size(); i++) {
+                binding.othercity.append(othercity.get(i)+" ");
+            }
         }else {
-            binding.othercity.setText(getSHaredList().size()+"شهر");
+            SharedPreferences otherCityName=getActivity().getSharedPreferences("other_city_edit",Context.MODE_PRIVATE);
+            binding.othercity.setText(otherCityName.getString("otherCity_name","00"));
         }
 
 
@@ -158,12 +183,13 @@ public class EditAnnouncementFragment extends Fragment {
 
         }
 
+        if (sharedPreferences.getString("city_name","0").equals("0")){
+            binding.fgfd.setText(city_save);
+        }else {
+            binding.fgfd.setText(sharedPreferences.getString("city_name","")+", "+sharedPreferences.getString("province_name",""));
 
-        //Log.d("sdfdsfdsf", "onViewCreated: edit"+city);
-        //set city
-     //   binding.setCity(sharedPreferences.getString("city_name",binding.fgfd.getText().toString()));
-        binding.fgfd.setText(sharedPreferences.getString("city_name","")+", "+sharedPreferences.getString("province_name",""));
-        //    binding.fgfd.setText(sharedPreferences.getString("city_name",""));
+        }
+
 
         binding.saveAnnounce.setOnClickListener(o ->{
             ApiInterface apiInterface= ApiClient.getApiClient();
@@ -209,14 +235,19 @@ public class EditAnnouncementFragment extends Fragment {
 
     private void loadData(DetailModel.Data data) {
         binding.setData(data);
+        binding.setCateg.setText(data.getCollection());
         binding.title.setText(data.getTitle());
         binding.description.setText(data.getDetail());
         binding.fgfd.setText(data.getCity());
+        city_save=data.getCity();
+        binding.surpriseText.setText(data.getReward());
         oldAdaptor =new ImageEditAdaptor(data.getPictures(),DeleteImage);
         oldRecyclerView.setAdapter(oldAdaptor);
+
         try {
-            for (int i = 0; i < data.getOtherCity().size(); i++) {
-                binding.othercity.append(data.getOtherCity().get(i)+" ");
+            othercity.addAll(data.getOtherCity());
+            for (int i = 0; i < othercity.size(); i++) {
+                binding.othercity.append(othercity.get(i)+" ");
             }
         }catch (Exception e){
 
@@ -224,9 +255,11 @@ public class EditAnnouncementFragment extends Fragment {
         if (data.getType().equals("پیدا شده")){
             binding.find.toggle();
             type="1";
+            binding.suprise.setVisibility(View.GONE);
         }else {
             binding.lost.toggle();
             type="2";
+            binding.suprise.setVisibility(View.VISIBLE);
         }
         if (data.getPictures().get(0).equals("https://gomgashteh.com/uploads/announce/camera-icon.jpg")){
             Toast.makeText(getContext(), "not [ivture", Toast.LENGTH_SHORT).show();
@@ -235,6 +268,8 @@ public class EditAnnouncementFragment extends Fragment {
         old_pic=data.getPictures();
         Log.d("sfsefesf", "fetchdata: "+data.getPictures().toString());
         Log.d("sfsefesf", "fetchdata: "+old_pic.toString());
+
+
     }
 
     public List<String> getSHaredList() {
@@ -290,6 +325,7 @@ public class EditAnnouncementFragment extends Fragment {
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
         RequestBody picture_old=RequestBody.create(MediaType.parse("old_picture"),old_pic.toString());
 
+
         RequestBody other_city;
         if (getSHaredList()==null){
             other_city=RequestBody.create(MediaType.parse("other_city"),"");
@@ -305,6 +341,7 @@ public class EditAnnouncementFragment extends Fragment {
         Log.d("dfdsfdsfdsfdsf", "description: "+binding.description.getText().toString());
         Log.d("dfdsfdsfdsfdsf", "surpriseText: "+binding.surpriseText.getText().toString());
         Log.d("dfdsfdsfdsfdsf", "fetchdata: "+other_city);
+        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+binding.surpriseText.getText());
 
 
 
@@ -331,9 +368,11 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
     public void passUri(Uri uri, MultipartBody.Part partList) {
         uriList.add(uri);
         partLists.add(partList);
-        adaptor=new AddImageAnnouncmentAdaptor(uriList);
+        adaptor=new AddImageAnnouncmentAdaptor(uriList,onDeleteImages);
         recyclerView.setAdapter(adaptor);
         bottomSheetChooseImage.dismiss();
+        Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
+        Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
     }
 };
 
@@ -348,5 +387,35 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
 
         }
     };
+    AddImageAnnouncmentAdaptor.onDeleteImages onDeleteImages=new AddImageAnnouncmentAdaptor.onDeleteImages() {
+        @Override
+        public void deleteImage(List<Uri> list, int position) {
+            uriList.remove(position);
+            partLists.remove(position);
+            adaptor.notifyDataSetChanged();
+            Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
+            Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
+        }
+    };
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Log.d("dsfdsfdsf", "onPause: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("dsfdsfdsf" ,"onStop: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("dsfdsfdsf", "onDestroy: ");
+                edit.clear();
+        edit.apply();
+    }
 }

@@ -25,7 +25,7 @@ public class MainCityViewModel extends ViewModel {
     public void getMainCity(String id){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.cities(id)
+        compositeDisposable.add(apiInterface.cities(id,"")
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableSingleObserver<CategoryModel>() {

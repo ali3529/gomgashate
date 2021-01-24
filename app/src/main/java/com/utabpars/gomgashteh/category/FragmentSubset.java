@@ -29,7 +29,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
      SubsetViewModel subsetViewModel;
      RecyclerView recyclerView;
      CategoryAdaptor adaptor;
-    String id,title,type,id_anounce;
+    String idx,title,type,id_anounce;
     Bundle bundle;
     SharedPreferences sharedPreferences;
 
@@ -53,13 +53,12 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-         id=getArguments().getString("id");
+         idx =getArguments().getString("id");
          title=getArguments().getString("title");
         type =getArguments().getString("type");
-        Log.d("dsdsfdsf", "onViewCreated: "+type);
+
         binding.toolbartitle.setText(title);
-        subsetViewModel.getSubset(id,"sub_one",type);
-        Log.d("ytjuyi", "onViewCreated: "+id);
+        subsetViewModel.getSubset(idx,"sub_one",type);
         subsetViewModel.getCallBack(this);
 
         lastAnnouncmentAboveBtNavigation();
@@ -72,10 +71,10 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             bundle =new Bundle();
             bundle.putString("id",id);
             bundle.putString("title",title);
-            Log.d("safasdsadsadwz", "getCategoryId: sub one "+id);
-            subsetViewModel.getSubset(id,"sub_two",type);
+
             id_anounce=id;
-            Log.d("sdvsbsdsnn", "getCategoryId: "+id_anounce);
+            subsetViewModel.getSubset(id,"sub_two",type);
+
             saveCategoryNames(title);
 
         }
@@ -84,8 +83,6 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
     @Override
     public void onSubsetCallback(SubSetModel subSetModel) {
         if (subSetModel.getMasasge().equals("sub_one")){
-            Toast.makeText(getContext(), "sub 1", Toast.LENGTH_SHORT).show();
-            Log.d("safcaccv", "onViewCreated: "+subSetModel.getListData().get(0).getCategoryName());
             adaptor=new CategoryAdaptor(subSetModel.getListData(),categoryCallBack);
             recyclerView.setAdapter(adaptor);
         }else if (subSetModel.getMasasge().equals("sub_two")){
@@ -106,7 +103,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
         Bundle bundle=new Bundle();
         bundle.putString("id",id_anounce);
         bundle.putString("type","sub_two");
-        Toast.makeText(getContext(), id_anounce, Toast.LENGTH_SHORT).show();
+
         try {
             Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
         }catch (Exception e){
@@ -118,13 +115,10 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
     @Override
     public void emptyCallback(boolean empty,SubSetModel subSetModel) {
         if (type.equals("category")){
-            Toast.makeText(getContext(), "زیر مجموعه وجود ندارد", Toast.LENGTH_SHORT).show();
             Bundle bundle=new Bundle();
-            bundle.putString("id",id);
-            bundle.putString("type","sub_one");
+            bundle.putString("id", id_anounce);
+            bundle.putString("type","sub_two");
             bundle.putString("title",title);
-            Log.d("saavavavs", "emptyCallback: iiiiiiiiiiii"+id);
-            Log.d("saavavavs", "emptyCallback: iiiiiiiiiiii"+id_anounce);
             try {
                 Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
             }catch (Exception e){
@@ -133,8 +127,8 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
 
         }else {
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putString("collaction_id",id);
-            editor.putString("type","sub_one");
+            editor.putString("collaction_id", id_anounce);
+            editor.putString("type","sub_two");
             editor.putString("title",title);
             editor.apply();
             Toast.makeText(getContext(), "emty_one", Toast.LENGTH_SHORT).show();

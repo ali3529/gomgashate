@@ -72,7 +72,7 @@ public interface ApiInterface {
 
     @POST("cities")
     @FormUrlEncoded
-    Single<CategoryModel> cities(@Field("province") String province_id);
+    Single<CategoryModel> cities(@Field("province") String province_id,@Field("type") String city);
 
 
     @POST("insertAnnounce")

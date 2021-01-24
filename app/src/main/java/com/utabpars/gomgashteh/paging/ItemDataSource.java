@@ -41,7 +41,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                     if (anoncmentModel.getResponse().equals("1")){
                         callback.onResult(anoncmentModel.getData(),null,PAGE);
                         binding.setProgress(false);
-                        Log.d("pagingcheck", "onSuccess: loadInitial");
+                        Log.d("pagingcheck", "onSuccess: loadInitial"+anoncmentModel.getData().get(3).getReward());
                         binding.setLayoutvisibility(false);
 
                     }

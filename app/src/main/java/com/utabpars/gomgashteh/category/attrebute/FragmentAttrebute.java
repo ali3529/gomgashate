@@ -37,6 +37,7 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
     int adaptorItemCount;
     SpinnerBottomSheet spinnerBottomSheet;
     int position;
+    String id_for_emty_attr;
     MutableLiveData<String> isckeckNasesary=new MutableLiveData<>();
 
 
@@ -63,12 +64,14 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
         super.onViewCreated(view, savedInstanceState);
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
+        Log.d("DSgsdgsdg", "onViewCreated: "+id);
         viewModel.getAttrebute(id,type);
 
         viewModel.spinnerModelMutableLiveData.observe(getViewLifecycleOwner(),t ->{
             spinnerAdaptor=new SpinnerAdaptor(t,this);
             recyclerView.setAdapter(spinnerAdaptor);
             adaptorItemCount=recyclerView.getAdapter().getItemCount();
+            id_for_emty_attr=t.getAttrebuteData().get(0).getId();
             setIndec();
         });
 
@@ -78,6 +81,7 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
             editor.putString("collaction_id",getData().toString());
             editor.putString("type","");
             editor.putString("title","ویژگی");
+            editor.putString("emty_status",id_for_emty_attr);
             editor.apply();
             Navigation.findNavController(o).navigate(R.id.action_fragmentAttrebute_to_add);
             Log.d("sgfsegesgeg", "onViewCreated: "+getData().toString());
