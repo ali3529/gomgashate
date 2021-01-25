@@ -155,6 +155,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_chat_to_fragmentSystemTickets">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -473,6 +478,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentOpenImage">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-2040" />
+                            <option name="y" value="-2290" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentOptions">
                     <value>
                       <LayoutPositions>
@@ -484,6 +501,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_fragmentOptions_to_announcement">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_fragmentOptions_to_editAnnouncementFragment">
                               <value>
                                 <LayoutPositions />
@@ -613,6 +635,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentSystemTicket">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="710" />
+                            <option name="y" value="2400" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

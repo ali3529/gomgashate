@@ -35,13 +35,45 @@
         android:indeterminate="true"
         android:layout_below="@id/hr"
         />
+    <RelativeLayout
+        android:id="@+id/system_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressbar"
+        android:background="#B2FAE36D"
+        android:clickable="true"
+        >
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            android:text="پیام های سیستمی"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            />
+        <TextView
+            android:id="@+id/notifications.badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="9+"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:background="@drawable/badge_shape"
+            android:gravity="center"
+            android:layout_toLeftOf="@id/title"/>
+
+
+    </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/progressbar"
+        android:layout_below="@id/system_ticket"
         android:layout_above="@id/gggg"/>
 
 

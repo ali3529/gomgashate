@@ -9,6 +9,16 @@ public class ChatsModel {
     private String response;
     @SerializedName("data")
     private List<Tickets> ticketList;
+    @SerializedName("system_messages")
+    private String system_messages;
+
+    public String getSystem_messages() {
+        return system_messages;
+    }
+
+    public void setSystem_messages(String system_messages) {
+        this.system_messages = system_messages;
+    }
 
     public String getResponse() {
         return response;
@@ -27,20 +37,30 @@ public class ChatsModel {
     }
 
     public class Tickets{
-       @SerializedName("ticket_id")
+        @SerializedName("ticket_id")
         private String ticket_id;
-       @SerializedName("user_id")
+        @SerializedName("user_id")
         private String user_id;
-       @SerializedName("announcement_title")
+        @SerializedName("announcement_title")
         private String announcement_title;
-       @SerializedName("message_time")
-       private String message_time;
-       @SerializedName("announcement_id")
-       private String announcement_id;
+        @SerializedName("message_time")
+        private String message_time;
+        @SerializedName("announcement_id")
+        private String announcement_id;
         @SerializedName("pictures")
         private String picture;
         @SerializedName("block")
         private boolean block;
+        @SerializedName("sum")
+        private int massageNumber;
+
+        public int getMassageNumber() {
+            return massageNumber;
+        }
+
+        public void setMassageNumber(int massageNumber) {
+            this.massageNumber = massageNumber;
+        }
 
         public boolean isBlock() {
             return block;

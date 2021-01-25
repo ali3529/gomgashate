@@ -23,11 +23,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.ChatsAdaptor;
 import com.utabpars.gomgashteh.databinding.FragmentChatBinding;
 import com.utabpars.gomgashteh.interfaces.ChatOnclick;
 import com.utabpars.gomgashteh.model.ChatsModel;
+import com.utabpars.gomgashteh.viewmodel.ChatNotificationViewModel;
 import com.utabpars.gomgashteh.viewmodel.ChatsViewModel;
 
 
@@ -39,6 +42,7 @@ public class FragmentChat extends Fragment {
     ChatsAdaptor chatsAdaptor;
     RecyclerView recyclerView;
     ProgressBar progressBar;
+    ChatNotificationViewModel chatNotificationViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class FragmentChat extends Fragment {
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.VISIBLE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_chat,container,false);
         sharedPreferences=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
+        chatNotificationViewModel=new ViewModelProvider(this).get(ChatNotificationViewModel.class);
         chatsViewModel=new ViewModelProvider(this).get(ChatsViewModel.class);
         initViews();
         return binding.getRoot();
@@ -72,6 +77,7 @@ public class FragmentChat extends Fragment {
             binding.chatRecyclerview.setVisibility(View.VISIBLE);
             chatsViewModel.getTickets(user_id);
             progressBar.setVisibility(View.VISIBLE);
+            chatNotificationViewModel.getChatNotification(user_id);
             Log.d("bdfbfdbdf", "onChanged: logined "+user_id);
         }
 
@@ -80,6 +86,16 @@ public class FragmentChat extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_chat_to_fragmentLogin);
+            }
+        });
+        chatNotificationViewModel.chatCounterMutableLiveData.observe(getViewLifecycleOwner(),notification->{
+            if (notification==0){
+
+            }else {
+                BottomNavigationView bottomNavigationView=getActivity().findViewById(R.id.bottomnav);
+                BadgeDrawable badge= bottomNavigationView.getOrCreateBadge(R.id.chat);
+                badge.isVisible();
+                badge.setNumber(notification);
             }
         });
 
@@ -92,13 +108,33 @@ public class FragmentChat extends Fragment {
                 chatsAdaptor=new ChatsAdaptor(chatsModel.getTicketList(),chatOnclick);
                 recyclerView.setAdapter(chatsAdaptor);
 
+                if (chatsModel.getSystem_messages().equals("0")){
+                    binding.notificationsBadge.setVisibility(View.GONE);
+                }else {
+
+                    if (Integer.parseInt(chatsModel.getSystem_messages())>10){
+                        binding.notificationsBadge.setText("9+");
+                    }else {
+                        binding.notificationsBadge.setText(chatsModel.getSystem_messages());
+                    }
+
+                }
+
               
             }
         });
 
         lastAnnouncmentAboveBtNavigation();
+       // BadgeDrawable badgeDrawable= getActivity().findViewById(R.id.bottomnav).getbad
+        BottomNavigationView bottomNavigationView=getActivity().findViewById(R.id.bottomnav);
+        BadgeDrawable badge= bottomNavigationView.getOrCreateBadge(R.id.chat);
+        bottomNavigationView.removeBadge(R.id.chat);
 
-
+        binding.systemTicket.setOnClickListener(o->{
+            Bundle bundle=new Bundle();
+            bundle.putString("user_id",user_id);
+            Navigation.findNavController(o).navigate(R.id.action_chat_to_fragmentSystemTickets,bundle);
+        });
     }
 
     @Override

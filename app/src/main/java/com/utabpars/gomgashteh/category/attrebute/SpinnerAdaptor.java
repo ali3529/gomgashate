@@ -23,7 +23,6 @@ import java.util.List;
 
 public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerViewHolder> {
     SpinnerModel spinnerModel;
-    List<ChatStatusModel.attributes> attributes=new ArrayList<>();
 
     int positionT;
     BottonShettCallback bottonShettCallback;
@@ -33,10 +32,6 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
         this.bottonShettCallback=bottonShettCallback;
     }
 
-    public SpinnerAdaptor(List<ChatStatusModel.attributes> attributes, BottonShettCallback bottonShettCallback) {
-        this.attributes = attributes;
-        this.bottonShettCallback = bottonShettCallback;
-    }
 
     @NonNull
     @Override
@@ -81,9 +76,9 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
 
     @Override
     public int getItemCount() {
-        if (attributes==null){
+
             return spinnerModel.getAttrebuteData().size();
-        }else return attributes.size();
+
 
     }
 

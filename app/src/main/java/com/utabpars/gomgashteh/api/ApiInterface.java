@@ -15,11 +15,13 @@ import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.AtrrNameModel;
 import com.utabpars.gomgashteh.model.BlockModel;
 import com.utabpars.gomgashteh.model.CategoryModel;
+import com.utabpars.gomgashteh.model.ChatNotificationModel;
 import com.utabpars.gomgashteh.model.ChatsModel;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
+import com.utabpars.gomgashteh.systemtickets.SystemTicketModel;
 
 import java.util.List;
 import java.util.Map;
@@ -195,5 +197,14 @@ public interface ApiInterface {
     @POST("selectedAttributes")
     @FormUrlEncoded
     Single<AtrrNameModel> getAttributesName(@Field("collection_id") String callection_id);
+
+
+    @POST("sumTickets")
+    @FormUrlEncoded
+    Single<ChatNotificationModel> getNotification(@Field("user_id") String user_id);
+
+    @POST("myMessages")
+    @FormUrlEncoded
+    Single<SystemTicketModel> getSystemMessage(@Field("user_id") String user_id);
 }
 

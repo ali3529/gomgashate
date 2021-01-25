@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.utabpars.gomgashteh.R;
 
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment hostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host);
         NavigationUI.setupWithNavController(bottomNavigationView,hostFragment.getNavController());
+
+
+
 
     }
 }

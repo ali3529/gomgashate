@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.adaptor;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,12 @@ public class ChatsAdaptor extends RecyclerView.Adapter<ChatsAdaptor.ChatViewHold
         });
 
         Picasso.get().load(chats.get(position).getPicture()).into(holder.binding.image);
+        if (chats.get(position).getMassageNumber()==0){
+            holder.binding.notificationsBadge.setVisibility(View.GONE);
+        }else {
+            holder.binding.notificationsBadge.setText(String.valueOf(chats.get(position).getMassageNumber()));
+        }
+
     }
 
     @Override
