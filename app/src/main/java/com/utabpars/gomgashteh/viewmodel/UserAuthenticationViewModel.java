@@ -87,7 +87,7 @@ public class UserAuthenticationViewModel extends ViewModel {
 
 
     public void timerOtp(){
-        new CountDownTimer(3100, 1000) {
+        new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long l) {
                 timerOtp.postValue(l/1000);

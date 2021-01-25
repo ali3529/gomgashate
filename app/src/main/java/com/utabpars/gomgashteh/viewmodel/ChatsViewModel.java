@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.viewmodel;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,9 +28,14 @@ public class ChatsViewModel extends ViewModel {
         .subscribeWith(new DisposableSingleObserver<ChatsModel>() {
             @Override
             public void onSuccess(@NonNull ChatsModel chatsModel) {
-                if (chatsModel.getResponse().equals("1")){
-                    chatsModelMutableLiveData.setValue(chatsModel);
+                if (chatsModel.getResponse()==null){
+
+                }else {
+                    if (chatsModel.getResponse().equals("1")){
+                        chatsModelMutableLiveData.setValue(chatsModel);
+                    }
                 }
+
             }
 
             @Override

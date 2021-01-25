@@ -23,7 +23,7 @@
         tools:text="اسلحه شکاری"
         android:textColor="@color/text_color_black"
         android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
+
         android:textSize="@dimen/text_size_16"
         android:text="@{model.announcement_title}"/>
 

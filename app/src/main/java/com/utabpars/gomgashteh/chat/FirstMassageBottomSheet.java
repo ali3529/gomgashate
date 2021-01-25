@@ -61,7 +61,10 @@ public String sender_id;
     SpinnerBottomSheet spinnerBottomSheet;
     ArrayList<AtttrModel> spinnerlist=new ArrayList<>();
     int adaptorItemCount;
-    int position;
+    int position,counter=0;
+    private List<String> listNassesary=new ArrayList<>();
+    boolean is_nassasery_selected;
+    boolean ok=false;
 
     public MutableLiveData<String> closeBottensheet=new MutableLiveData<>();
 
@@ -79,6 +82,13 @@ public String sender_id;
     }
     public void getAttr(List<ChatStatusModel.attributes> attributes){
         this.attributes=attributes;
+        for (int i = 0; i < attributes.size(); i++) {
+            if (attributes.get(i).isNecessary()){
+                listNassesary.add(attributes.get(i).getId());
+                Log.d("sdgsdvsdgrh", "getAttr: "+attributes.get(i).getId());
+                Log.d("sdgsdvsdgrh", "getAttr: "+attributes.get(i).isNecessary());
+            }
+        }
     }
 
     public FirstMassageBottomSheet() {
@@ -108,15 +118,22 @@ public String sender_id;
         binding.send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             if (binding.masage.getText().toString().length()!=0){
-                 viewModel.sendFirstMassage(partLists,fetchData());
-                 binding.firstMassageProgress.setVisibility(View.VISIBLE);
-                 binding.textinputlayout.setVisibility(View.GONE);
-                 binding.attrRecyclerview.setVisibility(View.GONE);
-                 Log.d("iufdsbfdhs", "onClick: onsss");
-             }else {
-                 Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
-             }
+                if (is_nassasery_selected){
+                    Toast.makeText(getContext(), "true_send", Toast.LENGTH_SHORT).show();
+                    if (binding.masage.getText().toString().length()!=0){
+                        viewModel.sendFirstMassage(partLists,fetchData());
+                        binding.firstMassageProgress.setVisibility(View.VISIBLE);
+                        binding.textinputlayout.setVisibility(View.GONE);
+                        binding.attrRecyclerview.setVisibility(View.GONE);
+                        Log.d("iufdsbfdhs", "onClick: onsss");
+                    }else {
+                        Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(getContext(), "لطفا ویژگی های الزامی را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
@@ -151,7 +168,7 @@ public String sender_id;
             Toast.makeText(getContext(), "خطا در ارسال اطلاعات", Toast.LENGTH_SHORT).show();
         });
         if (attributes==null){
-            Toast.makeText(getContext(), "riidddiiid", Toast.LENGTH_SHORT).show();
+            is_nassasery_selected=true;
         }else {
             attr_recyclerView=binding.attrRecyclerview;
             attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -168,7 +185,7 @@ public String sender_id;
     PassDataCallBack passDataCallBack=new PassDataCallBack() {
         @Override
         public void passUri(Uri uri, MultipartBody.Part partList) {
-            Toast.makeText(getContext(), "hi bech", Toast.LENGTH_SHORT).show();
+
             uriList.add(uri);
             partLists.add(partList);
             adaptor=new AddImageAnnouncmentAdaptor(uriList, new AddImageAnnouncmentAdaptor.onDeleteImages() {
@@ -205,10 +222,7 @@ public String sender_id;
       massageData.put("receiver_id",receiverId);
       massageData.put("ticket_id",ticketId);
       massageData.put("attr",attr);
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("test", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("ttt",getData().toString());
-        editor.apply();
+
 
         Log.d("dfgdfgfd", "fetchData: sender_id "+sender_id);
         Log.d("dfgdfgfd", "fetchData:  anouncment_id"+anounccer_id);
@@ -244,16 +258,12 @@ public String sender_id;
         @Override
         public void getAttr(String id, String value, String value_id) {
             spinnerBottomSheet.dismiss();
-            Log.d("sdgsdbmm", "ItemClick:--- "+value);
-            Log.d("sdgsdbmm", "ItemClick: -----"+value_id);
-            Log.d("sdgsdbmm", "ItemClick: -----"+id);
-            Log.d("sdgsdbmm", "ItemClick: --------------");
+
             attrAdaptor.setText(value,position);
             AtttrModel atttrModel=new AtttrModel(id,value_id);
             spinnerlist.set(position,atttrModel);
-            Log.d("sdgsdbmm", "ItemClick: -----" +spinnerlist.toString());
-            Log.d("sdgsdbmm", "ItemClick: -----" +spinnerlist.get(0).getValue().toString());
-            Log.d("sdgsdbmm", "ItemClick: -----" +spinnerlist.get(0).getId().toString());
+            is_nassasery_selected=setNassasery(id);
+            Log.d("sfascascasc", "getAttr: "+is_nassasery_selected);
         }
     };
 
@@ -266,5 +276,32 @@ public String sender_id;
            // list.add(spinnerlist.get(i).getIscheck());
         }
         return list;
+    }
+
+    public boolean setNassasery(String id){
+
+        if (ok){
+
+        }else {
+            for (int j = 0; j < listNassesary.size(); j++) {
+                if (listNassesary.get(j).equals(id)){
+                    Log.d("dvsdvdsvdsv", "getNassasery: nasasary"+listNassesary.size());
+                    Log.d("dvsdvdsvdsv", "getNassasery: c-----  befor"+counter);
+                    counter++;
+                    Log.d("dvsdvdsvdsv", "getNassasery: c----- after"+counter);
+
+                    Log.d("dvsdvdsvdsv", "getNassasery: spinner "+id);
+                    Log.d("dvsdvdsvdsv", "getNassasery: nassasery "+listNassesary.get(j));
+                    Log.d("dvsdvdsvdsv", "--------------------------------------------------");
+                    if (counter==listNassesary.size()){
+                        ok=true;
+                    }
+                }else {
+                    Log.d("dvsdvdsvdsv", "getNassasery: not ok "+id);
+                }
+            }
+        }
+
+        return ok;
     }
 }

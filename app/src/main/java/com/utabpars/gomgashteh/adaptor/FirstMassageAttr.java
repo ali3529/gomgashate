@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.adaptor;
 
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class FirstMassageAttr extends RecyclerView.Adapter<FirstMassageAttr.Spin
         return new SpinnerViewHolder(binding);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull FirstMassageAttr.SpinnerViewHolder holder, int position) {
         positionT=position;
@@ -66,6 +68,10 @@ public class FirstMassageAttr extends RecyclerView.Adapter<FirstMassageAttr.Spin
         });
 
         holder.binding.emportent.setVisibility(View.GONE);
+        if (spinnerModel.get(position).isNecessary()){
+            holder.binding.nassasery.setVisibility(View.VISIBLE);
+            //holder.binding.spinner.setBackgroundColor(R.color.colorPrimary);
+        }
 
     }
 
