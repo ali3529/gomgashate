@@ -15,7 +15,7 @@
             android:layout_height="350dp"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_peekHeight="350dp"
-            app:behavior_hideable="true"
+            app:behavior_hideable="false"
             android:paddingHorizontal="8dp">
             <ImageView
                 android:id="@+id/tab"
@@ -60,7 +60,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
-                            android:nestedScrollingEnabled="false"/>
+                          />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>

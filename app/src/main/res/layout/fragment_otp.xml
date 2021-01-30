@@ -214,40 +214,66 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
-            <RelativeLayout
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_below="@id/layoit_lastname">
-
-
-                <TextView
-                    android:id="@+id/link"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ruls"
-                    android:textAlignment="center"
-                    android:padding="4dp"
-                    android:layout_centerInParent="true"
-                    android:textSize="@dimen/text_size_16"
-                    android:layout_toLeftOf="@id/checkruls"
-                    android:onClick="@{() -> sendotp.goToRuls()}"/>
-                <CheckBox
-                    android:id="@+id/checkruls"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:padding="4dp"
-                    />
-            </RelativeLayout>
 
         </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/ruls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/layout_register"
+        >
 
+
+        <TextView
+            android:id="@+id/link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ruls"
+            android:textAlignment="center"
+            android:padding="4dp"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_size_16"
+            android:layout_toLeftOf="@id/checkruls"
+            android:onClick="@{() -> sendotp.goToRuls()}"/>
+        <CheckBox
+            android:id="@+id/checkruls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:padding="4dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ruls"
+
+        android:layout_margin="4dp"
+        android:background="#B2FAE36D">
+        <TextView
+            android:id="@+id/alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_color_black"
+            android:text="هشدار(باقوانین مطمئن ثبت کن، مانع تخلف هم باش) هشدار"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:layout_margin="4dp"
+
+            />
+    </RelativeLayout>
 </RelativeLayout>
+
         </androidx.core.widget.NestedScrollView>
+
+
         <RelativeLayout
             android:id="@+id/layput_otp"
             android:layout_width="match_parent"
@@ -263,6 +289,7 @@
                 android:layout_margin="6dp"
 
                 android:background="@color/colorPrimary"
+
              >
                 <TextView
                     android:layout_width="match_parent"

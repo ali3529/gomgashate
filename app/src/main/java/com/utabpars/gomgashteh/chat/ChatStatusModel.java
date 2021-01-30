@@ -19,6 +19,7 @@ public class ChatStatusModel {
     @SerializedName("attributes")
     List<attributes> attributes=new ArrayList<>();
 
+
     public List<ChatStatusModel.attributes> getAttributes() {
         return attributes;
     }

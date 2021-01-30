@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +39,8 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
     SpinnerBottomSheet spinnerBottomSheet;
     int position;
     String id_for_emty_attr;
-    MutableLiveData<String> isckeckNasesary=new MutableLiveData<>();
+    String check_string="0";
+
 
 
 
@@ -91,25 +93,6 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
 
     }
 
-
-//    @Override
-//    public void SpinnerItemCallBack(String id, String value,boolean isCkeck,int position,List<String> list) {
-////
-////        AtttrModel atttrModel=new AtttrModel(id,value,isckeckNasesary);
-////
-////        spinnerlist.set(position,atttrModel);
-////
-////        for (int i = 0; i < spinnerlist.size(); i++) {
-////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getId());
-////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getValue());
-////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.get(i).getIscheck());
-////            Log.d("sdgsdvbbvmmmm", "SpinnerItemCallBack: "+spinnerlist.size());
-////            Log.d("sdgsdvbbvmmmm", "-------------------------------------------------");
-////        }
-//
-//
-//
-//    }
     public void setIndec(){
         for (int i = 0; i < adaptorItemCount; i++) {
             spinnerlist.add(new AtttrModel("","",""));
@@ -130,51 +113,29 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
     @Override
     public void onClickSpinner(String id, List<String> values, int position) {
         this.position=position;
-
         spinnerBottomSheet=new SpinnerBottomSheet(values,id,attrCallback);
         spinnerBottomSheet.show(getActivity().getSupportFragmentManager(),"");
     }
     SpinnerBottomSheet.AttrCallback attrCallback=new SpinnerBottomSheet.AttrCallback() {
         @Override
-        public void getAttr(String id, String value, String value_id) {
+        public void getAttr(String id, String value, String value_id,boolean isCheck) {
             spinnerBottomSheet.dismiss();
             Log.d("sdgsdbmm", "ItemClick:--- "+value);
             Log.d("sdgsdbmm", "ItemClick: -----"+value_id);
             Log.d("sdgsdbmm", "ItemClick: -----"+id);
-            Log.d("sdgsdbmm", "ItemClick: -----"+isckeckNasesary);
+            Log.d("sdgsdbmm", "ItemClick: -----"+isCheck);
+            if (isCheck){
+                check_string="1";
+            }else check_string="0";
+
             spinnerAdaptor.setText(value,position);
-            AtttrModel atttrModel=new AtttrModel(id,value_id,"0");
+            AtttrModel atttrModel=new AtttrModel(id,value_id,check_string);
             spinnerlist.set(position,atttrModel);
 
 
-//            isckeckNasesary.observe(getViewLifecycleOwner(), t->{
-//                AtttrModel atttrModel=new AtttrModel(id,value_id,t);
-//                spinnerlist.set(position,atttrModel);
-//                Log.d("Dfbfdbfdb", "getAttr: clicked");
-//            });
-//            if (isckeckNasesary.getValue()==null){
-//                AtttrModel atttrModel=new AtttrModel(id,value_id,"0");
-//                spinnerlist.set(position,atttrModel);
-//                Log.d("Dfbfdbfdb", "getAttr: if null");
-//            }else {
-//                AtttrModel atttrModel=new AtttrModel(id,value_id,isckeckNasesary.getValue());
-//                spinnerlist.set(position,atttrModel);
-//                Log.d("Dfbfdbfdb", "getAttr: else");
-//            }
 
         }
     };
 
-    @Override
-    public void onClickSpinnerisCheck(boolean isckeck) {
 
-
-        if (isckeck){
-            isckeckNasesary.setValue("1");
-        }else {
-            isckeckNasesary.setValue("0");
-        }
-
-        Log.d("sdgsdbmm", "ItemClick: -----"+isckeckNasesary.getValue());
-    }
 }

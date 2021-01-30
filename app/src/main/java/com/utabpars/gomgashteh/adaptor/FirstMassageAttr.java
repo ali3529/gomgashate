@@ -67,7 +67,7 @@ public class FirstMassageAttr extends RecyclerView.Adapter<FirstMassageAttr.Spin
 
         });
 
-        holder.binding.emportent.setVisibility(View.GONE);
+        //holder.binding.emportent.setVisibility(View.GONE);
         if (spinnerModel.get(position).isNecessary()){
             holder.binding.nassasery.setVisibility(View.VISIBLE);
             //holder.binding.spinner.setBackgroundColor(R.color.colorPrimary);

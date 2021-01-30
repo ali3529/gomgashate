@@ -80,6 +80,7 @@ public class FragmentChatDetail extends Fragment {
     boolean test1;
     boolean test2;
     MutableLiveData<Boolean> isReport=new MutableLiveData<>();
+    boolean isReport_clicked;
     PhoneConfirmViewModel phoneConfirmViewModel;
 
 
@@ -105,7 +106,7 @@ public class FragmentChatDetail extends Fragment {
         recever_id=getArguments().getString("recever_id");
         anouncer_id=getArguments().getString("announcer_id");
         try {
-         //    block=getArguments().getBoolean("block");
+            //    block=getArguments().getBoolean("block");
 
         }catch (Exception e){
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -120,7 +121,8 @@ public class FragmentChatDetail extends Fragment {
                 massageAdaptor.getMassageList(ticketResponseModel.getMassages());
                 recyclerView.setAdapter(massageAdaptor);
                 if (ticketResponseModel.isReport()){
-                    isReport.setValue(true);
+                    isReport.setValue(ticketResponseModel.isReport());
+                    isReport_clicked=ticketResponseModel.isReport();
                 }else {
                     block.setValue(ticketResponseModel.isBlock());
                 }
@@ -205,10 +207,24 @@ public class FragmentChatDetail extends Fragment {
         refresh();
 
         fragmentReportBottomSheet.reportResponsLiveData.observe(getViewLifecycleOwner(), t->{
+            //error
             fragmentReportBottomSheet.dismiss();
-            binding.setMassagelayoutvisibility(false);
-            binding.setSecendmassagevisibility(true);
-            viewModel.getTicket(ticket_id,user_id);
+            if (t){
+                binding.setMassagelayoutvisibility(false);
+                binding.setSecendmassagevisibility(true);
+                viewModel.getTicket(ticket_id,user_id);
+
+
+
+            }else {
+                binding.setMassagelayoutvisibility(true);
+                binding.setSecendmassagevisibility(false);
+                viewModel.getTicket(ticket_id,user_id);
+
+
+            }
+            //todo
+
         });
 
 
@@ -383,8 +399,13 @@ public class FragmentChatDetail extends Fragment {
         });
 
         isReport.observe(getViewLifecycleOwner(),t ->{
-            menu.getItem(0).setEnabled(false);
-            menu.getItem(1).setEnabled(false);
+            if (t){
+                menu.getItem(1).setTitle("ازاد");
+            }else {
+                menu.getItem(1).setTitle("'گزارش");
+            }
+
+            //todo ttt
         });
 
         super.onCreateOptionsMenu(menu, inflater);
@@ -425,8 +446,28 @@ public class FragmentChatDetail extends Fragment {
 
 
                 }
+
             }
         });
+
+        fragmentReportBottomSheet.reportResponsLiveData.observe(getViewLifecycleOwner(), t->{
+            Log.d("dsfsdf", "onOptionsItemSelected: rrr");
+            if (item.getItemId()==R.id.report) {
+                if (t) {
+                    item.setTitle("ازاد");
+                    Log.d("dsfsdf", "onOptionsItemSelected: if");
+                } else {
+
+                    item.setTitle("گزارش");
+                    Log.d("dsfsdf", "onOptionsItemSelected: else");
+                }
+            }
+
+        });
+
+
+
+
         switch (item.getItemId()){
             case R.id.block:
 
@@ -434,9 +475,15 @@ public class FragmentChatDetail extends Fragment {
 
                 break;
             case R.id.report:
-                fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"");
-                fragmentReportBottomSheet.getUsers(user_id,recever_id);
-                Log.d("sdfdsfdsfdsf", "getUsers: "+user_id+"  "+recever_id);
+                if (isReport_clicked){
+                    fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"");
+                    fragmentReportBottomSheet.reportUser(user_id,recever_id,"ثث");
+                }else {
+                    fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"");
+                    fragmentReportBottomSheet.getUsers(user_id,recever_id);
+                    Log.d("sdfdsfdsfdsf", "getUsers: "+user_id+"  "+recever_id);
+                }
+
 
         }
 

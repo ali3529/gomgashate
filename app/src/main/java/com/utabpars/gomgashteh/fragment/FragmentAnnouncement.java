@@ -72,6 +72,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     Toolbar toolbar;
     String type="",test="";
     static int type_for_view=0;
+    MutableLiveData<Integer> typeLiveData=new MutableLiveData<>();
 
     TextView searchView;
     SharedPreferences shPref;
@@ -92,7 +93,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         // Inflate the layout for this fragment
         initViews();
         shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+     //   ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         updateViewModel = new ViewModelProvider(this).get(CheckUpdateViewModel.class);
 
@@ -175,6 +176,13 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         binding.find.setOnClickListener(o ->{
 
             setFilterViews(2);
+        });
+
+        typeLiveData.setValue(type_for_view);
+
+        typeLiveData.observe(getViewLifecycleOwner(),t->{
+            Log.d("Sefsefesf", "onViewCreated: "+t);
+            setFilterViews(t);
         });
 
 
@@ -282,7 +290,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
     private void initViews() {
         recyclerView = binding.recycler;
-        toolbar=binding.toolbar;
+      //  toolbar=binding.toolbar;
         searchView=binding.search;
         provinceViewModel=new ViewModelProvider(getActivity()).get(FilterAnouncmentByProvinceViewModel.class);
         provinceFilterDataSource = new ProvinceFilterDataSource();
@@ -345,7 +353,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("http://chidashop.ir"));
+                        intent.setData(Uri.parse("https://gomgashteh.com/dl/gomgashteh.apk"));
                         startActivity(intent);
                     }
                 });

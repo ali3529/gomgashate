@@ -26,6 +26,7 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
 
     int positionT;
     BottonShettCallback bottonShettCallback;
+    ItemSpinnerBinding binding;
     boolean isckeck;
     public SpinnerAdaptor(SpinnerModel spinnerModel, BottonShettCallback bottonShettCallback) {
         this.spinnerModel = spinnerModel;
@@ -44,6 +45,7 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
     @Override
     public void onBindViewHolder(@NonNull SpinnerViewHolder holder, int position) {
         positionT=position;
+        this.binding=holder.binding;
 //        holder.binding.spinner.setSpinnerPopupAnimation(SpinnerAnimation.BOUNCE);
         List<String> list=new ArrayList<>();
         for (String s:spinnerModel.getAttrebuteData().get(position).getValues()) {
@@ -60,16 +62,18 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
             bottonShettCallback.onClickSpinner(spinnerModel.getAttrebuteData().get(position).getId(),
                     spinnerModel.getAttrebuteData().get(position).getValues(),position);
 
+//
 //            holder.binding.emportent.setOnClickListener( ou->{
 //                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
 //                bottonShettCallback.onClickSpinner(spinnerModel.getAttrebuteData().get(position).getId(),
-//                        spinnerModel.getAttrebuteData().get(position).getValues(),position);
+//                        spinnerModel.getAttrebuteData().get(position).getValues(),position,
+//                        holder.binding.emportent.isChecked());
 //                });
 
         });
-        holder.binding.emportent.setOnClickListener(o ->{
-            bottonShettCallback.onClickSpinnerisCheck(holder.binding.emportent.isChecked());
-        });
+//        holder.binding.emportent.setOnClickListener(o ->{
+//            bottonShettCallback.onClickSpinnerisCheck(holder.binding.emportent.isChecked());
+//        });
 
 
     }
@@ -95,6 +99,7 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
         notifyDataSetChanged();
         Log.d("dsfdsf", "setText: "+position);
     }
+
 
 
 }

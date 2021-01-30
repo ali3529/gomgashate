@@ -58,8 +58,8 @@ public class FragmentOtp extends Fragment {
         binding.ttt.setText("کد تایید پیامک شده به "+" "+phone_num+" "+"وارد کنید");
         viewModel.phoneNumberInterface(loginRespondeCallBack);
         if (is_validate) {
-            binding.desablsave.setVisibility(View.GONE);
-            binding.validateOtp.setVisibility(View.VISIBLE);
+            binding.desablsave.setVisibility(View.VISIBLE);
+            binding.validateOtp.setVisibility(View.INVISIBLE);
 
             binding.validateOtp.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,7 +75,7 @@ public class FragmentOtp extends Fragment {
         }else {
             binding.layoutRegister.setVisibility(View.VISIBLE);
             binding.desablsave.setVisibility(View.VISIBLE);
-            binding.validateOtp.setVisibility(View.GONE);
+            binding.validateOtp.setVisibility(View.INVISIBLE);
            binding.validateOtp.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
@@ -102,6 +102,7 @@ public class FragmentOtp extends Fragment {
                }
            });
         }
+       // binding.desablsave.setVisibility(View.GONE);
         binding.checkruls.setOnClickListener(o->{
             if (binding.checkruls.isChecked()){
                 binding.desablsave.setVisibility(View.GONE);

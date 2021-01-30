@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigate"
-    app:startDestination="@id/fragmentOpenImage">
+    app:startDestination="@id/fragmentSplash">
 
     <fragment
         android:id="@+id/fragmentSplash"
@@ -87,7 +87,8 @@
         <action
             android:id="@+id/action_add_to_fragmentOptions"
             app:destination="@id/fragmentOptions"
-            />
+            app:popUpTo="@id/announcement"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_add_to_fragmentShowEdit"
             app:destination="@id/fragmentShowEdit" />
@@ -187,6 +188,9 @@
         <action
             android:id="@+id/action_fragmentAnnouncmentDetail_to_fragmentRuls"
             app:destination="@id/fragmentRuls" />
+        <action
+            android:id="@+id/action_fragmentAnnouncmentDetail_to_fragmentOpenImage"
+            app:destination="@id/fragmentOpenImage" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCallection"

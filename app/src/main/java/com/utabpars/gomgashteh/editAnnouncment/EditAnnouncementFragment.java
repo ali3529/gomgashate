@@ -128,19 +128,6 @@ public class EditAnnouncementFragment extends Fragment {
             }
         });
 
-//        if (load){
-//
-//        }else {
-//            try {
-//                for (int i = 0; i < othercity.size(); i++) {
-//                    binding.othercity.append(data.getOtherCity().get(i)+" ");
-//                }
-//            }catch (Exception e){
-//
-//            }
-//        }
-
-
 
         binding.setcity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,11 +188,17 @@ public class EditAnnouncementFragment extends Fragment {
                 @Override
                 public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull SaveAnnouncementModel saveAnnouncementModel) {
                     if (saveAnnouncementModel.getResponse().equals("1")){
-                        Toast.makeText(getContext(), ""+saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
-                        Bundle bundle=new Bundle();
-                        bundle.putInt("id",id);
-                        bundle.putString("edit","edit");
-                        Navigation.findNavController(view).navigateUp();
+
+                        try {
+                            Toast.makeText(getContext(), ""+saveAnnouncementModel.getMasg(), Toast.LENGTH_SHORT).show();
+                            Bundle bundle=new Bundle();
+                            bundle.putInt("id",id);
+                            bundle.putString("edit","edit");
+                            Navigation.findNavController(getView()).navigateUp();
+                        }catch (Exception e){
+                            Log.d("dvdsvdsvdsv", "onError: catch "+e.toString());
+                        }
+
                     }
 
 
@@ -262,7 +255,6 @@ public class EditAnnouncementFragment extends Fragment {
             binding.suprise.setVisibility(View.VISIBLE);
         }
         if (data.getPictures().get(0).equals("https://gomgashteh.com/uploads/announce/camera-icon.jpg")){
-            Toast.makeText(getContext(), "not [ivture", Toast.LENGTH_SHORT).show();
             data.getPictures().remove(0);
         }
         old_pic=data.getPictures();

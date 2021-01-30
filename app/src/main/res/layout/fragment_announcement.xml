@@ -47,13 +47,15 @@
           android:layout_height="match_parent"
           tools:context=".fragment.FragmentAnnouncement">
 
-         <androidx.appcompat.widget.Toolbar
+         <RelativeLayout
              android:id="@+id/toolbar"
              android:layout_width="match_parent"
              android:layout_height="?attr/actionBarSize"
              android:layout_alignParentTop="true"
              android:background="@color/toolbar_background"
-             android:layout_marginTop="6dp">
+             android:layout_marginHorizontal="4dp"
+             android:layout_marginTop="6dp"
+         >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -65,16 +67,18 @@
                   <TextView
                       android:id="@+id/search"
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent"
+                      android:layout_height="50dp"
                       android:layout_gravity="end"
                       android:text="جستجو..."
                       android:textStyle="bold"
                       android:textSize="20dp"
                       android:padding="6dp"
-                      android:textAlignment="center"
+                    android:gravity="center"
                       android:layoutDirection="ltr"
                       android:textColor="@color/darkgray"
                       android:drawableEnd="@drawable/ic_search_24"
+                      android:background="@drawable/search_shape"
+
                       />
 
 
@@ -87,7 +91,7 @@
                    android:layout_height="50dp"
                    android:layout_alignParentLeft="true"
                    android:layout_gravity="center"
-                   android:background="@color/white"
+                   android:background="@drawable/search_shape"
                    android:padding="6dp"
                    >
 
@@ -122,7 +126,7 @@
                       />
                </RelativeLayout>
             </RelativeLayout>
-         </androidx.appcompat.widget.Toolbar>
+         </RelativeLayout>
 
 
          <LinearLayout
@@ -130,7 +134,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_centerInParent="true"
-             android:paddingHorizontal="12dp"
+             android:paddingHorizontal="3dp"
              android:layout_below="@id/toolbar"
              android:orientation="horizontal"
              android:gravity="center"

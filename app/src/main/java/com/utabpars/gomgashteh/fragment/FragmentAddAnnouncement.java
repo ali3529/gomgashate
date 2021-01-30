@@ -113,8 +113,12 @@ public class FragmentAddAnnouncement extends Fragment  {
 
         if (type.equals("1")){
             binding.find.setChecked(true);
+            binding.rootLayout.setVisibility(View.VISIBLE);
+            getType(type);
         }else if (type.equals("2")){
             binding.lost.setChecked(true);
+            binding.rootLayout.setVisibility(View.VISIBLE);
+            getType(type);
         }
 
 
@@ -242,7 +246,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                     layout.setVisibility(View.VISIBLE);
                     binding.desablsave.setVisibility(View.GONE);
                 }else {
-                    layout.setVisibility(View.GONE);
+                    layout.setVisibility(View.INVISIBLE);
                     binding.desablsave.setVisibility(View.VISIBLE);
 
                 }
@@ -266,6 +270,7 @@ public class FragmentAddAnnouncement extends Fragment  {
             SharedPreferences.Editor editor1=sharedPreferences.edit();
             editor1.clear();
             editor1.apply();
+            binding.rootLayout.setVisibility(View.GONE);
 
 
 
@@ -300,6 +305,10 @@ public class FragmentAddAnnouncement extends Fragment  {
 
         });
 
+        binding.help.setOnClickListener(o->{
+            //todo set help
+            Toast.makeText(getContext(), "راهنما", Toast.LENGTH_SHORT).show();
+        });
 
 
     }
@@ -352,6 +361,8 @@ public class FragmentAddAnnouncement extends Fragment  {
                     editor_savestate.putString("type",type);
                     editor_savestate.apply();
                     binding.suprise.setVisibility(View.GONE);
+                    binding.rootLayout.setVisibility(View.VISIBLE);
+                    getType(type);
                 }
                 //todo
 
@@ -363,6 +374,8 @@ public class FragmentAddAnnouncement extends Fragment  {
                     editor_savestate.putString("type",type);
                     editor_savestate.apply();
                     binding.suprise.setVisibility(View.VISIBLE);
+                    binding.rootLayout.setVisibility(View.VISIBLE);
+                    getType(type);
                 }
                 break;
         }
@@ -422,10 +435,8 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     Bundle bundle=new Bundle();
                                     bundle.putInt("id",Integer.parseInt(saveAnnouncementModel.getAnnounce_id()));
                                     bundle.putString("add","add");
-                                    NavOptions navOptions = new NavOptions.Builder()
-                                            .setPopUpTo(R.id.add, false)
-                                            .build();
-                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentOptions,bundle,navOptions);
+                                 ;
+                                    Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentOptions,bundle);
 
                                     SharedPreferences.Editor editor=shPref.edit();
                                     editor.clear();
@@ -563,6 +574,13 @@ public class FragmentAddAnnouncement extends Fragment  {
 public void goToRuls(){
       //  Navigation.findNavController(getView()).navigate(R.layout);
  Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentRuls);
+}
+
+public void getType(String type){
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("Announce_type",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("type",type);
+        editor.apply();
 }
 }
 

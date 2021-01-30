@@ -3,7 +3,7 @@ package com.utabpars.gomgashteh.chat.reportchat;
 import com.google.gson.annotations.SerializedName;
 
 public class ReportModel {
-    @SerializedName("status")
+    @SerializedName("response")
     private String status;
     @SerializedName("massage")
     private String massage;

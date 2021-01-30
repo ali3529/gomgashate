@@ -68,9 +68,10 @@
             tools:text="9+"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:layout_centerInParent="true"
             android:background="@drawable/badge_shape"
             android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
       />
 
 

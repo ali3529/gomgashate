@@ -43,7 +43,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import static com.utabpars.gomgashteh.utils.NavigateHelper.navigate;
 
-public class FragmentOtherCity extends Fragment {
+public class
+
+FragmentOtherCity extends Fragment {
     FragmentOtherCityBinding binding;
     RecyclerView recyclerView;
     CategoryAdaptor otherCityAdaptor;

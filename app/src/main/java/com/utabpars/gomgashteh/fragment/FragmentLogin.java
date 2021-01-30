@@ -100,6 +100,10 @@ viewModel.phoneNumberInterface(loginRespondeCallBack);
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
                 Log.d("drgdrggdr", "otpCallback: 2   -- "+rmModel.getResponse());
             }
+            else if (rmModel.getResponse().equals("2")){
+                Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
+                binding.setProgress(false);
+            }
         }
     };
 }

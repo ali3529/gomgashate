@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +24,10 @@ import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.databinding.FragmentReportBottomSheetBinding;
 import com.utabpars.gomgashteh.model.RmModel;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -108,14 +107,18 @@ public void reportUser(String blocker,String blocked,String report_text){
         @Override
         public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ReportModel statusModel) {
             if (statusModel.getStatus().equals("1")){
-                Toast.makeText(getContext(), statusModel.getMassage(), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getContext(), statusModel.getMassage(), Toast.LENGTH_SHORT).show();
+
+
                 reportResponsLiveData.setValue(statusModel.isReport());
+                Log.d("sdvdsvdsv", "onSuccess: ");
             }
         }
 
         @Override
         public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-            Log.d("Dsfdsfdsf", "onError: "+e.toString());
+            Log.d("sdvdsvdsv", "onError: "+e.toString());
         }
     }));
 }

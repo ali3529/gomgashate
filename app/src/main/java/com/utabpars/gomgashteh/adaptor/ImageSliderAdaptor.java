@@ -1,6 +1,7 @@
 package com.utabpars.gomgashteh.adaptor;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,21 @@ import com.utabpars.gomgashteh.model.ProgressModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoomConfig;
+
 public class ImageSliderAdaptor extends SliderViewAdapter<ImageSliderAdaptor.DetailImageSliderVieHolder> {
     private List<String> picture=new ArrayList<>();
+    imageCallback imageCallback;
 
+    public ImageSliderAdaptor(List<String> picture, ImageSliderAdaptor.imageCallback imageCallback) {
+        this.picture = picture;
+        this.imageCallback = imageCallback;
+    }
 
     public ImageSliderAdaptor() {
     }
+
+
 
     public ImageSliderAdaptor(List<String> picture) {
         this.picture = picture;
@@ -39,6 +49,9 @@ public class ImageSliderAdaptor extends SliderViewAdapter<ImageSliderAdaptor.Det
     @Override
     public void onBindViewHolder(DetailImageSliderVieHolder viewHolder, int position) {
         viewHolder.binding.setPicture(picture.get(position));
+        viewHolder.itemView.setOnClickListener(o->{
+            imageCallback.ImageOnClick(picture.get(position));
+        });
 
     }
 
@@ -55,4 +68,9 @@ public class ImageSliderAdaptor extends SliderViewAdapter<ImageSliderAdaptor.Det
 
         }
     }
+
+   public interface imageCallback{
+        void ImageOnClick(String url);
+    }
+
 }

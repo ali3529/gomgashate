@@ -45,6 +45,9 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchView
                 detileCallBack.onItemClicked(view,detiles.get(position).getId());
             }
         });
+        if (detiles.get(position).getReward().equals("0")){
+            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

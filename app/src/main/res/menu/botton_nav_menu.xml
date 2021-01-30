@@ -20,7 +20,7 @@
         android:icon="@drawable/ic_list"/>
 
     <item android:id="@+id/announcement"
-        android:title="همه آگهی ها"
+        android:title="آگهی ها"
         android:icon="@drawable/ic_home"/>
 
 

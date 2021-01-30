@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -89,6 +91,7 @@ public String sender_id;
                 Log.d("sdgsdvsdgrh", "getAttr: "+attributes.get(i).isNecessary());
             }
         }
+
     }
 
     public FirstMassageBottomSheet() {
@@ -99,6 +102,7 @@ public String sender_id;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_first_massage_bottom_sheet,container,false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         initViews();
         return binding.getRoot();
@@ -110,6 +114,7 @@ public String sender_id;
         recyclerView=binding.imageFirstMassage;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setHasFixedSize(true);
+
     }
 
     @Override
@@ -118,6 +123,7 @@ public String sender_id;
         binding.send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (is_nassasery_selected){
                     Toast.makeText(getContext(), "true_send", Toast.LENGTH_SHORT).show();
                     if (binding.masage.getText().toString().length()!=0){
@@ -167,9 +173,12 @@ public String sender_id;
             binding.attrRecyclerview.setVisibility(View.VISIBLE);
             Toast.makeText(getContext(), "خطا در ارسال اطلاعات", Toast.LENGTH_SHORT).show();
         });
+
         if (attributes==null){
             is_nassasery_selected=true;
-        }else {
+
+        }else if (listNassesary.size()==0){
+            is_nassasery_selected=true;
             attr_recyclerView=binding.attrRecyclerview;
             attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             attrAdaptor=new FirstMassageAttr(attributes,bottonShettCallback);
@@ -177,6 +186,15 @@ public String sender_id;
             adaptorItemCount=attr_recyclerView.getAdapter().getItemCount();
             setIndec();
         }
+        else {
+            attr_recyclerView=binding.attrRecyclerview;
+            attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            attrAdaptor=new FirstMassageAttr(attributes,bottonShettCallback);
+            attr_recyclerView.setAdapter(attrAdaptor);
+            adaptorItemCount=attr_recyclerView.getAdapter().getItemCount();
+            setIndec();
+        }
+
        
     }
 
@@ -236,15 +254,12 @@ public String sender_id;
         public void onClickSpinner(String id, List<String> values, int positio) {
             position=positio;
              spinnerBottomSheet = new SpinnerBottomSheet(values, id, attrCallback);
-            spinnerBottomSheet.show(getActivity().getSupportFragmentManager(),"");
+            spinnerBottomSheet.show(getActivity().getSupportFragmentManager(),"first");
 
 
         }
 
-        @Override
-        public void onClickSpinnerisCheck(boolean isCkeck) {
 
-        }
     };
 
     public void setIndec(){
@@ -256,7 +271,7 @@ public String sender_id;
 
     SpinnerBottomSheet.AttrCallback attrCallback=new SpinnerBottomSheet.AttrCallback() {
         @Override
-        public void getAttr(String id, String value, String value_id) {
+        public void getAttr(String id, String value, String value_id,boolean ischeck) {
             spinnerBottomSheet.dismiss();
 
             attrAdaptor.setText(value,position);
@@ -279,28 +294,33 @@ public String sender_id;
     }
 
     public boolean setNassasery(String id){
-
-        if (ok){
-
+        if (listNassesary.size()==0){
+            ok=true;
         }else {
-            for (int j = 0; j < listNassesary.size(); j++) {
-                if (listNassesary.get(j).equals(id)){
-                    Log.d("dvsdvdsvdsv", "getNassasery: nasasary"+listNassesary.size());
-                    Log.d("dvsdvdsvdsv", "getNassasery: c-----  befor"+counter);
-                    counter++;
-                    Log.d("dvsdvdsvdsv", "getNassasery: c----- after"+counter);
+            if (ok){
 
-                    Log.d("dvsdvdsvdsv", "getNassasery: spinner "+id);
-                    Log.d("dvsdvdsvdsv", "getNassasery: nassasery "+listNassesary.get(j));
-                    Log.d("dvsdvdsvdsv", "--------------------------------------------------");
-                    if (counter==listNassesary.size()){
-                        ok=true;
+            }else {
+                for (int j = 0; j < listNassesary.size(); j++) {
+                    if (listNassesary.get(j).equals(id)){
+                        Log.d("dvsdvdsvdsv", "getNassasery: nasasary"+listNassesary.size());
+                        Log.d("dvsdvdsvdsv", "getNassasery: c-----  befor"+counter);
+                        counter++;
+                        Log.d("dvsdvdsvdsv", "getNassasery: c----- after"+counter);
+
+                        Log.d("dvsdvdsvdsv", "getNassasery: spinner "+id);
+                        Log.d("dvsdvdsvdsv", "getNassasery: nassasery "+listNassesary.get(j));
+                        Log.d("dvsdvdsvdsv", "--------------------------------------------------");
+                        if (counter==listNassesary.size()){
+                            ok=true;
+                        }
+                    }else {
+                        Log.d("dvsdvdsvdsv", "getNassasery: not ok "+id);
                     }
-                }else {
-                    Log.d("dvsdvdsvdsv", "getNassasery: not ok "+id);
                 }
             }
         }
+
+
 
         return ok;
     }

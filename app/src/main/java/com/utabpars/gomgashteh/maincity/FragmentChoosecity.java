@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentChoosecityBinding;
+import com.utabpars.gomgashteh.model.CategoryModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,9 @@ public class FragmentChoosecity extends Fragment {
     Gson gson;
     RecyclerView recyclerView;
     SelectetdCityAdaptor adaptor;
+    MutableLiveData< List<CategoryModel.ListData>> nameMutableLiveData=new MutableLiveData<>();
+    List<String> name=new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,8 +67,8 @@ public class FragmentChoosecity extends Fragment {
                 Log.d("ffdvf", "onViewCreated: okkk"+t.get(0).getId());
                 Log.d("ffdvf", "onViewCreated: okkk"+t.get(0).getCategoryName());
                 Log.d("ffdvf", "onViewCreated: okkk"+t.size());
-                adaptor=new SelectetdCityAdaptor(t);
-                recyclerView.setAdapter(adaptor);
+                nameMutableLiveData.setValue(t);
+
             }else {
                 try {
                     adaptor.notifyDataSetChanged();
@@ -75,6 +80,17 @@ public class FragmentChoosecity extends Fragment {
 
         });
 
+        nameMutableLiveData.observe(getViewLifecycleOwner(),t->{
+            //edit save city name forshow when app close
+            //not complete
+            adaptor=new SelectetdCityAdaptor(t);
+            recyclerView.setAdapter(adaptor);
+            for (int i = 0; i < t.size(); i++) {
+                name.add(t.get(i).getCategoryName());
+            }
+            editor.putString("name",name.toString());
+
+        });
     }
 
     public void ttt()  {
@@ -86,9 +102,7 @@ public class FragmentChoosecity extends Fragment {
             popback();
 
         } catch (Exception e) {
-//            e.printStackTrace();
-//            Toast.makeText(getContext(), "انتخاب حداقل یک شهر الزامی است", Toast.LENGTH_SHORT).show();
-//            Log.d("bhvhvhvg", "ttt: "+e.toString());
+
             editor.clear();
             editor.commit();
             popback();
@@ -102,6 +116,7 @@ public class FragmentChoosecity extends Fragment {
        }
        return id;
    }
+
 
    public void popback(){
        Navigation.findNavController(getView()).popBackStack();

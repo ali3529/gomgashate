@@ -43,6 +43,9 @@ public class MyAnnouncmentAdaptor extends RecyclerView.Adapter<MyAnnouncmentAdap
                 detileCallBack.onItemClicked(view,detiles.get(position).getId());
             }
         });
+        if (detiles.get(position).getType().equals("پیدا شده")){
+            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

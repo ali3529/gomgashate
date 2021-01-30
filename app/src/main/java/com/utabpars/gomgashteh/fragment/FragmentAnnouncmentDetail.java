@@ -175,7 +175,10 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
                fragmentReportBottomSheet.getList(data.getReport_list());
                 fragmentReportBottomSheet.getAnnounceid(anouns_id,user_id);
-                if (data.getReward().equals("0")){
+                if (data.getType().equals("پیدا شده")){
+                    binding.rewardLayout.setVisibility(View.GONE);
+                }
+                if (data.getDetail().equals("0")){
                     binding.rewardLayout.setVisibility(View.GONE);
                 }
 
@@ -211,7 +214,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
         markViewModel.markModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<MarkModel>() {
             @Override
             public void onChanged(MarkModel markModel) {
-                //todo set ismark
                 Toast.makeText(getContext(), markModel.getMessage(), Toast.LENGTH_SHORT).show();
                 if (markModel.isMark()){
 
@@ -225,25 +227,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
             }
         });
 
-//        OnBackPressedCallback callback=new OnBackPressedCallback(true) {
-//
-//            @Override
-//            public void handleOnBackPressed() {
-//
-//                //   Navigation.findNavController(getView()).navigate(R.id.action_chat_to_announcement);
-//                if (edit_status.equals("edit")){
-//
-//                    Navigation.findNavController(view).popBackStack(R.id.editAnnouncementFragment,true);
-//                }else {
-//                    Navigation.findNavController(view).navigateUp();
-//                }
-//
-//
-//
-//            };
-//
-//        };
-//        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(),callback);
+
 
         binding.share.setOnClickListener( o ->{
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -280,7 +264,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
 
     public void setSlider(List<String> pic){
-        sliderAdaptor=new ImageSliderAdaptor(pic);
+        sliderAdaptor=new ImageSliderAdaptor(pic,imageCallback);
         sliderView.setSliderAdapter(sliderAdaptor);
     }
 
@@ -368,4 +352,16 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
         fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"report_announcment");
     }
+
+    ImageSliderAdaptor.imageCallback imageCallback=new ImageSliderAdaptor.imageCallback() {
+        @Override
+        public void ImageOnClick(String url) {
+            Log.d("DSfdsfdsfnn", "ImageOnClick: "+"hhhhhhhh");
+            Bundle bundle=new Bundle();
+            bundle.putString("url",url);
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentOpenImage,bundle);
+        }
+    };
+
+
 }

@@ -41,13 +41,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/shape_toolbar"
-            >
-            <!--        android:background="#2CB6B4B4">-->
+            android:layout_marginBottom="3dp"
+                    android:background="#2CB6B4B4">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
+
                 <ImageView
                     android:id="@+id/arrow_back"
                     android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_below="@id/toolbar"
             >
 
 
@@ -98,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/chat_layout"
+
                 >
 
 
@@ -126,6 +127,7 @@
 
                         app:sliderScrollTimeInSec="3"
                         app:sliderStartAutoCycle="true"
+
 
                         />
 

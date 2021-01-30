@@ -11,18 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp">
-        <CheckBox
-            android:id="@+id/emportent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="الزامی"
-            android:layout_alignParentRight="true"
-            android:padding="6dp"
-            android:layout_centerInParent="true"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/emportent">
+            android:layout_marginHorizontal="16dp"
+          >
 
 
         <com.skydoves.powerspinner.PowerSpinnerView
@@ -43,7 +37,7 @@
             app:spinner_popup_animation="normal"
             app:spinner_popup_background="#fff"
             app:spinner_popup_elevation="14dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="1dp"
             android:hint="@{text}"
             android:layout_below="@id/nassasery"
             android:layout_centerInParent="true"

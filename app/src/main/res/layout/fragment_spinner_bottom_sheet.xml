@@ -12,10 +12,10 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="270dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    app:behavior_peekHeight="250dp"
-    app:behavior_hideable="true">
+    app:behavior_peekHeight="270dp"
+    app:behavior_hideable="false">
     <ImageView
         android:id="@+id/tab"
         android:layout_width="wrap_content"
@@ -33,6 +33,17 @@
         android:layout_alignParentRight="true"
         android:layout_margin="6dp"
         android:layout_below="@id/tab"/>
+    <CheckBox
+        android:id="@+id/emportent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="الزامی"
+        android:layout_alignParentLeft="true"
+
+        android:padding="6dp"
+       android:layout_margin="8dp"
+
+      />
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
@@ -43,8 +54,8 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        android:layout_below="@id/view1"/>
+        android:layout_below="@id/view1"
+        android:layout_margin="6dp"/>
 
 </RelativeLayout>
 

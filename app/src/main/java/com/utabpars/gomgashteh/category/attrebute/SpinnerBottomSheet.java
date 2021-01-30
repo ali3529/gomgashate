@@ -1,5 +1,7 @@
 package com.utabpars.gomgashteh.category.attrebute;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,8 +53,14 @@ public class SpinnerBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d("fdbfdbdfb", "onViewCreated: "+list.size());
+        if (getTag().equals("first")){
+            binding.emportent.setVisibility(View.GONE);
+        }
         adaptor=new SpinnerItemAdaptor(list,itemCallbacl);
         recyclerView.setAdapter(adaptor);
+        if (getType().equals("2")){
+            binding.emportent.setVisibility(View.GONE);
+        }
     }
     private void initViews() {
         recyclerView=binding.recyclerview;
@@ -65,13 +73,17 @@ public class SpinnerBottomSheet extends BottomSheetDialogFragment {
             Log.d("sdgsdbmm", "ItemClick: "+value);
             Log.d("sdgsdbmm", "ItemClick: "+value_id);
             Log.d("sdgsdbmm", "ItemClick: "+id);
-            attrCallback.getAttr(id,value,value_id);
+            attrCallback.getAttr(id,value,value_id,binding.emportent.isChecked());
 
         }
     };
 
     public interface AttrCallback{
-        void getAttr(String id,String value,String value_id);
+        void getAttr(String id,String value,String value_id,boolean isCheck);
     }
-
+    public String getType(){
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("Announce_type", Context.MODE_PRIVATE);
+        String type=sharedPreferences.getString("type","0");
+      return type;
+    }
 }

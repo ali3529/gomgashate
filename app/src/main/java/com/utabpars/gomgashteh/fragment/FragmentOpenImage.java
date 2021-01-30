@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentOpenImageBinding;
 
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoomBottomSheet;
+
 public class FragmentOpenImage extends Fragment {
     FragmentOpenImageBinding binding;
 
@@ -32,5 +35,8 @@ public class FragmentOpenImage extends Fragment {
         String url=getArguments().getString("url");
       //  String u="https://filmdaily.co/wp-content/uploads/2020/06/2021lede-1300x650.jpg";
         Picasso.get().load(url).into(binding.image);
+        binding.image.setEnabled(true);
+
+
     }
 }
