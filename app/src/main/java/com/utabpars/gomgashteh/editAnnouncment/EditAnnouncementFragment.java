@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -84,6 +85,7 @@ public class EditAnnouncementFragment extends Fragment {
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_edit_announcement,container,false);
         viewModel=new ViewModelProvider(this).get(EditAnnouncementViewModel.class);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         initViews();
         return binding.getRoot();
     }

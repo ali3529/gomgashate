@@ -39,7 +39,7 @@ public class FragmentOtp extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_otp,container,false);
-        viewModel=new ViewModelProvider(this).get(UserAuthenticationViewModel.class);
+        viewModel=new ViewModelProvider(getActivity()).get(UserAuthenticationViewModel.class);
         return binding.getRoot();
     }
 
@@ -241,6 +241,7 @@ public class FragmentOtp extends Fragment {
 
 
     public void goToRuls(){
-
+       // Navigation.findNavController(getView()).navigate(R.id.action_fragmentOtp_to_ruls);
+        Toast.makeText(getContext(), "لطفا از قسمت پروفایل قوانین را مطالعه کنید.", Toast.LENGTH_SHORT).show();
     }
 }

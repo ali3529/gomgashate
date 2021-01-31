@@ -72,9 +72,11 @@ public class FragmentChat extends Fragment {
         if (!is_login){
             binding.login.setVisibility(View.VISIBLE);
             binding.chatRecyclerview.setVisibility(View.GONE);
+            binding.systemTicket.setVisibility(View.GONE);
 
         }else {
             binding.chatRecyclerview.setVisibility(View.VISIBLE);
+            binding.systemTicket.setVisibility(View.VISIBLE);
             chatsViewModel.getTickets(user_id);
             progressBar.setVisibility(View.VISIBLE);
             chatNotificationViewModel.getChatNotification(user_id);
@@ -90,6 +92,9 @@ public class FragmentChat extends Fragment {
         });
         chatNotificationViewModel.chatCounterMutableLiveData.observe(getViewLifecycleOwner(),notification->{
             if (notification==0){
+                BottomNavigationView bottomNavigationView=getActivity().findViewById(R.id.bottomnav);
+                BadgeDrawable badge= bottomNavigationView.getOrCreateBadge(R.id.chat);
+                badge.setVisible(false);
 
             }else {
                 BottomNavigationView bottomNavigationView=getActivity().findViewById(R.id.bottomnav);

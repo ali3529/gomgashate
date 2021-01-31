@@ -120,9 +120,10 @@ public class FragmentChatDetail extends Fragment {
             public void onChanged(TicketResponseModel ticketResponseModel) {
                 massageAdaptor.getMassageList(ticketResponseModel.getMassages());
                 recyclerView.setAdapter(massageAdaptor);
+                isReport_clicked=ticketResponseModel.isReport();
                 if (ticketResponseModel.isReport()){
                     isReport.setValue(ticketResponseModel.isReport());
-                    isReport_clicked=ticketResponseModel.isReport();
+
                 }else {
                     block.setValue(ticketResponseModel.isBlock());
                 }
@@ -207,24 +208,20 @@ public class FragmentChatDetail extends Fragment {
         refresh();
 
         fragmentReportBottomSheet.reportResponsLiveData.observe(getViewLifecycleOwner(), t->{
-            //error
-            fragmentReportBottomSheet.dismiss();
-            if (t){
+
                 binding.setMassagelayoutvisibility(false);
                 binding.setSecendmassagevisibility(true);
                 viewModel.getTicket(ticket_id,user_id);
+                fragmentReportBottomSheet.dismiss();
+            Log.d("sdvdsvdsv", "onSuccess: "+"report");
 
 
 
-            }else {
-                binding.setMassagelayoutvisibility(true);
-                binding.setSecendmassagevisibility(false);
-                viewModel.getTicket(ticket_id,user_id);
-
-
-            }
-            //todo
-
+        });
+        fragmentReportBottomSheet.notReportResponsLiveData.observe(getViewLifecycleOwner(),t->{
+            fragmentReportBottomSheet.dismiss();
+            viewModel.getTicket(ticket_id,user_id);
+            Log.d("sdvdsvdsv", "onSuccess: "+"freeee");
         });
 
 
@@ -463,7 +460,7 @@ public class FragmentChatDetail extends Fragment {
                 }
             }
 
-        });
+     });
 
 
 

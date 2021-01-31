@@ -45,7 +45,6 @@ public class AddImageAnnouncmentAdaptor extends RecyclerView.Adapter<AddImageAnn
 
     @Override
     public void onBindViewHolder(@NonNull TViewHolder holder, int position) {
-        Log.d("sfcsdfsdf", "onBindViewHolder: "+uris.size());
         holder.binding.img.setImageURI(uris.get(position));
         holder.binding.deletImg.setOnClickListener(o ->{
             onDeleteImage.deleteImage(uris,position);

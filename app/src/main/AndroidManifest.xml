@@ -18,7 +18,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".view.MainActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
             <nav-graph android:value="@navigation/main_navigate"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

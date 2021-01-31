@@ -46,6 +46,9 @@ public class MyAnnouncmentAdaptor extends RecyclerView.Adapter<MyAnnouncmentAdap
         if (detiles.get(position).getType().equals("پیدا شده")){
             holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
         }
+        if (detiles.get(position).getReward().equals("0")){
+            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

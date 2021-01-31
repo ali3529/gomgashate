@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="picture"
+            type="String" />
+        <variable
+            name="progress"
+            type="Boolean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+           <com.github.chrisbanes.photoview.PhotoView
+               android:id="@+id/image"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="fitXY"
+               android:layout_centerInParent="true"
+               app:imageSlider="@{picture}"
+               app:errorSlider="@{@drawable/ic_placeholder}"/>
+
+
+    </RelativeLayout>
+</layout>

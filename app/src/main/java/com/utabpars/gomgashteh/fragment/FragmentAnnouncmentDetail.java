@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -31,11 +29,11 @@ import com.utabpars.gomgashteh.chat.FirstMassageBottomSheet;
 import com.utabpars.gomgashteh.chat.LoginAlertBottomSheet;
 import com.utabpars.gomgashteh.chat.reportchat.FragmentReportBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncmentDetailBinding;
+import com.utabpars.gomgashteh.imagehelper.FragmentOpenImage;
 import com.utabpars.gomgashteh.interfaces.ChatCallBack;
 import com.utabpars.gomgashteh.markannouncment.MarkModel;
 import com.utabpars.gomgashteh.markannouncment.MarkViewModel;
 import com.utabpars.gomgashteh.model.DetailModel;
-import com.utabpars.gomgashteh.utils.NavigateHelper;
 import com.utabpars.gomgashteh.viewmodel.DetailViewModel;
 
 import java.util.List;
@@ -176,10 +174,10 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                fragmentReportBottomSheet.getList(data.getReport_list());
                 fragmentReportBottomSheet.getAnnounceid(anouns_id,user_id);
                 if (data.getType().equals("پیدا شده")){
-                    binding.rewardLayout.setVisibility(View.GONE);
+                    binding.rewardLayout.setVisibility(View.INVISIBLE);
                 }
-                if (data.getDetail().equals("0")){
-                    binding.rewardLayout.setVisibility(View.GONE);
+                if (data.getReward().equals("0")){
+                    binding.rewardLayout.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -355,11 +353,12 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
     ImageSliderAdaptor.imageCallback imageCallback=new ImageSliderAdaptor.imageCallback() {
         @Override
-        public void ImageOnClick(String url) {
+        public void ImageOnClick(List<String> url) {
             Log.d("DSfdsfdsfnn", "ImageOnClick: "+"hhhhhhhh");
-            Bundle bundle=new Bundle();
-            bundle.putString("url",url);
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentOpenImage,bundle);
+//            Bundle bundle=new Bundle();
+//            bundle.putStringArrayList("url",url);
+            FragmentOpenImage.getImages(url);
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentOpenImage);
         }
     };
 

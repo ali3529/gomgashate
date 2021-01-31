@@ -62,8 +62,8 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
        if (getItem(position).getType().equals("پیدا شده")){
            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
        }
-        if (getItem(position).getDetail().equals("0")){
-            holder.binding.rewardLayout.setVisibility(View.GONE);
+        if (getItem(position).getReward().equals("0")){
+            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
         }
 
     }

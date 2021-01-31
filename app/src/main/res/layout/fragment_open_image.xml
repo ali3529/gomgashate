@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FragmentOpenImage"
+    tools:context=".imagehelper.FragmentOpenImage"
     android:background="#B9000000">
 
-   <com.github.chrisbanes.photoview.PhotoView
-       android:id="@+id/image"
+<!--   <com.github.chrisbanes.photoview.PhotoView-->
+<!--       android:id="@+id/image"-->
+<!--       android:layout_width="match_parent"-->
+<!--       android:layout_height="match_parent"-->
+<!--       android:scaleType="fitCenter"-->
+<!--       android:layout_centerInParent="true" />-->
+
+   <ImageView
+       android:id="@+id/back_arrow"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/ic_arrow_left_black_48dp"
+       android:layout_margin="20dp"
+
+       android:layout_alignParentTop="true"/>
+
+   <com.smarteist.autoimageslider.SliderView
+       android:id="@+id/slider"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="250dp"
+       app:sliderAnimationDuration="600"
+       app:sliderAutoCycleDirection="right"
+       app:sliderAutoCycleEnabled="false"
+       android:background="@color/white"
        android:scaleType="fitCenter"
-       android:layout_centerInParent="true" />
+       app:sliderIndicatorAnimationDuration="600"
+
+       app:sliderIndicatorMargin="15dp"
+       app:sliderIndicatorOrientation="horizontal"
+       app:sliderIndicatorPadding="6dp"
+       app:sliderIndicatorRadius="2dp"
+
+
+       app:sliderScrollTimeInSec="3"
+       app:sliderStartAutoCycle="true"
+       android:layout_centerInParent="true"
+
+
+       />
 
 </RelativeLayout>
 </layout>

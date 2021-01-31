@@ -124,6 +124,7 @@ public String sender_id;
             @Override
             public void onClick(View view) {
 
+
                 if (is_nassasery_selected){
                     Toast.makeText(getContext(), "true_send", Toast.LENGTH_SHORT).show();
                     if (binding.masage.getText().toString().length()!=0){

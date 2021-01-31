@@ -50,7 +50,7 @@ public class ImageSliderAdaptor extends SliderViewAdapter<ImageSliderAdaptor.Det
     public void onBindViewHolder(DetailImageSliderVieHolder viewHolder, int position) {
         viewHolder.binding.setPicture(picture.get(position));
         viewHolder.itemView.setOnClickListener(o->{
-            imageCallback.ImageOnClick(picture.get(position));
+            imageCallback.ImageOnClick(picture);
         });
 
     }
@@ -70,7 +70,7 @@ public class ImageSliderAdaptor extends SliderViewAdapter<ImageSliderAdaptor.Det
     }
 
    public interface imageCallback{
-        void ImageOnClick(String url);
+        void ImageOnClick(List<String> url);
     }
 
 }

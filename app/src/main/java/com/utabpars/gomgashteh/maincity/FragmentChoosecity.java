@@ -20,10 +20,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentChoosecityBinding;
 import com.utabpars.gomgashteh.model.CategoryModel;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,26 +81,42 @@ public class FragmentChoosecity extends Fragment {
             }
 
         });
+        try {
+            //set city when open app
+            if (getCityName()!=null){
+                adaptor=new SelectetdCityAdaptor(null,getCityName());
+                recyclerView.setAdapter(adaptor);
+            }else {
+                Log.d("gvnygjy", "onViewCreated: rrrrr");
+            }
+        }catch (Exception e){
+
+        }
+
 
         nameMutableLiveData.observe(getViewLifecycleOwner(),t->{
             //edit save city name forshow when app close
             //not complete
-            adaptor=new SelectetdCityAdaptor(t);
+            adaptor=new SelectetdCityAdaptor(t,null);
             recyclerView.setAdapter(adaptor);
-            for (int i = 0; i < t.size(); i++) {
-                name.add(t.get(i).getCategoryName());
-            }
-            editor.putString("name",name.toString());
 
         });
     }
 
     public void ttt()  {
         try {
+            //citys_id_save
             gson=new Gson();
             String s=gson.toJson(list());
             editor.putString("main_city",s);
             editor.commit();
+
+            //citys_name_save
+            Gson gson=new Gson();
+            String n=gson.toJson(name);
+            editor.putString("name",n);
+            editor.apply();
+
             popback();
 
         } catch (Exception e) {
@@ -113,6 +131,7 @@ public class FragmentChoosecity extends Fragment {
         List<String> id=new ArrayList<>();
        for (int i = 0; i < fragmentMainCity.ggggg().size(); i++) {
            id.add(fragmentMainCity.ggggg().get(i).getId());
+           name.add(fragmentMainCity.ggggg().get(i).getCategoryName());
        }
        return id;
    }
@@ -122,6 +141,20 @@ public class FragmentChoosecity extends Fragment {
        Navigation.findNavController(getView()).popBackStack();
    }
 
+    public List<String> getCityName(){
+        Gson gson=new Gson();
+        SharedPreferences sharedPreferences;
+            sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
+            Log.d("fhfdgdfg", "onViewCreated: edit ee");
 
+
+        String s=sharedPreferences.getString("name","w");
+        Type type=new TypeToken<List<String>>(){
+
+        }.getType();
+        List<String>  j=gson.fromJson(s,type);
+
+        return j;
+    }
 
 }

@@ -225,7 +225,6 @@
                     android:id="@+id/setcategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:padding="8dp">
                     <TextView
                         android:id="@+id/category_title"
@@ -237,15 +236,7 @@
                         android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_black"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{category}"
-                        android:hint="انتخاب کنید"
-                        android:layout_alignParentLeft="true"
-                        android:fontFamily="@font/sans"
-                        android:textSize="@dimen/text_size_16"
-                        android:textColor="@color/text_color_low_black"/>
+
                     <TextView
                         android:id="@+id/category_name"
                         android:layout_width="match_parent"
@@ -256,11 +247,37 @@
                         android:textDirection="rtl"
                         android:layout_marginTop="3dp"/>
                 </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/setattr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/setcategory"
+                        android:padding="8dp">
+                        <TextView
+                            android:id="@+id/attr_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ویژگی ها"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/sans"
+                            android:textSize="@dimen/text_size_16"
+                            android:textColor="@color/text_color_black"/>
+
+                        <TextView
+                            android:id="@+id/attr_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/attr_title"
+                            tools:text="fvdjsvfdsvf"
+                            android:textDirection="rtl"
+                            android:layout_marginTop="3dp"/>
+                    </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/hr_callection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/setcategory">
+                    android:layout_below="@id/setattr">
                     <View
 
                         android:layout_width="match_parent"
@@ -273,7 +290,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:layout_below="@id/setcategory"
+                    android:layout_below="@id/setattr"
                     >
                     <TextView
                         android:layout_width="wrap_content"

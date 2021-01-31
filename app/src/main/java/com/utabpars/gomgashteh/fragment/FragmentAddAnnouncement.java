@@ -114,10 +114,12 @@ public class FragmentAddAnnouncement extends Fragment  {
         if (type.equals("1")){
             binding.find.setChecked(true);
             binding.rootLayout.setVisibility(View.VISIBLE);
+            binding.suprise.setVisibility(View.GONE);
             getType(type);
         }else if (type.equals("2")){
             binding.lost.setChecked(true);
             binding.rootLayout.setVisibility(View.VISIBLE);
+            binding.suprise.setVisibility(View.VISIBLE);
             getType(type);
         }
 
@@ -171,11 +173,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                 category_name.getString("sub_three",""));
 
         attrebuteNameViewModel.nameModelMutableLiveData.observe(getViewLifecycleOwner(),t->{
-            binding.categoryName.setText(category_name.getString("category","")+" - "+
-                    category_name.getString("collection","")+" - "+
-                    category_name.getString("sub_one","")+" - "+
-                    category_name.getString("sub_two","")+" - "+
-                    category_name.getString("sub_three","")+" - "+t);
+            binding.attrName.setText(t);
         });
 
 
@@ -282,9 +280,10 @@ public class FragmentAddAnnouncement extends Fragment  {
             binding.surpriseText.setText("");
             binding.setCity(shPref.getString("city_name","انتخاب کنید")+", "+shPref.getString("province_name",""));
             binding.setCategory(title);
-                binding.find.setChecked(false);
+            binding.radiogroup.clearCheck();
 
-                binding.lost.setChecked(false);
+
+
                 try {
                     addImageAnnouncmentAdaptor.notifyDataSetChanged();
                 }catch (Exception e){
@@ -363,6 +362,8 @@ public class FragmentAddAnnouncement extends Fragment  {
                     binding.suprise.setVisibility(View.GONE);
                     binding.rootLayout.setVisibility(View.VISIBLE);
                     getType(type);
+
+
                 }
                 //todo
 
@@ -376,6 +377,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                     binding.suprise.setVisibility(View.VISIBLE);
                     binding.rootLayout.setVisibility(View.VISIBLE);
                     getType(type);
+
                 }
                 break;
         }

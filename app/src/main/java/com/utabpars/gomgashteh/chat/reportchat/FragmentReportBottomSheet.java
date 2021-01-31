@@ -40,6 +40,7 @@ public class FragmentReportBottomSheet extends BottomSheetDialogFragment {
     String blocker,blocked;
     String announce_id,user_id;
     public MutableLiveData<Boolean> reportResponsLiveData=new MutableLiveData<>();
+    public MutableLiveData<Boolean> notReportResponsLiveData=new MutableLiveData<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,12 +108,15 @@ public void reportUser(String blocker,String blocked,String report_text){
         @Override
         public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ReportModel statusModel) {
             if (statusModel.getStatus().equals("1")){
+                Toast.makeText(getContext(), statusModel.getMassage(), Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getContext(), statusModel.getMassage(), Toast.LENGTH_SHORT).show();
+                    reportResponsLiveData.setValue(statusModel.isReport());
+                    Log.d("sdvdsvdsv", "onSuccess: ");
 
 
-                reportResponsLiveData.setValue(statusModel.isReport());
-                Log.d("sdvdsvdsv", "onSuccess: ");
+
+
+
             }
         }
 

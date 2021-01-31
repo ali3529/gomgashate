@@ -18,10 +18,15 @@ import java.util.List;
 
 public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdaptor.SelectedViewHolder> {
     List<CategoryModel.ListData> listData=new ArrayList<>();
+    List<String> names=new ArrayList<>();
 
-    public SelectetdCityAdaptor(List<CategoryModel.ListData> listData) {
+
+
+    public SelectetdCityAdaptor(List<CategoryModel.ListData> listData,List<String> names) {
         this.listData = listData;
+        this.names=names;
     }
+
 
     @NonNull
     @Override
@@ -33,16 +38,29 @@ public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdap
 
     @Override
     public void onBindViewHolder(@NonNull SelectedViewHolder holder, int position) {
-        holder.binding.setTitle(listData.get(position).getCategoryName());
-        holder.binding.delete.setOnClickListener(o ->{
-            listData.remove(position);
-            notifyDataSetChanged();
-        });
+        if (listData==null){
+            holder.binding.setTitle(names.get(position));
+            holder.binding.delete.setOnClickListener(o ->{
+                names.remove(position);
+                notifyDataSetChanged();
+            });
+        }else {
+            holder.binding.setTitle(listData.get(position).getCategoryName());
+            holder.binding.delete.setOnClickListener(o ->{
+                listData.remove(position);
+                notifyDataSetChanged();
+            });
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return listData.size();
+        if (listData!=null){
+            return listData.size();
+        }else return names.size();
+
     }
 
     class SelectedViewHolder extends RecyclerView.ViewHolder {

@@ -308,6 +308,9 @@
         <action
             android:id="@+id/action_fragmentOtp_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentOtp_to_ruls"
+            app:destination="@id/fragmentRuls" />
     </fragment>
     <fragment
         android:id="@+id/fragmentOtherCity"
@@ -463,6 +466,6 @@
         android:label="FragmentSystemTicket" />
     <fragment
         android:id="@+id/fragmentOpenImage"
-        android:name="com.utabpars.gomgashteh.fragment.FragmentOpenImage"
+        android:name="com.utabpars.gomgashteh.imagehelper.FragmentOpenImage"
         android:label="FragmentOpenImage" />
 </navigation>
