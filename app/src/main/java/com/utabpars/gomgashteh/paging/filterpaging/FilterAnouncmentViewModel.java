@@ -37,7 +37,6 @@ public class FilterAnouncmentViewModel extends ViewModel {
 
     public void refresh(){
         itemDataSourceFactory.getAnoncmentMutableLiveData().getValue().invalidate();
-        Log.d("kjlj", "refresh: "+"bsdhfsdf");
 
     }
 }

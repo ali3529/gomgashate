@@ -46,11 +46,6 @@ public class FragmentLogin extends Fragment  {
         super.onViewCreated(view, savedInstanceState);
         binding.setSendotp(this);
         binding.inputPhonenumber.setFocusable(true);
-//        InputMethodManager inputMethodManager =
-//                (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//            inputMethodManager.toggleSoftInputFromWindow(
-//                    binding.inputPhonenumber.getApplicationWindowToken(),
-//                    InputMethodManager.SHOW_FORCED, 0);
 
 viewModel.phoneNumberInterface(loginRespondeCallBack);
 
@@ -75,7 +70,6 @@ viewModel.phoneNumberInterface(loginRespondeCallBack);
     }
     public void backStack(){
         Navigation.findNavController(getView()).popBackStack();
-        Toast.makeText(getContext(), "sdfgestggzsd", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -90,7 +84,6 @@ viewModel.phoneNumberInterface(loginRespondeCallBack);
                 bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
                 bundle.putBoolean("is_validate",true);
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
-                Log.d("drgdrggdr", "otpCallback: 1   -- "+rmModel.getResponse());
             }else if (rmModel.getResponse().equals("0")){
                 Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
                 binding.setProgress(false);
@@ -98,7 +91,6 @@ viewModel.phoneNumberInterface(loginRespondeCallBack);
                 bundle.putString("phone_num",binding.inputPhonenumber.getText().toString());
                 bundle.putBoolean("is_validate",false);
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentLogin_to_fragmentOtp,bundle);
-                Log.d("drgdrggdr", "otpCallback: 2   -- "+rmModel.getResponse());
             }
             else if (rmModel.getResponse().equals("2")){
                 Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();

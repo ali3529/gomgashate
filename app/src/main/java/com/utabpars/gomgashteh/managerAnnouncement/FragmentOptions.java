@@ -52,8 +52,6 @@ public class FragmentOptions extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         int id=getArguments().getInt("id");
 
-        Log.d("fdffvcdsv", "onViewCreated: id"+id);
-        Log.d("fdffvcdsv", "onViewCreated: id_announce"+annoouncment_id);
         viewModel.getTabs(String.valueOf(id));
         binding.load.setVisibility(View.VISIBLE);
         deleteBottonSheet=new FragmentDeleteBottonSheet();
@@ -104,7 +102,6 @@ public class FragmentOptions extends Fragment {
            } else if (id==3){
                Bundle bundle=new Bundle();
                bundle.putInt("id",annoouncment_id);
-               Log.d("onclick", "onItemClicked: "+annoouncment_id);
                Navigation.findNavController(view).navigate(R.id.action_fragmentOptions_to_editAnnouncementFragment,bundle);
            }else if (id==4){
 

@@ -1,12 +1,10 @@
 package com.utabpars.gomgashteh.chat;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +15,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,7 +28,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
@@ -45,7 +38,6 @@ import com.utabpars.gomgashteh.databinding.FragmentChatDetailBinding;
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.BlockModel;
-import com.utabpars.gomgashteh.utils.NavigateHelper;
 import com.utabpars.gomgashteh.utils.Utils;
 
 import java.util.ArrayList;
@@ -143,23 +135,11 @@ public class FragmentChatDetail extends Fragment {
                     }
                 }else binding.phoneCheck.setChecked(false);
 
-//                binding.phoneText.setOnClickListener( o->{
-//                    Intent intent = new Intent(Intent.ACTION_DIAL);
-//                    intent.setData(Uri.parse("tel:"+ticketResponseModel.getPhone_number()));
-//                    startActivityForResult(intent,100);
-//                });
             }
 
 
         });
 
-//        binding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                viewModel.getTicket(ticket_id,user_id);
-////
-//            }
-//        });
 
 
         binding.send.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +180,7 @@ public class FragmentChatDetail extends Fragment {
         chatAuthViewModel.firstChatStatus.observe(getViewLifecycleOwner(), new Observer<StatusModel>() {
             @Override
             public void onChanged(StatusModel statusModel) {
-                Toast.makeText(getContext(), "sdfsefdsf", Toast.LENGTH_SHORT).show();
+                //massage send
 
             }
         });
@@ -213,7 +193,7 @@ public class FragmentChatDetail extends Fragment {
                 binding.setSecendmassagevisibility(true);
                 viewModel.getTicket(ticket_id,user_id);
                 fragmentReportBottomSheet.dismiss();
-            Log.d("sdvdsvdsv", "onSuccess: "+"report");
+
 
 
 
@@ -221,7 +201,7 @@ public class FragmentChatDetail extends Fragment {
         fragmentReportBottomSheet.notReportResponsLiveData.observe(getViewLifecycleOwner(),t->{
             fragmentReportBottomSheet.dismiss();
             viewModel.getTicket(ticket_id,user_id);
-            Log.d("sdvdsvdsv", "onSuccess: "+"freeee");
+
         });
 
 
@@ -326,7 +306,7 @@ public class FragmentChatDetail extends Fragment {
     PassDataCallBack passDataCallBack=new PassDataCallBack() {
         @Override
         public void passUri(Uri uri, MultipartBody.Part partList) {
-            Toast.makeText(getContext(), "goooood", Toast.LENGTH_SHORT).show();
+
             List<MultipartBody.Part> imageList=new ArrayList<>();
             bottomSheetChooseImage.dismiss();
             imageList.add(partList);
@@ -353,11 +333,11 @@ public class FragmentChatDetail extends Fragment {
         massageData.put("receiver_id",receiverId);
         massageData.put("ticket_id",ticketId);
 
-        Log.d("dfgdfgfd", "fetchData: sender_id "+sender_id);
-        Log.d("dfgdfgfd", "fetchData:  massages"+massages);
-        Log.d("dfgdfgfd", "fetchData:  anounccer_id"+anounccer_id);
-        Log.d("dfgdfgfd", "fetchData:  receive_id"+receive_id);
-        Log.d("dfgdfgfd", "fetchData:  ticket_id"+ticket_id);
+//        Log.d("dfgdfgfd", "fetchData: sender_id "+sender_id);
+//        Log.d("dfgdfgfd", "fetchData:  massages"+massages);
+//        Log.d("dfgdfgfd", "fetchData:  anounccer_id"+anounccer_id);
+//        Log.d("dfgdfgfd", "fetchData:  receive_id"+receive_id);
+//        Log.d("dfgdfgfd", "fetchData:  ticket_id"+ticket_id);
 
         return massageData;
     }
@@ -370,7 +350,7 @@ public class FragmentChatDetail extends Fragment {
 
             @Override
             public void onFinish() {
-                Log.d("fsdfsdfdsf", "onFinish: ok");
+
                 viewModel.getTicket(ticket_id,user_id);
                 scrollToBottom(recyclerView);
                 refresh();
@@ -386,11 +366,11 @@ public class FragmentChatDetail extends Fragment {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean){
                     menu.getItem(0).setTitle("ازاد");
-                    Log.d("vbfbfdbfg", "onOptionsItemSelected:  inf "+block);
+
 
                 }else {
                     menu.getItem(0).setTitle(" مسدود");
-                    Log.d("vbfbfdbfg", "onOptionsItemSelected:  inf"+block);
+
                 }
             }
         });
@@ -422,24 +402,23 @@ public class FragmentChatDetail extends Fragment {
                         binding.setMassagelayoutvisibility(false);
                         binding.setSecendmassagevisibility(true);
                         binding.setMassage("کاربر گرامی شما این آگهی را مسدود کرده اید و امکان ارسال پیام ندارید  ");
-                        Log.d("dfdfbdfb", "onChanged: "+item.getItemId());
+
                     }else {
-                        Log.d("dfdfbdfb", "onChanged: else");
+
                     }
 
-                    Log.d("vbfbfdb", "onOptionsItemSelected: "+isBlock);
+
 
                 }else {
                     if (item.getItemId()==R.id.block) {
                         item.setTitle(" مسدود");
                         binding.setMassagelayoutvisibility(true);
                         binding.setSecendmassagevisibility(false);
-                        Log.d("dfdfbdfb", "onChanged: "+item.getItemId());
+
                     }else {
-                        Log.d("dfdfbdfb", "onChanged: else");
+
                     }
 
-                    Log.d("vbfbfdb", "onOptionsItemSelected: "+isBlock);
 
 
                 }
@@ -448,15 +427,14 @@ public class FragmentChatDetail extends Fragment {
         });
 
         fragmentReportBottomSheet.reportResponsLiveData.observe(getViewLifecycleOwner(), t->{
-            Log.d("dsfsdf", "onOptionsItemSelected: rrr");
+
             if (item.getItemId()==R.id.report) {
                 if (t) {
                     item.setTitle("ازاد");
-                    Log.d("dsfsdf", "onOptionsItemSelected: if");
+
                 } else {
 
                     item.setTitle("گزارش");
-                    Log.d("dsfsdf", "onOptionsItemSelected: else");
                 }
             }
 
@@ -478,7 +456,7 @@ public class FragmentChatDetail extends Fragment {
                 }else {
                     fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"");
                     fragmentReportBottomSheet.getUsers(user_id,recever_id);
-                    Log.d("sdfdsfdsfdsf", "getUsers: "+user_id+"  "+recever_id);
+
                 }
 
 
@@ -498,7 +476,7 @@ public class FragmentChatDetail extends Fragment {
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull BlockModel blockModel) {
                         Toast.makeText(getContext(), blockModel.getMassage(), Toast.LENGTH_SHORT).show();
-                        Log.d("vbfbfdb", "onSuccess: block"+blockModel.isBlock());
+
                         blockLiveData.setValue(blockModel);
                     }
 

@@ -109,7 +109,6 @@ public class EditAnnouncementFragment extends Fragment {
         id=getArguments().getInt("id");
        // id=519;
         binding.setFrag(this);
-        Log.d("asfcascc", "onViewCreated: "+id);
         binding.load.setVisibility(View.VISIBLE);
         viewModel.getEditDetail(id);
 
@@ -120,10 +119,10 @@ public class EditAnnouncementFragment extends Fragment {
 
                 if (load){
                     loadData(data);
-                    Log.d("drdgfdbfdb", "onChanged: inside "+load);
+
                 }
                 load=false;
-                Log.d("drdgfdbfdb", "onChanged: outside "+load);
+
 
                 binding.load.setVisibility(View.GONE);
 
@@ -164,12 +163,12 @@ public class EditAnnouncementFragment extends Fragment {
 
 
         try {
-            adaptor.notifyDataSetChanged();
             recyclerView.setAdapter(adaptor);
             oldRecyclerView.setAdapter(oldAdaptor);
+            adaptor.notifyDataSetChanged();
 
         }catch (Exception r){
-
+            Log.d("dsfdsdsf", "onViewCreated: "+r);
         }
 
         if (sharedPreferences.getString("city_name","0").equals("0")){
@@ -260,8 +259,7 @@ public class EditAnnouncementFragment extends Fragment {
             data.getPictures().remove(0);
         }
         old_pic=data.getPictures();
-        Log.d("sfsefesf", "fetchdata: "+data.getPictures().toString());
-        Log.d("sfsefesf", "fetchdata: "+old_pic.toString());
+
 
 
     }
@@ -290,7 +288,6 @@ public class EditAnnouncementFragment extends Fragment {
             case R.id.find:
                 if (checked){
                     type="1";
-                    Log.d("jhvhjvj", "onClickRadio: "+type);
                     binding.suprise.setVisibility(View.GONE);
                 }
 
@@ -298,7 +295,6 @@ public class EditAnnouncementFragment extends Fragment {
             case R.id.lost:
                 if (checked) {
                     type = "2";
-                    Log.d("jhvhjvj", "onClickRadio: " + type);
                     binding.suprise.setVisibility(View.VISIBLE);
                 }
                 break;
@@ -327,15 +323,15 @@ public class EditAnnouncementFragment extends Fragment {
 
             other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
         }
-
-        Log.d("dfdsfdsfdsfdsf", "title: "+binding.title.getText().toString());
-        Log.d("dfdsfdsfdsfdsf", "type: "+type);
-        Log.d("dfdsfdsfdsfdsf", "province_id: "+sharedPreferences.getString("province_id",""));
-        Log.d("dfdsfdsfdsfdsf", "city_id: "+sharedPreferences.getString("city_id",""));
-        Log.d("dfdsfdsfdsfdsf", "description: "+binding.description.getText().toString());
-        Log.d("dfdsfdsfdsfdsf", "surpriseText: "+binding.surpriseText.getText().toString());
-        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+other_city);
-        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+binding.surpriseText.getText());
+//
+//        Log.d("dfdsfdsfdsfdsf", "title: "+binding.title.getText().toString());
+//        Log.d("dfdsfdsfdsfdsf", "type: "+type);
+//        Log.d("dfdsfdsfdsfdsf", "province_id: "+sharedPreferences.getString("province_id",""));
+//        Log.d("dfdsfdsfdsfdsf", "city_id: "+sharedPreferences.getString("city_id",""));
+//        Log.d("dfdsfdsfdsfdsf", "description: "+binding.description.getText().toString());
+//        Log.d("dfdsfdsfdsfdsf", "surpriseText: "+binding.surpriseText.getText().toString());
+//        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+other_city);
+//        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+binding.surpriseText.getText());
 
 
 
@@ -365,20 +361,15 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
         adaptor=new AddImageAnnouncmentAdaptor(uriList,onDeleteImages);
         recyclerView.setAdapter(adaptor);
         bottomSheetChooseImage.dismiss();
-        Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
-        Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
+
     }
 };
 
     onDeleteImage DeleteImage=new onDeleteImage() {
         @Override
         public void deleteImage(List<String> list) {
-            Log.d("fbcgnfng", "deleteImage: "+list.size());
         oldAdaptor.notifyDataSetChanged();
-            Log.d("sfsefesf", "deleteImage: "+list.toString());
         old_pic=list;
-            Log.d("sfsefesf", "deleteImage: "+old_pic.toString());
-
         }
     };
     AddImageAnnouncmentAdaptor.onDeleteImages onDeleteImages=new AddImageAnnouncmentAdaptor.onDeleteImages() {
@@ -387,8 +378,6 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
             uriList.remove(position);
             partLists.remove(position);
             adaptor.notifyDataSetChanged();
-            Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
-            Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
         }
     };
 
@@ -396,19 +385,16 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
     public void onPause() {
         super.onPause();
 
-        Log.d("dsfdsfdsf", "onPause: ");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d("dsfdsfdsf" ,"onStop: ");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("dsfdsfdsf", "onDestroy: ");
                 edit.clear();
         edit.apply();
     }

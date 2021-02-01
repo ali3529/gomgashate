@@ -66,6 +66,10 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
             holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
         }
 
+        if (getItem(position).getPishkhan().equals("0")){
+            holder.binding.pishkan.setVisibility(View.GONE);
+        }
+
     }
 
     class AnnoncementViewHolder extends RecyclerView.ViewHolder {

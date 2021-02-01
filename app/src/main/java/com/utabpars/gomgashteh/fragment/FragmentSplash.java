@@ -16,10 +16,12 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.ChatNotificationViewModel;
 
 
@@ -67,6 +69,9 @@ public class FragmentSplash extends Fragment {
             }
         },2000);
 
+
+        TextView textView=view.findViewById(R.id.app_versionm);
+        textView.setText("ویرایش "+ Utils.versionName(getActivity()));
 
     }
 }

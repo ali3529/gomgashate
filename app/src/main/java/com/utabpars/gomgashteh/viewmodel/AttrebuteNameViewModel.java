@@ -28,7 +28,6 @@ public MutableLiveData<String> nameModelMutableLiveData=new MutableLiveData<>();
         .subscribeWith(new DisposableSingleObserver<AtrrNameModel>() {
             @Override
             public void onSuccess(@NonNull AtrrNameModel s) {
-                Log.d("sdfdsfsdfdsf", "onSuccess: "+s.getAttr());
                 nameModelMutableLiveData.setValue(s.getAttr());
             }
 

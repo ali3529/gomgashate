@@ -157,6 +157,10 @@
         <action
             android:id="@+id/action_perofile_to_fragmentRuls"
             app:destination="@id/fragmentRuls" />
+
+        <action
+            android:id="@+id/action_perofile_to_fragmentrecomend"
+            app:destination="@id/fragmentRecomend" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAnnouncmentDetail"
@@ -468,4 +472,9 @@
         android:id="@+id/fragmentOpenImage"
         android:name="com.utabpars.gomgashteh.imagehelper.FragmentOpenImage"
         android:label="FragmentOpenImage" />
+    <fragment
+        android:id="@+id/fragmentRecomend"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentRecomend"
+        android:label="fragment_recomend"
+        tools:layout="@layout/fragment_recomend" />
 </navigation>

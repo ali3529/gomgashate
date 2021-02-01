@@ -44,12 +44,12 @@ public class ChatAuthViewModel extends ViewModel {
             public void onSuccess(@NonNull ChatStatusModel chatStatusModel) {
 
                 chatCallBack.ChatListener(chatStatusModel);
-                Log.d("dsfsdf", "chatValidate: chat"+chatStatusModel.getMassage());
+
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.d("dsfsdf", "chatValidate: chat"+e.toString());
+
                 chatCallBack.ChatErrorListener();
             }
         }));

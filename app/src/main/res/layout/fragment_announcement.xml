@@ -45,7 +45,8 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          tools:context=".fragment.FragmentAnnouncement">
+          tools:context=".fragment.FragmentAnnouncement"
+          android:layoutDirection="ltr">
 
          <RelativeLayout
              android:id="@+id/toolbar"
@@ -63,7 +64,7 @@
                <RelativeLayout
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_toRightOf="@id/layout_location">
+                   android:layout_toEndOf="@id/layout_location">
                   <TextView
                       android:id="@+id/search"
                       android:layout_width="match_parent"

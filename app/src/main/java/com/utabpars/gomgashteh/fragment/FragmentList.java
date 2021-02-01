@@ -54,7 +54,6 @@ public class FragmentList extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("fghfdgdfhh", "onViewCreated:  list");
         binding.setProgress(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -83,38 +82,13 @@ public class FragmentList extends Fragment {
                                 bundle.putString("id", String.valueOf(id));
                                 bundle.putString("type", type);
                                 Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection, bundle);
-                            Log.d("fdtjnfngdbfv", "getCategoryId: dnknvx [test]"+id);
 
                         }
                     });
-                    Log.d("sdvsdvds", "onchange: "+categoryModel.getResponse());
-                    Log.d("sdvsdvds", "onchange: "+categoryModel.getListData().get(0).getCategoryName());
                     recyclerView.setAdapter(categoryAdaptor);
                     saveInstanceList =categoryViewModel.categoriesMutableLiveData();
                 }
             });
-
-//        else {
-//            saveInstanceList.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
-//                @Override
-//                public void onChanged(CategoryModel categoryModel) {
-//                    categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
-//                        @Override
-//                        public void getCategoryId(View view, int id,int position) {
-//                            Bundle bundle=new Bundle();
-//                            bundle.putString("title",categoryModel.getListData().get(position).getCategoryName());
-//                            bundle.putString("id",String.valueOf(id));
-//                            Navigation.findNavController(view).navigate(R.id.action_list_to_fragmentCallection,bundle);
-//                            Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                    Log.d("sdvsdvds", "instance: "+categoryModel.getResponse());
-//                    Log.d("sdvsdvds", "instance: "+categoryModel.getListData().get(0).getCategoryName());
-//                    recyclerView.setAdapter(categoryAdaptor);
-//                }
-//            });
-//        }
-
 
         lastAnnouncmentAboveBtNavigation();
 
@@ -128,10 +102,8 @@ public class FragmentList extends Fragment {
                 LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
                 int itemcount=layoutManager.getItemCount();
                 int lastvisi=layoutManager.findLastVisibleItemPosition();
-                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
-                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
                 if (lastvisi==itemcount-1){
-                    Log.d("dsgfdgfdg", "last: ");
+
                     binding.gggg.setVisibility(View.VISIBLE);
                 }
             }
@@ -162,28 +134,6 @@ public class FragmentList extends Fragment {
         toolbar=binding.toolbar;
     }
 
-//
-//    private void getCategory(){
-//        ApiInterface apiInterface= ApiClient.getApiClient();
-//        CompositeDisposable compositeDisposable=new CompositeDisposable();
-//        compositeDisposable.add(apiInterface.getcategories("")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
-//                    @Override
-//                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull CategoryModel categoryModel) {
-//                        if (categoryModel.getResponse().equals("1")){
-//                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getResponse());
-//                            Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getListData().get(0).getCategoryName());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-//                        Log.d("dsfsd", "onError: "+e.toString());
-//                    }
-//                }));
-//    }
 private void saveCategoryNames(String title) {
     SharedPreferences SaveCategoryName;
     SharedPreferences.Editor SaveCategoryNameEditor;

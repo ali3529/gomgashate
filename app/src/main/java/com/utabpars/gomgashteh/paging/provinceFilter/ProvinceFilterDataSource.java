@@ -33,7 +33,6 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
         this.city=city;
         this.type=type;
         this.key_search=key_search;
-        Log.d("dsfdsfdsf", "FilterDataSource: "+city);
 
     }
 
@@ -54,7 +53,6 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
                         if (anoncmentModel.getResponse().equals("1")){
                             callback.onResult(anoncmentModel.getData(),null,PAGE);
-                            Log.d("vxcvdxvs", "onSuccess: gooooood");
 
                         }
 

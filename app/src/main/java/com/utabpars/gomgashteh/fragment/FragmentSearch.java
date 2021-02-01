@@ -83,7 +83,6 @@ public class FragmentSearch extends Fragment  {
             inputMethodManager.toggleSoftInputFromWindow(
                     getView().getApplicationWindowToken(),
                     InputMethodManager.SHOW_FORCED, 0);
-            Log.d("dghfdgfdg", "onViewCreated: rewuest");
         }
 
 
@@ -111,11 +110,9 @@ public class FragmentSearch extends Fragment  {
                 try {
                     if (getMainCity()!=null){
                         searcgKey(getMainCity().toString(),type,charSequence.toString());
-                        Log.d("dsvdsv", "onTextChanged: getcity");
                     }
                 }catch (Exception e){
                     searcgKey("",type,charSequence.toString());
-                    Log.d("dsvdsv", "onTextChanged: type"+type);
                 }
 
 
@@ -172,7 +169,6 @@ public class FragmentSearch extends Fragment  {
                             binding.setSearchvisibility(true);
                             binding.setProgres(false);
                             binding.setLayouterror(false);
-                            Log.d("vfrtert", "onSuccess: seccos");
                             Save_anoncmentModel=anoncmentModel;
                             searchAdaptor=new SearchAdaptor(anoncmentModel.getData(), new DetileCallBack() {
                                 @Override

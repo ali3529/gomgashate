@@ -22,7 +22,6 @@ public class ImageEditAdaptor extends RecyclerView.Adapter<ImageEditAdaptor.Imag
     public ImageEditAdaptor(List<String> list,onDeleteImage onDeleteImage) {
         this.images = list;
         this.onDeleteImage=onDeleteImage;
-        Log.d("sfsefesf", "ImageEditAdaptor: "+images.toString());
     }
 
     @NonNull

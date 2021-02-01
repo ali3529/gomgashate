@@ -35,8 +35,6 @@ public class CategoryViewModel extends ViewModel {
                 if (categoryModel.getResponse().equals("1")){
                     categoryModelMutableLiveData.postValue(categoryModel);
 
-                    Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getResponse());
-                    Log.d("dsfgdsfds", "onSuccess: "+categoryModel.getListData().get(0).getCategoryName());
                 }
             }
 

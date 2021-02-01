@@ -206,5 +206,9 @@ public interface ApiInterface {
     @POST("myMessages")
     @FormUrlEncoded
     Single<SystemTicketModel> getSystemMessage(@Field("user_id") String user_id);
+
+    @POST("recommend")
+    @FormUrlEncoded
+    Single<RmModel> sendRecommend(@Field("user_id") String user_id,@Field("text") String s);
 }
 

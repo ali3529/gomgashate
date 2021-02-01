@@ -39,8 +39,6 @@ public class SpinnerItemAdaptor extends RecyclerView.Adapter<SpinnerItemAdaptor.
             String[] strings=list.get(i).split("@");
             list_name.add(strings[1]);
             list_id.add(strings[0]);
-            Log.d("dvsdvdsv", "onBindViewHolder: "+strings[0].toString());
-            Log.d("dvsdvdsv", "onBindViewHolder: "+strings[1].toString());
 
         }
 

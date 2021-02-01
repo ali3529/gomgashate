@@ -54,8 +54,6 @@ public class FirstMassageAttr extends RecyclerView.Adapter<FirstMassageAttr.Spin
         for (String s:spinnerModel.get(position).getValue()) {
             String[] strings=s.split("@");
             list.add(strings[1]);
-            Log.d("dvsdvdsv", "onBindViewHolder: "+strings[0].toString());
-            Log.d("dvsdvdsv", "onBindViewHolder: "+strings[1].toString());
 
         }
         holder.binding.setText(spinnerModel.get(position).getName());
@@ -67,10 +65,10 @@ public class FirstMassageAttr extends RecyclerView.Adapter<FirstMassageAttr.Spin
 
         });
 
-        //holder.binding.emportent.setVisibility(View.GONE);
+
         if (spinnerModel.get(position).isNecessary()){
             holder.binding.nassasery.setVisibility(View.VISIBLE);
-            //holder.binding.spinner.setBackgroundColor(R.color.colorPrimary);
+
         }
 
     }
@@ -94,7 +92,6 @@ public class FirstMassageAttr extends RecyclerView.Adapter<FirstMassageAttr.Spin
     public void setText(String text,int position){
         spinnerModel.get(position).setName(text);
         notifyDataSetChanged();
-        Log.d("dsfdsf", "setText: "+position);
     }
 
 

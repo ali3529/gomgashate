@@ -87,8 +87,6 @@ public String sender_id;
         for (int i = 0; i < attributes.size(); i++) {
             if (attributes.get(i).isNecessary()){
                 listNassesary.add(attributes.get(i).getId());
-                Log.d("sdgsdvsdgrh", "getAttr: "+attributes.get(i).getId());
-                Log.d("sdgsdvsdgrh", "getAttr: "+attributes.get(i).isNecessary());
             }
         }
 
@@ -126,13 +124,13 @@ public String sender_id;
 
 
                 if (is_nassasery_selected){
-                    Toast.makeText(getContext(), "true_send", Toast.LENGTH_SHORT).show();
+
                     if (binding.masage.getText().toString().length()!=0){
                         viewModel.sendFirstMassage(partLists,fetchData());
                         binding.firstMassageProgress.setVisibility(View.VISIBLE);
                         binding.textinputlayout.setVisibility(View.GONE);
                         binding.attrRecyclerview.setVisibility(View.GONE);
-                        Log.d("iufdsbfdhs", "onClick: onsss");
+
                     }else {
                         Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
                     }
@@ -214,8 +212,6 @@ public String sender_id;
                     uriList.remove(position);
                     partLists.remove(position);
                     adaptor.notifyDataSetChanged();
-                    Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
-                    Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
                 }
             });
             recyclerView.setAdapter(adaptor);
@@ -242,10 +238,6 @@ public String sender_id;
       massageData.put("ticket_id",ticketId);
       massageData.put("attr",attr);
 
-
-        Log.d("dfgdfgfd", "fetchData: sender_id "+sender_id);
-        Log.d("dfgdfgfd", "fetchData:  anouncment_id"+anounccer_id);
-        Log.d("dfgdfgfd", "fetchData:  receive id"+receive_id);
 
       return massageData;
     }
@@ -279,7 +271,6 @@ public String sender_id;
             AtttrModel atttrModel=new AtttrModel(id,value_id);
             spinnerlist.set(position,atttrModel);
             is_nassasery_selected=setNassasery(id);
-            Log.d("sfascascasc", "getAttr: "+is_nassasery_selected);
         }
     };
 
@@ -303,19 +294,12 @@ public String sender_id;
             }else {
                 for (int j = 0; j < listNassesary.size(); j++) {
                     if (listNassesary.get(j).equals(id)){
-                        Log.d("dvsdvdsvdsv", "getNassasery: nasasary"+listNassesary.size());
-                        Log.d("dvsdvdsvdsv", "getNassasery: c-----  befor"+counter);
                         counter++;
-                        Log.d("dvsdvdsvdsv", "getNassasery: c----- after"+counter);
-
-                        Log.d("dvsdvdsvdsv", "getNassasery: spinner "+id);
-                        Log.d("dvsdvdsvdsv", "getNassasery: nassasery "+listNassesary.get(j));
-                        Log.d("dvsdvdsvdsv", "--------------------------------------------------");
                         if (counter==listNassesary.size()){
                             ok=true;
                         }
                     }else {
-                        Log.d("dvsdvdsvdsv", "getNassasery: not ok "+id);
+
                     }
                 }
             }

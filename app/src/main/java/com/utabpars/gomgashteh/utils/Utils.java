@@ -134,6 +134,17 @@ public class Utils {
             return true;// دسترسی تایید شده جواب مثبت می شود.
         }
     }
+
+    public static String versionName(Activity activity) {
+        String versionNumber="0";
+        try {
+            PackageInfo info=activity.getPackageManager().getPackageInfo(activity.getPackageName(),0);
+            versionNumber=info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionNumber;
+    }
 }
 
 

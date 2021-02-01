@@ -52,7 +52,7 @@ public class SpinnerBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("fdbfdbdfb", "onViewCreated: "+list.size());
+
         if (getTag().equals("first")){
             binding.emportent.setVisibility(View.GONE);
         }
@@ -70,9 +70,7 @@ public class SpinnerBottomSheet extends BottomSheetDialogFragment {
     SpinnerItemAdaptor.ItemCallbacl itemCallbacl=new SpinnerItemAdaptor.ItemCallbacl() {
         @Override
         public void ItemClick(String value,String value_id) {
-            Log.d("sdgsdbmm", "ItemClick: "+value);
-            Log.d("sdgsdbmm", "ItemClick: "+value_id);
-            Log.d("sdgsdbmm", "ItemClick: "+id);
+
             attrCallback.getAttr(id,value,value_id,binding.emportent.isChecked());
 
         }

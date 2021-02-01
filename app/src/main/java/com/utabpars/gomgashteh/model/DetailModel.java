@@ -80,6 +80,18 @@ public class DetailModel {
         @SerializedName("attributes")
         private String attributes;
 
+        @SerializedName("pishkhan")
+        private String pishkhan;
+
+
+        public String getPishkhan() {
+            return pishkhan;
+        }
+
+        public void setPishkhan(String pishkhan) {
+            this.pishkhan = pishkhan;
+        }
+
         public String getAttributes() {
             return attributes;
         }

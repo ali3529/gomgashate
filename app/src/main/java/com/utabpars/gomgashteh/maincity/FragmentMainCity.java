@@ -96,8 +96,7 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
             listData.add(categoryModel);
             listDataMutableLiveData.setValue(listData);
             for (int i = 0; i < listData.size(); i++) {
-                Log.d("htgdfgvdfg", "getSelectedItem: "+listData.get(i).getId());
-                Log.d("htgdfgvdfg", "getSelectedItem: "+listData.get(i).getCategoryName());
+
             }
 
         }
@@ -105,8 +104,6 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
             if (listData.size()!=0){
                 for (int i = 0; i < listData.size(); i++) {
                     if (listData.get(i).getId().equals(categoryModel.getId())) {
-                        Log.d("htgdfgvdfg", "getSelectedItem: " + listData.get(i).getId());
-                        Log.d("htgdfgvdfg", "getSelectedItem: " + listData.get(i).getCategoryName());
                         listData.remove(i);
                         listDataMutableLiveData.setValue(listData);
                     }
@@ -118,7 +115,6 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
     }
 
     public List<CategoryModel.ListData>  ggggg() {
-        Log.d("thrfhbdr", "ggggg: "+listData.get(0).getId());
 
         return listData;
     }

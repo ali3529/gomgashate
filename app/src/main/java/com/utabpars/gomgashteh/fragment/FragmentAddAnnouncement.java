@@ -207,7 +207,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                             if (!shPref.getString("collaction_id","0").equals("0")){
                                 binding.addProgress.setVisibility(View.VISIBLE);
                                 sendAnnouncment(fetchdata());
-                                Log.d("insetanosdijds", "onClick: goood");
+
                             }else {
                                 Toast.makeText(getContext(), "لطفادسته بندی را مشخص کنید", Toast.LENGTH_SHORT).show();
                             }
@@ -321,15 +321,9 @@ public class FragmentAddAnnouncement extends Fragment  {
         bottomSheetChooseImage.passData(new PassDataCallBack() {
             @Override
             public void passUri(Uri uri, MultipartBody.Part partList) {
-                Toast.makeText(getContext(), "dsgsdgsdgsdg", Toast.LENGTH_SHORT).show();
-                Log.d("fdyheszhb", "Uri:"+partList.toString());
-                Log.d("fdyheszhb", "passUri:"+partList);
-                Log.d("fdyheszhb", "passUri_index:"+partList.body());
                 bottomSheetChooseImage.dismiss();
                 partLists.add(partList);
                 uriList.add(uri);
-                Log.d("dssdvsdvv", ": add "+uriList.size());
-                Log.d("dssdvsdvv", ":  add"+partLists.size());
 
                 addImageAnnouncmentAdaptor=new AddImageAnnouncmentAdaptor(uriList, new AddImageAnnouncmentAdaptor.onDeleteImages() {
                     @Override
@@ -337,8 +331,6 @@ public class FragmentAddAnnouncement extends Fragment  {
                         uriList.remove(position);
                         partLists.remove(position);
                         addImageAnnouncmentAdaptor.notifyDataSetChanged();
-                        Log.d("dssdvsdvv", "deleteImage: "+uriList.size());
-                        Log.d("dssdvsdvv", "deleteImage: "+partLists.size());
                     }
                 });
                 addImageRecyclerview.setAdapter(addImageAnnouncmentAdaptor);
@@ -356,7 +348,6 @@ public class FragmentAddAnnouncement extends Fragment  {
             case R.id.find:
                 if (checked){
                     type="1";
-                    Log.d("jhvhjvj", "onClickRadio: "+type);
                     editor_savestate.putString("type",type);
                     editor_savestate.apply();
                     binding.suprise.setVisibility(View.GONE);
@@ -371,7 +362,6 @@ public class FragmentAddAnnouncement extends Fragment  {
             case R.id.lost:
                 if (checked) {
                     type = "2";
-                    Log.d("jhvhjvj", "onClickRadio: " + type);
                     editor_savestate.putString("type",type);
                     editor_savestate.apply();
                     binding.suprise.setVisibility(View.VISIBLE);
@@ -429,7 +419,6 @@ public class FragmentAddAnnouncement extends Fragment  {
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull SaveAnnouncementModel saveAnnouncementModel) {
                         if (saveAnnouncementModel.getResponse().equals("1")){
                             Toast.makeText(getContext(), saveAnnouncementModel.getMasg().get(0), Toast.LENGTH_SHORT).show();
-                            Log.d("insetanosdijds", "onSuccess: "+saveAnnouncementModel.getMasg());
                             binding.addProgress.setVisibility(View.GONE);
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -474,7 +463,6 @@ public class FragmentAddAnnouncement extends Fragment  {
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                         Toast.makeText(getContext(), "ارتباط با اینترنت قطع میباشد", Toast.LENGTH_SHORT).show();
-                        Log.d("insetanosdijds", "onSuccess: "+e.toString());
                         binding.addProgress.setVisibility(View.GONE);
 
                     }
@@ -507,16 +495,16 @@ public class FragmentAddAnnouncement extends Fragment  {
             Log.d("fesbebdbbmi", "fetchdata: other city     "+getSHaredList().toString());
         }
 
-        Log.d("fesbebdbbmi", "fetchdata: title   "+edTitle.getText().toString());
-        Log.d("fesbebdbbmi", "fetchdata: type   "+type);
-        Log.d("fesbebdbbmi", "fetchdata: case   "+shPref.getString("type",""));
-        Log.d("fesbebdbbmi", "fetchdata: attr_id   "+shPref.getString("emty_status",""));
-        Log.d("fesbebdbbmi", "fetchdata: collection_id   "+shPref.getString("collaction_id",""));
-        Log.d("fesbebdbbmi", "fetchdata: province_id    "+shPref.getString("province_id",""));
-        Log.d("fesbebdbbmi", "fetchdata: city_id    "+shPref.getString("city_id",""));
-        Log.d("fesbebdbbmi", "fetchdata: detail    "+edDescription.getText().toString());
-        Log.d("fesbebdbbmi", "fetchdata: reward    "+binding.surpriseText.getText().toString());
-        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
+//        Log.d("fesbebdbbmi", "fetchdata: title   "+edTitle.getText().toString());
+//        Log.d("fesbebdbbmi", "fetchdata: type   "+type);
+//        Log.d("fesbebdbbmi", "fetchdata: case   "+shPref.getString("type",""));
+//        Log.d("fesbebdbbmi", "fetchdata: attr_id   "+shPref.getString("emty_status",""));
+//        Log.d("fesbebdbbmi", "fetchdata: collection_id   "+shPref.getString("collaction_id",""));
+//        Log.d("fesbebdbbmi", "fetchdata: province_id    "+shPref.getString("province_id",""));
+//        Log.d("fesbebdbbmi", "fetchdata: city_id    "+shPref.getString("city_id",""));
+//        Log.d("fesbebdbbmi", "fetchdata: detail    "+edDescription.getText().toString());
+//        Log.d("fesbebdbbmi", "fetchdata: reward    "+binding.surpriseText.getText().toString());
+//        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
 
 
 
@@ -544,7 +532,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         if (requestCode == ReadExternalRequestCode) { // با کلید مربوط به خواندن مموری نتیجه را می خوانیم
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // اگر از درخواست دسترسی جواب مثبت برگشت دستورات شرط اجرا می شود.
                 startActivityForResult(intent, 100);
-                Toast.makeText(getContext(), "permision granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), " دسترسی داده شد", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getContext(), "دسترسی داده نشد!", Toast.LENGTH_LONG).show(); // در صورتی که جواب منفی گرفتیم پیام دسترسی داده نشد را نمایش می دهیم.
             }

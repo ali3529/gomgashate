@@ -245,6 +245,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_fragmentAnnouncmentDetail_to_fragmentOpenImage">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_fragmentAnnouncmentDetail_to_fragmentRuls">
                               <value>
                                 <LayoutPositions />
@@ -568,7 +573,24 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_fragmentOtp_to_ruls">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentRecomend">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2160" />
+                            <option name="y" value="3050" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -799,6 +821,11 @@
                               </value>
                             </entry>
                             <entry key="action_perofile_to_fragmentRuls">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_perofile_to_fragmentrecomend">
                               <value>
                                 <LayoutPositions />
                               </value>

@@ -80,7 +80,6 @@ public class FragmentChat extends Fragment {
             chatsViewModel.getTickets(user_id);
             progressBar.setVisibility(View.VISIBLE);
             chatNotificationViewModel.getChatNotification(user_id);
-            Log.d("bdfbfdbdf", "onChanged: logined "+user_id);
         }
 
 
@@ -108,7 +107,6 @@ public class FragmentChat extends Fragment {
         chatsViewModel.chatsModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ChatsModel>() {
             @Override
             public void onChanged(ChatsModel chatsModel) {
-                Log.d("bdfbfdbdf", "onChanged: ");
                 progressBar.setVisibility(View.GONE);
                 chatsAdaptor=new ChatsAdaptor(chatsModel.getTicketList(),chatOnclick);
                 recyclerView.setAdapter(chatsAdaptor);
@@ -171,7 +169,6 @@ public class FragmentChat extends Fragment {
             bundle.putString("recever_id",announcer_id);
             bundle.putString("announcer_id",announcement_id);
             bundle.putBoolean("block",block);
-            Log.d("ticketid", "onChatItemClicked: ticketid"+ticketId);
             Navigation.findNavController(view).navigate(R.id.action_chat_to_fragmentChatDetail,bundle);
         }
     };
@@ -184,10 +181,7 @@ public class FragmentChat extends Fragment {
                 LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
                 int itemcount=layoutManager.getItemCount();
                 int lastvisi=layoutManager.findLastVisibleItemPosition();
-                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
-                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
                 if (lastvisi==itemcount-1){
-                    Log.d("dsgfdgfdg", "last: ");
                     binding.gggg.setVisibility(View.VISIBLE);
                 }
             }

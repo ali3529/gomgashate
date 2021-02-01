@@ -95,6 +95,17 @@ public class AnoncmentModel {
         @SerializedName("reward")
         private String reward;
 
+        @SerializedName("pishkhan")
+        private String pishkhan;
+
+        public String getPishkhan() {
+            return pishkhan;
+        }
+
+        public void setPishkhan(String pishkhan) {
+            this.pishkhan = pishkhan;
+        }
+
         public String getReward() {
             return reward;
         }

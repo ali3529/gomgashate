@@ -97,11 +97,9 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 viewModel.getDetail(id,user_id,"");
             }
 
-            Log.d("sfesfesff", "onViewCreated: code"+code);
         }catch (Exception e){
             //get detail whit share link
             viewModel.getDetail(0,user_id,code);
-            Log.d("sfesfesff", "onViewCreated: code"+code);
         }
 
         viewModel.getView(binding);
@@ -119,7 +117,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
         dataMutableLiveData.observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
             @Override
             public void onChanged(DetailModel.Data data) {
-                Log.d("sdfgsdgsdgsd", "onChanged: if"+data.isMark());
                 setSlider(data.getPictures());
                 binding.setProgress(false);
                 binding.setDetails(data);
@@ -127,11 +124,10 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 sender_id=data.getAnnouncer_id();
                 title=data.getTitle();
 
-                Log.d("sdvdsvdvbbb", "onChanged: "+data.getAttributes());
-                if (data.getAttributes().isEmpty()){
+                //hide attr
                     binding.layoutAttrebuts.setVisibility(View.GONE);
 
-                }
+
 
                 if (data.getAnnouncer_id().equals(user_id)){
                     binding.chatBtn.setVisibility(View.GONE);
@@ -147,17 +143,12 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                     }
                 }
 
-
                 if (data.isMark()){
                     binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
-                    Log.d("sdfgsdgsdgsd", "onChanged: if"+data.isMark());
-
 
                 }else {
 
                     binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
-                    Log.d("sdfgsdgsdgsd", "onChanged: else "+data.isMark());
-
 
                 }
                 share_link=data.getShareLink();
@@ -167,6 +158,10 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 }
                 if (user_id.equals(data.getId())){
                     binding.report.setVisibility(View.GONE);
+                }
+
+                if (data.getPishkhan().equals("0")){
+                    binding.pishkan.setVisibility(View.GONE);
                 }
 
 
@@ -249,13 +244,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 Toast.makeText(getContext(), "لطفا از قسمت پروفایل وارد حساب کارری خود شوید", Toast.LENGTH_SHORT).show();
             }
 
-//                binding.mark.setImageResource(R.drawable.ic_bookmark_unselected24);
-//                isMark=false;
-//            }else {
-//                markViewModel.markAnnouncement(user_id,anouns_id);
-//                binding.mark.setImageResource(R.drawable.ic_bookmark_selected24);
-//                isMark=true;
-//            }
 
         });
     }
@@ -295,7 +283,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
             binding.chatProgress.setVisibility(View.GONE);
             if (chatStatusModel.getBlock_status().equals("no_block")){
                 if (chatStatusModel.getStatus_ticket().equals("first")){
-                    Log.d("fdhgdfg", "onChanged: first "+anouns_id+"    "+sender_id+" "+user_id);
                     firstMassageBottomSheet.getInfo(anouns_id,sender_id,user_id);
                     if (chatStatusModel.getAttributes().isEmpty()){
 
@@ -309,8 +296,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
                     firstMassageBottomSheet.show(getActivity().getSupportFragmentManager(),"massage");
                 }else if (chatStatusModel.getStatus_ticket().equals("second")){
-                    Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getStatus_ticket());
-                    Log.d("fdhgdfg", "onChanged: second "+chatStatusModel.getTicket_id());
                     Bundle bundle=new Bundle();
                     bundle.putString("ticket_id",chatStatusModel.getTicket_id());
                     bundle.putString("title",title);
@@ -327,7 +312,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
             }
         }catch (Exception e){
             Toast.makeText(getContext(), "لطفا صبر کنید", Toast.LENGTH_SHORT).show();
-            Log.d("safasfsafas", "ChatListener: "+e.toString());
         }
 
     }
@@ -354,9 +338,6 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
     ImageSliderAdaptor.imageCallback imageCallback=new ImageSliderAdaptor.imageCallback() {
         @Override
         public void ImageOnClick(List<String> url) {
-            Log.d("DSfdsfdsfnn", "ImageOnClick: "+"hhhhhhhh");
-//            Bundle bundle=new Bundle();
-//            bundle.putStringArrayList("url",url);
             FragmentOpenImage.getImages(url);
             Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentOpenImage);
         }

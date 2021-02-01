@@ -66,9 +66,6 @@ public class FragmentChoosecity extends Fragment {
 
         FragmentMainCity.listDataMutableLiveData.observe(getViewLifecycleOwner(), t->{
             if (t.size()>0){
-                Log.d("ffdvf", "onViewCreated: okkk"+t.get(0).getId());
-                Log.d("ffdvf", "onViewCreated: okkk"+t.get(0).getCategoryName());
-                Log.d("ffdvf", "onViewCreated: okkk"+t.size());
                 nameMutableLiveData.setValue(t);
 
             }else {
@@ -87,7 +84,7 @@ public class FragmentChoosecity extends Fragment {
                 adaptor=new SelectetdCityAdaptor(null,getCityName());
                 recyclerView.setAdapter(adaptor);
             }else {
-                Log.d("gvnygjy", "onViewCreated: rrrrr");
+
             }
         }catch (Exception e){
 
@@ -96,7 +93,6 @@ public class FragmentChoosecity extends Fragment {
 
         nameMutableLiveData.observe(getViewLifecycleOwner(),t->{
             //edit save city name forshow when app close
-            //not complete
             adaptor=new SelectetdCityAdaptor(t,null);
             recyclerView.setAdapter(adaptor);
 
@@ -145,7 +141,6 @@ public class FragmentChoosecity extends Fragment {
         Gson gson=new Gson();
         SharedPreferences sharedPreferences;
             sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
-            Log.d("fhfdgdfg", "onViewCreated: edit ee");
 
 
         String s=sharedPreferences.getString("name","w");

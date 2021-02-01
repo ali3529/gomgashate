@@ -162,10 +162,9 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
                 LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
                 int itemcount=layoutManager.getItemCount();
                 int lastvisi=layoutManager.findLastVisibleItemPosition();
-                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
-                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
+
                 if (lastvisi==itemcount-1){
-                    Log.d("dsgfdgfdg", "last: ");
+
                     binding.gggg.setVisibility(View.VISIBLE);
                 }
             }

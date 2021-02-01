@@ -73,9 +73,6 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
 
             type =getArguments().getString("type");
 
-        Log.d("fdtjnfngdbfv", "onViewCreated:  callection"+list_id);
-
-
 
         binding.setTitle(title);
         subsetViewModel.getCallBack(this);
@@ -199,10 +196,7 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
                 LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
                 int itemcount=layoutManager.getItemCount();
                 int lastvisi=layoutManager.findLastVisibleItemPosition();
-                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
-                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
                 if (lastvisi==itemcount-1){
-                    Log.d("dsgfdgfdg", "last: ");
                     binding.gggg.setVisibility(View.VISIBLE);
                 }
             }

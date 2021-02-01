@@ -19,14 +19,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //single activity design pattern
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomnav);
 
         NavHostFragment hostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host);
         NavigationUI.setupWithNavController(bottomNavigationView,hostFragment.getNavController());
-
-
-
 
     }
 }

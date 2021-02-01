@@ -67,7 +67,7 @@ public class FragmentReportBottomSheet extends BottomSheetDialogFragment {
 
     public void getList(List<String> lists){
      list.setValue(lists);
-        Log.d("sadsadsad", "getList: "+lists.get(0));
+
 
 
     }
@@ -80,8 +80,6 @@ public class FragmentReportBottomSheet extends BottomSheetDialogFragment {
     public void getAnnounceid(String announceid,String user_id){
         this.announce_id=announceid;
         this.user_id=user_id;
-        Log.d("sdfdsfdsf", "getAnnounceid: "+announceid);
-        Log.d("sdfdsfdsf", "getAnnounceid: "+user_id);
 
     }
     ReportClick reportClick=new ReportClick() {

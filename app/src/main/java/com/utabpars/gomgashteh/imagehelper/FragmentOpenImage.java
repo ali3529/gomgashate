@@ -42,12 +42,6 @@ public class FragmentOpenImage extends Fragment {
         zoomImageAdaptor=new ZoomImageAdaptor(lists);
         binding.slider.setSliderAdapter(zoomImageAdaptor);
 
-      //  String url=getArguments().getString("url");
-      //  String u="https://filmdaily.co/wp-content/uploads/2020/06/2021lede-1300x650.jpg";
-        //Picasso.get().load(url).into(binding.image);
-       // binding.image.setEnabled(true);
-
-
         binding.backArrow.setOnClickListener(o->{
             Navigation.findNavController(view).navigateUp();
         });

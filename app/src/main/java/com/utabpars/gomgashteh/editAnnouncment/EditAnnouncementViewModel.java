@@ -18,7 +18,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class EditAnnouncementViewModel extends ViewModel {
     public MutableLiveData<DetailModel.Data> dataMutableLiveData=new MutableLiveData<>();
     public void getEditDetail(int id){
-        Log.d("sdfdsfdsf", "getEditDetail: "+id);
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
         compositeDisposable.add(apiInterface.showEditDetail(id)

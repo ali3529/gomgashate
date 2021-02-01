@@ -66,7 +66,6 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
         super.onViewCreated(view, savedInstanceState);
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
-        Log.d("DSgsdgsdg", "onViewCreated: "+id);
         viewModel.getAttrebute(id,type);
 
         viewModel.spinnerModelMutableLiveData.observe(getViewLifecycleOwner(),t ->{
@@ -120,10 +119,7 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
         @Override
         public void getAttr(String id, String value, String value_id,boolean isCheck) {
             spinnerBottomSheet.dismiss();
-            Log.d("sdgsdbmm", "ItemClick:--- "+value);
-            Log.d("sdgsdbmm", "ItemClick: -----"+value_id);
-            Log.d("sdgsdbmm", "ItemClick: -----"+id);
-            Log.d("sdgsdbmm", "ItemClick: -----"+isCheck);
+
             if (isCheck){
                 check_string="1";
             }else check_string="0";

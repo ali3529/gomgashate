@@ -279,7 +279,21 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/toolbar_background">
+            android:background="@color/toolbar_background"
+            android:layoutDirection="ltr">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+
             <RelativeLayout
                 android:id="@+id/validate_otp"
                 android:layout_width="180dp"
@@ -321,8 +335,9 @@
                 android:layout_height="wrap_content"
                 android:background="#9E80B1"
                 android:layout_alignParentLeft="true"
-                android:gravity="center"
+                android:layout_centerInParent="true"
                 android:layout_margin="8dp"
+
                 >
 
 
@@ -342,6 +357,13 @@
 
                     />
             </RelativeLayout>
+            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
             <TextView
                 android:id="@+id/timer_otp"
                 android:layout_width="180dp"
@@ -358,6 +380,8 @@
 
 
                 />
+                </RelativeLayout>
+            </LinearLayout>
         </RelativeLayout>
 
     </RelativeLayout>

@@ -124,7 +124,6 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==REQCODE){
-            Log.d("kiiiirkhar", "onActivityResult: gallery");
             if (resultCode==RESULT_OK){
 
                 try {
@@ -132,11 +131,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
                     String tyoe=getFileExtantion(getContext(),data.getData());
                     sendUploadRequest(getByts(inputStream),tyoe);
 
-
-
                     passDataCallBack.passUri(data.getData(),partList);
-                    Log.d("tfhtrfhd", "onActivityResult: "+data.getData().toString());
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -156,9 +151,6 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
                 String f = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, "Title", null).toString();
 
                 Uri uri = Uri.parse(f.toString());
-                Log.d("kiiiirkhar", "onActivityResult: camera"+data.getData());
-                Log.d("kiiiirkhar", "onActivityResult: camera"+data.getExtras().get("data"));
-                Log.d("kiiiirkhar", "onActivityResult: camera");
 
                 InputStream inputStream= null;
                 try {
@@ -169,7 +161,6 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
                 }
 
                 passDataCallBack.passUri(uri,partList);
-                Log.d("tfhtrfhd", "onActivityResult: "+uri.toString());
             }
         }
     }

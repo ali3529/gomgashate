@@ -30,8 +30,6 @@ public class SubsetViewModel extends ViewModel {
         .subscribeWith(new DisposableSingleObserver<SubSetModel>() {
             @Override
             public void onSuccess(@NonNull SubSetModel subSetModel) {
-                Log.d("gdsgsgsdg", "onSuccess: "+subSetModel.getResponse());
-                Log.d("gdsgsgsdg", "onSuccess: id"+collection_id);
                 if (subSetModel.getResponse().equals("1")){
                     subSetCallBack.onSubsetCallback(subSetModel);
                 }else if (subSetModel.getResponse().equals("0")){

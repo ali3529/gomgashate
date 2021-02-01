@@ -41,7 +41,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-import static com.utabpars.gomgashteh.utils.NavigateHelper.navigate;
+;
 
 public class
 
@@ -78,21 +78,17 @@ FragmentOtherCity extends Fragment {
         if (navigate.equals("otherCityEdit")){
             sharedPreferences=getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
             editor=sharedPreferences.edit();
-            Log.d("fhfdgdfg", "onViewCreated: edit");
         }else {
             sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
             editor=sharedPreferences.edit();
-            Log.d("fhfdgdfg", "onViewCreated: other");
         }
         try {
             if (otherCityList.size()==0){
                 otherCityList=getSHaredList();
 
-                Log.d("DSvdsvdsvdv", "onViewCreated: "+otherCityList.size());
             }
             if (city_name.size()==0){
                 city_name=getNameList();
-                Log.d("DSvdsvdsvdv", "onViewCreated: "+city_name.size());
             }
         }catch (Exception e){
       
@@ -112,9 +108,6 @@ FragmentOtherCity extends Fragment {
                                 for (int j = 0; j < getSHaredList().size(); j++) {
                                     if (String.valueOf(categoryModel.getListData().get(i).getId()).equals(getSHaredList().get(j))){
                                         categoryModel.getListData().get(i).setSelected(true);
-                                        Log.d("ewfewvcsdce", "onSuccess: "+categoryModel.getListData().get(i).getId());
-                                        Log.d("ewfewvcsdce", "onSuccess: "+getSHaredList().get(j));
-
                                     }
                                 }
                             }
@@ -218,10 +211,8 @@ FragmentOtherCity extends Fragment {
         SharedPreferences sharedPreferences;
         if (navigate.equals("otherCityEdit")){
             sharedPreferences=getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
-            Log.d("fhfdgdfg", "onViewCreated: edit ee");
         }else {
             sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
-            Log.d("fhfdgdfg", "onViewCreated: other ee");
         }
 
         String s=sharedPreferences.getString("otherCityList","w");
@@ -238,10 +229,8 @@ FragmentOtherCity extends Fragment {
         SharedPreferences sharedPreferences;
         if (navigate.equals("otherCityEdit")){
             sharedPreferences=getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
-            Log.d("fhfdgdfg", "onViewCreated: edit ee");
         }else {
             sharedPreferences=getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
-            Log.d("fhfdgdfg", "onViewCreated: other ee");
         }
 
         String s=sharedPreferences.getString("otherCity_name","w");

@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/G:/sdk/icons/material/materialicons/help/baseline_help_24.xml" />
+                                      <entry key="url" value="file:/G:/sdk/icons/material/materialicons/receipt/baseline_receipt_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,7 +34,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="838282" />
-                            <entry key="outputName" value="ic_help_24" />
+                            <entry key="outputName" value="ic_recomend_24" />
                             <entry key="sourceFile" value="C:\Users\alireza\AndroidStudioProjects\gomgashteh" />
                           </map>
                         </option>

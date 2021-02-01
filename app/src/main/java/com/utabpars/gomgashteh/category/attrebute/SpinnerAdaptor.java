@@ -51,9 +51,6 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
         for (String s:spinnerModel.getAttrebuteData().get(position).getValues()) {
             String[] strings=s.split("@");
             list.add(strings[1]);
-            Log.d("dvsdvdsv", "onBindViewHolder: "+strings[0].toString());
-            Log.d("dvsdvdsv", "onBindViewHolder: "+strings[1].toString());
-
         }
         holder.binding.setText(spinnerModel.getAttrebuteData().get(position).getName());
 
@@ -62,18 +59,9 @@ public class SpinnerAdaptor extends RecyclerView.Adapter<SpinnerAdaptor.SpinnerV
             bottonShettCallback.onClickSpinner(spinnerModel.getAttrebuteData().get(position).getId(),
                     spinnerModel.getAttrebuteData().get(position).getValues(),position);
 
-//
-//            holder.binding.emportent.setOnClickListener( ou->{
-//                    Log.d("dsvdsvv666", "onBindViewHolder: "+holder.binding.emportent.isChecked());
-//                bottonShettCallback.onClickSpinner(spinnerModel.getAttrebuteData().get(position).getId(),
-//                        spinnerModel.getAttrebuteData().get(position).getValues(),position,
-//                        holder.binding.emportent.isChecked());
-//                });
+
 
         });
-//        holder.binding.emportent.setOnClickListener(o ->{
-//            bottonShettCallback.onClickSpinnerisCheck(holder.binding.emportent.isChecked());
-//        });
 
 
     }

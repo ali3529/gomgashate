@@ -29,7 +29,6 @@ public class ChatNotificationViewModel extends ViewModel {
             @Override
             public void onSuccess(@NonNull ChatNotificationModel chatNotificationModel) {
                 chatCounterMutableLiveData.setValue(chatNotificationModel.getNotificationNumber());
-                Log.d("sdvdsvsdv", "onSuccess: "+chatNotificationModel.getNotificationNumber());
             }
 
             @Override

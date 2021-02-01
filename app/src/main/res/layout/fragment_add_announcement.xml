@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/type_layout"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     >
 
 
@@ -462,7 +462,7 @@
                         android:id="@+id/title_help"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="در عنوان آگهی به موارد چشمگیر اشاره کنید."
+                        android:text="در عنوان آگهی به موارد چشمگیر اشاره کنید.(نوع جنس مشخص شود)"
                         android:textStyle="bold"
                         android:layout_alignParentRight="true"
 

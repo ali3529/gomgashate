@@ -181,7 +181,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         typeLiveData.setValue(type_for_view);
 
         typeLiveData.observe(getViewLifecycleOwner(),t->{
-            Log.d("Sefsefesf", "onViewCreated: "+t);
             setFilterViews(t);
         });
 
@@ -197,10 +196,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                 LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
                 int itemcount=layoutManager.getItemCount();
                 int lastvisi=layoutManager.findLastVisibleItemPosition();
-                Log.d("dsgfdgfdg", "onScrolled: "+itemcount);
-                Log.d("dsgfdgfdg", "onScrolled: "+lastvisi);
                 if (lastvisi==itemcount-1){
-                    Log.d("dsgfdgfdg", "last: ");
+
                     binding.gggg.setVisibility(View.VISIBLE);
                 }
             }
@@ -211,20 +208,10 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         try {
             if (getMainCity()!=null) {
 
-                //todo
-
-                Log.d("Sgsgsgse", "onViewCreated: getcity ok "+getMainCity().toString());
-
-
-
                 provinceFilterDataSource.FilterDataSource(getMainCity().toString(),type,"");
                 provinceViewModel.getProvinceFilter();
-                Log.d("Sgsgsgse", "setAnounsmentFilter: "+type);
-
 
                 provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
-
-
 
                     adaptor.submitList(province);
 
@@ -238,16 +225,8 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
                 provinceFilterDataSource.FilterDataSource("",type,"");
                 provinceViewModel.getProvinceFilter();
-
-
                 provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
-
-
-
                     adaptor.submitList(province);
-
-                    Log.d("Sgsgsgse", "onViewCreated: getcity null type ok "+type);
-
                 });
 
 
@@ -257,40 +236,18 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                     @Override
                     public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
                         adaptor.submitList(detiles);
-
-
                     }
                 });
-                Log.d("Sgsgsgse", "onViewCreated: getcity null type null  all "+type);
-            }
 
+            }
 
         }
 
-//        ApiInterface apiInterface= ApiClient.getApiClient();
-//        CompositeDisposable compositeDisposable=new CompositeDisposable();
-//        List<String> list=new ArrayList<>();
-//        list.add("17");
-//        compositeDisposable.add(apiInterface.filterAnnouncement(getMainCity().toString())
-//        .subscribeOn(Schedulers.io())
-//        .observeOn(AndroidSchedulers.mainThread())
-//        .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
-//            @Override
-//            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
-//                Log.d("sgsdfsdf", "onSuccess: ");
-//            }
-//
-//            @Override
-//            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-//                Log.d("sgsdfsdf", "onError: "+e.toString());
-//            }
-//        }));
     }
 
 
     private void initViews() {
         recyclerView = binding.recycler;
-      //  toolbar=binding.toolbar;
         searchView=binding.search;
         provinceViewModel=new ViewModelProvider(getActivity()).get(FilterAnouncmentByProvinceViewModel.class);
         provinceFilterDataSource = new ProvinceFilterDataSource();
@@ -310,11 +267,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
                 getActivity().finish();
 
-
             }
-
-            ;
-
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }

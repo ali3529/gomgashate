@@ -38,7 +38,6 @@ public class ManagerAdaptor extends RecyclerView.Adapter<ManagerAdaptor.OptionVi
         holder.binding.setCat(options.get(position));
         holder.itemView.setOnClickListener( o ->{
             detileCallBack.onItemClicked(o,options.get(position).getId());
-            Log.d("sacsac", "onBindViewHolder: "+options.get(position).getId());
         });
     }
 

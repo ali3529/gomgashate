@@ -75,7 +75,6 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                             if (anoncmentModel.getResponse().equals("1")) {
 
                                 callback.onResult(anoncmentModel.getData(), adjacentKey);
-                                Log.d("pagingcheck", "onSuccess: loadBefore");
                             }
                         }
                     }
@@ -110,7 +109,6 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.
                                     lastPage=anoncmentModel.getLast_page();
                                     callback.onResult(anoncmentModel.getData(), key);
                                     binding.setProgressbelow(false);
-                                    Log.d("pagingcheck", "onSuccess: after");
 
 
                             }

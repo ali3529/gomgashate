@@ -44,7 +44,6 @@ public class UserAuthenticationViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull RmModel rmModel) {
                         if (rmModel.getResponse()!=null){
-                            Log.d("ewtwet[pl", "onSuccess: "+rmModel.getResponse());
                             loginRespondeCallBack.otpCallback(rmModel);
 
                         }

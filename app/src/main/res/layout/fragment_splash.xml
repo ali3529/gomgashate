@@ -28,6 +28,7 @@
 <!--       />-->
 
    <TextView
+       android:id="@+id/gomgashteh"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="@string/utabpars"
@@ -38,6 +39,16 @@
        android:textStyle="bold"
 
        />
-
+   <TextView
+       android:id="@+id/app_versionm"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:layout_margin="12dp"
+       tools:text="ویرایش 1.0"
+       android:textStyle="bold|italic"
+       android:layout_toRightOf="@id/gomgashteh"
+       />
 
 </RelativeLayout>

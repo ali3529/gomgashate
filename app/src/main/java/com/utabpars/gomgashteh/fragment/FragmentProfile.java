@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentProfileBinding;
+import com.utabpars.gomgashteh.utils.Utils;
 
 public class FragmentProfile extends Fragment {
     FragmentProfileBinding binding;
@@ -76,9 +79,6 @@ public class FragmentProfile extends Fragment {
             public void onClick(View view) {
                 if (log_status.getValue()){
                     bottomSheetLogout.show(getActivity().getSupportFragmentManager(),"logout");
-//                    log_status.setValue(false);
-//                    editor.putBoolean("user_login",false);
-//                    editor.apply();
                 }else {
                     Navigation.findNavController(view).navigate(R.id.action_perofile_to_fragmentLogin);
                 }
@@ -120,6 +120,14 @@ public class FragmentProfile extends Fragment {
             Navigation.findNavController(o).navigate(R.id.action_perofile_to_fragmentRuls);
         });
 
+        binding.recammendLayout.setOnClickListener(o->{
+            Navigation.findNavController(o).navigate(R.id.action_perofile_to_fragmentrecomend);
+        });
+
+        binding.appVersion.setText("ویرایش "+Utils.versionName(getActivity()));
+        binding.utabpars.setText("طراحی و توسعه یوتاب پارس");
+
+
     }
 
     @Override
@@ -138,4 +146,5 @@ public class FragmentProfile extends Fragment {
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
     }
+
 }
