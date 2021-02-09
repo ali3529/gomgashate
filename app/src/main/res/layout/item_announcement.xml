@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="180dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:padding="16dp"
@@ -19,12 +19,13 @@
 
         <RelativeLayout
             android:id="@+id/img_layout"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
+            android:layout_width="135dp"
+            android:layout_height="150dp"
             android:orientation="horizontal"
             android:layout_marginRight="12dp"
             android:layout_marginBottom="10dp"
-            android:layout_alignParentLeft="true">
+            android:layout_alignParentLeft="true"
+            android:layout_above="@id/status">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageviewaccon"
                 android:layout_width="130dp"
@@ -40,6 +41,7 @@
                 app:riv_mutate_background="true"
                 app:riv_tile_mode="clamp"
                 app:riv_oval="false"
+
 
 
 
@@ -79,7 +81,7 @@
                 tools:text="شیراز - گویم"
                 android:textColor="#A933424C"
                 android:fontFamily="@font/sans"
-               android:layout_above="@id/date"
+
                 android:textSize="@dimen/text_size_14"
                 android:layout_below="@id/title"
 
@@ -94,8 +96,9 @@
                 android:textColor="@color/lowblack"
                 android:fontFamily="@font/sans"
                 android:textSize="@dimen/text_size_14"
-                android:layout_above="@id/pishkan"
+
                 android:layout_alignParentRight="true"
+                android:layout_below="@id/city"
 
 
                 />
@@ -105,11 +108,13 @@
                 android:layout_height="wrap_content"
                 android:text="@{announcment.pishkhan}"
                 tools:text="ثبت شده توسط دفتر پیشخوان"
-                android:textColor="#00B9BF"
+                android:textColor="#D50000"
                 android:fontFamily="@font/sans"
                 android:textSize="@dimen/text_size_14"
-                android:layout_above="@id/reward_layout"
+
                 android:layout_alignParentRight="true"
+               android:visibility="invisible"
+                android:layout_below="@id/date"
 
 
 
@@ -125,6 +130,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:elevation="2dp"
+
+
                 >
 
 
@@ -151,6 +158,8 @@
 
                     />
             </RelativeLayout>
+
+
 <!--            <TextView-->
 <!--                android:id="@+id/line"-->
 <!--                android:layout_width="wrap_content"-->
@@ -186,6 +195,22 @@
             android:background="@color/hr_color"
            android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="1dp"
+            />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{announcment.status}"
+            tools:text=" دفتر پیشخوان"
+            android:textColor="#00B9BF"
+            android:fontFamily="@font/sans"
+            android:textSize="@dimen/text_size_14"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:gravity="center"
             />
 
 

@@ -19,6 +19,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class AttrebuteNameViewModel extends ViewModel {
 public MutableLiveData<String> nameModelMutableLiveData=new MutableLiveData<>();
+public boolean eventHandle=false;
     public void getAttrName(String colection_id){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
@@ -28,7 +29,10 @@ public MutableLiveData<String> nameModelMutableLiveData=new MutableLiveData<>();
         .subscribeWith(new DisposableSingleObserver<AtrrNameModel>() {
             @Override
             public void onSuccess(@NonNull AtrrNameModel s) {
-                nameModelMutableLiveData.setValue(s.getAttr());
+                eventHandle=true;
+                if (eventHandle) {
+                    nameModelMutableLiveData.setValue(s.getAttr());
+                }
             }
 
             @Override
@@ -36,5 +40,9 @@ public MutableLiveData<String> nameModelMutableLiveData=new MutableLiveData<>();
                 Log.d("sdfdsfsdfdsf", "onSuccess: "+e.toString());
             }
         }));
+    }
+
+    public void setEvant(boolean event){
+        eventHandle=event;
     }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class FragmentShowEdit extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int id=getArguments().getInt("id");
+        Log.d("dsvdasv", "onViewCreated: "+id);
 
 
         sliderView=binding.slider;
@@ -62,6 +64,12 @@ public class FragmentShowEdit extends Fragment {
                         binding.otherCitys.append(data.getOtherCity().get(i)+",");
                     }
                 }
+                if (data.getShowAddress().equals("0")){
+                    binding.addressLayout.setVisibility(View.GONE);
+                }else {
+                    binding.addressLayout.setVisibility(View.VISIBLE);
+                    binding.showAddress.setText(data.getShowAddress());
+                }
 
             }
         });
@@ -69,7 +77,12 @@ public class FragmentShowEdit extends Fragment {
 
     }
     public void setSlider(List<String> pic){
-        sliderAdaptor=new ImageSliderAdaptor(pic);
+        sliderAdaptor=new ImageSliderAdaptor(pic, new ImageSliderAdaptor.imageCallback() {
+            @Override
+            public void ImageOnClick(List<String> url) {
+
+            }
+        });
         sliderView.setSliderAdapter(sliderAdaptor);
     }
 

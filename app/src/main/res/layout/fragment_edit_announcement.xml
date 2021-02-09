@@ -348,6 +348,31 @@
 
                     </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/pishkan_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/suprise">
+                        <TextView
+                            android:id="@+id/pishkan_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نمایش آدرس و تلفن دفتر پیشخوان من به بازدید کننده ها"
+                            android:textAlignment="center"
+                            android:padding="4dp"
+                            android:layout_centerInParent="true"
+                            android:textSize="@dimen/text_size_16"
+                            android:layout_toLeftOf="@id/checkpishkan"
+                            />
+                        <CheckBox
+                            android:id="@+id/checkpishkan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:padding="4dp"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:id="@+id/type_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -378,6 +403,7 @@
                             android:background="@drawable/botten_shape"
                             android:layout_below="@id/type_title"
                             android:gravity="center"
+
                             >
                             <RadioButton
                                 android:id="@+id/find"
@@ -389,6 +415,7 @@
                                 android:text="پیدا شده"
                                 android:layout_margin="10dp"
                                 android:textColor="@color/text_color_black"
+                                android:enabled="false"
 
 
                                 />
@@ -402,6 +429,7 @@
                                 android:textSize="@dimen/text_size_16"
                                 android:text="گم شده"
                                 android:textColor="@color/text_color_black"
+                                android:enabled="false"
                                 />
                         </RadioGroup>
                     </RelativeLayout>

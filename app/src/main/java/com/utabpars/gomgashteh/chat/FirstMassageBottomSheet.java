@@ -163,6 +163,7 @@ public String sender_id;
                 binding.textinputlayout.setVisibility(View.VISIBLE);
                 binding.attrRecyclerview.setVisibility(View.VISIBLE);
                 closeBottensheet.setValue(rmModel.getStatus());
+
             }
         });
 

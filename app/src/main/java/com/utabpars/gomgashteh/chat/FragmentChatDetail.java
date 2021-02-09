@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,11 +32,13 @@ import android.widget.Toast;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.chat.deletmassage.DeletMassageViewModel;
 import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmModel;
 import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmViewModel;
 import com.utabpars.gomgashteh.chat.reportchat.FragmentReportBottomSheet;
 import com.utabpars.gomgashteh.databinding.FragmentChatDetailBinding;
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
+import com.utabpars.gomgashteh.imagehelper.FragmentOpenImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.BlockModel;
 import com.utabpars.gomgashteh.utils.Utils;
@@ -74,6 +77,7 @@ public class FragmentChatDetail extends Fragment {
     MutableLiveData<Boolean> isReport=new MutableLiveData<>();
     boolean isReport_clicked;
     PhoneConfirmViewModel phoneConfirmViewModel;
+    DeletMassageViewModel deletMassageViewModel;
 
 
 
@@ -181,6 +185,7 @@ public class FragmentChatDetail extends Fragment {
             @Override
             public void onChanged(StatusModel statusModel) {
                 //massage send
+               // viewModel.getTicket(ticket_id,user_id);
 
             }
         });
@@ -269,11 +274,12 @@ public class FragmentChatDetail extends Fragment {
         chatAuthViewModel=new ViewModelProvider(this).get(ChatAuthViewModel.class);
         recyclerView=binding.recyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        massageAdaptor=new MassageAdaptor();
+        massageAdaptor=new MassageAdaptor(deleteCallback);
         toolbar=binding.toolbar;
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
         phoneConfirmViewModel=new ViewModelProvider(this).get(PhoneConfirmViewModel.class);
+        deletMassageViewModel=new ViewModelProvider(this).get(DeletMassageViewModel.class);
     }
 
     private void scrollToBottom(final RecyclerView recyclerView) {
@@ -486,4 +492,22 @@ public class FragmentChatDetail extends Fragment {
                     }
                 }));
     }
+
+    MassageAdaptor.DeleteCallback deleteCallback=new MassageAdaptor.DeleteCallback() {
+        @Override
+        public void ItemDeleted(int answerId) {
+            deletMassageViewModel.deleteMassage(answerId);
+            viewModel.getTicket(ticket_id,user_id);
+        }
+
+        @Override
+        public void ItemImageZoom(String url) {
+            ArrayList<String> lists=new ArrayList<>();
+            lists.add(url);
+            Bundle bundle=new Bundle();
+            bundle.putStringArrayList("url",lists);
+
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentChatDetail_to_fragmentzoompicture,bundle);
+        }
+    };
 }

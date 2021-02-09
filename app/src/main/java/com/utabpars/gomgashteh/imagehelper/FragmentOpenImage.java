@@ -25,7 +25,7 @@ import ozaydin.serkan.com.image_zoom_view.ImageViewZoomBottomSheet;
 
 public class FragmentOpenImage extends Fragment {
     FragmentOpenImageBinding binding;
-    static List<String> lists=new ArrayList<>();
+   // static List<String> lists=new ArrayList<>();
     ZoomImageAdaptor zoomImageAdaptor;
 
     @Override
@@ -39,17 +39,24 @@ public class FragmentOpenImage extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ArrayList<String> lists=getArguments().getStringArrayList("url");
+        Log.d("dsvsdvdv", "onViewCreated: "+lists.get(0));
         zoomImageAdaptor=new ZoomImageAdaptor(lists);
         binding.slider.setSliderAdapter(zoomImageAdaptor);
 
+
         binding.backArrow.setOnClickListener(o->{
             Navigation.findNavController(view).navigateUp();
+            zoomImageAdaptor.notifyDataSetChanged();
         });
 
 
     }
 
-    public static void getImages(List<String> list){
-       lists=list;
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

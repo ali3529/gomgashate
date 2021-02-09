@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.chat;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,14 @@ import com.utabpars.gomgashteh.databinding.ItemMassageReceveBinding;
 import com.utabpars.gomgashteh.databinding.MassageSenderBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MassageAdaptor extends RecyclerView.Adapter<MassageAdaptor.MassageViewHolder> {
     List<TicketResponseModel.Massage> ticketResponseModel =new ArrayList<>();
     TicketResponseModel.Massage massage;
+    DeleteCallback deleteCallback;
+
     public void getMassageList(List<TicketResponseModel.Massage> TicketResponseModel) {
         this.ticketResponseModel = TicketResponseModel;
     }
@@ -29,7 +33,8 @@ public class MassageAdaptor extends RecyclerView.Adapter<MassageAdaptor.MassageV
         ticketResponseModel.add(massage);
     }
 
-    public MassageAdaptor() {
+    public MassageAdaptor(DeleteCallback deleteCallback) {
+        this.deleteCallback=deleteCallback;
     }
 
     @NonNull
@@ -63,22 +68,74 @@ public class MassageAdaptor extends RecyclerView.Adapter<MassageAdaptor.MassageV
 
     @Override
     public void onBindViewHolder(@NonNull MassageViewHolder holder, int position) {
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        long min=currentTime/1000;
         switch (holder.getItemViewType()){
             case 1:
                 holder.receveBinding.massage.setText(ticketResponseModel.get(position).getMessage());
                 holder.setMassageStatusreveive(ticketResponseModel.get(position).getStatus());
+                holder.receveBinding.setCreateat(ticketResponseModel.get(position).getCreated_at());
+
                 break;
             case 2:
+
                 holder.senderBinding.massage2.setText(ticketResponseModel.get(position).getMessage());
                 holder.setMassageStatusreveive(ticketResponseModel.get(position).getStatus());
+                holder.senderBinding.setCreateat(ticketResponseModel.get(position).getCreated_at());
+                if (min>ticketResponseModel.get(position).getTime()){
+                    Log.d("sddsvfnhgkyy", "onViewCreated: "+"false");
+                    Log.d("sddsvfnhgkyy", "onViewCreated: min  "+min);
+                    Log.d("sddsvfnhgkyy", "onViewCreated: text  "+ticketResponseModel.get(position).getMessage());
+                    Log.d("sddsvfnhgkyy", "onViewCreated: time "+ticketResponseModel.get(position).getTime());
+                    holder.senderBinding.close.setVisibility(View.GONE);
+
+
+                }else {
+                    Log.d("sddsvfnhgkyy", "onViewCreated: "+"true");
+                    Log.d("sddsvfnhgkyy", "onViewCreated: time "+ticketResponseModel.get(position).getTime());
+                    Log.d("sddsvfnhgkyy", "onViewCreated: min "+min);
+                    holder.senderBinding.close.setVisibility(View.VISIBLE);
+
+                }
+                holder.senderBinding.close.setOnClickListener(o->{
+                    deleteCallback.ItemDeleted(ticketResponseModel.get(position).getAnswer_id());
+                });
+
                 break;
             case 3:
                 holder.imageReceiverBinding1.setImage(ticketResponseModel.get(position).getPictures());
                 holder.setImageStatusreveive(ticketResponseModel.get(position).getStatus());
+                holder.imageReceiverBinding1.setCreateat(ticketResponseModel.get(position).getCreated_at());
+                holder.imageReceiverBinding1.massage2.setOnClickListener(o->{
+                    deleteCallback.ItemImageZoom(ticketResponseModel.get(position).getPictures());
+                });
                 break;
             case 4:
             holder.imageSenderBinding.setImage(ticketResponseModel.get(position).getPictures());
             holder.setImageStatusreveive(ticketResponseModel.get(position).getStatus());
+                holder.imageSenderBinding.setCreateat(ticketResponseModel.get(position).getCreated_at());
+                if (min>ticketResponseModel.get(position).getTime()){
+                    Log.d("sddsvfnhgkyy", "onViewCreated: "+"false");
+                    Log.d("sddsvfnhgkyy", "onViewCreated: min  "+min);
+                    Log.d("sddsvfnhgkyy", "onViewCreated: text  "+ticketResponseModel.get(position).getMessage());
+                    Log.d("sddsvfnhgkyy", "onViewCreated: time "+ticketResponseModel.get(position).getTime());
+                    holder.imageSenderBinding.close.setVisibility(View.GONE);
+
+
+                }else {
+                    Log.d("sddsvfnhgkyy", "onViewCreated: "+"true");
+                    Log.d("sddsvfnhgkyy", "onViewCreated: time "+ticketResponseModel.get(position).getTime());
+                    Log.d("sddsvfnhgkyy", "onViewCreated: min "+min);
+                    holder.imageSenderBinding.close.setVisibility(View.VISIBLE);
+
+                }
+                holder.imageSenderBinding.close.setOnClickListener(o->{
+                    deleteCallback.ItemDeleted(ticketResponseModel.get(position).getAnswer_id());
+                });
+
+                holder.imageSenderBinding.massage2.setOnClickListener(o->{
+                    deleteCallback.ItemImageZoom(ticketResponseModel.get(position).getPictures());
+                });
             break;
 
         }
@@ -177,5 +234,10 @@ public class MassageAdaptor extends RecyclerView.Adapter<MassageAdaptor.MassageV
         }
 
 
+    }
+
+    public interface DeleteCallback{
+        void ItemDeleted(int answerId);
+        void ItemImageZoom(String url);
     }
 }

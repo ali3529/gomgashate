@@ -66,9 +66,12 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
             holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
         }
 
-        if (getItem(position).getPishkhan().equals("0")){
-            holder.binding.pishkan.setVisibility(View.GONE);
+        if (getItem(position).getPishkhan().equals("ثبت پیشخوان")){
+            holder.binding.pishkan.setVisibility(View.VISIBLE);
+        }else {
+            holder.binding.pishkan.setVisibility(View.INVISIBLE);
         }
+        holder.binding.status.setVisibility(View.GONE);
 
     }
 

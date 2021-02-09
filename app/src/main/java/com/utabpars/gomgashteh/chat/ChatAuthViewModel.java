@@ -67,6 +67,7 @@ public class ChatAuthViewModel extends ViewModel {
             @Override
             public void onSuccess(@NonNull StatusModel rmModel) {
                 firstChatStatus.setValue(rmModel);
+
             }
 
             @Override

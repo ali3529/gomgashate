@@ -27,6 +27,16 @@ public class TicketResponseModel {
     private String phone_number;
     @SerializedName("respondent_user")
     private boolean respondent_user;
+    @SerializedName("created_at")
+    private String createAt;
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
 
     public String getPhone_number() {
         return phone_number;
@@ -145,6 +155,26 @@ public class TicketResponseModel {
         public String created_at;
         @SerializedName("type")
         public String type;
+        @SerializedName("time")
+        private int time;
+        @SerializedName("answer_id")
+        private int answer_id;
+
+        public int getAnswer_id() {
+            return answer_id;
+        }
+
+        public void setAnswer_id(int answer_id) {
+            this.answer_id = answer_id;
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public void setTime(int time) {
+            this.time = time;
+        }
 
         public String getAnnouncement() {
             return announcement;

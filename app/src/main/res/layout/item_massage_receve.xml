@@ -9,6 +9,9 @@
         <variable
             name="check"
             type="Boolean" />
+        <variable
+            name="createat"
+            type="String" />
     </data>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,20 +36,30 @@
         android:layout_margin="6dp"
         android:textSize="14sp"/>
 
+    <TextView
+        android:id="@+id/createat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="سه روز پیش"
+        android:text="@{createat}"
+        android:layout_below="@id/massage"
+        android:textStyle="italic"
+        android:textSize="12dp"/>
+
     <ImageView
         android:id="@+id/check_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic__check_24"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/massage"
+        android:layout_below="@id/createat"
         app:setLayoutVisi="@{check}"/>
     <ImageView
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:src="@drawable/ic_doul_check"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/massage"
+        android:layout_below="@id/createat"
         android:layout_toRightOf="@id/check_1"
         android:visibility="gone"
         app:setLayoutVisi="@{doublcheck}"/>

@@ -63,7 +63,8 @@
             android:layout_centerInParent="true"
             android:background="@drawable/badge_shape"
             android:gravity="center"
-            android:layout_toLeftOf="@id/title"/>
+            android:layout_toLeftOf="@id/title"
+            android:visibility="gone"/>
 
 
     </RelativeLayout>
@@ -112,6 +113,21 @@
         android:text="ورود"/>
 
 </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/emty_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@id/system_ticket">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="پیامی وجود ندارد"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

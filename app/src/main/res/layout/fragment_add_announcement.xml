@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/type_layout"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     >
 
 
@@ -235,7 +235,15 @@
                         android:fontFamily="@font/sans"
                         android:textSize="@dimen/text_size_16"
                         android:textColor="@color/text_color_black"/>
-
+                    <TextView
+                        android:id="@+id/categort_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="انتخاب کنید"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/sans"
+                        android:textSize="@dimen/text_size_16"
+                        android:textColor="@color/text_color_low_black"/>
 
                     <TextView
                         android:id="@+id/category_name"
@@ -458,27 +466,27 @@
                         android:textColor="@color/text_color_black"
                         android:layout_marginHorizontal="18dp"
                         />
-                    <TextView
-                        android:id="@+id/title_help"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="در عنوان آگهی به موارد چشمگیر اشاره کنید.(نوع جنس مشخص شود)"
-                        android:textStyle="bold"
-                        android:layout_alignParentRight="true"
+<!--                    <TextView-->
+<!--                        android:id="@+id/title_help"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="در عنوان آگهی به موارد چشمگیر اشاره کنید.(نوع جنس مشخص شود)"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_alignParentRight="true"-->
 
-                        android:textSize="@dimen/text_size_14"
-                        android:textColor="@color/text_color_low_black"
-                        android:layout_marginHorizontal="18dp"
-                        android:layout_below="@id/title_gued"
-                        android:layout_marginTop="6dp"
-                        />
+<!--                        android:textSize="@dimen/text_size_14"-->
+<!--                        android:textColor="@color/text_color_low_black"-->
+<!--                        android:layout_marginHorizontal="18dp"-->
+<!--                        android:layout_below="@id/title_gued"-->
+<!--                        android:layout_marginTop="6dp"-->
+<!--                        />-->
 
                     <com.google.android.material.textfield.TextInputLayout
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="18dp"
-                        android:layout_below="@id/title_help"
+                        android:layout_below="@id/title_gued"
                         android:layout_marginTop="16dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         >
@@ -517,7 +525,11 @@
                         android:id="@+id/detail_help"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="جزئیات و نکات قابل توجه آگهی خود را کامل و دقیق بنویسید. درج شماره موبایل در متن آگهی مجاز نیست. همچنین در آگهی های پیدا شده از ارائه جزییات در متن توضیحات بپرهیزید."
+                        android:text="(در آگهی های پیدا شده از ارائه جزئیات در متن توضیحات بپرهیزید)
+\n
+در امور گم شده نکات قابل توجه آگهی خود را کامل بنویسید.
+\n
+درج شماره موبایل در متن جزئیات ممنوع می باشد."
                         android:textStyle="bold"
                         android:layout_alignParentRight="true"
 
@@ -526,6 +538,7 @@
                         android:layout_marginHorizontal="18dp"
                         android:layout_below="@id/detail_gued"
                         android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="2dp"
                         />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -589,6 +602,31 @@
 
 
                 </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/pishkan_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/suprise">
+                        <TextView
+                            android:id="@+id/pishkan_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نمایش آدرس و تلفن دفتر پیشخوان من به بازدید کننده ها"
+                            android:textAlignment="center"
+                            android:padding="4dp"
+                            android:layout_centerInParent="true"
+                            android:textSize="@dimen/text_size_16"
+                            android:layout_toLeftOf="@id/checkpishkan"
+                            />
+                        <CheckBox
+                            android:id="@+id/checkpishkan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:padding="4dp"
+                            />
+                    </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
 

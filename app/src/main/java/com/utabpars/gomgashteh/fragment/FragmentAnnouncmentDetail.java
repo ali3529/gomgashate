@@ -36,6 +36,7 @@ import com.utabpars.gomgashteh.markannouncment.MarkViewModel;
 import com.utabpars.gomgashteh.model.DetailModel;
 import com.utabpars.gomgashteh.viewmodel.DetailViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack {
@@ -125,7 +126,12 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 title=data.getTitle();
 
                 //hide attr
+                if (data.getType().equals("گم شده")){
+                    binding.layoutAttrebuts.setVisibility(View.VISIBLE);
+                }else {
                     binding.layoutAttrebuts.setVisibility(View.GONE);
+                }
+
 
 
 
@@ -175,7 +181,16 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                     binding.rewardLayout.setVisibility(View.INVISIBLE);
                 }
 
+                if (data.getShowAddress().equals("0")){
+                    binding.addressLayout.setVisibility(View.GONE);
+                }else {
+                    binding.addressLayout.setVisibility(View.VISIBLE);
+                    binding.showAddress.setText(data.getShowAddress());
+                }
+
             }
+
+
         });
 
         bookmanrStatus();
@@ -252,6 +267,8 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
     public void setSlider(List<String> pic){
         sliderAdaptor=new ImageSliderAdaptor(pic,imageCallback);
         sliderView.setSliderAdapter(sliderAdaptor);
+        sliderAdaptor.notifyDataSetChanged();
+
     }
 
     public void checkChatStatus(){
@@ -284,6 +301,7 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
             if (chatStatusModel.getBlock_status().equals("no_block")){
                 if (chatStatusModel.getStatus_ticket().equals("first")){
                     firstMassageBottomSheet.getInfo(anouns_id,sender_id,user_id);
+                    Log.d("kjnkugv", "ChatListener: "+anouns_id+"-"+sender_id+"-"+user_id);
                     if (chatStatusModel.getAttributes().isEmpty()){
 
                     }else {
@@ -338,8 +356,13 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
     ImageSliderAdaptor.imageCallback imageCallback=new ImageSliderAdaptor.imageCallback() {
         @Override
         public void ImageOnClick(List<String> url) {
-            FragmentOpenImage.getImages(url);
-            Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentOpenImage);
+            ArrayList<String> strings=new ArrayList<>();
+            strings.addAll(url);
+            Bundle bundle=new Bundle();
+            bundle.putStringArrayList("url",strings);
+
+           // FragmentOpenImage.getImages(url);
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentAnnouncmentDetail_to_fragmentOpenImage,bundle);
         }
     };
 

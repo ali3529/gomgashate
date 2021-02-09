@@ -97,6 +97,27 @@ public class AnoncmentModel {
 
         @SerializedName("pishkhan")
         private String pishkhan;
+        @SerializedName("status")
+        private String status;
+
+        @SerializedName("status_type")
+        private String status_type;
+
+        public String getStatus_type() {
+            return status_type;
+        }
+
+        public void setStatus_type(String status_type) {
+            this.status_type = status_type;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
 
         public String getPishkhan() {
             return pishkhan;

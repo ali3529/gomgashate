@@ -138,6 +138,7 @@ public class FragmentOtp extends Fragment {
                     editor.putString("phone_num",rmModel.getData().getPhone_num());
                     editor.putString("first_name",rmModel.getData().getFirst_name());
                     editor.putString("last_name",rmModel.getData().getLast_name());
+                    editor.putString("user_type",rmModel.getData().getUserType());
                 editor.apply();
                 binding.setProgress(false);
                 Navigation.findNavController(getView()).navigate(R.id.action_fragmentOtp_to_perofile);

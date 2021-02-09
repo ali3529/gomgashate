@@ -83,6 +83,26 @@ public class DetailModel {
         @SerializedName("pishkhan")
         private String pishkhan;
 
+        @SerializedName("show_address")
+        private String showAddress;
+        @SerializedName("showaddress_edit")
+        private String showAddressEdit;
+
+        public String getShowAddressEdit() {
+            return showAddressEdit;
+        }
+
+        public void setShowAddressEdit(String showAddressEdit) {
+            this.showAddressEdit = showAddressEdit;
+        }
+
+        public String getShowAddress() {
+            return showAddress;
+        }
+
+        public void setShowAddress(String showAddress) {
+            this.showAddress = showAddress;
+        }
 
         public String getPishkhan() {
             return pishkhan;

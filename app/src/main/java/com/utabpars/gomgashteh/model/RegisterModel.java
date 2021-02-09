@@ -63,6 +63,16 @@ public class RegisterModel {
         private Object address;
         @SerializedName("postal_code")
         private Object postal_code;
+        @SerializedName("user_type")
+        private String userType;
+
+        public String getUserType() {
+            return userType;
+        }
+
+        public void setUserType(String userType) {
+            this.userType = userType;
+        }
 
         public int getId() {
             return id;

@@ -331,6 +331,15 @@
                             <option name="y" value="1560" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentChatDetail_to_fragmentzoompicture">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -668,6 +677,30 @@
                           <Point>
                             <option name="x" value="710" />
                             <option name="y" value="2400" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentTest">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1610" />
+                            <option name="y" value="-1900" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentTestImage">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-180" />
+                            <option name="y" value="-1980" />
                           </Point>
                         </option>
                       </LayoutPositions>

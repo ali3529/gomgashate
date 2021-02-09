@@ -64,6 +64,7 @@ public class EditAnnouncementFragment extends Fragment {
 
 
     String type;
+    String is_show_addres="0";
     BottomSheetChooseImage bottomSheetChooseImage;
     AddImageAnnouncmentAdaptor adaptor;
     List<Uri> uriList=new ArrayList<>();
@@ -223,6 +224,12 @@ public class EditAnnouncementFragment extends Fragment {
             }
         });
 
+        binding.checkpishkan.setOnClickListener(o->{
+            if (binding.checkpishkan.isChecked()){
+                is_show_addres="1";
+            }else is_show_addres="0";
+        });
+
 
 
     }
@@ -259,6 +266,21 @@ public class EditAnnouncementFragment extends Fragment {
             data.getPictures().remove(0);
         }
         old_pic=data.getPictures();
+
+        if (user_status.getString("user_type","000").equals("1")){
+            binding.pishkanLayout.setVisibility(View.VISIBLE);
+            if (data.getShowAddressEdit().equals("1")){
+                binding.checkpishkan.setChecked(true);
+                is_show_addres="1";
+            }else {
+                binding.checkpishkan.setChecked(false);
+                is_show_addres="0";
+            }
+        }else {
+            binding.pishkanLayout.setVisibility(View.GONE);
+        }
+
+
 
 
 
@@ -314,6 +336,10 @@ public class EditAnnouncementFragment extends Fragment {
         RequestBody reward=RequestBody.create(MediaType.parse("reward"),binding.surpriseText.getText().toString());
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
         RequestBody picture_old=RequestBody.create(MediaType.parse("old_picture"),old_pic.toString());
+        if (binding.checkpishkan.isChecked()){
+            is_show_addres="1";
+        }
+        RequestBody pishkan=RequestBody.create(MediaType.parse("show_address"),is_show_addres);
 
 
         RequestBody other_city;
@@ -323,15 +349,17 @@ public class EditAnnouncementFragment extends Fragment {
 
             other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
         }
-//
-//        Log.d("dfdsfdsfdsfdsf", "title: "+binding.title.getText().toString());
-//        Log.d("dfdsfdsfdsfdsf", "type: "+type);
-//        Log.d("dfdsfdsfdsfdsf", "province_id: "+sharedPreferences.getString("province_id",""));
-//        Log.d("dfdsfdsfdsfdsf", "city_id: "+sharedPreferences.getString("city_id",""));
-//        Log.d("dfdsfdsfdsfdsf", "description: "+binding.description.getText().toString());
-//        Log.d("dfdsfdsfdsfdsf", "surpriseText: "+binding.surpriseText.getText().toString());
-//        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+other_city);
-//        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+binding.surpriseText.getText());
+
+        Log.d("dfdsfdsfdsfdsf", "title: "+binding.title.getText().toString());
+        Log.d("dfdsfdsfdsfdsf", "type: "+type);
+        Log.d("dfdsfdsfdsfdsf", "province_id: "+sharedPreferences.getString("province_id",""));
+        Log.d("dfdsfdsfdsfdsf", "city_id: "+sharedPreferences.getString("city_id",""));
+        Log.d("dfdsfdsfdsfdsf", "description: "+binding.description.getText().toString());
+        Log.d("dfdsfdsfdsfdsf", "surpriseText: "+binding.surpriseText.getText().toString());
+        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+other_city);
+        Log.d("dfdsfdsfdsfdsf", "fetchdata: "+binding.surpriseText.getText());
+        Log.d("dfdsfdsfdsfdsf", "old pic: "+old_pic.toString());
+        Log.d("dfdsfdsfdsfdsf", "is_show_addres: "+is_show_addres);
 
 
 
@@ -345,6 +373,7 @@ public class EditAnnouncementFragment extends Fragment {
         addAnnouncement.put("reward",reward);
         addAnnouncement.put("id",id_announc);
         addAnnouncement.put("old_picture",picture_old);
+        addAnnouncement.put("show_address",pishkan);
 
 
 

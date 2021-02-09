@@ -113,8 +113,10 @@ public class FragmentChat extends Fragment {
 
                 if (chatsModel.getSystem_messages().equals("0")){
                     binding.notificationsBadge.setVisibility(View.GONE);
+                    Log.d("sdvsdvdv", "onChanged: if "+chatsModel.getSystem_messages());
                 }else {
-
+                    Log.d("sdvsdvdv", "onChanged: else  "+chatsModel.getSystem_messages());
+                    binding.notificationsBadge.setVisibility(View.VISIBLE);
                     if (Integer.parseInt(chatsModel.getSystem_messages())>10){
                         binding.notificationsBadge.setText("9+");
                     }else {
@@ -125,6 +127,23 @@ public class FragmentChat extends Fragment {
 
               
             }
+        });
+
+        chatsViewModel.chatsModelEmptyMutableLiveData.observe(getViewLifecycleOwner(),chatsModel->{
+            binding.emtyStatus.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+
+            if (chatsModel.getSystem_messages().equals("0")){
+                binding.notificationsBadge.setVisibility(View.GONE);
+                Log.d("sdvsdvdv", "onChanged: if "+chatsModel.getSystem_messages());
+            }else {
+                Log.d("sdvsdvdv", "onChanged: else  "+chatsModel.getSystem_messages());
+                binding.notificationsBadge.setVisibility(View.VISIBLE);
+                if (Integer.parseInt(chatsModel.getSystem_messages())>10){
+                    binding.notificationsBadge.setText("9+");
+                }else {
+                    binding.notificationsBadge.setText(chatsModel.getSystem_messages());
+                }}
         });
 
         lastAnnouncmentAboveBtNavigation();

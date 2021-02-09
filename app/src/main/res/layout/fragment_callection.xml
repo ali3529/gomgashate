@@ -41,12 +41,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_above="@id/gggg"/>
+        android:layout_above="@id/gggg"
+        android:nestedScrollingEnabled="true" />
 
     <View
         android:id="@+id/gggg"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="80dp"
         android:background="@color/white"
         android:layout_alignParentBottom="true"
 

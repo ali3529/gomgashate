@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -291,8 +292,12 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
                 } else {
                     if (appVersionModel.getIs_force() == 1) {
-                        AppVersionAlertDialog(getContext(), appVersionModel.getMessage(), true);
-                    } else AppVersionAlertDialog(getContext(), appVersionModel.getMessage(), false);
+                        //AppVersionAlertDialog(getContext(), appVersionModel.getMessage(), true);
+                        appUpdateAlert(appVersionModel.getMessage(),true);
+                    } else{
+                       // AppVersionAlertDialog(getContext(), appVersionModel.getMessage(), false);
+                        appUpdateAlert(appVersionModel.getMessage(),false);
+                    }
                 }
             }
         });
@@ -389,6 +394,46 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
             setAnounsmentFilter();
         }
+    }
+
+    public void appUpdateAlert(String massage, boolean is_force){
+        LayoutInflater inflater = this.getLayoutInflater();
+        View help_layout = inflater.inflate(R.layout.alert_dialog_update, null);
+        TextView massages= help_layout.findViewById(R.id.massage_update);
+        Button update= help_layout.findViewById(R.id.btn_update);
+        Button cancel= help_layout.findViewById(R.id.btn_cancle);
+        massages.setText(massage);
+        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+        builder.setCancelable(false);
+        builder.setView(help_layout);
+
+        AlertDialog alertDialog=builder.create();
+        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        alertDialog.show();
+
+        update.setOnClickListener(o->{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://gomgashteh.com/dl/"));
+            startActivity(intent);
+        });
+
+        if (!is_force) {
+            cancel.setText("آلان نه");
+          cancel.setOnClickListener(o->{
+              alertDialog.dismiss();
+          });
+
+        } else {
+            cancel.setText("خروج");
+            builder.setCancelable(false);
+           cancel.setOnClickListener(o->{
+               getActivity().finish();
+           });
+
+
+
+        }
+
     }
 
 }

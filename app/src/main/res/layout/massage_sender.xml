@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 <data>
     <variable
         name="doublcheck"
@@ -8,6 +9,9 @@
     <variable
         name="check"
         type="Boolean" />
+    <variable
+        name="createat"
+        type="String" />
 </data>
 
     <RelativeLayout
@@ -15,13 +19,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layoutDirection="ltr">
+
         <RelativeLayout
+            android:id="@+id/recever_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/massage_shape_sender"
             android:padding="12dp"
             android:layout_margin="6dp"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+        >
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clear_24"
+
+                android:layout_alignParentTop="true"
+                />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/massage2"
                 android:layout_width="wrap_content"
@@ -29,7 +44,19 @@
 
                 android:textColor="@color/text_color_black"
                 android:layout_margin="6dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:layout_below="@id/close"/>
+
+            <TextView
+                android:id="@+id/createat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="سه روز پیش"
+                android:text="@{createat}"
+                android:layout_below="@id/massage2"
+                android:textStyle="italic"
+                android:textSize="12dp"/>
+
 
             <ImageView
                 android:id="@+id/check_1"
@@ -37,14 +64,14 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic__check_24"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@id/massage2"
+                android:layout_below="@id/createat"
                 app:setLayoutVisi="@{check}"/>
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_doul_check"
          android:layout_alignParentLeft="true"
-                android:layout_below="@id/massage2"
+                android:layout_below="@id/createat"
 
                 android:visibility="gone"
                 app:setLayoutVisi="@{doublcheck}"/>

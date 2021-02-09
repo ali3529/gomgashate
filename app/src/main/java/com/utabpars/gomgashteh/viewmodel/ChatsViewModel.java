@@ -3,7 +3,9 @@ package com.utabpars.gomgashteh.viewmodel;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.utabpars.gomgashteh.api.ApiClient;
@@ -19,6 +21,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ChatsViewModel extends ViewModel {
   public   MutableLiveData<ChatsModel> chatsModelMutableLiveData=new MutableLiveData<>();
+  public   MutableLiveData<ChatsModel> chatsModelEmptyMutableLiveData=new MutableLiveData<>();
+
+
     public void getTickets(String user_id){
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
@@ -29,7 +34,7 @@ public class ChatsViewModel extends ViewModel {
             @Override
             public void onSuccess(@NonNull ChatsModel chatsModel) {
                 if (chatsModel.getResponse()==null){
-
+                    chatsModelEmptyMutableLiveData.setValue(chatsModel);
                 }else {
                     if (chatsModel.getResponse().equals("1")){
                         chatsModelMutableLiveData.setValue(chatsModel);

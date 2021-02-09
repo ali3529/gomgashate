@@ -3,6 +3,7 @@ package com.utabpars.gomgashteh.api;
 import com.utabpars.gomgashteh.category.SubSetModel;
 import com.utabpars.gomgashteh.category.attrebute.SpinnerModel;
 import com.utabpars.gomgashteh.chat.ChatStatusModel;
+import com.utabpars.gomgashteh.chat.deletmassage.DeletMassageModel;
 import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmModel;
 import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.chat.TicketResponseModel;
@@ -18,6 +19,7 @@ import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.model.ChatNotificationModel;
 import com.utabpars.gomgashteh.model.ChatsModel;
 import com.utabpars.gomgashteh.model.DetailModel;
+import com.utabpars.gomgashteh.model.REcomendModel;
 import com.utabpars.gomgashteh.model.RegisterModel;
 import com.utabpars.gomgashteh.model.RmModel;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
@@ -209,6 +211,10 @@ public interface ApiInterface {
 
     @POST("recommend")
     @FormUrlEncoded
-    Single<RmModel> sendRecommend(@Field("user_id") String user_id,@Field("text") String s);
+    Single<REcomendModel> sendRecommend(@Field("user_id") String user_id, @Field("text") String s);
+
+    @POST("deleteTicket")
+    @FormUrlEncoded
+    Single<DeletMassageModel> deleteMassage(@Field("answer_id") int answer_id);
 }
 

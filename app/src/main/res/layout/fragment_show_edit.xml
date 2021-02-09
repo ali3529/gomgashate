@@ -282,10 +282,54 @@
 
                         </RelativeLayout>
                         <RelativeLayout
-                            android:id="@+id/layout_detail"
+                            android:id="@+id/address_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/othercity_layout"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+
+                            >
+                            <TextView
+                                android:id="@+id/address_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="آدرس"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+
+                                android:layout_marginTop="4dp"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+                                android:id="@+id/show_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="ناموجود"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_below="@id/address_txt"
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentRight="true"/>
+                            <View
+                                android:id="@+id/view6"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/show_address"
+                                android:layout_marginTop="6dp"/>
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/layout_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/address_layout"
                             android:gravity="right"
                             android:padding="@dimen/detail_padding"
                             android:layout_marginTop="6dp"

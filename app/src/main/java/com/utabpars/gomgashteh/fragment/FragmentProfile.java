@@ -1,7 +1,9 @@
 package com.utabpars.gomgashteh.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -126,6 +128,11 @@ public class FragmentProfile extends Fragment {
 
         binding.appVersion.setText("ویرایش "+Utils.versionName(getActivity()));
         binding.utabpars.setText("طراحی و توسعه یوتاب پارس");
+        binding.utabpars.setOnClickListener(o->{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://utabpars.com"));
+            startActivity(intent);
+        });
 
 
     }

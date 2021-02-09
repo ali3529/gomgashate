@@ -337,7 +337,15 @@
     <fragment
         android:id="@+id/fragmentChatDetail"
         android:name="com.utabpars.gomgashteh.chat.FragmentChatDetail"
-        android:label="FragmentChatDetail" />
+        android:label="FragmentChatDetail" >
+        <action
+            android:id="@+id/action_fragmentChatDetail_to_fragmentzoompicture"
+            app:destination="@id/fragmentOpenImage"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+    </fragment>
     <fragment
         android:id="@+id/fragmentMyAnnouncment2"
         android:name="com.utabpars.gomgashteh.myannouncment.FragmentMyAnnouncment"
@@ -477,4 +485,13 @@
         android:name="com.utabpars.gomgashteh.fragment.FragmentRecomend"
         android:label="fragment_recomend"
         tools:layout="@layout/fragment_recomend" />
+    <fragment
+        android:id="@+id/fragmentTest"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentTest"
+        android:label="FragmentTest" />
+    <fragment
+        android:id="@+id/fragmentTestImage"
+        android:name="com.utabpars.gomgashteh.fragment.FragmentTestImage"
+        android:label="fragment_test_image"
+        tools:layout="@layout/fragment_test_image" />
 </navigation>

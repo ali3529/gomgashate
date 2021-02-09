@@ -44,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_marginBottom="8dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/recomenr_text"
             android:layout_width="match_parent"
@@ -65,8 +66,9 @@
         android:text="ارسال"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:layout_below="@id/recomend_layout"
+
         android:layout_marginHorizontal="6dp"
+        android:layout_alignParentBottom="true"
         />
 </RelativeLayout>
 

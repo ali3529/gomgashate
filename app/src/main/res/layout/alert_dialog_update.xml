@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/roott"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+    <androidx.cardview.widget.CardView android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+
+
+
+        xmlns:card_view="http://schemas.android.com/tools">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="نسخه جدید"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+                android:textColor="@color/text_color_black"/>
+            <View
+                android:id="@+id/hr"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_below="@id/title"
+                android:background="@color/hr_color"/>
+            <TextView
+                android:id="@+id/massage_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hr"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:lineSpacingExtra="4dp"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/text_color_low_black"
+                android:text="کاربر گرامی نسخه "/>
+
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentRight="true"
+                android:text="اپدیت"
+
+                android:layout_below="@id/massage_update"
+                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/blue"/>
+
+            <Button
+                android:id="@+id/btn_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/massage_update"
+                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_toLeftOf="@id/btn_update"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

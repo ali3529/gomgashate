@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".imagehelper.FragmentOpenImage"
-    android:background="#B9000000">
+    android:background="#32000000">
 
 <!--   <com.github.chrisbanes.photoview.PhotoView-->
 <!--       android:id="@+id/image"-->
@@ -18,8 +18,8 @@
 
    <ImageView
        android:id="@+id/back_arrow"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
+       android:layout_width="30dp"
+       android:layout_height="30dp"
        android:src="@drawable/ic_arrow_left_black_48dp"
        android:layout_margin="20dp"
 
@@ -27,15 +27,13 @@
 
    <com.smarteist.autoimageslider.SliderView
        android:id="@+id/slider"
-       android:layout_width="match_parent"
-       android:layout_height="250dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
        app:sliderAnimationDuration="600"
-       app:sliderAutoCycleDirection="right"
        app:sliderAutoCycleEnabled="false"
        android:background="@color/white"
        android:scaleType="fitCenter"
        app:sliderIndicatorAnimationDuration="600"
-
        app:sliderIndicatorMargin="15dp"
        app:sliderIndicatorOrientation="horizontal"
        app:sliderIndicatorPadding="6dp"
@@ -43,8 +41,9 @@
 
 
        app:sliderScrollTimeInSec="3"
-       app:sliderStartAutoCycle="true"
+       app:sliderStartAutoCycle="false"
        android:layout_centerInParent="true"
+       android:layout_below="@id/back_arrow"
 
 
        />

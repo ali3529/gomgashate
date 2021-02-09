@@ -1,7 +1,10 @@
 package com.utabpars.gomgashteh.category.attrebute;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentAttrebuteBinding;
+import com.utabpars.gomgashteh.databinding.ItemHelpAttrBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +94,11 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
 
         });
 
+
+        binding.help.setOnClickListener(o->{
+            showHelpDialoghhy();
+        });
+
     }
 
     public void setIndec(){
@@ -132,6 +141,29 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
 
         }
     };
+
+
+
+    public void showHelpDialoghhy(){
+        LayoutInflater inflater = this.getLayoutInflater();
+        View help_layout = inflater.inflate(R.layout.item_help_attr, null);
+      //  help_layout.findViewById(R.id.card).setBackgroundColor(Color.TRANSPARENT);
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+        builder.setCancelable(true);
+
+        builder.setView(help_layout);
+
+        AlertDialog alertDialog=builder.create();
+        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        alertDialog.show();
+
+        help_layout.findViewById(R.id.btn).setOnClickListener(o->{
+            alertDialog.dismiss();
+        });
+    }
+
+
 
 
 }

@@ -67,6 +67,7 @@ public class FragmentAddAnnouncement extends Fragment  {
     SharedPreferences.Editor editor_savestate;
     RadioGroup radioGroup;
     String type;
+    String is_address_show="0";
      RecyclerView addImageRecyclerview;
     Intent intent;
     static AddImageAnnouncmentAdaptor addImageAnnouncmentAdaptor;
@@ -75,6 +76,7 @@ public class FragmentAddAnnouncement extends Fragment  {
     BottomSheetChooseImage bottomSheetChooseImage;
     String title;
     AttrebuteNameViewModel attrebuteNameViewModel;
+    boolean is_clear_category=false;
 
 
 
@@ -127,6 +129,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                is_clear_category=true;
                 Bundle bundle=new Bundle();
                 bundle.putString("type","");
 
@@ -165,6 +168,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         attrebuteNameViewModel.getAttrName(shPref.getString("collaction_id",null));
 
         binding.setCategory(title);
+        binding.setattr.setVisibility(View.GONE);
 
         binding.categoryName.setText(category_name.getString("category","")+" - "+
                 category_name.getString("collection","")+" - "+
@@ -173,7 +177,13 @@ public class FragmentAddAnnouncement extends Fragment  {
                 category_name.getString("sub_three",""));
 
         attrebuteNameViewModel.nameModelMutableLiveData.observe(getViewLifecycleOwner(),t->{
-            binding.attrName.setText(t);
+
+            if (attrebuteNameViewModel.eventHandle){
+                binding.setattr.setVisibility(View.VISIBLE);
+                binding.attrName.setText(t);
+            }
+            attrebuteNameViewModel.setEvant(false);
+
         });
 
 
@@ -259,6 +269,7 @@ public class FragmentAddAnnouncement extends Fragment  {
             SharedPreferences.Editor add_category=shPref.edit();
             add_category.clear();
             add_category.apply();
+            binding.attrName.setText("");
             editor_savestate.clear();
             editor_savestate.apply();
             uriList.clear();
@@ -308,7 +319,16 @@ public class FragmentAddAnnouncement extends Fragment  {
             //todo set help
             Toast.makeText(getContext(), "راهنما", Toast.LENGTH_SHORT).show();
         });
+//        SharedPreferences.Editor editor=shPref.edit();
+//        editor.putString("collaction_id","0");
+//        editor.apply();
+      //  attrebuteNameViewModel.getAttrName(shPref.getString("collaction_id",null));
 
+        if (user_status.getString("user_type","0000").equals("1")){
+            binding.pishkanLayout.setVisibility(View.VISIBLE);
+        }else {
+            binding.pishkanLayout.setVisibility(View.GONE);
+        }
 
     }
 
@@ -367,6 +387,7 @@ public class FragmentAddAnnouncement extends Fragment  {
                     binding.suprise.setVisibility(View.VISIBLE);
                     binding.rootLayout.setVisibility(View.VISIBLE);
                     getType(type);
+                    binding.setattr.setVisibility(View.GONE);
 
                 }
                 break;
@@ -483,6 +504,11 @@ public class FragmentAddAnnouncement extends Fragment  {
         RequestBody city_id=RequestBody.create(MediaType.parse("city_id"),shPref.getString("city_id",""));
         RequestBody detail=RequestBody.create(MediaType.parse("detail"),edDescription.getText().toString());
         RequestBody reward=RequestBody.create(MediaType.parse("reward"),binding.surpriseText.getText().toString());
+        if (binding.checkpishkan.isChecked()){
+            is_address_show="1";
+        }
+        RequestBody pishkan=RequestBody.create(MediaType.parse("show_address"),is_address_show);
+
 
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
         RequestBody other_city;
@@ -504,7 +530,8 @@ public class FragmentAddAnnouncement extends Fragment  {
 //        Log.d("fesbebdbbmi", "fetchdata: city_id    "+shPref.getString("city_id",""));
 //        Log.d("fesbebdbbmi", "fetchdata: detail    "+edDescription.getText().toString());
 //        Log.d("fesbebdbbmi", "fetchdata: reward    "+binding.surpriseText.getText().toString());
-//        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
+//       Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
+//        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+is_address_show);
 
 
 
@@ -520,6 +547,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         addAnnouncement.put("announcer_id",announcer_id);
         addAnnouncement.put("reward",reward);
         addAnnouncement.put("attr_id",attrId);
+        addAnnouncement.put("show_address",pishkan);
 
 
 
@@ -572,5 +600,23 @@ public void getType(String type){
         editor.putString("type",type);
         editor.apply();
 }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (is_clear_category){
+            SharedPreferences.Editor editor=shPref.edit();
+            editor.clear();
+            editor.apply();
+            binding.setattr.setVisibility(View.GONE);
+            SharedPreferences.Editor editor_category=category_name.edit();
+            editor_category.clear();
+            editor_category.apply();
+            binding.categoryName.setText("");
+            Log.d("sdvsdvsdv", "onPause: ");
+            is_clear_category=false;
+        }
+
+    }
 }
 

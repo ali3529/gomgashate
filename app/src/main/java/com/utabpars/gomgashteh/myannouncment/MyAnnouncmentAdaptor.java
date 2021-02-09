@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.myannouncment;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MyAnnouncmentAdaptor extends RecyclerView.Adapter<MyAnnouncmentAdaptor.MyAnnounceViewHolder> {
     DetileCallBack detileCallBack;
     List<AnoncmentModel.Detile> detiles=new ArrayList<>();
+    Context context;
 
     public MyAnnouncmentAdaptor(List<AnoncmentModel.Detile> detiles , DetileCallBack detileCallBack) {
         this.detiles = detiles;
@@ -30,6 +32,7 @@ public class MyAnnouncmentAdaptor extends RecyclerView.Adapter<MyAnnouncmentAdap
     @Override
     public MyAnnounceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+        context=parent.getContext();
         ItemAnnouncementBinding binding= DataBindingUtil.inflate(inflater, R.layout.item_announcement,parent,false);
         return new MyAnnounceViewHolder(binding);
     }
@@ -52,6 +55,8 @@ public class MyAnnouncmentAdaptor extends RecyclerView.Adapter<MyAnnouncmentAdap
         if (detiles.get(position).getPishkhan().equals("0")){
             holder.binding.pishkan.setVisibility(View.GONE);
         }
+
+        setType(holder.binding,position);
     }
 
     @Override
@@ -64,6 +69,22 @@ public class MyAnnouncmentAdaptor extends RecyclerView.Adapter<MyAnnouncmentAdap
         public MyAnnounceViewHolder(@NonNull ItemAnnouncementBinding binding) {
             super(binding.getRoot());
             this.binding=binding;
+        }
+    }
+
+
+    public void setType(ItemAnnouncementBinding binding,int position){
+        if (detiles.get(position).equals("1")){
+            binding.status.setTextColor(context.getResources().getColor(R.color.orange));
+        }else if (detiles.get(position).getStatus_type().equals("2")){
+            binding.status.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        }else if (detiles.get(position).getStatus_type().equals("3")){
+            binding.status.setTextColor(context.getResources().getColor(R.color.greennew));
+        }else if (detiles.get(position).getStatus_type().equals("4")){
+            binding.status.setTextColor(context.getResources().getColor(R.color.red));
+        }else if (detiles.get(position).getStatus_type().equals("5")){
+            binding.status.setTextColor(context.getResources().getColor(R.color.red));
+
         }
     }
 }

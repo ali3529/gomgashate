@@ -14,12 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.databinding.FragmentRecomendBinding;
+import com.utabpars.gomgashteh.model.REcomendModel;
 import com.utabpars.gomgashteh.model.RmModel;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -38,6 +40,7 @@ public class FragmentRecomend extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_recomend,container,false);
         user_status=getActivity().getSharedPreferences("user_login", Context.MODE_PRIVATE);
         return binding.getRoot();
@@ -67,14 +70,14 @@ public class FragmentRecomend extends Fragment {
         compositeDisposable.add(apiInterface.sendRecommend(user_id,massage)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<RmModel>() {
+        .subscribeWith(new DisposableSingleObserver<REcomendModel>() {
             @Override
-            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RmModel rmModel) {
+            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull REcomendModel rmModel) {
                 Toast.makeText(getContext(), rmModel.getMassage(), Toast.LENGTH_SHORT).show();
                 try {
                     Navigation.findNavController(getView()).navigateUp();
                 }catch (Exception e){
-                    
+
                 }
 
             }

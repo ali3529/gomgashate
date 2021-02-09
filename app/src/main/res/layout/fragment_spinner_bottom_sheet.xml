@@ -39,9 +39,10 @@
         android:layout_height="wrap_content"
         android:text="الزامی"
         android:layout_alignParentLeft="true"
-
+        android:layout_alignParentTop="true"
         android:padding="6dp"
        android:layout_margin="8dp"
+
 
       />
     <View
