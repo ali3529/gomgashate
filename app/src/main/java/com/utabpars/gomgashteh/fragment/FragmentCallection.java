@@ -1,3 +1,4 @@
+
 package com.utabpars.gomgashteh.fragment;
 
 import android.content.Context;
@@ -27,9 +28,20 @@ import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.category.SubSetCallBack;
 import com.utabpars.gomgashteh.category.SubSetModel;
 import com.utabpars.gomgashteh.category.SubsetViewModel;
+import com.utabpars.gomgashteh.database.categoryDatabase.Attrebiute;
+import com.utabpars.gomgashteh.database.categoryDatabase.Category;
+import com.utabpars.gomgashteh.database.categoryDatabase.CategoryDataBase;
+import com.utabpars.gomgashteh.database.categoryDatabase.Collection;
+import com.utabpars.gomgashteh.database.categoryDatabase.Subset;
+import com.utabpars.gomgashteh.database.categoryDatabase.Subset2;
 import com.utabpars.gomgashteh.databinding.FragmentCallectionBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
 import com.utabpars.gomgashteh.model.CategoryModel;
+
+import org.w3c.dom.Attr;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -48,6 +60,8 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     String ca;
     String idg,titleg;
     SubsetViewModel subsetViewModel;
+    SharedPreferences shPref;
+
 
 
     @Override
@@ -55,6 +69,7 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
                              Bundle savedInstanceState) {
          binding= DataBindingUtil.inflate(inflater,R.layout.fragment_callection,container,false);
          subsetViewModel=new ViewModelProvider(this).get(SubsetViewModel.class);
+        shPref = getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
          initViews();
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -70,42 +85,43 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
         binding.setProgress(true);
          title=getArguments().getString("title");
          list_id=getArguments().getString("id");
+        Log.d("Sdvsdv", "onViewCreated: "+list_id);
 
-            type =getArguments().getString("type");
+        type =getArguments().getString("type");
 
 
         binding.setTitle(title);
         subsetViewModel.getCallBack(this);
-        ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getcallection(list_id,type)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<CategoryModel>() {
-            @Override
-            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull CategoryModel categoryModel) {
-                if (categoryModel.getResponse().equals("1")){
-                    binding.setProgress(false);
-                    collectionAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
-                        @Override
-                        public void getCategoryId(View view, String id,int position,String title) {
+        CategoryDataBase categoryDataBase=CategoryDataBase.getInstance(getContext());
+        categoryDataBase.categoryDao().getCollection(list_id).observe(getViewLifecycleOwner(),collection->{
+            //Log.d("Dvdsvsdv", "onViewCreated: "+collection.get(0).getId());
+            List<Category> categories=new ArrayList<>();
+            for (Collection c : collection) {
+                Category category=new Category();
+                category.setId(c.getId());
+                category.setName(c.getName());
+                categories.add(category);
 
-                             idg=id;
-                             titleg=title;
-                             subsetViewModel.getSubset(id,"sub_one",type);
-                             saveCategoryNames(title);
+            }
+//            Log.d("Dvdsvsdv", "onViewCreated: "+categories.get(0).getId());
+            binding.setProgress(false);
+            collectionAdaptor=new CategoryAdaptor(categories, new CategoryCallBack() {
+                @Override
+                public void getCategoryId(View view, String id,int position,String title) {
 
-                        }
-                    });
-                    recyclerView.setAdapter(collectionAdaptor);
+                    idg=id;
+                    titleg=title;
+                    subsetViewModel.getSubsetFromDb(id);
+                    saveCategoryNames(title);
+                    SharedPreferences.Editor editor=shPref.edit();
+                    editor.putString("card_id",id);
+                    editor.apply();
+
                 }
-            }
+            });
+            recyclerView.setAdapter(collectionAdaptor);
+        });
 
-            @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-            }
-        }));
 
         lastAnnouncmentAboveBtNavigation();
     }
@@ -131,7 +147,8 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     }
 
     @Override
-    public void onSubsetCallback(SubSetModel subSetModel) {
+    public void onSubsetCallback(List<Subset> subSetModel) {
+        Log.d("dfbdfbfdbfdb", "emptyCallback: "+"SubsetCallback");
         Bundle bundle=new Bundle();
         bundle.putString("id",idg);
         bundle.putString("title",titleg);
@@ -145,7 +162,13 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     }
 
     @Override
-    public void onAttributeCallback(SubSetModel SubSetModel) {
+    public void onSubset2Callback(List<Subset2> subSetModel) {
+
+    }
+
+    @Override
+    public void onAttributeCallback(List<Attrebiute> SubSetModel) {
+        Log.d("dfbdfbfdbfdb", "emptyCallback: "+"ttributeCallback");
         Bundle bundle=new Bundle();
         bundle.putString("id",idg);
         bundle.putString("type","sub_one");
@@ -158,8 +181,9 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
     }
 
     @Override
-    public void emptyCallback(boolean empty, SubSetModel subSetModel) {
-        if (type.equals("category")){
+    public void emptyCallback(boolean empty) {
+        Log.d("dfbdfbfdbfdb", "emptyCallback: "+"emty callback");
+        if (!isComeFromAdd()){
             Bundle bundle=new Bundle();
             bundle.putString("id",idg);
             bundle.putString("type","sub_one");
@@ -201,5 +225,10 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
                 }
             }
         });
+    }
+
+    private boolean isComeFromAdd(){
+        SharedPreferences from_add_shpref=getActivity().getSharedPreferences("from_add",Context.MODE_PRIVATE);
+        return from_add_shpref.getBoolean("from_add",false);
     }
 }

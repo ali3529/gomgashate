@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+   <data>
+      <variable
+          name="splash"
+          type="com.utabpars.gomgashteh.fragment.FragmentSplash" />
+   </data>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -51,4 +58,24 @@
        android:layout_toRightOf="@id/gomgashteh"
        />
 
+   <RelativeLayout
+       android:id="@+id/try_again"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_above="@id/gomgashteh"
+       android:layout_centerInParent="true"
+       android:visibility="gone"
+       android:background="?attr/selectableItemBackgroundBorderless"
+   android:onClick="@{() -> splash.tryAgain()}">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="تلاش مجدد"
+          android:textColor="@color/colorPrimary"
+          android:textStyle="bold"
+          android:textSize="@dimen/text_size_16"
+          android:layout_centerInParent="true"/>
+   </RelativeLayout>
+
 </RelativeLayout>
+</layout>

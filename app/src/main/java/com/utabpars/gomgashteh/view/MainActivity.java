@@ -13,9 +13,9 @@ import android.os.Bundle;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.database.categoryDatabase.CategoryDataBase;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +26,10 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment hostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host);
         NavigationUI.setupWithNavController(bottomNavigationView,hostFragment.getNavController());
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

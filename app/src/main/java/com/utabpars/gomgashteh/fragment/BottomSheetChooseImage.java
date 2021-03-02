@@ -97,11 +97,13 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Utils.checkPermissionCamera(getContext())){
-                    intent=new Intent("android.media.action.IMAGE_CAPTURE");
+            //    if (Utils.checkPermissionCamera(getContext())){
+                    Log.d("fbfdrthrh", "onClick: ");
+                   // intent=new Intent("android.media.action.IMAGE_CAPTURE");
+                    intent=new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent,200);
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
+              //  }
 
             }
         });
@@ -123,6 +125,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.d("fbfdrthrh", "onActivityResult: ");
         if (requestCode==REQCODE){
             if (resultCode==RESULT_OK){
 
@@ -178,7 +181,7 @@ public class BottomSheetChooseImage extends BottomSheetDialogFragment {
             }
         }else if (requestCode==WriteExternalRequestCode){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // اگر از درخواست دسترسی جواب مثبت برگشت دستورات شرط اجرا می شود.
-                intent=new Intent("android.media.action.IMAGE_CAPTURE");
+                intent=new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,REQCODE2);
 
                 Toast.makeText(getContext(), "permision granted", Toast.LENGTH_SHORT).show();

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/other_city_navigation"
+    app:startDestination="@id/fragmentOtherProvince">
+
+    <fragment
+        android:id="@+id/fragmentOtherCity2"
+        android:name="com.utabpars.gomgashteh.othercity.FragmentOtherCity"
+        android:label="FragmentOtherCity" />
+    <fragment
+        android:id="@+id/fragmentOtherProvince"
+        android:name="com.utabpars.gomgashteh.othercity.FragmentOtherProvince"
+        android:label="FragmentOtherProvince" >
+        <action
+            android:id="@+id/action_fragmentOtherProvince_to_fragmentOtherCity2"
+            app:destination="@id/fragmentOtherCity2" />
+    </fragment>
+</navigation>

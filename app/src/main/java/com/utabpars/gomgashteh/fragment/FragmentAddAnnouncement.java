@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,21 +29,19 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 
-import com.utabpars.gomgashteh.category.attrebute.AttrebuteViewModel;
+import com.utabpars.gomgashteh.database.citydatabase.City;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
 import com.utabpars.gomgashteh.databinding.FragmentAddAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
 import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.AttrebuteNameViewModel;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,6 +74,8 @@ public class FragmentAddAnnouncement extends Fragment  {
     String title;
     AttrebuteNameViewModel attrebuteNameViewModel;
     boolean is_clear_category=false;
+    List<String> cityList;
+    CityDatabase cityDatabase;
 
 
 
@@ -91,6 +90,7 @@ public class FragmentAddAnnouncement extends Fragment  {
         user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
         initViews();
         binding.setFrag(this);
+         cityDatabase=CityDatabase.getInstance(getContext());
         return binding.getRoot();
     }
 
@@ -132,11 +132,13 @@ public class FragmentAddAnnouncement extends Fragment  {
                 is_clear_category=true;
                 Bundle bundle=new Bundle();
                 bundle.putString("type","");
+                bundle.putBoolean("from_add",true);
 
                 editor_savestate.putString("title",binding.title.getText().toString());
                 editor_savestate.putString("descrip",binding.description.getText().toString());
                 editor_savestate.putString("type",type);
                 editor_savestate.apply();
+
                 Navigation.findNavController(view).navigate(R.id.action_add_to_list,bundle);
             }
         });
@@ -146,7 +148,7 @@ public class FragmentAddAnnouncement extends Fragment  {
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
                 bundle.putString("navigate","city_add");
-                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmentCity,bundle);
+                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmenCity,bundle);
             }
         });
 
@@ -155,7 +157,7 @@ public class FragmentAddAnnouncement extends Fragment  {
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
                 bundle.putString("navigate","otherCity");
-                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmentCity,bundle);
+                Navigation.findNavController(view).navigate(R.id.action_add_to_fragmenthostCity,bundle);
             }
         });
 
@@ -188,13 +190,27 @@ public class FragmentAddAnnouncement extends Fragment  {
 
 
         //set other city
-        if (getSHaredList()==null){
-            binding.othercity.setText("انتخاب کنید");
-        }else {
-            binding.othercity.setText(getSHaredList().size()+"شهر");
-        }
-        SharedPreferences city_name = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
-        binding.cityName.setText(city_name.getString("otherCity_name",""));
+//        if (getSHaredList()==null){
+//            binding.othercity.setText("انتخاب کنید");
+//        }else {
+//            binding.othercity.setText(getSHaredList().size()+"شهر");
+//        }
+//        SharedPreferences city_name = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
+//        binding.cityName.setText(city_name.getString("otherCity_name",""));
+
+
+        cityDatabase.cityDao().getOtherCitySelected().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result->{
+                    cityList=new ArrayList<>();
+                    for (City c:result) {
+                        binding.othercity.setText(result.size()+"شهر");
+                        binding.cityName.append(c.getCity_name()+" , ");
+                        cityList.add(c.getCity_id());
+
+                    }
+
+                });
 
 
 
@@ -302,16 +318,16 @@ public class FragmentAddAnnouncement extends Fragment  {
                 }
 
             //set other city
-            if (getSHaredList()==null){
                 binding.othercity.setText("انتخاب کنید");
-            }else {
-                binding.othercity.setText(getSHaredList().size()+"شهر");
-            }
+
             SharedPreferences.Editor editor_category=category_name.edit();
             editor_category.clear();
             editor_category.apply();
             binding.cityName.setText("");
             binding.categoryName.setText("");
+
+            cityDatabase.cityDao().clearSelectedCity();
+            cityDatabase.cityDao().clearProvinceAfterInsertAnnunce();
 
         });
 
@@ -471,6 +487,10 @@ public class FragmentAddAnnouncement extends Fragment  {
                                     editor_category.apply();
 
 
+                                    cityDatabase.cityDao().clearSelectedCity();
+                                    cityDatabase.cityDao().clearProvinceAfterInsertAnnunce();
+
+
 
                                 }
                             },1000);
@@ -511,27 +531,28 @@ public class FragmentAddAnnouncement extends Fragment  {
 
 
         RequestBody announcer_id=RequestBody.create(MediaType.parse("announcer_id"),user_status.getString("user_id",""));
+
         RequestBody other_city;
-        if (getSHaredList()==null){
+        if (cityList.size()==0){
             other_city=RequestBody.create(MediaType.parse("other_city"),"");
 
         }else {
 
-            other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
-            Log.d("fesbebdbbmi", "fetchdata: other city     "+getSHaredList().toString());
+            other_city=RequestBody.create(MediaType.parse("other_city"),cityList.toString());
+            Log.d("fesbebdbbmi", "fetchdata: other city     "+cityList.toString());
         }
 
-//        Log.d("fesbebdbbmi", "fetchdata: title   "+edTitle.getText().toString());
-//        Log.d("fesbebdbbmi", "fetchdata: type   "+type);
-//        Log.d("fesbebdbbmi", "fetchdata: case   "+shPref.getString("type",""));
-//        Log.d("fesbebdbbmi", "fetchdata: attr_id   "+shPref.getString("emty_status",""));
-//        Log.d("fesbebdbbmi", "fetchdata: collection_id   "+shPref.getString("collaction_id",""));
-//        Log.d("fesbebdbbmi", "fetchdata: province_id    "+shPref.getString("province_id",""));
-//        Log.d("fesbebdbbmi", "fetchdata: city_id    "+shPref.getString("city_id",""));
-//        Log.d("fesbebdbbmi", "fetchdata: detail    "+edDescription.getText().toString());
-//        Log.d("fesbebdbbmi", "fetchdata: reward    "+binding.surpriseText.getText().toString());
-//       Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
-//        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+is_address_show);
+        Log.d("fesbebdbbmi", "fetchdata: title   "+edTitle.getText().toString());
+        Log.d("fesbebdbbmi", "fetchdata: type   "+type);
+        Log.d("fesbebdbbmi", "fetchdata: case   "+shPref.getString("type",""));
+        Log.d("fesbebdbbmi", "fetchdata: attr_id   "+shPref.getString("emty_status",""));
+        Log.d("fesbebdbbmi", "fetchdata: collection_id   "+shPref.getString("collaction_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: province_id    "+shPref.getString("province_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: city_id    "+shPref.getString("city_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: detail    "+edDescription.getText().toString());
+        Log.d("fesbebdbbmi", "fetchdata: reward    "+binding.surpriseText.getText().toString());
+       Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+user_status.getString("user_id",""));
+        Log.d("fesbebdbbmi", "fetchdata: announcer_id    "+is_address_show);
 
 
 
@@ -569,22 +590,6 @@ public class FragmentAddAnnouncement extends Fragment  {
 
 
 
-    public  List<String> getSHaredList() {
-        Gson gson = new Gson();
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("other_city", Context.MODE_PRIVATE);
-
-        String s = sharedPreferences.getString("otherCityList", null);
-        Type type = new TypeToken<List<String>>() {
-
-        }.getType();
-        List<String> j = gson.fromJson(s, type);
-
-
-
-            return j;
-
-
-    }
 
     public void getRegister(){
         Navigation.findNavController(getView()).navigate(R.id.action_add_to_fragmentLogin);
@@ -618,5 +623,6 @@ public void getType(String type){
         }
 
     }
+
 }
 

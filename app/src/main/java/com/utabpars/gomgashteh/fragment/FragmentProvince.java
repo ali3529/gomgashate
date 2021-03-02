@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,24 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.utabpars.gomgashteh.R;
-import com.utabpars.gomgashteh.adaptor.CategoryAdaptor;
-import com.utabpars.gomgashteh.api.ApiClient;
-import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.adaptor.CityAdaptor;
+import com.utabpars.gomgashteh.adaptor.ProvinceAdaptor;
+import com.utabpars.gomgashteh.database.citydatabase.Province;
 import com.utabpars.gomgashteh.databinding.FragmentProvinceBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
-import com.utabpars.gomgashteh.model.CategoryModel;
 import com.utabpars.gomgashteh.viewmodel.ProvinceViewModel;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FragmentProvince extends Fragment {
     FragmentProvinceBinding binding;
     ProvinceViewModel provinceViewModel;
     RecyclerView recyclerView;
-    CategoryAdaptor categoryAdaptor;
+    ProvinceAdaptor cityAdaptor;
     String navigate;
 
 
@@ -55,11 +48,8 @@ public class FragmentProvince extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        provinceViewModel.categoryModelMutableLiveData.observe(getViewLifecycleOwner(), new Observer<CategoryModel>() {
-            @Override
-            public void onChanged(CategoryModel categoryModel) {
-                categoryAdaptor=new CategoryAdaptor(categoryModel.getListData(), new CategoryCallBack() {
+        provinceViewModel.provinceMutableLiveData.observe(getViewLifecycleOwner(),province->{
+            cityAdaptor=new ProvinceAdaptor(province, new CategoryCallBack() {
                     @Override
                     public void getCategoryId(View view, String id, int position,String title) {
                         try {
@@ -69,43 +59,35 @@ public class FragmentProvince extends Fragment {
 
                                 Bundle bundle = new Bundle();
                                 bundle.putString("province", String.valueOf(id));
-                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("province_name", province.get(position).getProvince_name());
                                 bundle.putString("navigate", navigate);
                                 Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
-                            }else if (navigate.equals("otherCity")){
-                                Bundle bundle = new Bundle();
-                                bundle.putString("province", String.valueOf(id));
-                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
-                                bundle.putString("navigate", "otherCity");
-                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
                             }else if (navigate.equals("city_edit")){
                                 Bundle bundle = new Bundle();
                                 bundle.putString("province", String.valueOf(id));
-                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
+                                bundle.putString("province_name", province.get(position).getProvince_name());
                                 bundle.putString("navigate", "city_edit");
                                 Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentCity2, bundle);
-                            }else if (navigate.equals("otherCityEdit")){
-                                Bundle bundle = new Bundle();
-                                bundle.putString("province", String.valueOf(id));
-                                bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
-                                bundle.putString("navigate", "otherCityEdit");
-                                Navigation.findNavController(view).navigate(R.id.action_fragmentCity_to_fragmentOtherCity, bundle);
                             }
                         }catch (Exception e){
 
-                            Bundle bundle = new Bundle();
-                            bundle.putString("province", String.valueOf(id));
-                            bundle.putString("province_name", categoryModel.getListData().get(position).getCategoryName());
-                            Navigation.findNavController(view).navigate(R.id.action_fragmentProvince_to_fragmentMainCity2, bundle);
+                                 Bundle bundle = new Bundle();
+                                 bundle.putString("province", String.valueOf(id));
+                                 bundle.putString("province_name", province.get(position).getProvince_name());
+                                 Navigation.findNavController(view).navigate(R.id.action_fragmentProvince_to_fragmentMainCity2, bundle);
+
                         }
 
 
 
                     }
-                });
-                recyclerView.setAdapter(categoryAdaptor);
-            }
-        });
+                },itemProvinceSelected);
+                recyclerView.setAdapter(cityAdaptor);
+                //ecyclerView.computeVerticalScrollExtent();
+               // recyclerView.computeVerticalScrollOffset();
+
+            });
+
     }
 
 
@@ -115,5 +97,11 @@ public class FragmentProvince extends Fragment {
         recyclerView.setHasFixedSize(true);
     }
 
-
+    ProvinceAdaptor.ItemProvinceSelected itemProvinceSelected=new ProvinceAdaptor.ItemProvinceSelected() {
+        @Override
+        public void clearAllCity(Province city) {
+            provinceViewModel.clearAllCity(city.getProvince_id());
+            provinceViewModel.onSelectProvince(city.getProvince_id());
+        }
+    };
 }

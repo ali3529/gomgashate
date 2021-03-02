@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="province"
+            type="com.utabpars.gomgashteh.database.citydatabase.Province" />
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/text_color_black"
+            android:fontFamily="@font/sans"
+            tools:text="مدارک "
+            android:text="@{province.province_name}"
+            android:layout_marginRight="@dimen/text_size_14"
+            android:layout_marginBottom="6dp"/>
+        <ImageView
+            android:id="@+id/fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_more"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_below="@id/name"
+            android:background="@color/hr_color"
+            />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerInParent="false"
+            android:layout_toRightOf="@id/fff"
+            android:checked="true"
+            android:visibility="gone"
+            />
+
+
+    </RelativeLayout>
+</layout>

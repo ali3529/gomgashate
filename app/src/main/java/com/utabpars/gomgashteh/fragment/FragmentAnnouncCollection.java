@@ -13,6 +13,7 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
         initViews();
         viewModel= new ViewModelProvider(this).get(FilterAnouncmentViewModel.class);
         // Inflate the layout for this fragment
+        Log.d("dvdsvthopoi", "onCreateView: "+"collection");
         return binding.getRoot();
     }
 

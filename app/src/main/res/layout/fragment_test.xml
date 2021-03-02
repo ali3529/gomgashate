@@ -7,36 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentTest">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:layout_centerInParent="true"/>
 
-    <TextView
-        android:id="@+id/date2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/date"/>
-    <TextView
-        android:id="@+id/date3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/date2"/>
-    <Button
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="time"
-        android:layout_below="@id/date3"
-        android:layout_centerInParent="true"/>
-
+<include layout="@layout/plate_number" android:id="@+id/pp"
+    />
+</RelativeLayout>
 </RelativeLayout>
 </layout>

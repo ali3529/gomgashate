@@ -21,6 +21,9 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.database.citydatabase.City;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
+import com.utabpars.gomgashteh.database.citydatabase.Province;
 import com.utabpars.gomgashteh.databinding.FragmentMainCityBinding;
 import com.utabpars.gomgashteh.interfaces.ItemSelectedCallback;
 import com.utabpars.gomgashteh.model.CategoryModel;
@@ -30,14 +33,18 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
+import io.reactivex.rxjava3.core.Flowable;
+
+public class FragmentMainCity extends Fragment
+        implements MainCityAdaptor.ItemCitySelected
+{
     FragmentMainCityBinding binding;
     MainCityViewModel mainCityViewModel;
     MainCityAdaptor categoryAdaptor;
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;
-   static List<CategoryModel.ListData> listData=new ArrayList<>();
-  static MutableLiveData< List<CategoryModel.ListData>> listDataMutableLiveData=new MutableLiveData<>();
+    List<City> cityList=new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +53,7 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_main_city,container,false);
         mainCityViewModel=new ViewModelProvider(this).get(MainCityViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
+        Log.d("fnfgngfnfgn", "onCreateView: ");
         return binding.getRoot();
     }
 
@@ -58,78 +66,51 @@ public class FragmentMainCity extends Fragment implements ItemSelectedCallback {
         recyclerView.setHasFixedSize(true);
         String province_name=getArguments().getString("province_name");
         String province_id=getArguments().getString("province");
-        mainCityViewModel.getMainCity(province_id);
+        categoryAdaptor=new MainCityAdaptor();
 
+        mainCityViewModel.getProvinceFromDB(province_id);
+        mainCityViewModel.provinceMutableLiveData.observe(getViewLifecycleOwner(), city ->{
 
-        mainCityViewModel.categoryModelMutableLiveData.observe(getViewLifecycleOwner(), citeis ->{
-
-                if (getMainCity()==null){
-                    for (int i = 0; i < citeis.getListData().size(); i++) {
-                        for (int j = 0; j < listData.size(); j++) {
-                            if (citeis.getListData().get(i).getId().equals(listData.get(j).getId())){
-                                citeis.getListData().get(i).setSelected(true);
-                            }
-                        }
-                    }
-                }else {
-                    for (int i = 0; i < citeis.getListData().size(); i++) {
-                        for (int j = 0; j < getMainCity().size(); j++) {
-                            if (citeis.getListData().get(i).getId().equals(getMainCity().get(j))) {
-                                citeis.getListData().get(i).setSelected(true);
-                            }
-                        }
-                    }
-                }
-
-
-            categoryAdaptor=new MainCityAdaptor(citeis.getListData(),this::getSelectedItem);
+            categoryAdaptor.setData(city,this::getSelectedItem);
             recyclerView.setAdapter(categoryAdaptor);
+            cityList=city;
+
         });
+
+//        FragmentChoosecity.booleanMutableLiveData.observe(getViewLifecycleOwner(),t->{
+//            Log.d("fdbdfbdfb", "onViewCreated: ");
+//            //categoryAdaptor.notifyDataSetChanged();
+//            mainCityViewModel.getProvinceFromDB(province_id);
+//        });
 
 
     }
 
     @Override
-    public void getSelectedItem(View view, CategoryModel.ListData categoryModel, int position, boolean is_checked) {
+    public void getSelectedItem(View view, City city, int position, boolean is_checked) {
 
-        if (is_checked){
-            listData.add(categoryModel);
-            listDataMutableLiveData.setValue(listData);
-            for (int i = 0; i < listData.size(); i++) {
+        Log.d("fbdfbdfbfb", "getSelectedItem: bbefooor ");
 
+            city.setSelected_city(is_checked);
+            mainCityViewModel.updateSelectedCity(city);
+
+
+//        CityDatabase cityDatabase=CityDatabase.getInstance(getContext());
+//        Flowable<List<Province>> provinces= cityDatabase.cityDao().getProvnce();
+
+        for (City c:cityList) {
+            if (c.isSelected_city()){
+                mainCityViewModel.setSelectedProvince(city.getProvince_id(),true);
+                Log.d("fbdfbdfbfb", "getSelectedItem: for if");
+                break;
+            }else {
+                mainCityViewModel.setSelectedProvince(city.getProvince_id(),false);
+                Log.d("fbdfbdfbfb", "getSelectedItem: for else");
             }
 
         }
-        else {
-            if (listData.size()!=0){
-                for (int i = 0; i < listData.size(); i++) {
-                    if (listData.get(i).getId().equals(categoryModel.getId())) {
-                        listData.remove(i);
-                        listDataMutableLiveData.setValue(listData);
-                    }
 
-                }
-            }
-        }
 
     }
 
-    public List<CategoryModel.ListData>  ggggg() {
-
-        return listData;
-    }
-
-    public List<String> getMainCity(){
-        Gson gson=new Gson();
-
-        String s=sharedPreferences.getString("main_city",null);
-
-        Type type=new TypeToken<List<String>>(){
-
-        }.getType();
-        List<String>  j=gson.fromJson(s,type);
-
-
-        return j;
-    }
 }

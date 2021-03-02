@@ -2,7 +2,9 @@ package com.utabpars.gomgashteh.viewmodel;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.utabpars.gomgashteh.api.ApiClient;
@@ -18,6 +20,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ChatNotificationViewModel extends ViewModel {
     public MutableLiveData<Integer> chatCounterMutableLiveData=new MutableLiveData<>();
+    public MutableLiveData<ChatNotificationModel> chatNotificationModelMutableLiveData=new MutableLiveData<>();
+    public MutableLiveData<String> category_update=new MutableLiveData<>();
+    public MutableLiveData<Boolean> error=new MutableLiveData<>();
 
     public void getChatNotification(String user_id){
         ApiInterface apiInterface= ApiClient.getApiClient();
@@ -29,11 +34,14 @@ public class ChatNotificationViewModel extends ViewModel {
             @Override
             public void onSuccess(@NonNull ChatNotificationModel chatNotificationModel) {
                 chatCounterMutableLiveData.setValue(chatNotificationModel.getNotificationNumber());
+                chatNotificationModelMutableLiveData.setValue(chatNotificationModel);
+                category_update.setValue(chatNotificationModel.getVersion_update());
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.d("sdasdsad", "onError: "+e.toString());
+                error.setValue(true);
+
             }
         }));
     }

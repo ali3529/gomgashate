@@ -14,8 +14,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/white"
-        >
+        android:background="?attr/selectableItemBackgroundBorderless">
 
         <RelativeLayout
             android:id="@+id/img_layout"

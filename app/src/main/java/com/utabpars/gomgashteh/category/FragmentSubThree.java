@@ -25,7 +25,9 @@ import com.utabpars.gomgashteh.databinding.FragmentSubThreeBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
 
 
-public class FragmentSubThree extends Fragment implements SubSetCallBack {
+public class FragmentSubThree extends Fragment
+        //implements SubSetCallBack
+{
 
     FragmentSubThreeBinding binding;
     SubsetViewModel subsetViewModel;
@@ -41,6 +43,7 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
         subsetViewModel=new ViewModelProvider(this).get(SubsetViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
         initViews();
+        Log.d("dbfdboooi", "onCreateView: "+"subttt");
         return binding.getRoot();
     }
 
@@ -52,8 +55,8 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
          title=getArguments().getString("title");
         type =getArguments().getString("type");
         binding.toolbartitle.setText(title);
-        subsetViewModel.getSubset(id,"sub_three",type);
-        subsetViewModel.getCallBack(this);
+      //  subsetViewModel.getSubset(id,"sub_three",type);
+      //  subsetViewModel.getCallBack(this);
         lastAnnouncmentAboveBtNavigation();
 
     }
@@ -62,7 +65,7 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
         @Override
         public void getCategoryId(View view, String id, int position,String title) {
 
-            subsetViewModel.getSubset(id,"attr",type);
+            //subsetViewModel.getSubset(id,"attr",type);
             t_id=id;
             saveCategoryNames(title);
         }
@@ -73,53 +76,53 @@ public class FragmentSubThree extends Fragment implements SubSetCallBack {
 
     }
 
-    @Override
-    public void onSubsetCallback(SubSetModel subSetModel) {
-        adaptor=new CategoryAdaptor(subSetModel.getListData(),categoryCallBack);
-        recyclerView.setAdapter(adaptor);
-    }
-
-    @Override
-    public void onAttributeCallback(SubSetModel SubSetModel) {
-        Bundle bundle=new Bundle();
-        bundle.putString("id",t_id);
-        bundle.putString("type","attr");
-        try {
-            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
-        }catch (Exception e){
-
-        }
-
-    }
-
-    @Override
-    public void emptyCallback(boolean empty,SubSetModel subSetModel) {
-        if (type.equals("category")){
-            Bundle bundle=new Bundle();
-            bundle.putString("id",t_id);
-            bundle.putString("type","attr");
-            bundle.putString("title",title);
-            try {
-                Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
-            }catch (Exception e){
-
-            }
-
-        }else {
-            SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putString("collaction_id",t_id);
-            editor.putString("type","attr");
-            editor.putString("title",title);
-            editor.apply();
-            try {
-                Navigation.findNavController(getView()).navigate(R.id.action_global_add);
-            }catch (Exception e){
-
-            }
-
-        }
-
-    }
+//    @Override
+//    public void onSubsetCallback(SubSetModel subSetModel) {
+////        adaptor=new CategoryAdaptor(subSetModel.getListData(),categoryCallBack);
+////        recyclerView.setAdapter(adaptor);
+//    }
+//
+//    @Override
+//    public void onAttributeCallback(SubSetModel SubSetModel) {
+//        Bundle bundle=new Bundle();
+//        bundle.putString("id",t_id);
+//        bundle.putString("type","attr");
+//        try {
+//            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+//        }catch (Exception e){
+//
+//        }
+//
+//    }
+//
+//    @Override
+//    public void emptyCallback(boolean empty,SubSetModel subSetModel) {
+//        if (type.equals("category")){
+//            Bundle bundle=new Bundle();
+//            bundle.putString("id",t_id);
+//            bundle.putString("type","attr");
+//            bundle.putString("title",title);
+//            try {
+//                Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
+//            }catch (Exception e){
+//
+//            }
+//
+//        }else {
+//            SharedPreferences.Editor editor=sharedPreferences.edit();
+//            editor.putString("collaction_id",t_id);
+//            editor.putString("type","attr");
+//            editor.putString("title",title);
+//            editor.apply();
+//            try {
+//                Navigation.findNavController(getView()).navigate(R.id.action_global_add);
+//            }catch (Exception e){
+//
+//            }
+//
+//        }
+//
+//    }
     private void saveCategoryNames(String title) {
         SharedPreferences SaveCategoryName;
         SharedPreferences.Editor SaveCategoryNameEditor;

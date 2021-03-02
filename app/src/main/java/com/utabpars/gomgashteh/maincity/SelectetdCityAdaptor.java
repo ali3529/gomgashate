@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.database.citydatabase.City;
 import com.utabpars.gomgashteh.databinding.ItemCitySeceltedBinding;
 import com.utabpars.gomgashteh.databinding.ItemFilterTopBinding;
 import com.utabpars.gomgashteh.model.CategoryModel;
@@ -17,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdaptor.SelectedViewHolder> {
-    List<CategoryModel.ListData> listData=new ArrayList<>();
-    List<String> names=new ArrayList<>();
+    List<City> listData=new ArrayList<>();
+    deleteSelectedCityCallback deleteSelectedCityCallback;
 
 
 
-    public SelectetdCityAdaptor(List<CategoryModel.ListData> listData,List<String> names) {
+    public SelectetdCityAdaptor(List<City> listData,deleteSelectedCityCallback deleteSelectedCityCallback) {
         this.listData = listData;
-        this.names=names;
+        this.deleteSelectedCityCallback=deleteSelectedCityCallback;
     }
 
 
@@ -38,28 +39,34 @@ public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdap
 
     @Override
     public void onBindViewHolder(@NonNull SelectedViewHolder holder, int position) {
-        if (listData==null){
-            holder.binding.setTitle(names.get(position));
-            holder.binding.delete.setOnClickListener(o ->{
-                names.remove(position);
-                notifyDataSetChanged();
-            });
-        }else {
-            holder.binding.setTitle(listData.get(position).getCategoryName());
-            holder.binding.delete.setOnClickListener(o ->{
-                listData.remove(position);
-                notifyDataSetChanged();
-            });
+//        if (listData==null){
+//            holder.binding.setTitle(names.get(position));
+//            holder.binding.delete.setOnClickListener(o ->{
+//                names.remove(position);
+//                notifyDataSetChanged();
+//            });
+//        }else {
+//            holder.binding.setTitle(listData.get(position).getCategoryName());
+//            holder.binding.delete.setOnClickListener(o ->{
+//                listData.remove(position);
+//                notifyDataSetChanged();
+//            });
+//        }
+        holder.binding.setTitle(listData.get(position).getCity_name());
+
+        holder.binding.delete.setOnClickListener(o ->{
+        deleteSelectedCityCallback.DeleteSelectetdCity(listData.get(position));
+        if (listData.size()==1){
+            deleteSelectedCityCallback.last(listData.get(position));
         }
+            });
 
 
     }
 
     @Override
     public int getItemCount() {
-        if (listData!=null){
             return listData.size();
-        }else return names.size();
 
     }
 
@@ -69,5 +76,11 @@ public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdap
             super(binding.getRoot());
             this.binding=binding;
         }
+    }
+
+
+    public interface deleteSelectedCityCallback{
+        void DeleteSelectetdCity(City city);
+        void last(City city);
     }
 }

@@ -70,14 +70,20 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
         super.onViewCreated(view, savedInstanceState);
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
-        viewModel.getAttrebute(id,type);
+          if (sharedPreferences.getString("card_id","0").equals("38")){
+                Log.d("fbdfbdfbbb", "onViewCreated: ");
+            }else {
+              viewModel.getAttrebute(id, type);
+              Log.d("fbdfbdfbbb", "onViewCreated: else "+sharedPreferences.getString("card_id,","0"));
+          }
 
         viewModel.spinnerModelMutableLiveData.observe(getViewLifecycleOwner(),t ->{
-            spinnerAdaptor=new SpinnerAdaptor(t,this);
-            recyclerView.setAdapter(spinnerAdaptor);
-            adaptorItemCount=recyclerView.getAdapter().getItemCount();
-            id_for_emty_attr=t.getAttrebuteData().get(0).getId();
-            setIndec();
+                spinnerAdaptor = new SpinnerAdaptor(t, this);
+                recyclerView.setAdapter(spinnerAdaptor);
+                adaptorItemCount = recyclerView.getAdapter().getItemCount();
+                id_for_emty_attr = t.getAttrebuteData().get(0).getId();
+                setIndec();
+
         });
 
 

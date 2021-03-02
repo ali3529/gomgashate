@@ -3,7 +3,7 @@
     <data>
         <variable
             name="category"
-            type="com.utabpars.gomgashteh.model.CategoryModel.ListData" />
+            type="com.utabpars.gomgashteh.database.categoryDatabase.Category" />
     </data>
 
 <RelativeLayout
@@ -19,7 +19,7 @@
     android:textColor="@color/text_color_black"
     android:fontFamily="@font/sans"
     tools:text="مدارک "
-    android:text="@{category.categoryName}"
+    android:text="@{category.name}"
     android:layout_marginRight="@dimen/text_size_14"
     android:layout_marginBottom="6dp"/>
     <ImageView
@@ -41,7 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_check_24"
-        android:layout_toRightOf="@id/fff"/>
+        android:layout_toRightOf="@id/fff"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

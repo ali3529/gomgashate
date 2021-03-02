@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <RelativeLayout
+        android:id="@+id/parcham"
+        android:layout_width="50dp"
+        android:layout_height="110dp"
+        android:background="@drawable/plate_shape"
+        >
+        <ImageView
+            android:id="@+id/iran"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/iran"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I.R.\nIRAN"
+            android:layout_below="@id/iran"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:accessibilityTraversalBefore="@id/iran"
+            android:padding="8dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number"
+        android:layout_width="340dp"
+        android:layout_height="110dp"
+        android:layout_toRightOf="@id/parcham"
+        android:background="@drawable/plate_shape_wite"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/f_number"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
+            android:background="@drawable/shape_plate_number"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="6dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:maxLength="2"/>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/word"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/f_number"
+            android:layout_centerInParent="true"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_toLeftOf="@id/l_number"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textAlignment="center"
+
+            android:backgroundTintMode="multiply"
+
+            />
+
+        <EditText
+            android:id="@+id/l_number"
+            android:layout_width="130dp"
+            android:layout_height="38dp"
+            android:background="@drawable/shape_plate_number"
+           android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:maxLength="3"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="110dp"
+        android:layout_toRightOf="@id/number"
+        android:background="@drawable/plate_shape_wite"
+        >
+        <TextView
+            android:id="@+id/ir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ایران"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:textStyle="bold"
+            android:textSize="22dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/province_num"
+            android:layout_width="120dp"
+            android:layout_height="38dp"
+            android:background="@drawable/shape_plate_number"
+            android:layout_marginHorizontal="6dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="6dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:maxLength="2"/>
+    </RelativeLayout>
+</LinearLayout>
+</RelativeLayout>

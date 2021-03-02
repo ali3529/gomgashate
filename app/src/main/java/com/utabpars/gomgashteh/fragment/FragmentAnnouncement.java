@@ -39,8 +39,12 @@ import com.utabpars.gomgashteh.R;
 
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.database.citydatabase.City;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
 import com.utabpars.gomgashteh.databinding.FragmentAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
+import com.utabpars.gomgashteh.maincity.FragmentChoosecity;
+import com.utabpars.gomgashteh.maincity.SelectetdCityAdaptor;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 import com.utabpars.gomgashteh.model.AppVersionModel;
 import com.utabpars.gomgashteh.model.RmModel;
@@ -81,7 +85,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     FilterAnouncmentByProvinceViewModel provinceViewModel;
     ProvinceFilterDataSource provinceFilterDataSource;
 
-    SharedPreferences sharedPreferences;
+    List<String> selectedCities=new ArrayList<>();
 
 
     @Override
@@ -135,17 +139,42 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
             }
         });
 
-        sharedPreferences=getActivity().getSharedPreferences("main_city",Context.MODE_PRIVATE);
-        try {
-            if (getMainCity()==null){
-                binding.setCity( "انتخاب");
-            }else {
-                binding.setCity(getMainCity().size()+"شهر");
-            }
-        }catch (Exception e){
+//        sharedPreferences=getActivity().getSharedPreferences("main_city",Context.MODE_PRIVATE);
+//        try {
+//            if (getMainCity()==null){
+//                binding.setCity( "انتخاب");
+//            }else {
+//                binding.setCity(getMainCity().size()+"شهر");
+//            }
+//        }catch (Exception e){
+//
+//            binding.setCity( "انتخاب");
+//        }
+        CityDatabase cityDatabase=CityDatabase.getInstance(getContext());
+        cityDatabase.cityDao().getCitySelected().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(selectetd_city->{
+                    if (selectetd_city.size()==0){
+                        binding.setCity("انتخاب");
+                    }else {
+                        binding.setCity(selectetd_city.size()+"شهر");
+                    }
+                    for (City city:selectetd_city) {
+                        selectedCities.add(city.getCity_id());
+                        Log.d("fbfdnfdn", "onViewCreated: "+city.getCity_id());
+                    }
 
-            binding.setCity( "انتخاب");
-        }
+                });
+
+        FragmentChoosecity.deletLast.observe(getViewLifecycleOwner(),t->{
+            Log.d("fbfdnfdn", "onViewCreated  foreeeeech:    sss------ "+selectedCities.size());
+                    selectedCities.clear();
+            Log.d("fbfdnfdn", "onViewCreated  foreeeeech:    sss------ "+selectedCities.size());
+                    Log.d("fbfdnfdn", "onViewCreated  foreeeeech: "+t.getCity_id());
+                    setAnounsmentFilter();
+
+
+        });
 
 
         binding.layoutLocation.setOnClickListener(new View.OnClickListener() {
@@ -206,24 +235,21 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     }
 
     private void setAnounsmentFilter() {
-        try {
-            if (getMainCity()!=null) {
 
-                provinceFilterDataSource.FilterDataSource(getMainCity().toString(),type,"");
+            if (selectedCities.size()!=0) {
+               // Log.d("dvdsvvvd", "setAnounsmentFilter if: ");
+                Log.d("dvdsvvvd", "setAnounsmentFilter if: "+selectedCities.get(0));
+                provinceFilterDataSource.FilterDataSource(selectedCities.toString(),type,"");
                 provinceViewModel.getProvinceFilter();
 
                 provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
-
                     adaptor.submitList(province);
 
                 });
 
 
-            }
-        }catch (Exception e){
-
-            if (type.length()>0){
-
+            } else if (type.length()>0){
+                Log.d("dvdsvvvd", "setAnounsmentFilter try  if---: ");
                 provinceFilterDataSource.FilterDataSource("",type,"");
                 provinceViewModel.getProvinceFilter();
                 provinceViewModel.listLiveData.observe(getViewLifecycleOwner(), province -> {
@@ -231,18 +257,19 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
                 });
 
 
-            }
-            else {
+            } else {
+                viewModel.getAnnouncement();
                 viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
                     @Override
                     public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
                         adaptor.submitList(detiles);
+                        Log.d("dvdsvvvd", "setAnounsmentFilter try  else---: ");
                     }
                 });
 
             }
 
-        }
+      //  }
 
     }
 
@@ -336,22 +363,7 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-    public List<String> getMainCity(){
-        Gson gson=new Gson();
 
-        String s=sharedPreferences.getString("main_city","w");
-
-        Type type=new TypeToken<List<String>>(){
-
-        }.getType();
-
-        List<String>  j=gson.fromJson(s,type);
-
-
-
-        Log.d("sfesfsef", "getCategoryId: "+j.get(0));
-        return j;
-    }
 
     public void setFilterViews(int i){
         if (i==1){
@@ -436,4 +448,9 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        selectedCities.clear();
+    }
 }

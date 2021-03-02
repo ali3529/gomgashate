@@ -8,6 +8,8 @@ import com.utabpars.gomgashteh.chat.phoneconfirm.PhoneConfirmModel;
 import com.utabpars.gomgashteh.chat.StatusModel;
 import com.utabpars.gomgashteh.chat.TicketResponseModel;
 import com.utabpars.gomgashteh.chat.reportchat.ReportModel;
+import com.utabpars.gomgashteh.database.categoryDatabase.DatabaseEntityModel;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabaseModel;
 import com.utabpars.gomgashteh.managerAnnouncement.ManageModel;
 import com.utabpars.gomgashteh.markannouncment.MarkModel;
 import com.utabpars.gomgashteh.model.AboutModel;
@@ -33,6 +35,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -216,5 +219,12 @@ public interface ApiInterface {
     @POST("deleteTicket")
     @FormUrlEncoded
     Single<DeletMassageModel> deleteMassage(@Field("answer_id") int answer_id);
+
+
+    @POST("categoryForDatabase")
+    Single<DatabaseEntityModel> getCategoryForDB();
+
+    @POST("cityForDatabase")
+    Single<CityDatabaseModel> getCityForDB();
 }
 

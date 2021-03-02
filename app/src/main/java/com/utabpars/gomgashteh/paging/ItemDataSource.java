@@ -22,7 +22,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class ItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.Detile> {
 
     public static final int PAGE=1;
-    public static final int PAGESIZE=5;
+    public static final int PAGESIZE=15;
     public int lastPage=0;
    static FragmentAnnouncementBinding binding;
     static Context context;

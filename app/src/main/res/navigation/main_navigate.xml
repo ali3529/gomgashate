@@ -59,8 +59,7 @@
         android:id="@+id/add"
         android:name="com.utabpars.gomgashteh.fragment.FragmentAddAnnouncement"
         android:label="fragment_add_announcement"
-        tools:layout="@layout/fragment_add_announcement"
-        app:startDestination="@id/action_add_to_fragmentCity">
+        tools:layout="@layout/fragment_add_announcement">
         <action
             android:id="@+id/action_add_to_announcement"
             app:destination="@id/announcement" />
@@ -72,8 +71,8 @@
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
         <action
-            android:id="@+id/action_add_to_fragmentCity"
-            app:destination="@id/fragmentCity"
+            android:id="@+id/action_add_to_fragmenthostCity"
+            app:destination="@id/fragmentHostOtherCity"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
@@ -81,6 +80,9 @@
         <action
             android:id="@+id/action_add_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_add_to_fragmenCity"
+            app:destination="@id/fragmentCity"/>
         <action
             android:id="@+id/action_add_to_fragmentRuls"
             app:destination="@id/fragmentRuls" />
@@ -318,7 +320,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentOtherCity"
-        android:name="com.utabpars.gomgashteh.fragment.FragmentOtherCity"
+        android:name="com.utabpars.gomgashteh.othercity.FragmentOtherCity"
         android:label="fragment_other_city"
         tools:layout="@layout/fragment_other_city" >
         <action
@@ -390,7 +392,7 @@
         android:label="EditAnnouncementFragment" >
         <action
             android:id="@+id/action_editAnnouncementFragment_to_fragmentCity"
-            app:destination="@id/fragmentCity" />
+            app:destination="@id/fragmentHostOtherCity" />
         <action
             android:id="@+id/action_editAnnouncementFragment_to_fragmentAnnouncmentDetail"
             app:destination="@id/fragmentAnnouncmentDetail"
@@ -486,6 +488,7 @@
         android:label="fragment_recomend"
         tools:layout="@layout/fragment_recomend" />
     <fragment
+
         android:id="@+id/fragmentTest"
         android:name="com.utabpars.gomgashteh.fragment.FragmentTest"
         android:label="FragmentTest" />
@@ -494,4 +497,8 @@
         android:name="com.utabpars.gomgashteh.fragment.FragmentTestImage"
         android:label="fragment_test_image"
         tools:layout="@layout/fragment_test_image" />
+    <fragment
+        android:id="@+id/fragmentHostOtherCity"
+        android:name="com.utabpars.gomgashteh.othercity.FragmentHostOtherCity"
+        android:label="FragmentHostOtherCity" />
 </navigation>

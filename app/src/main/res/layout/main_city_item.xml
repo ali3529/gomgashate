@@ -2,8 +2,8 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="category"
-            type="com.utabpars.gomgashteh.model.CategoryModel.ListData" />
+            name="province"
+            type="com.utabpars.gomgashteh.database.citydatabase.City" />
     </data>
 
     <RelativeLayout
@@ -19,7 +19,7 @@
             android:textColor="@color/text_color_black"
             android:fontFamily="@font/sans"
             tools:text="مدارک "
-            android:text="@{category.categoryName}"
+            android:text="@{province.city_name}"
             android:layout_marginRight="@dimen/text_size_14"
             android:layout_marginBottom="6dp"/>
         <ImageView

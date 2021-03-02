@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.database.citydatabase.City;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
+import com.utabpars.gomgashteh.database.citydatabase.Province;
 import com.utabpars.gomgashteh.databinding.FragmentChoosecityBinding;
 import com.utabpars.gomgashteh.model.CategoryModel;
 
@@ -29,17 +32,21 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class FragmentChoosecity extends Fragment {
 
     FragmentChoosecityBinding binding;
-    FragmentMainCity fragmentMainCity=new FragmentMainCity();
    static SharedPreferences sharedPreferences;
    static SharedPreferences.Editor editor;
-    Gson gson;
     RecyclerView recyclerView;
     SelectetdCityAdaptor adaptor;
-    MutableLiveData< List<CategoryModel.ListData>> nameMutableLiveData=new MutableLiveData<>();
-    List<String> name=new ArrayList<>();
+    CityDatabase db;
+    public static MutableLiveData<City> booleanMutableLiveData=new MutableLiveData<>();
+   public static MutableLiveData<City> deletLast=new MutableLiveData<>();
+    List<City> cityList=new ArrayList<>();
+    public static MutableLiveData<City> provinceMutableLiveData=new MutableLiveData<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +57,7 @@ public class FragmentChoosecity extends Fragment {
         sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
         initViews();
+        Log.d("fnfgngfnfgn", "onCreateView: ");
         return binding.getRoot();
 
     }
@@ -63,93 +71,59 @@ public class FragmentChoosecity extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.setFrag(this);
+         db=CityDatabase.getInstance(getContext());
+        db.cityDao().getCitySelected().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(selectetd_city->{
+                    adaptor = new SelectetdCityAdaptor(selectetd_city,deleteSelectedCityCallback);
+                    recyclerView.setAdapter(adaptor);
+                    cityList=selectetd_city;
+                });
 
-        FragmentMainCity.listDataMutableLiveData.observe(getViewLifecycleOwner(), t->{
-            if (t.size()>0){
-                nameMutableLiveData.setValue(t);
-
-            }else {
-                try {
-                    adaptor.notifyDataSetChanged();
-                }catch (Exception e){
-
-                }
-
-            }
-
-        });
-        try {
-            //set city when open app
-            if (getCityName()!=null){
-                adaptor=new SelectetdCityAdaptor(null,getCityName());
-                recyclerView.setAdapter(adaptor);
-            }else {
-
-            }
-        }catch (Exception e){
 
         }
 
 
-        nameMutableLiveData.observe(getViewLifecycleOwner(),t->{
-            //edit save city name forshow when app close
-            adaptor=new SelectetdCityAdaptor(t,null);
-            recyclerView.setAdapter(adaptor);
-
-        });
-    }
 
     public void ttt()  {
-        try {
-            //citys_id_save
-            gson=new Gson();
-            String s=gson.toJson(list());
-            editor.putString("main_city",s);
-            editor.commit();
-
-            //citys_name_save
-            Gson gson=new Gson();
-            String n=gson.toJson(name);
-            editor.putString("name",n);
-            editor.apply();
-
             popback();
-
-        } catch (Exception e) {
-
-            editor.clear();
-            editor.commit();
-            popback();
-        }
     }
 
-   public List<String> list(){
-        List<String> id=new ArrayList<>();
-       for (int i = 0; i < fragmentMainCity.ggggg().size(); i++) {
-           id.add(fragmentMainCity.ggggg().get(i).getId());
-           name.add(fragmentMainCity.ggggg().get(i).getCategoryName());
-       }
-       return id;
-   }
 
 
    public void popback(){
        Navigation.findNavController(getView()).popBackStack();
    }
 
-    public List<String> getCityName(){
-        Gson gson=new Gson();
-        SharedPreferences sharedPreferences;
-            sharedPreferences=getActivity().getSharedPreferences("main_city", Context.MODE_PRIVATE);
 
+    SelectetdCityAdaptor.deleteSelectedCityCallback deleteSelectedCityCallback=new SelectetdCityAdaptor.deleteSelectedCityCallback() {
+        @Override
+        public void DeleteSelectetdCity(City city) {
+            city.setSelected_city(false);
+            db.cityDao().selectedCity(city);
+          //  db.cityDao().selectedProvinceCity(city.getProvince_id(),false);
+            booleanMutableLiveData.setValue(city);
+            Log.d("fbdfbdfbfnbnb", "getSelectedItem:");
+            for (City c:cityList) {
+                Log.d("fbdfbdfbfnbnb", "getSelectedItem: for");
+                if (c.getProvince_id().equals(city.getProvince_id()) && c.isSelected_city()){
+                    db.cityDao().selectedProvinceCity(city.getProvince_id(),true);
+                    Log.d("fbdfbdfbfnbnb", "getSelectedItem: for if");
+                    break;
+                }else {
+                    db.cityDao().selectedProvinceCity(city.getProvince_id(),false);
+                    //provinceMutableLiveData.setValue(c);
+                    Log.d("fbdfbdfbfnbnb", "getSelectedItem: for else");
+                }
 
-        String s=sharedPreferences.getString("name","w");
-        Type type=new TypeToken<List<String>>(){
+            }
 
-        }.getType();
-        List<String>  j=gson.fromJson(s,type);
+        }
 
-        return j;
-    }
-
+        @Override
+        public void last(City city) {
+            Log.d("dbdfb", "last: "+city.getCity_id());
+            deletLast.setValue(city);
+        }
+    };
 }

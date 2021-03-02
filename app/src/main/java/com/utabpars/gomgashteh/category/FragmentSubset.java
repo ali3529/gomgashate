@@ -21,10 +21,21 @@ import android.widget.Toast;
 
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.CategoryAdaptor;
+import com.utabpars.gomgashteh.database.categoryDatabase.Attrebiute;
+import com.utabpars.gomgashteh.database.categoryDatabase.Category;
+import com.utabpars.gomgashteh.database.categoryDatabase.Collection;
+import com.utabpars.gomgashteh.database.categoryDatabase.Subset;
+import com.utabpars.gomgashteh.database.categoryDatabase.Subset2;
 import com.utabpars.gomgashteh.databinding.FragmentSubsetBinding;
 import com.utabpars.gomgashteh.interfaces.CategoryCallBack;
 
-public class FragmentSubset extends Fragment implements SubSetCallBack{
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class FragmentSubset extends Fragment implements SubSetCallBack {
      FragmentSubsetBinding binding;
      SubsetViewModel subsetViewModel;
      RecyclerView recyclerView;
@@ -32,6 +43,8 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
     String idx,title,type,id_anounce;
     Bundle bundle;
     SharedPreferences sharedPreferences;
+    String which_subset="sub_one";
+    boolean test=true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +54,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
         subsetViewModel=new ViewModelProvider(this).get(SubsetViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences("add_announce", Context.MODE_PRIVATE);
         initViews();
+        Log.d("sbsdbb", "onCreateView: ");
         return binding.getRoot();
     }
 
@@ -58,7 +72,7 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
         type =getArguments().getString("type");
 
         binding.toolbartitle.setText(title);
-        subsetViewModel.getSubset(idx,"sub_one",type);
+        setSubsetDataToRecyclerView(idx);
         subsetViewModel.getCallBack(this);
 
         lastAnnouncmentAboveBtNavigation();
@@ -71,9 +85,11 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
             bundle =new Bundle();
             bundle.putString("id",id);
             bundle.putString("title",title);
-
+            test=true;
             id_anounce=id;
-            subsetViewModel.getSubset(id,"sub_two",type);
+            which_subset="sub_two";
+            Log.d("fdbfdbfb", "getCategoryId: "+" cat callback");
+           subsetViewModel.getSubset2FromDb(id);
 
             saveCategoryNames(title);
 
@@ -81,40 +97,69 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
     };
 
     @Override
-    public void onSubsetCallback(SubSetModel subSetModel) {
-        if (subSetModel.getMasasge().equals("sub_one")){
-            adaptor=new CategoryAdaptor(subSetModel.getListData(),categoryCallBack);
-            recyclerView.setAdapter(adaptor);
-        }else if (subSetModel.getMasasge().equals("sub_two")){
-            bundle.putString("type",type);
+    public void onSubsetCallback(List<Subset> subsetModel) {
+
+            Log.d("bsdbdsbdsb", "onSubsetCallback else: ");
+
+            if (test){
             try {
-                Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubset_to_fragmentSubTwo,bundle);
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubset_to_fragmentSubTwo);
             }catch (Exception e){
 
             }
-
-
-        }
-    }
-
-    @Override
-    public void onAttributeCallback(SubSetModel SubSetModel) {
-
-        Bundle bundle=new Bundle();
-        bundle.putString("id",id_anounce);
-        bundle.putString("type","sub_two");
-
-        try {
-            Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
-        }catch (Exception e){
-
-        }
+                test=false;
+            }
 
     }
 
     @Override
-    public void emptyCallback(boolean empty,SubSetModel subSetModel) {
-        if (type.equals("category")){
+    public void onSubset2Callback(List<Subset2> subSetModel) {
+        Log.d("bsdbdsbdsb", "onSubset2Callback: ");
+        Log.d("bsdbdsbdsb", "onSubsetCallback else: ");
+        if (test) {
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_fragmentSubset_to_fragmentSubTwo, bundle);
+                Log.d("تواتوتاواتو", "onSubsetCallback else: ");
+
+            } catch (Exception e) {
+
+            }
+            test=false;
+        }
+    }
+
+    @Override
+    public void onAttributeCallback(List<Attrebiute> SubSetModel) {
+        if (isComeFromAdd()){
+            Log.d("bsdbdsbdsb", "onAttributeCallback: ");
+            Bundle bundle=new Bundle();
+            bundle.putString("id",id_anounce);
+            bundle.putString("type","sub_two");
+
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAttrebute,bundle);
+            }catch (Exception e){
+
+            }
+        }else {
+            Bundle bundle=new Bundle();
+            bundle.putString("id", id_anounce);
+            bundle.putString("type","sub_two");
+            bundle.putString("title",title);
+            try {
+                Navigation.findNavController(getView()).navigate(R.id.action_global_fragmentAnnouncCollection,bundle);
+            }catch (Exception e){
+
+            }
+        }
+
+
+    }
+
+    @Override
+    public void emptyCallback(boolean empty) {
+        Log.d("bsdbdsbdsb", "emptyCallback: ");
+        if (!isComeFromAdd()){
             Bundle bundle=new Bundle();
             bundle.putString("id", id_anounce);
             bundle.putString("type","sub_two");
@@ -169,5 +214,28 @@ public class FragmentSubset extends Fragment implements SubSetCallBack{
                 }
             }
         });
+    }
+
+    private boolean isComeFromAdd(){
+        SharedPreferences from_add_shpref=getActivity().getSharedPreferences("from_add",Context.MODE_PRIVATE);
+        return from_add_shpref.getBoolean("from_add",false);
+    }
+
+    public void setSubsetDataToRecyclerView(String subset_id){
+        subsetViewModel.getSubsetToRecyclerView(subset_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result->{
+                    List<Category> categories = new ArrayList<>();
+                    for (Subset c : result) {
+                        Category category = new Category();
+                        category.setId(c.getId());
+                        category.setName(c.getName());
+                        categories.add(category);
+
+
+                        adaptor = new CategoryAdaptor(categories, categoryCallBack);
+                        recyclerView.setAdapter(adaptor);
+                    }
+                });
     }
 }

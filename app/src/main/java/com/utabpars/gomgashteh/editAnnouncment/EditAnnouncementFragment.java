@@ -30,6 +30,8 @@ import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.database.citydatabase.City;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
 import com.utabpars.gomgashteh.databinding.FragmentEditAnnouncementBinding;
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
@@ -59,8 +61,6 @@ public class EditAnnouncementFragment extends Fragment {
     RecyclerView oldRecyclerView,recyclerView;
     ImageEditAdaptor oldAdaptor;
     SharedPreferences sharedPreferences,user_status;
-    SharedPreferences other_city;
-    SharedPreferences.Editor edit;
 
 
     String type;
@@ -72,6 +72,8 @@ public class EditAnnouncementFragment extends Fragment {
     List<String> old_pic=new ArrayList<>();
      List<String> othercity=new ArrayList<>();
      static String city_save;
+    CityDatabase cityDatabase;
+    List<String> cityList;
 
 
 
@@ -87,6 +89,7 @@ public class EditAnnouncementFragment extends Fragment {
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_edit_announcement,container,false);
         viewModel=new ViewModelProvider(this).get(EditAnnouncementViewModel.class);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        cityDatabase=CityDatabase.getInstance(getContext());
         initViews();
         return binding.getRoot();
     }
@@ -98,9 +101,8 @@ public class EditAnnouncementFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         oldRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         sharedPreferences = getActivity().getSharedPreferences("editcity", Context.MODE_PRIVATE);
-        other_city = getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
+
         user_status=getActivity().getSharedPreferences("user_login",Context.MODE_PRIVATE);
-        edit=other_city.edit();
 
     }
 
@@ -146,22 +148,34 @@ public class EditAnnouncementFragment extends Fragment {
                 Bundle bundle=new Bundle();
                 bundle.putString("navigate","otherCityEdit");
                 Navigation.findNavController(view).navigate(R.id.action_editAnnouncementFragment_to_fragmentCity,bundle);
+
+//                cityDatabase.cityDao().clearProvinceAfterInsertAnnunce();
+//                cityDatabase.cityDao().clearSelectedCity();
             }
         });
 
        // Log.d("sdfsdfdsfdsf", "onViewCreated: "+editData.getData().getTitle());
 
         //set other city
-        if (getSHaredList()==null){
-//            binding.othercity.setText("انتخاب کنید");
-            for (int i = 0; i < othercity.size(); i++) {
-                binding.othercity.append(othercity.get(i)+" ");
-            }
-        }else {
-            SharedPreferences otherCityName=getActivity().getSharedPreferences("other_city_edit",Context.MODE_PRIVATE);
-            binding.othercity.setText(otherCityName.getString("otherCity_name","00"));
-        }
-
+//        if (getSHaredList()==null){
+////            binding.othercity.setText("انتخاب کنید");
+//            for (int i = 0; i < othercity.size(); i++) {
+//                binding.othercity.append(othercity.get(i)+" ");
+//            }
+//        }else {
+//            SharedPreferences otherCityName=getActivity().getSharedPreferences("other_city_edit",Context.MODE_PRIVATE);
+//            binding.othercity.setText(otherCityName.getString("otherCity_name","00"));
+//        }
+        cityDatabase.cityDao().getOtherCitySelected().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(selectetOtherCity->{
+                    cityList=new ArrayList<>();
+                    for (City c:selectetOtherCity) {
+                        binding.othercity.append(c.getCity_name()+" ");
+                        cityList.add(c.getCity_id());
+                        Log.d("fdbdfbfcbfdb", "onViewCreated: for ");
+                    }
+                });
 
         try {
             recyclerView.setAdapter(adaptor);
@@ -286,22 +300,6 @@ public class EditAnnouncementFragment extends Fragment {
 
     }
 
-    public List<String> getSHaredList() {
-        Gson gson = new Gson();
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("other_city_edit", Context.MODE_PRIVATE);
-
-        String s = sharedPreferences.getString("otherCityList", null);
-        Type type = new TypeToken<List<String>>() {
-
-        }.getType();
-        List<String> j = gson.fromJson(s, type);
-
-
-
-        return j;
-
-
-    }
     public void onClickRadio(View view){
         boolean checked = ((RadioButton) view).isChecked();
 
@@ -343,11 +341,11 @@ public class EditAnnouncementFragment extends Fragment {
 
 
         RequestBody other_city;
-        if (getSHaredList()==null){
+        if (cityList.size()==0){
             other_city=RequestBody.create(MediaType.parse("other_city"),"");
         }else {
 
-            other_city=RequestBody.create(MediaType.parse("other_city"),getSHaredList().toString());
+            other_city=RequestBody.create(MediaType.parse("other_city"),cityList.toString());
         }
 
         Log.d("dfdsfdsfdsfdsf", "title: "+binding.title.getText().toString());
@@ -360,6 +358,7 @@ public class EditAnnouncementFragment extends Fragment {
         Log.d("dfdsfdsfdsfdsf", "fetchdata: "+binding.surpriseText.getText());
         Log.d("dfdsfdsfdsfdsf", "old pic: "+old_pic.toString());
         Log.d("dfdsfdsfdsfdsf", "is_show_addres: "+is_show_addres);
+        Log.d("dfdsfdsfdsfdsf", "is_show_addres: "+cityList.toString());
 
 
 
@@ -424,7 +423,5 @@ PassDataCallBack passDataCallBack=new PassDataCallBack() {
     @Override
     public void onDestroy() {
         super.onDestroy();
-                edit.clear();
-        edit.apply();
     }
 }
