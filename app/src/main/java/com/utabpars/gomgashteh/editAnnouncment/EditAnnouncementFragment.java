@@ -115,6 +115,8 @@ public class EditAnnouncementFragment extends Fragment {
         binding.load.setVisibility(View.VISIBLE);
         viewModel.getEditDetail(id);
 
+
+
         viewModel.dataMutableLiveData.observe(getViewLifecycleOwner(), new Observer<DetailModel.Data>() {
             @Override
             public void onChanged(DetailModel.Data data) {
@@ -131,14 +133,18 @@ public class EditAnnouncementFragment extends Fragment {
 
             }
         });
-
+        if (user_status.getString("user_type","0000").equals("1")){
+            binding.pishkanLayout.setVisibility(View.VISIBLE);
+        }else {
+            binding.pishkanLayout.setVisibility(View.GONE);
+        }
 
         binding.setcity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
                 bundle.putString("navigate","city_edit");
-                Navigation.findNavController(view).navigate(R.id.action_editAnnouncementFragment_to_fragmentCity,bundle);
+                Navigation.findNavController(view).navigate(R.id.action_editAnnouncementFragment_to_City,bundle);
             }
         });
 
@@ -149,23 +155,9 @@ public class EditAnnouncementFragment extends Fragment {
                 bundle.putString("navigate","otherCityEdit");
                 Navigation.findNavController(view).navigate(R.id.action_editAnnouncementFragment_to_fragmentCity,bundle);
 
-//                cityDatabase.cityDao().clearProvinceAfterInsertAnnunce();
-//                cityDatabase.cityDao().clearSelectedCity();
             }
         });
 
-       // Log.d("sdfsdfdsfdsf", "onViewCreated: "+editData.getData().getTitle());
-
-        //set other city
-//        if (getSHaredList()==null){
-////            binding.othercity.setText("انتخاب کنید");
-//            for (int i = 0; i < othercity.size(); i++) {
-//                binding.othercity.append(othercity.get(i)+" ");
-//            }
-//        }else {
-//            SharedPreferences otherCityName=getActivity().getSharedPreferences("other_city_edit",Context.MODE_PRIVATE);
-//            binding.othercity.setText(otherCityName.getString("otherCity_name","00"));
-//        }
         cityDatabase.cityDao().getOtherCitySelected().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(selectetOtherCity->{

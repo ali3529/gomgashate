@@ -43,6 +43,9 @@ public interface CityDao {
     @Query("SELECT * FROM city WHERE selected_city=1")
     Flowable<List<City>> getCitySelected();
 
+    @Query("SELECT * FROM city WHERE selected_city=1")
+    List<City> getCitySelectedForFilterAnnounce();
+
     @Query("UPDATE city SET other_city_selected=0  WHERE other_city_selected=1")
     void clearSelectedCity();
     @Query("UPDATE province Set selected_other_City=0 WHERE province_id=:province_id")
@@ -65,7 +68,7 @@ public interface CityDao {
 
     //selected size for not select plus 10
     @Query("SELECT * FROM city WHERE other_city_selected=1")
-    List<City> getSelectedCitySize();
+    Flowable<List<City>> getSelectedCitySize();
 
 
 

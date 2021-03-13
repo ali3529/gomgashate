@@ -92,7 +92,8 @@ public class FragmentProfile extends Fragment {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean){
                     log_status.setValue(false);
-                    editor.putBoolean("user_login",false);
+                   // editor.putBoolean("user_login",false);
+                    editor.clear();
                     editor.apply();
                     bottomSheetLogout.dismiss();
 

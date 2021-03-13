@@ -1,18 +1,13 @@
 package com.utabpars.gomgashteh.paging.provinceFilter;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -23,16 +18,18 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
     static String city;
     static String type;
      static String key_search;
+    static EmptyAnnouncement emptyAnnouncement;
 
     public static final int PAGE=1;
 
     public ProvinceFilterDataSource() {
     }
 
-    public void FilterDataSource(String city,String type,String key_search) {
+    public void FilterDataSource(String city, String type, String key_search, EmptyAnnouncement emptyAnnouncement) {
         this.city=city;
         this.type=type;
         this.key_search=key_search;
+        this.emptyAnnouncement=emptyAnnouncement;
 
     }
 
@@ -45,7 +42,8 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
         compositeDisposable.add(apiInterface.filterAnnouncement(
                 city,
                 type,
-                key_search)
+                key_search,
+                PAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
@@ -54,6 +52,9 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                         if (anoncmentModel.getResponse().equals("1")){
                             callback.onResult(anoncmentModel.getData(),null,PAGE);
 
+                        }else {
+                            Log.d("jkhj,jh,h,hj,", "onSuccess: "+"not found");
+                            emptyAnnouncement.onEmptyAnnouncement();
                         }
 
 
@@ -62,6 +63,7 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                     @Override
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                         Log.d("vxcvdxvs", "onSuccess: error"+e.toString());
+
 
                     }
                 }));
@@ -74,7 +76,47 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, AnoncmentModel.Detile> callback) {
+        Log.d("dsfvsdvsdvsdv", "loadAfter:gghygf ");
 
+
+        ApiInterface apiInterface= ApiClient.getApiClient();
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        Integer key = true? params.key + 1 : null;
+        compositeDisposable.add(apiInterface.filterAnnouncement(
+                city,
+                type,
+                key_search,
+                key)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
+                        if (anoncmentModel.getResponse()!=null) {
+                            if (anoncmentModel.getResponse().equals("1") && anoncmentModel.getNext_page_url()!=null) {
+                                callback.onResult(anoncmentModel.getData(), key);
+                                Log.d("jkhj,jh,h,hj,", "onSuccess: "+"not found"+key);
+                                Log.d("jkhj,jh,h,hj,", "onSuccess: "+"not found"+params.key);
+                            }
+                        }else {
+                            Log.d("jkhj,jh,h,hj,", "onSuccess: "+"not found");
+                            emptyAnnouncement.onEmptyAnnouncement();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.d("vxcvdxvs", "onSuccess: error"+e.toString());
+
+
+                    }
+                }));
+    }
+
+   public interface EmptyAnnouncement {
+        void onEmptyAnnouncement();
     }
 
 

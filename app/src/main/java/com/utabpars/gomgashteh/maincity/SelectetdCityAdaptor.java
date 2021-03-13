@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.maincity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,11 +57,8 @@ public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdap
 
         holder.binding.delete.setOnClickListener(o ->{
         deleteSelectedCityCallback.DeleteSelectetdCity(listData.get(position));
-        if (listData.size()==1){
-            deleteSelectedCityCallback.last(listData.get(position));
-        }
-            });
 
+            });
 
     }
 
@@ -81,6 +79,5 @@ public class SelectetdCityAdaptor extends RecyclerView.Adapter<SelectetdCityAdap
 
     public interface deleteSelectedCityCallback{
         void DeleteSelectetdCity(City city);
-        void last(City city);
     }
 }

@@ -59,14 +59,19 @@ public class PagingAdaptor extends PagedListAdapter<AnoncmentModel.Detile, Pagin
                 detileCallBack.onItemClicked(view,getItem(position).getId());
             }
         });
+        if (getItem(position).getType().equals("پیدا شده")){
+            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+        }
        if (getItem(position).getType().equals("پیدا شده")){
            holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
        }
-        if (getItem(position).getReward().equals("0")){
+        if (getItem(position).getReward().equals("0 تومان")){
             holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+        }else {
+            holder.binding.rewardLayout.setVisibility(View.VISIBLE);
         }
 
-        if (getItem(position).getPishkhan().equals("ثبت پیشخوان")){
+        if (getItem(position).getPishkhan().equals("دفتر پیشخوان")){
             holder.binding.pishkan.setVisibility(View.VISIBLE);
         }else {
             holder.binding.pishkan.setVisibility(View.INVISIBLE);

@@ -103,6 +103,7 @@ public class AnoncmentModel {
         @SerializedName("status_type")
         private String status_type;
 
+
         public String getStatus_type() {
             return status_type;
         }

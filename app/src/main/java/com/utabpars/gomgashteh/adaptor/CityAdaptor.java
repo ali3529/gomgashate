@@ -50,7 +50,7 @@ public class CityAdaptor extends RecyclerView.Adapter<CityAdaptor.CityViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                categoryCallBack.getCategoryId(view, city.get(position).getProvince_id(),position, city.get(position).getCity_name());
+                categoryCallBack.getCategoryId(view, city.get(position).getCity_id(),position, city.get(position).getCity_name());
                 if (itemSelectedCallback!=null){
                     itemSelectedCallback.getSelectedItem(view, city.get(position),position,false);
                 }

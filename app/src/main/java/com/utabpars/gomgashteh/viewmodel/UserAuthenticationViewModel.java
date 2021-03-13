@@ -54,7 +54,7 @@ public class UserAuthenticationViewModel extends ViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        error.postValue(e.toString());
+                        error.setValue(e.toString());
                         Log.d("sdfsdf", "onError: "+e.toString());
                     }
                 }));
@@ -70,7 +70,8 @@ public class UserAuthenticationViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull RegisterModel rmModel) {
 
-                        otpResponseLiveData.postValue(rmModel);
+                        otpResponseLiveData.setValue(rmModel);
+                        Log.d("gnfgnfgnfgn", "onSuccess: ");
 
 
                     }

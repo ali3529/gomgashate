@@ -55,6 +55,7 @@ FragmentOtherCity extends Fragment {
     OtherCityAdaptor otherCityAdaptor;
     String navigate;
     OtherCityViewModel viewModel;
+
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +83,20 @@ FragmentOtherCity extends Fragment {
             Log.d("sdvdsvdsv", "onViewCreated: ");
         });
 
+
+//      viewModel.getSelectedCitySize().subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(rea->{
+//                    if (rea.size()<=10){
+//                        Log.d("gfnhgmghmgh", "onViewCreated: goooood");
+//                        is_ten_city_selected=true;
+//                    }else {
+//                        Log.d("gfnhgmghmgh", "onViewCreated: "+rea.size());
+//                        is_ten_city_selected=false;
+//                    }
+//
+//                });
+
     }
 
     private void initViews() {
@@ -94,12 +109,11 @@ FragmentOtherCity extends Fragment {
 
     OtherCityAdaptor.ItemCitySelected itemCitySelected=new OtherCityAdaptor.ItemCitySelected() {
         @Override
-        public void getSelectedItem(View view, City city, int position, boolean is_checked) {
-            city.setSelected_otherCity(is_checked);
-            viewModel.updateSelectetOtherCity(city);
+        public void getSelectedItem(View view, City city, int position, boolean is_checked,int is_ten_city_selected) {
+                city.setSelected_otherCity(is_checked);
+                viewModel.updateSelectetOtherCity(city);
 
-            viewModel.setSelectedProvince(city.getProvince_id(),is_checked);
-            Log.d("sdvdsvdsv", "getSelectedItem: ");
+                viewModel.setSelectedProvince(city.getProvince_id(), is_checked);
         }
     };
 

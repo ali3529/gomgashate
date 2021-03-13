@@ -29,4 +29,9 @@ public class FilterAnouncmentByProvinceViewModel extends ViewModel {
     }
 
 
+    public void refreshData(){
+        provinceFilterDataSourceFactory.getMutableLiveData().getValue().invalidate();
+    }
+
+
 }

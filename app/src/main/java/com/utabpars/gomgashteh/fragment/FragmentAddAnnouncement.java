@@ -207,7 +207,6 @@ public class FragmentAddAnnouncement extends Fragment  {
                         binding.othercity.setText(result.size()+"شهر");
                         binding.cityName.append(c.getCity_name()+" , ");
                         cityList.add(c.getCity_id());
-
                     }
 
                 });
@@ -392,7 +391,6 @@ public class FragmentAddAnnouncement extends Fragment  {
 
 
                 }
-                //todo
 
                 break;
             case R.id.lost:

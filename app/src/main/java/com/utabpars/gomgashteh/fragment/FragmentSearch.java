@@ -35,11 +35,14 @@ import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.SearchAdaptor;
 import com.utabpars.gomgashteh.api.ApiClient;
 import com.utabpars.gomgashteh.api.ApiInterface;
+import com.utabpars.gomgashteh.database.citydatabase.City;
+import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
 import com.utabpars.gomgashteh.databinding.FragmentSearchBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -57,6 +60,7 @@ public class FragmentSearch extends Fragment  {
     ImageView backArrow,clear_text;
     static AnoncmentModel Save_anoncmentModel;
     SharedPreferences sharedPreferences;
+    CityDatabase cityDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +70,7 @@ public class FragmentSearch extends Fragment  {
        getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         sharedPreferences=getActivity().getSharedPreferences("main_city",Context.MODE_PRIVATE);
         initViews();
+        cityDatabase=CityDatabase.getInstance(getContext());
 
         return binding.getRoot();
 
@@ -107,14 +112,13 @@ public class FragmentSearch extends Fragment  {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                try {
-                    if (getMainCity()!=null){
-                        searcgKey(getMainCity().toString(),type,charSequence.toString());
-                    }
-                }catch (Exception e){
-                    searcgKey("",type,charSequence.toString());
+                if (!listCity().isEmpty()) {
+                    searcgKey(listCity().toString(), type, charSequence.toString());
+                    Log.d(" ", "onTextChanged: ");
+                }else {
+                    searcgKey("", type, charSequence.toString());
+                    Log.d("fbfdbdfbdfb", "onTextChanged: else"+type);
                 }
-
 
                 binding.setProgres(true);
             }
@@ -158,7 +162,7 @@ public class FragmentSearch extends Fragment  {
     private void searcgKey(String city,String type,String keySearch) {
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.filterAnnouncement(city,type,keySearch)
+        compositeDisposable.add(apiInterface.filterAnnouncement(city,type,keySearch,1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
@@ -198,21 +202,15 @@ public class FragmentSearch extends Fragment  {
                 }));
     }
 
-    public List<String> getMainCity(){
-        Gson gson=new Gson();
-
-        String s=sharedPreferences.getString("main_city","w");
-
-        Type type=new TypeToken<List<String>>(){
-
-        }.getType();
-
-        List<String>  j=gson.fromJson(s,type);
 
 
+    public List<String> listCity(){
+        List<String> list=new ArrayList<>();
+        for (City city: cityDatabase.cityDao().getCitySelectedForFilterAnnounce()) {
+            list.add(city.getCity_id());
+        }
+        return list;
 
-        Log.d("sfesfsef", "getCategoryId: "+j.get(0));
-        return j;
     }
 
 

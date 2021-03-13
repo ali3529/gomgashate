@@ -17,9 +17,9 @@ public class    ApiClient {
 
     private static Retrofit getInstance(){
         if (retrofit==null){
-            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-//                    .connectTimeout(60,TimeUnit.SECONDS)
-//                    .readTimeout(60,TimeUnit.SECONDS);
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                    .connectTimeout(60,TimeUnit.SECONDS)
+                    .readTimeout(60,TimeUnit.SECONDS);
             httpClient.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {

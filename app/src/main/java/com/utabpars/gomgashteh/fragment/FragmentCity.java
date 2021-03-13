@@ -62,6 +62,7 @@ public class FragmentCity extends Fragment {
                     editor.putString("province_id",province_id);
                     editor.putString("province_name",province_name);
                     editor.putString("city_id",String.valueOf(id));
+                    Log.d("uymuymyu", "getCategoryId: "+id);
                     editor.putString("city_name",province.get(position).getCity_name());
                     editor.apply();
                     if (navigation.equals("city_add")){

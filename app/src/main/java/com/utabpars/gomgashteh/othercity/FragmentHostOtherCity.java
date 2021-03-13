@@ -105,9 +105,5 @@ public class FragmentHostOtherCity extends Fragment {
 
         }
 
-        @Override
-        public void last(City city) {
-
-        }
     };
 }

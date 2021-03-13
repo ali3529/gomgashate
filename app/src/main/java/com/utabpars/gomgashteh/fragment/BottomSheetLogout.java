@@ -52,7 +52,7 @@ public class BottomSheetLogout extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
 
-                isLogOut.postValue(true);
+                isLogOut.setValue(true);
                 Toast.makeText(getContext(), "خارج شدید", Toast.LENGTH_SHORT).show();
             }
         });

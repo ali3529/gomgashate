@@ -394,6 +394,9 @@
             android:id="@+id/action_editAnnouncementFragment_to_fragmentCity"
             app:destination="@id/fragmentHostOtherCity" />
         <action
+            android:id="@+id/action_editAnnouncementFragment_to_City"
+            app:destination="@id/fragmentCity" />
+        <action
             android:id="@+id/action_editAnnouncementFragment_to_fragmentAnnouncmentDetail"
             app:destination="@id/fragmentAnnouncmentDetail"
             app:popUpTo="@id/fragmentAnnouncmentDetail"

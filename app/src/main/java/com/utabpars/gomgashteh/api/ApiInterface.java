@@ -111,7 +111,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     Single<AnoncmentModel> filterAnnouncement(@Field("city") String city,
                                                  @Field("type") String type,
-                                                 @Field("key") String key);
+                                                 @Field("key") String key,
+                                              @Query("page") int page);
 
     @POST("provinceFilter")
     @FormUrlEncoded

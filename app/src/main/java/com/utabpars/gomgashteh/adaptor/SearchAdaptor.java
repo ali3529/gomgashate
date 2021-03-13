@@ -1,5 +1,6 @@
 package com.utabpars.gomgashteh.adaptor;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +46,14 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchView
                 detileCallBack.onItemClicked(view,detiles.get(position).getId());
             }
         });
-        if (detiles.get(position).getReward().equals("0")){
+        if (detiles.get(position).getReward().equals("0 تومان")){
             holder.binding.rewardLayout.setVisibility(View.INVISIBLE);
+        }
+        holder.binding.status.setVisibility(View.INVISIBLE);
+        if (detiles.get(position).getPishkhan().equals("دفتر پیشخوان")){
+            holder.binding.pishkan.setVisibility(View.VISIBLE);
+        }else {
+            holder.binding.pishkan.setVisibility(View.INVISIBLE);
         }
     }
 

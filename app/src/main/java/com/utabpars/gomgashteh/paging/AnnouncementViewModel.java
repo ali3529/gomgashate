@@ -27,7 +27,7 @@ public class AnnouncementViewModel extends ViewModel {
     FragmentAnnouncementBinding binding;
 
     public  AnnouncementViewModel(){
-       getAnnouncement();
+      getAnnouncement();
 
     }
 

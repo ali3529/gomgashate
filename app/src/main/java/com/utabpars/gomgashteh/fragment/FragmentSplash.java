@@ -81,6 +81,7 @@ public class FragmentSplash extends Fragment {
          user_id = sharedPreferences.getString("user_id", "0");
         boolean save_category=save_category_to_database.getBoolean("category_status",true);
         chatNotificationViewModel.getChatNotification(user_id);
+        binding.preeeeg.setVisibility(View.VISIBLE);
         chatNotificationViewModel.chatCounterMutableLiveData.observe(getViewLifecycleOwner(), notification -> {
 
             if (notification == 0) {
@@ -106,6 +107,7 @@ public class FragmentSplash extends Fragment {
 
         chatNotificationViewModel.category_update.observe(getViewLifecycleOwner(),is_update->{
             binding.tryAgain.setVisibility(View.GONE);
+            binding.preeeeg.setVisibility(View.GONE);
             if (save_category){
                 getCategoryForDb();
                 SharedPreferences.Editor editor = save_category_to_database.edit();
@@ -129,6 +131,7 @@ public class FragmentSplash extends Fragment {
 
         chatNotificationViewModel.error.observe(getViewLifecycleOwner(),error->{
             binding.tryAgain.setVisibility(View.VISIBLE);
+            binding.preeeeg.setVisibility(View.GONE);
         });
 
 
@@ -176,9 +179,6 @@ public class FragmentSplash extends Fragment {
 
     public void navigateTo(){
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 NavOptions navOptions = new NavOptions.Builder()
                         .setPopUpTo(R.id.fragmentSplash, true)
                         .build();
@@ -188,13 +188,14 @@ public class FragmentSplash extends Fragment {
                 }catch (Exception e){
 
                 }
-            }
-        }, 2000);
+
     }
 
 
     public void tryAgain(){
         chatNotificationViewModel.getChatNotification(user_id);
+        binding.tryAgain.setVisibility(View.GONE);
+        binding.preeeeg.setVisibility(View.VISIBLE);
 
     }
 

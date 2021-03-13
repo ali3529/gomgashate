@@ -88,6 +88,28 @@ public class DetailModel {
         @SerializedName("showaddress_edit")
         private String showAddressEdit;
 
+        @SerializedName("office_name")
+        private String office_name;
+
+        @SerializedName("tell")
+        private String office_tell;
+
+        public String getOffice_name() {
+            return office_name;
+        }
+
+        public void setOffice_name(String office_name) {
+            this.office_name = office_name;
+        }
+
+        public String getOffice_tell() {
+            return office_tell;
+        }
+
+        public void setOffice_tell(String office_tell) {
+            this.office_tell = office_tell;
+        }
+
         public String getShowAddressEdit() {
             return showAddressEdit;
         }

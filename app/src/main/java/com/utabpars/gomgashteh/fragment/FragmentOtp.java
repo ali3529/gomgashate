@@ -39,7 +39,7 @@ public class FragmentOtp extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getActivity().findViewById(R.id.bottomnav).setVisibility(View.GONE);
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_otp,container,false);
-        viewModel=new ViewModelProvider(getActivity()).get(UserAuthenticationViewModel.class);
+        viewModel=new ViewModelProvider(this).get(UserAuthenticationViewModel.class);
         return binding.getRoot();
     }
 

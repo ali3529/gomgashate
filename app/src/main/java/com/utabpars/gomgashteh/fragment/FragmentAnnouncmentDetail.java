@@ -177,15 +177,17 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
                 if (data.getType().equals("پیدا شده")){
                     binding.rewardLayout.setVisibility(View.INVISIBLE);
                 }
-                if (data.getReward().equals("0")){
+                if (data.getReward().equals("0 تومان")){
                     binding.rewardLayout.setVisibility(View.INVISIBLE);
                 }
 
                 if (data.getShowAddress().equals("0")){
                     binding.addressLayout.setVisibility(View.GONE);
+                    binding.tellNameLayout.setVisibility(View.GONE);
                 }else {
                     binding.addressLayout.setVisibility(View.VISIBLE);
-                    binding.showAddress.setText(data.getShowAddress());
+                    binding.showName.setText(data.getShowAddress());
+                    binding.tellNameLayout.setVisibility(View.VISIBLE);
                 }
 
             }

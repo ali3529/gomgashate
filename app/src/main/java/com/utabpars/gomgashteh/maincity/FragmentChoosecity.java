@@ -44,9 +44,7 @@ public class FragmentChoosecity extends Fragment {
     SelectetdCityAdaptor adaptor;
     CityDatabase db;
     public static MutableLiveData<City> booleanMutableLiveData=new MutableLiveData<>();
-   public static MutableLiveData<City> deletLast=new MutableLiveData<>();
     List<City> cityList=new ArrayList<>();
-    public static MutableLiveData<City> provinceMutableLiveData=new MutableLiveData<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,10 +118,5 @@ public class FragmentChoosecity extends Fragment {
 
         }
 
-        @Override
-        public void last(City city) {
-            Log.d("dbdfb", "last: "+city.getCity_id());
-            deletLast.setValue(city);
-        }
     };
 }

@@ -152,7 +152,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="#FBEBAC"
                                 android:layout_margin="4dp"
-                                android:layout_alignParentTop="true"
+                               android:layout_below="@id/title"
                                 android:layout_alignParentLeft="true"
                                 android:elevation="2dp"
                                 android:gravity="center"
@@ -436,55 +436,12 @@
 
 
                         </RelativeLayout>
-                        <RelativeLayout
-                            android:id="@+id/address_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/othercity_layout"
-                            android:gravity="right"
-                            android:padding="@dimen/detail_padding"
-                            android:layout_marginTop="1dp"
 
-                            >
-                            <TextView
-                                android:id="@+id/address_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="آدرس"
-                                android:textSize="@dimen/detail_size"
-                                android:fontFamily="@font/sans"
-                                android:textColor="@color/text_color_low_black"
-
-                                android:layout_marginTop="4dp"
-                                android:layout_alignParentRight="true"/>
-                            <TextView
-                                android:id="@+id/show_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                tools:text="ناموجود"
-                                android:textSize="@dimen/detail_size"
-                                android:fontFamily="@font/sans"
-                                android:textColor="@color/text_color_black"
-                                android:layout_below="@id/address_txt"
-                                android:layout_marginTop="6dp"
-                                android:layout_alignParentRight="true"/>
-                            <View
-                                android:id="@+id/view6"
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginHorizontal="2dp"
-                                android:background="@color/hr_color"
-                                android:layout_below="@id/show_address"
-                                android:layout_marginTop="6dp"/>
-
-
-
-                        </RelativeLayout>
                         <RelativeLayout
                             android:id="@+id/layout_detail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/address_layout"
+                            android:layout_below="@id/othercity_layout"
                             android:gravity="right"
                             android:padding="@dimen/detail_padding"
                             android:layout_marginTop="6dp"
@@ -526,10 +483,109 @@
                                 android:layout_marginTop="4dp"/>
                         </RelativeLayout>
                         <RelativeLayout
-                            android:id="@+id/report"
+                            android:id="@+id/address_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/layout_detail"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+
+                            >
+                            <TextView
+                                android:id="@+id/address_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="نام دفتر"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+
+                                android:layout_marginTop="1dp"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+                                android:id="@+id/show_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{details.office_name}"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_below="@id/address_txt"
+                                android:layout_marginTop="2dp"
+                                android:layout_alignParentRight="true"/>
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/tell_name_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/address_layout"
+                            android:gravity="right"
+                            android:padding="@dimen/detail_padding"
+                            android:layout_marginTop="1dp"
+
+                            >
+                            <TextView
+                                android:id="@+id/name_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="آدرس"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+
+                                android:layout_marginTop="1dp"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+                                android:id="@+id/show_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_below="@id/name_txt"
+                                android:layout_marginTop="2dp"
+                                android:layout_alignParentRight="true"/>
+
+                            <TextView
+                                android:id="@+id/tell_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="شماره تماس"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_low_black"
+                                android:layout_below="@id/show_name"
+                                android:layout_marginTop="1dp"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+                                android:id="@+id/show_tell"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="@{details.office_tell}"
+                                android:textSize="@dimen/detail_size"
+                                android:fontFamily="@font/sans"
+                                android:textColor="@color/text_color_black"
+                                android:layout_below="@id/tell_txt"
+                                android:layout_marginTop="2dp"
+                                android:layout_alignParentRight="true"/>
+
+                            <View
+                                android:id="@+id/view6"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="2dp"
+                                android:background="@color/hr_color"
+                                android:layout_below="@id/show_tell"
+                                android:layout_marginTop="6dp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tell_name_layout"
                             android:gravity="right"
                             android:padding="@dimen/detail_padding"
                             android:layout_marginTop="1dp"

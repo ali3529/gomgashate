@@ -18,6 +18,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class OtherCityViewModel extends AndroidViewModel {
     CityDatabase db;
+    int c=0;
    public MutableLiveData<List<City>> listMutableLiveData=new MutableLiveData<>();
     public OtherCityViewModel(@NonNull Application application) {
         super(application);
@@ -59,7 +60,8 @@ public class OtherCityViewModel extends AndroidViewModel {
     }
 
 
-    public int getSelectedCitySizegg(){
-        return db.cityDao().getSelectedCitySize().size();
+    public Flowable<List<City>> getSelectedCitySize(){
+
+        return db.cityDao().getSelectedCitySize();
     }
 }
