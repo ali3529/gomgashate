@@ -6,13 +6,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,37 +23,24 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.SearchAdaptor;
-import com.utabpars.gomgashteh.api.ApiClient;
-import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.database.citydatabase.City;
 import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
 import com.utabpars.gomgashteh.databinding.FragmentSearchBinding;
 import com.utabpars.gomgashteh.interfaces.DetileCallBack;
 import com.utabpars.gomgashteh.model.AnoncmentModel;
+import com.utabpars.gomgashteh.paging.PagingAdaptor;
+import com.utabpars.gomgashteh.paging.keysearchpaging.KeyFilterDataSource;
+import com.utabpars.gomgashteh.paging.keysearchpaging.KeyFilterDataSourceViewModel;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class FragmentSearch extends Fragment  {
     FragmentSearchBinding binding;
@@ -61,6 +51,8 @@ public class FragmentSearch extends Fragment  {
     static AnoncmentModel Save_anoncmentModel;
     SharedPreferences sharedPreferences;
     CityDatabase cityDatabase;
+    KeyFilterDataSourceViewModel viewModel;
+    PagingAdaptor adaptor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +63,8 @@ public class FragmentSearch extends Fragment  {
         sharedPreferences=getActivity().getSharedPreferences("main_city",Context.MODE_PRIVATE);
         initViews();
         cityDatabase=CityDatabase.getInstance(getContext());
-
+        viewModel=new ViewModelProvider(this).get(KeyFilterDataSourceViewModel.class);
+        adaptor =new PagingAdaptor();
         return binding.getRoot();
 
     }
@@ -89,7 +82,7 @@ public class FragmentSearch extends Fragment  {
                     getView().getApplicationWindowToken(),
                     InputMethodManager.SHOW_FORCED, 0);
         }
-
+        adaptor.getDEtail(detileCallBack);
 
         searchRecyClerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -99,7 +92,6 @@ public class FragmentSearch extends Fragment  {
                 return false;
             }
         });
-
 
 
 
@@ -120,7 +112,8 @@ public class FragmentSearch extends Fragment  {
                     Log.d("fbfdbdfbdfb", "onTextChanged: else"+type);
                 }
 
-                binding.setProgres(true);
+
+
             }
 
             @Override
@@ -145,7 +138,23 @@ public class FragmentSearch extends Fragment  {
             }
         });
 
+            viewModel.listLiveData.observe(getViewLifecycleOwner(), new Observer<PagedList<AnoncmentModel.Detile>>() {
+                @Override
+                public void onChanged(PagedList<AnoncmentModel.Detile> detiles) {
 
+                    adaptor.submitList(detiles);
+                    Log.d("sbvsdbsdbbds", "onViewCreated: livedata"+detiles.size());
+                    searchRecyClerView.setAdapter(adaptor);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.progress.setVisibility(View.GONE);
+                        }
+                    },2000);
+                    binding.layouterror.setVisibility(View.GONE);
+
+                }
+            });
 
 
     }
@@ -160,46 +169,11 @@ public class FragmentSearch extends Fragment  {
     }
 
     private void searcgKey(String city,String type,String keySearch) {
-        ApiInterface apiInterface= ApiClient.getApiClient();
-        CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.filterAnnouncement(city,type,keySearch,1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
-                        if (anoncmentModel.getResponse().equals("1")){
+        binding.progress.setVisibility(View.VISIBLE);
+       viewModel.setKeyFilterData(city,type,keySearch,emtySearchResult);
+        viewModel.refresh();
+        Log.d("sbvsdbsdbbds", "onViewCreated: serach");
 
-                            binding.setSearchvisibility(true);
-                            binding.setProgres(false);
-                            binding.setLayouterror(false);
-                            Save_anoncmentModel=anoncmentModel;
-                            searchAdaptor=new SearchAdaptor(anoncmentModel.getData(), new DetileCallBack() {
-                                @Override
-                                public void onItemClicked(View view, int id) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("id", id);
-
-                                    Navigation.findNavController(view).navigate(R.id.action_fragmentSearch_to_fragmentAnnouncmentDetail, bundle);
-                                }
-                            });
-                            searchRecyClerView.setAdapter(searchAdaptor);
-
-                        }else {
-
-                            binding.setProgres(false);
-                            binding.setLayouterror(true);
-                            binding.setResult(anoncmentModel.getMassage());
-                            Log.d("vfrtert", "onSuccess: wlse");
-                        }
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        binding.setProgres(false);
-                        Log.d("vfrtert", "onSuccess: "+ e.toString());
-                    }
-                }));
     }
 
 
@@ -213,5 +187,19 @@ public class FragmentSearch extends Fragment  {
 
     }
 
+DetileCallBack detileCallBack=new DetileCallBack() {
+    @Override
+    public void onItemClicked(View view, int id) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        Navigation.findNavController(view).navigate(R.id.action_fragmentSearch_to_fragmentAnnouncmentDetail, bundle);
+    }
+};
 
+    KeyFilterDataSource.EmtySearchResult emtySearchResult = new KeyFilterDataSource.EmtySearchResult() {
+        @Override
+        public void onEmptySEarch() {
+            binding.layouterror.setVisibility(View.VISIBLE);
+        }
+    };
 }

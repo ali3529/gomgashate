@@ -19,6 +19,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class FilterItemDataSource extends PageKeyedDataSource<Integer, AnoncmentModel.Detile> {
     static private String id;
     static private String type;
+    public static final int PAGE=1;
     //@SuppressLint("StaticFieldLeak")
     static FragmentAnnouncCollectionBinding binding;
     @Override
@@ -26,7 +27,7 @@ public class FilterItemDataSource extends PageKeyedDataSource<Integer, Anoncment
         binding.setProgress(true);
         ApiInterface apiInterface= ApiClient.getApiClient();
         CompositeDisposable compositeDisposable=new CompositeDisposable();
-        compositeDisposable.add(apiInterface.getFilterAnnouncment(id,type)
+        compositeDisposable.add(apiInterface.getFilterAnnouncment(id,type,PAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
@@ -34,7 +35,7 @@ public class FilterItemDataSource extends PageKeyedDataSource<Integer, Anoncment
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
                         if (anoncmentModel.getResponse().equals("1")){
                             if (anoncmentModel.getData()!=null){
-                                callback.onResult(anoncmentModel.getData(),null,1);
+                                callback.onResult(anoncmentModel.getData(),null,PAGE);
                                 binding.setVisivility(false);
                                 binding.setProgress(false);
                             }
@@ -61,7 +62,36 @@ public class FilterItemDataSource extends PageKeyedDataSource<Integer, Anoncment
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, AnoncmentModel.Detile> callback) {
+        binding.setProgress(true);
+        Integer key = true? params.key + 1 : null;
+        ApiInterface apiInterface= ApiClient.getApiClient();
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        compositeDisposable.add(apiInterface.getFilterAnnouncment(id,type,key)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
+                        if (anoncmentModel.getResponse().equals("1")){
+                            if (anoncmentModel.getData()!=null){
+                                callback.onResult(anoncmentModel.getData(),key);
+                                binding.setVisivility(false);
+                                binding.setProgress(false);
+                            }
 
+                        }else  {
+                            binding.setVisivility(true);
+                            binding.setProgress(false);
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.d("paginfjnasfd", "onSuccess: "+e.toString());
+
+                    }
+                }));
     }
     public void getCallectionId(String id,String type){
         this.id=id;

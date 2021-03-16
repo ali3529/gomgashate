@@ -54,7 +54,7 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
         String title=getArguments().getString("title");
-        Toast.makeText(getContext(), ""+id+"ppp", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getContext(), ""+id+"ppp", Toast.LENGTH_SHORT).show();
         binding.toolbartitle.setText(title);
         filterItemDataSource=new FilterItemDataSource();
         filterItemDataSource.getCallectionId(id,type);
@@ -72,7 +72,7 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
         });
         recyclerView.setAdapter(pagingAdaptor);
 
-
+        lastAnnouncmentAboveBtNavigation();
     }
 
     private void initViews() {
@@ -86,5 +86,21 @@ public class FragmentAnnouncCollection extends Fragment implements DetileCallBac
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
         Navigation.findNavController(view).navigate(R.id.action_fragmentAnnouncCollection_to_fragmentAnnouncmentDetail, bundle);
+    }
+
+    private void lastAnnouncmentAboveBtNavigation() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.gggg.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+                int itemcount=layoutManager.getItemCount();
+                int lastvisi=layoutManager.findLastVisibleItemPosition();
+                if (lastvisi==itemcount-1){
+                    binding.gggg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 }

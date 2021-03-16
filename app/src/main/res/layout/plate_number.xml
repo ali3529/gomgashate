@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/root_plate">
 <LinearLayout
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -9,17 +11,17 @@
     <RelativeLayout
         android:id="@+id/parcham"
         android:layout_width="50dp"
-        android:layout_height="110dp"
+        android:layout_height="90dp"
         android:background="@drawable/plate_shape"
         >
         <ImageView
             android:id="@+id/iran"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/iran"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="20dp"/>
+           />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,8 +36,8 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/number"
-        android:layout_width="340dp"
-        android:layout_height="110dp"
+        android:layout_width="320dp"
+        android:layout_height="90dp"
         android:layout_toRightOf="@id/parcham"
         android:background="@drawable/plate_shape_wite"
         android:padding="8dp">
@@ -51,7 +53,8 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:maxLength="2"/>
+            android:maxLength="2"
+            />
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/word"
             android:layout_width="90dp"
@@ -82,22 +85,22 @@
             android:maxLength="3"/>
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="80dp"
-        android:layout_height="110dp"
+        android:layout_width="60dp"
+        android:layout_height="90dp"
         android:layout_toRightOf="@id/number"
         android:background="@drawable/plate_shape_wite"
         >
+
         <TextView
             android:id="@+id/ir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ایران"
-            android:layout_centerInParent="true"
             android:layout_alignParentTop="true"
-            android:textStyle="bold"
-            android:textSize="22dp"
+            android:layout_centerHorizontal="true"
+            android:text="ایران"
             android:textColor="@color/black"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/province_num"
@@ -106,7 +109,7 @@
             android:background="@drawable/shape_plate_number"
             android:layout_marginHorizontal="6dp"
             android:layout_centerInParent="true"
-            android:layout_marginRight="6dp"
+            android:layout_below="@id/ir"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"

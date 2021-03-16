@@ -1,5 +1,7 @@
 package com.utabpars.gomgashteh.paging.provinceFilter;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
@@ -18,6 +20,7 @@ public class FilterAnouncmentByProvinceViewModel extends ViewModel {
     }
 
     public void getProvinceFilter(){
+        Log.d("sbvsdbsdbbds", "getProvinceFilter: ");
         provinceFilterDataSourceFactory=new ProvinceFilterDataSourceFactory();
         dataSourceLiveData=provinceFilterDataSourceFactory.getMutableLiveData();
         PagedList.Config config=new PagedList.Config.Builder()

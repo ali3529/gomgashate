@@ -68,7 +68,7 @@ public interface ApiInterface {
 
     @POST("collectionFilter")
     @FormUrlEncoded
-    Single<AnoncmentModel> getFilterAnnouncment(@Field("collection_id") String collection_id,@Field("case") String type);
+    Single<AnoncmentModel> getFilterAnnouncment(@Field("collection_id") String collection_id,@Field("case") String type,@Query("page") int page);
 
     @POST("keySearch")
     @FormUrlEncoded
@@ -112,6 +112,13 @@ public interface ApiInterface {
     Single<AnoncmentModel> filterAnnouncement(@Field("city") String city,
                                                  @Field("type") String type,
                                                  @Field("key") String key,
+                                              @Query("page") int page);
+
+    @POST("filter")
+    @FormUrlEncoded
+    Single<AnoncmentModel> keyfilterAnnouncement(@Field("city") String city,
+                                              @Field("type") String type,
+                                              @Field("key") String key,
                                               @Query("page") int page);
 
     @POST("provinceFilter")

@@ -49,11 +49,13 @@ public class ProvinceFilterDataSource extends PageKeyedDataSource<Integer, Anonc
                 .subscribeWith(new DisposableSingleObserver<AnoncmentModel>() {
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull AnoncmentModel anoncmentModel) {
+                        Log.d("vxcvdxvs", "onSuccess: out");
                         if (anoncmentModel.getResponse().equals("1")){
                             callback.onResult(anoncmentModel.getData(),null,PAGE);
+                            Log.d("vxcvdxvs", "onSuccess: ");
 
                         }else {
-                            Log.d("jkhj,jh,h,hj,", "onSuccess: "+"not found");
+                            Log.d("vxcvdxvs", "onSuccess: "+"not found");
                             emptyAnnouncement.onEmptyAnnouncement();
                         }
 

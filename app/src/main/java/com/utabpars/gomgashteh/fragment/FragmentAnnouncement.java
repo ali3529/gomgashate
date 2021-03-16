@@ -94,8 +94,6 @@ public class FragmentAnnouncement extends Fragment implements DetileCallBack {
     MutableLiveData<Boolean>liveData=new MutableLiveData<>();
     CityDatabase cityDatabase;
 
-    Parcelable stareee;
-
 
 
     @Override
