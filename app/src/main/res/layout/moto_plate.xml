@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/moto_plate_shape"
+    android:layoutDirection="ltr"
+    >
+    <RelativeLayout
+        android:id="@+id/parcham"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+    android:background="#304FFE"
+        >
+        <ImageView
+            android:id="@+id/iran"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:src="@drawable/iran"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I.R.\nIRAN"
+            android:layout_below="@id/iran"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:textSize="13sp"
+            android:padding="3dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="190dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/parcham"
+        android:layout_above="@id/b_num_layout">
+        <EditText
+            android:id="@+id/t_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:maxLength="3"
+            android:background="@drawable/shape_plate_number"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:inputType="number"
+            android:focusable="true"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/b_num_layout"
+        android:layout_width="240dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/parcham">
+        <EditText
+            android:id="@+id/b_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:maxLength="5"
+            android:background="@drawable/shape_plate_number"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:inputType="number"/>
+    </RelativeLayout>
+</RelativeLayout>

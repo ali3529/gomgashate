@@ -1,6 +1,8 @@
 package com.utabpars.gomgashteh.category;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -29,6 +31,7 @@ public class SubsetViewModel extends AndroidViewModel {
     MutableLiveData<SubSetModel> attributeMutableLiveData=new MutableLiveData<>();
     CategoryDataBase db;
     static SubSetCallBack subSetCallBack;
+    SharedPreferences sharedPreferences;
 
     public SubsetViewModel(@androidx.annotation.NonNull Application application) {
         super(application);
@@ -65,10 +68,18 @@ public class SubsetViewModel extends AndroidViewModel {
                 .subscribe(result ->{
                             Log.d("dfbngfmghm", "lastAnnouncmentAboveBtNavigation: "+result.get(0).getName());
                             if (!result.isEmpty()){
-                                Log.d("dsvdfhnfgn", "getSubsetFromDb: attrebiute not found   if");
-                               subSetCallBack.onAttributeCallback(result);
+                                Log.d("dsvdfhnfgngg", "getSubsetFromDb: attrebiute not found   if");
+                                if (detectType()){
+                                    subSetCallBack.onAttributeCallback(result);
+                                    Log.d("gnyjuyjygj", "getAttrebiuteFromDb:   if--" );
+                                }else {
+                                    subSetCallBack.emptyCallback(true);
+                                    Log.d("gnyjuyjygj", "getAttrebiuteFromDb:   else--" );
+                                }
+
+
                             }else {
-                                Log.d("dsvdfhnfgn", "getSubsetFromDb:  else   ");
+                                Log.d("dsvdfhnfgngg", "getSubsetFromDb:  else   ");
                             }
                         },
                         error->{
@@ -104,10 +115,10 @@ public class SubsetViewModel extends AndroidViewModel {
                 .subscribe(result ->{
                             Log.d("dfbngfmghm", "lastAnnouncmentAboveBtNavigation: "+result.get(0).getName());
                             if (!result.isEmpty()){
-                                Log.d("dsvdfhnfgn", "getSubsetFromDb: attrebiute not found   if");
+                                Log.d("dsvdfhnfgnn", "getSubsetFromDb: attrebiute not found   if");
                                 subSetCallBack.onAttributeCallback(result);
                             }else {
-                                Log.d("dsvdfhnfgn", "getSubsetFromDb:  else   ");
+                                Log.d("dsvdfhnfgnn", "getSubsetFromDb:  else   ");
                             }
                         },
                         error->{
@@ -141,5 +152,10 @@ public class SubsetViewModel extends AndroidViewModel {
 
     public Flowable<List<Subset>> getSubsetToRecyclerView(String subset_id){
         return getSubset(subset_id);
+    }
+
+    public boolean detectType(){
+       sharedPreferences=getApplication().getSharedPreferences("from_add", Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("from_add",false);
     }
 }

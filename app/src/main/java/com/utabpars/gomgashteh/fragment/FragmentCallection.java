@@ -116,6 +116,7 @@ public class FragmentCallection extends Fragment implements SubSetCallBack {
                     SharedPreferences.Editor editor=shPref.edit();
                     editor.putString("card_id",id);
                     editor.apply();
+                    Log.d("vsdvsdvsvd", "getCategoryId: "+type+idg);
 
                 }
             });

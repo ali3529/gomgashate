@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/type_layout"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     >
 
 
@@ -382,23 +382,12 @@
                         android:layout_marginTop="6dp"
                         />
                 </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/plate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/set_othercity"
-                        android:layout_centerInParent="true">
-                        <include layout="@layout/plate_number"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_centerInParent="true"/>
 
-                    </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/layout_img_recyclerview"
-                    android:layout_below="@id/plate"
+                    android:layout_below="@id/set_othercity"
                     android:padding="8dp"
                   >
                     <TextView

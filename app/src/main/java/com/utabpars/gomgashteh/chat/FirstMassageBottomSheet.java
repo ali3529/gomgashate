@@ -23,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.AddImageAnnouncmentAdaptor;
 import com.utabpars.gomgashteh.adaptor.FirstMassageAttr;
@@ -34,6 +35,7 @@ import com.utabpars.gomgashteh.databinding.FragmentFirstMassageBottomSheetBindin
 import com.utabpars.gomgashteh.fragment.BottomSheetChooseImage;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.RmModel;
+import com.utabpars.gomgashteh.utils.PlateNumber;
 import com.utabpars.gomgashteh.utils.Utils;
 
 import java.util.ArrayList;
@@ -68,6 +70,7 @@ public String sender_id;
     boolean is_nassasery_selected;
     boolean ok=false;
 
+
     public MutableLiveData<String> closeBottensheet=new MutableLiveData<>();
 
 
@@ -101,7 +104,7 @@ public String sender_id;
         // Inflate the layout for this fragment
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_first_massage_bottom_sheet,container,false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
+        Log.d("FDbdfbfdbdfb", "onCreateView: ");
         initViews();
         return binding.getRoot();
     }
@@ -122,23 +125,38 @@ public String sender_id;
             @Override
             public void onClick(View view) {
 
-
-                if (is_nassasery_selected){
-
-                    if (binding.masage.getText().toString().length()!=0){
-                        viewModel.sendFirstMassage(partLists,fetchData());
-                        binding.firstMassageProgress.setVisibility(View.VISIBLE);
-                        binding.textinputlayout.setVisibility(View.GONE);
-                        binding.attrRecyclerview.setVisibility(View.GONE);
-
+                if (carddd(attributes.get(0).getCollection_id())){
+                    if (getCardAttrValue(attributes.get(0).getCollection_id()).length()==0 && attributes.get(0).isNecessary()){
+                        Toast.makeText(getContext(), "لطفا اطلاعات خواسته شده را کامل کنید", Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
+                        if (binding.masage.getText().toString().length() != 0) {
+                            viewModel.sendFirstMassage(partLists, fetchData());
+                            binding.firstMassageProgress.setVisibility(View.VISIBLE);
+                            binding.textinputlayout.setVisibility(View.GONE);
+                        }else {
+                            Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 }else {
-                    Toast.makeText(getContext(), "لطفا ویژگی های الزامی را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                    binding.cardInfo.setVisibility(View.GONE);
+                    binding.attrRecyclerview.setVisibility(View.GONE);
+                    if (is_nassasery_selected) {
+
+                        if (binding.masage.getText().toString().length() != 0) {
+                            viewModel.sendFirstMassage(partLists, fetchData());
+                            binding.firstMassageProgress.setVisibility(View.VISIBLE);
+                            binding.textinputlayout.setVisibility(View.GONE);
+                            binding.attrRecyclerview.setVisibility(View.GONE);
+
+                        } else {
+                            Toast.makeText(getActivity(), "لطفا پیام خود را وارد کنید", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "لطفا ویژگی های الزامی را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-
-
 
             }
         });
@@ -176,25 +194,36 @@ public String sender_id;
 
         if (attributes==null){
             is_nassasery_selected=true;
+            Log.d("fdbdfbdbgnn", "onViewCreated: if atttt nulll--- ");
 
-        }else if (listNassesary.size()==0){
-            is_nassasery_selected=true;
-            attr_recyclerView=binding.attrRecyclerview;
-            attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            attrAdaptor=new FirstMassageAttr(attributes,bottonShettCallback);
-            attr_recyclerView.setAdapter(attrAdaptor);
-            adaptorItemCount=attr_recyclerView.getAdapter().getItemCount();
-            setIndec();
-        }
-        else {
-            attr_recyclerView=binding.attrRecyclerview;
-            attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            attrAdaptor=new FirstMassageAttr(attributes,bottonShettCallback);
-            attr_recyclerView.setAdapter(attrAdaptor);
-            adaptorItemCount=attr_recyclerView.getAdapter().getItemCount();
-            setIndec();
-        }
+        }else {
+            if (carddd(attributes.get(0).getCollection_id())){
+                Log.d("fdbdfbdbgnn", "onViewCreated: attrrr--- ");
+                PlateNumber.setType(attributes.get(0).getCollection_id());
+                binding.cardInfo.setVisibility(View.VISIBLE);
+                binding.attrRecyclerview.setVisibility(View.GONE);
+               // is_nassasery_selected=attributes.get(0).isNecessary();
+                is_nassasery_selected=false;
 
+            } else if (listNassesary.size() == 0) {
+                is_nassasery_selected = true;
+                attr_recyclerView = binding.attrRecyclerview;
+                attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                attrAdaptor = new FirstMassageAttr(attributes, bottonShettCallback);
+                attr_recyclerView.setAdapter(attrAdaptor);
+                adaptorItemCount = attr_recyclerView.getAdapter().getItemCount();
+                setIndec();
+                Log.d("fdbdfbdbgnn", "onViewCreated: else if--- ");
+            } else {
+                attr_recyclerView = binding.attrRecyclerview;
+                attr_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                attrAdaptor = new FirstMassageAttr(attributes, bottonShettCallback);
+                attr_recyclerView.setAdapter(attrAdaptor);
+                adaptorItemCount = attr_recyclerView.getAdapter().getItemCount();
+                setIndec();
+                Log.d("fdbdfbdbgnn", "onViewCreated: else --- ");
+            }
+        }
        
     }
 
@@ -229,8 +258,15 @@ public String sender_id;
         RequestBody announcementId=RequestBody.create(MediaType.parse("announcement_id"),anounccer_id);
         RequestBody receiverId=RequestBody.create(MediaType.parse("receiver_id"),receive_id);
         RequestBody ticketId=RequestBody.create(MediaType.parse("ticket_id"),"");
-        RequestBody attr=RequestBody.create(MediaType.parse("attr"),getData().toString());
-
+        RequestBody attr;
+        if (carddd(attributes.get(0).getCollection_id())){
+            List<String> list=new ArrayList<>();
+            list.add(attributes.get(0).getId());
+            list.add(getCardAttrValue(attributes.get(0).getCollection_id()));
+             attr = RequestBody.create(MediaType.parse("attr"), list.toString());
+        }else {
+             attr = RequestBody.create(MediaType.parse("attr"), getData().toString());
+        }
       massageData.put("sender_id",senderID);
       massageData.put("message",massage);
       massageData.put("statusTicket",statusTicket);
@@ -239,6 +275,7 @@ public String sender_id;
       massageData.put("ticket_id",ticketId);
       massageData.put("attr",attr);
 
+        Log.d("sdvsdvdsvdsvsdv", "fetchData: "+ getCardAttrValue(attributes.get(0).getCollection_id()));
 
       return massageData;
     }
@@ -309,5 +346,33 @@ public String sender_id;
 
 
         return ok;
+    }
+
+    public boolean carddd(String type){
+        boolean is_card=false;
+        is_card= type.equals("39") || type.equals("127")
+                || type.equals("116")
+                || type.equals("38") || type.equals("117") || type.equals("162") ||
+                type.equals("163") || type.equals("118") || type.equals("121") || type.equals("156") || type.equals("157")
+                || type.equals("158")  || type.equals("154")  || type.equals("155") || type.equals("165") || type.equals("166");
+        Log.d("dfbfdbdfb", "carddd: "+is_card);
+        return is_card;
+    }
+
+    public String getCardAttrValue(String type){
+        String card="0";
+
+        if (type.equals("39") || type.equals("127")){
+            card=binding.cardInfo.getCarPlateNumber();
+        }else if (type.equals("116")){
+            card=binding.cardInfo.getMotoNumber();
+        }else if (type.equals("38") || type.equals("117") || type.equals("162") ||
+                type.equals("163") || type.equals("118")
+                || type.equals("121") || type.equals("156") || type.equals("157")
+                || type.equals("158")
+                || type.equals("154")  || type.equals("155")){
+            card=binding.cardInfo.getCardNumber();
+        }
+        return card;
     }
 }

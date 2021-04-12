@@ -71,12 +71,22 @@ public class ChatStatusModel {
     public class attributes{
         @SerializedName("id")
         private String id;
+        @SerializedName("collection_id")
+        private String collection_id;
         @SerializedName("name")
         private String name;
         @SerializedName("values")
         private List<String> value;
         @SerializedName("is_necessary")
         private boolean necessary;
+
+        public String getCollection_id() {
+            return collection_id;
+        }
+
+        public void setCollection_id(String collection_id) {
+            this.collection_id = collection_id;
+        }
 
         public attributes(String id, String name, List<String> value) {
             this.id = id;

@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.utabpars.gomgashteh.R;
+import com.utabpars.gomgashteh.api.ApiClient;
+import com.utabpars.gomgashteh.api.ApiInterface;
 import com.utabpars.gomgashteh.database.categoryDatabase.Attrebiute;
 import com.utabpars.gomgashteh.database.categoryDatabase.Category;
 import com.utabpars.gomgashteh.database.categoryDatabase.CategoryDataBase;
@@ -143,6 +145,7 @@ public class FragmentSplash extends Fragment {
 //        viewModel=new ViewModelProvider(ViewModelStore::new).get(CategoryFromServerViewModel.class);
 //        String f=viewModel.databaseEntityModelMutableLiveData.getValue().getCategory().get(0).getId();
 //        Log.d(TAG, "onViewCreated: "+f);
+
     }
 
 

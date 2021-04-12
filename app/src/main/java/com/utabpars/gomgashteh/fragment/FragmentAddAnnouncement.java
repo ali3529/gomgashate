@@ -39,6 +39,7 @@ import com.utabpars.gomgashteh.database.citydatabase.CityDatabase;
 import com.utabpars.gomgashteh.databinding.FragmentAddAnnouncementBinding;
 import com.utabpars.gomgashteh.interfaces.PassDataCallBack;
 import com.utabpars.gomgashteh.model.SaveAnnouncementModel;
+import com.utabpars.gomgashteh.utils.PlateNumber;
 import com.utabpars.gomgashteh.utils.Utils;
 import com.utabpars.gomgashteh.viewmodel.AttrebuteNameViewModel;
 
@@ -345,6 +346,9 @@ public class FragmentAddAnnouncement extends Fragment  {
             binding.pishkanLayout.setVisibility(View.GONE);
         }
 
+
+
+
     }
 
 
@@ -621,6 +625,20 @@ public void getType(String type){
         }
 
     }
+
+//    public String hhhhhh(String type){
+//        String card="0";
+//
+//        if (type.equals("39") || type.equals("127")){
+//            card=binding.cardInfo.getCarPlateNumber().toString();
+//        }else if (type.equals("116")){
+//           card=binding.cardInfo.getMotoNumber().toString();
+//        }else if (type.equals("38") || type.equals("117") || type.equals("162") ||
+//                type.equals("163") || type.equals("118")){
+//          card=binding.cardInfo.getCardNumber();
+//        }
+//        return card;
+//    }
 
 }
 

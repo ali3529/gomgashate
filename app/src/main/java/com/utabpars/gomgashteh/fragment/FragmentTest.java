@@ -40,10 +40,12 @@ public class FragmentTest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_test,container,false);
         // Inflate the layout for this fragment
 //        t2=binding.pp.lNumber;
 //        t1=binding.pp.fNumber;
+
         return binding.getRoot();
     }
 
@@ -51,11 +53,13 @@ public class FragmentTest extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //PlateNumber.setType("7");
 
         binding.fff.setOnClickListener(t->{
-            for (String s:binding.rrrr.getNumber()) {
-                Log.d("dfvdfvfv", "onViewCreated: "+s);
-            }
+//            for (String s:binding.rrrr.getMotoNumber()) {
+//                Log.d("dfvdfvfv", "onViewCreated: "+s);
+//            }
+           // Log.d("dfvdfvfv", "onViewCreated: "+binding.rrrr.getCardNumber());
 
         });
 //        String[] word=new String[]{"الف","ب","پ","ج","د","ژ","س","ص","ط","ق","ک","گ","ل","م","ن","و","ه","ی"};

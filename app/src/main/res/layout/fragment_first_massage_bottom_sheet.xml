@@ -115,7 +115,13 @@
     android:layout_below="@id/textinputlayout"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="40dp">
+    <com.utabpars.gomgashteh.utils.PlateNumber
+        android:id="@+id/card_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
 
+        />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/attr_recyclerview"

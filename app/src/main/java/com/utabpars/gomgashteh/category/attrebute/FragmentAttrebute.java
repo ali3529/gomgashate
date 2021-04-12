@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.databinding.FragmentAttrebuteBinding;
 import com.utabpars.gomgashteh.databinding.ItemHelpAttrBinding;
+import com.utabpars.gomgashteh.utils.PlateNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
     int position;
     String id_for_emty_attr;
     String check_string="0";
+    String card_attr_id;
 
 
 
@@ -70,34 +72,71 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
         super.onViewCreated(view, savedInstanceState);
         String id=getArguments().getString("id");
         String type=getArguments().getString("type");
-          if (sharedPreferences.getString("card_id","0").equals("38")){
-                Log.d("fbdfbdfbbb", "onViewCreated: ");
-            }else {
-              viewModel.getAttrebute(id, type);
-              Log.d("fbdfbdfbbb", "onViewCreated: else "+sharedPreferences.getString("card_id,","0"));
-          }
-
+//          if (sharedPreferences.getString("card_id","0").equals("38")){
+//                Log.d("fbdfbdfbbb", "onViewCreated: ");
+//            }else {
+//              viewModel.getAttrebute(id, type);
+//              Log.d("fbdfbdfbbb", "onViewCreated: else "+sharedPreferences.getString("card_id,","0"));
+//          }
+        viewModel.getAttrebute(id, type);
         viewModel.spinnerModelMutableLiveData.observe(getViewLifecycleOwner(),t ->{
+            if (carddd(sharedPreferences.getString("card_id","0"))) {
+                card_attr_id=t.getAttrebuteData().get(0).getId();
+                Log.d("kjhklblkjb", "onViewCreated: " + t.getAttrebuteData().get(0).getId());
+                Log.d("kjhklblkjb", "onViewCreated: " + t.getAttrebuteData().size());
+                PlateNumber.setType(sharedPreferences.getString("card_id","0"));
+                binding.plate.setVisibility(View.VISIBLE);
+                binding.recyclerview.setVisibility(View.GONE);
+            }else {
+                binding.plate.setVisibility(View.GONE);
+                binding.recyclerview.setVisibility(View.VISIBLE);
                 spinnerAdaptor = new SpinnerAdaptor(t, this);
                 recyclerView.setAdapter(spinnerAdaptor);
                 adaptorItemCount = recyclerView.getAdapter().getItemCount();
                 id_for_emty_attr = t.getAttrebuteData().get(0).getId();
                 setIndec();
+                Log.d("kjhklblkjb", "onViewCreated: " + t.getAttrebuteData().get(0).getId());
+            }
 
         });
 
 
         binding.save.setOnClickListener( o->{
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putString("collaction_id",getData().toString());
-            editor.putString("type","");
-            editor.putString("title","ویژگی");
-            editor.putString("emty_status",id_for_emty_attr);
-            editor.apply();
-            Navigation.findNavController(o).navigate(R.id.action_fragmentAttrebute_to_add);
-            Log.d("sgfsegesgeg", "onViewCreated: "+getData().toString());
+            if (binding.nassesury.isChecked() && getCardAttrValue(sharedPreferences.getString("card_id","0")).length()==0) {
+                Toast.makeText(getContext(), "فیلد های خالی را پر کنید", Toast.LENGTH_SHORT).show();
+            }else if (!binding.nassesury.isChecked() && getCardAttrValue(sharedPreferences.getString("card_id","0")).length()==0){
+                editor.putString("collaction_id", "[, ]");
+                editor.putString("type", "");
+                editor.putString("title", "ویژگی");
+                editor.putString("emty_status", id_for_emty_attr);
+                editor.apply();
+                Navigation.findNavController(o).navigate(R.id.action_fragmentAttrebute_to_add);
+            }
+            else {
+                if (carddd(sharedPreferences.getString("card_id", "0"))) {
+
+                    editor.putString("collaction_id", setCardIndec(card_attr_id,
+                            getCardAttrValue(sharedPreferences.getString("card_id", "0")),
+                            binding.nassesury.isChecked()));
 
 
+                } else {
+                    editor.putString("collaction_id", getData().toString());
+                }
+
+                editor.putString("type", "");
+                editor.putString("title", "ویژگی");
+                editor.putString("emty_status", id_for_emty_attr);
+                editor.apply();
+                Navigation.findNavController(o).navigate(R.id.action_fragmentAttrebute_to_add);
+                Log.d("sgfsegesgeg", "onViewCreated: " + getData().toString());
+
+
+                Log.d("fgnfdndfhf", "onViewCreated: " + setCardIndec(card_attr_id,
+                        getCardAttrValue(sharedPreferences.getString("card_id", "0")),
+                        binding.nassesury.isChecked()));
+            }
         });
 
 
@@ -112,6 +151,19 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
             spinnerlist.add(new AtttrModel("","",""));
 
         }
+    }
+
+    public String setCardIndec(String attr_id,String value,boolean is_ckeck){
+        List<String> list=new ArrayList<>();
+        list.add(attr_id);
+        list.add(value);
+        if (is_ckeck){
+            list.add("1");
+        }else {
+            list.add("0");
+        }
+
+            return list.toString();
     }
     public List<String> getData(){
         List<String> list=new ArrayList<>();
@@ -170,6 +222,31 @@ public class FragmentAttrebute extends Fragment implements BottonShettCallback{
     }
 
 
+    public String getCardAttrValue(String type){
+        String card="0";
 
+        if (type.equals("39") || type.equals("127")){
+            card=binding.cardInfo.getCarPlateNumber();
+        }else if (type.equals("116")){
+           card=binding.cardInfo.getMotoNumber();
+        }else if (type.equals("38") || type.equals("117") || type.equals("162") ||
+                type.equals("163") || type.equals("118")
+                || type.equals("121") || type.equals("156") || type.equals("157")
+                || type.equals("158")
+                || type.equals("154")  || type.equals("155")){
+          card=binding.cardInfo.getCardNumber();
+        }
+        return card;
+    }
+public boolean carddd(String type){
+        boolean is_card=false;
+    is_card= type.equals("39") || type.equals("127")
+            || type.equals("116")
+            || type.equals("38") || type.equals("117") || type.equals("162") ||
+            type.equals("163") || type.equals("118") || type.equals("121") || type.equals("156") || type.equals("157")
+            || type.equals("158")  || type.equals("154")  || type.equals("155") || type.equals("165") || type.equals("166");
+    Log.d("dfbfdbdfb", "carddd: "+is_card);
+    return is_card;
+}
 
 }

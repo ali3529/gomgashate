@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.smarteist.autoimageslider.SliderView;
 import com.utabpars.gomgashteh.R;
 import com.utabpars.gomgashteh.adaptor.ImageSliderAdaptor;
@@ -351,8 +352,15 @@ public class FragmentAnnouncmentDetail extends Fragment implements ChatCallBack 
 
 
     public void reportAnnouncment(){
+       if (sharedPreferences.getBoolean("user_login",false)){
+            fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"report_announcment");
 
-        fragmentReportBottomSheet.show(getActivity().getSupportFragmentManager(),"report_announcment");
+        }else {
+           Snackbar.make(getView(),"برای ثبت گزارش باید وارد حساب گمگشته خود شوید",Snackbar.LENGTH_SHORT)
+                   .setTextColor(getResources().getColor(R.color.red)).show();
+
+       }
+
     }
 
     ImageSliderAdaptor.imageCallback imageCallback=new ImageSliderAdaptor.imageCallback() {
